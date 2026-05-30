@@ -46,7 +46,7 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <Link to="/" className="shrink-0">
             <img
-              src="/images/LogoMipadorNavBar.png"
+              src="./public/images/LogoMipadorNavBar.png"
               alt="Mipador"
               className="h-7 w-auto object-contain"
             />
