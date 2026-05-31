@@ -2,22 +2,13 @@ import React from "react";
 import type { Product } from "../../../../store/product.store";
 import { useProductStore } from "../../../../store/product.store";
 import { Link } from "react-router-dom";
-import { ShoppingBag, MessageCircle } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const { addToCart } = useProductStore();
   const isComingSoon = product.status === "coming-soon";
   const isOutOfStock = product.status === "out-of-stock";
   const isUnavailable = isComingSoon || isOutOfStock;
-
-  const handleWhatsApp = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const msg = encodeURIComponent(
-      `Hello, I would like more information about the ${product.name} (${product.collection}) — ${product.price.toLocaleString()} MAD.`
-    );
-    window.open(`https://wa.me/212612918900?text=${msg}`, "_blank");
-  };
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -81,15 +72,12 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           )}
         </div>
 
-        {/* Desktop hover overlay — WhatsApp only */}
+        {/* Desktop hover — "View Details" cue */}
         {!isUnavailable && (
-          <div className="absolute inset-0 bg-[#3D1A12]/20 opacity-0 group-hover:opacity-100 transition-all duration-300 hidden md:flex items-end justify-center pb-6 gap-3">
-            <button
-              onClick={handleWhatsApp}
-              className="flex items-center gap-2 bg-[#25D366] text-white text-[10px] font-black uppercase tracking-widest px-4 py-2.5 rounded-xl hover:bg-[#1ebe5d] transition-all"
-            >
-              <MessageCircle size={13} /> WhatsApp
-            </button>
+          <div className="absolute inset-0 bg-[#3D1A12]/15 opacity-0 group-hover:opacity-100 transition-all duration-300 hidden md:flex items-end justify-center pb-6">
+            <span className="bg-white text-[#3D1A12] text-[10px] font-black uppercase tracking-widest px-5 py-2.5 rounded-xl shadow-sm">
+              View Details
+            </span>
           </div>
         )}
       </div>
@@ -117,29 +105,22 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           )}
         </div>
 
-        {/* Mobile: WhatsApp always visible */}
-        {!isUnavailable && (
-          <button
-            onClick={handleWhatsApp}
-            className="flex mt-3 md:hidden items-center justify-center gap-1.5 bg-[#25D366] text-white text-[9px] font-black uppercase tracking-widest py-2.5 rounded-xl active:scale-95 transition-all"
-          >
-            <MessageCircle size={11} /> WhatsApp
-          </button>
-        )}
-
         {/* Add to cart */}
         <button
           onClick={handleAddToCart}
           disabled={isUnavailable}
-          className={`mt-2 w-full py-2.5 text-[9px] font-black uppercase tracking-widest rounded-xl flex items-center justify-center gap-2 transition-all duration-300 ${
+          className={`mt-3 w-full py-2.5 text-[9px] font-black uppercase tracking-widest rounded-xl flex items-center justify-center gap-2 transition-all duration-300 ${
             isUnavailable
               ? "bg-[#3D1A12]/8 text-[#3D1A12]/30 cursor-not-allowed"
               : "bg-[#3D1A12] text-white hover:bg-[#4D2A22] active:scale-95"
           }`}
         >
-          {isComingSoon ? "Coming Soon" : isOutOfStock ? "Sold Out" : (
-            <><ShoppingBag size={11} /> Add to Cart</>
-          )}
+          {isComingSoon
+            ? "Coming Soon"
+            : isOutOfStock
+            ? "Sold Out"
+            : <><ShoppingBag size={11} /> Add to Cart</>
+          }
         </button>
       </div>
     </Link>

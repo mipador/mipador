@@ -40,6 +40,7 @@ export interface Product {
   featured: boolean;
   images: string[];                // multiple images: [main, detail, lifestyle]
   tags: string[];                  // for filtering: ["bestseller", "new", "handcrafted"]
+  stock: number;
 }
 
 export const products: Product[] = [
@@ -69,11 +70,12 @@ export const products: Product[] = [
     inStock: true,
     featured: true,
     images: [
-      "./public/images/wabi-lounge-chair-main.jpg",
-      "./public/images/wabi-lounge-chair-detail.jpg",
-      "./public/images/wabi-lounge-chair-lifestyle.jpg",
+      "./public/images/products/wabi-lounge-chair-main.jpg",
+      "./public/images/products/wabi-lounge-chair-detail.jpg",
+      "./public/images/products/wabi-lounge-chair-lifestyle.jpg",
     ],
     tags: ["bestseller", "handcrafted", "new"],
+    stock: 4,
   },
   {
     id: "2",
@@ -100,11 +102,12 @@ export const products: Product[] = [
     inStock: true,
     featured: true,
     images: [
-      "./public/images/medina-coffee-table-main.jpg",
-      "./public/images/medina-coffee-table-detail.jpg",
-      "./public/images/medina-coffee-table-lifestyle.jpg",
+      "./public/images/products/medina-coffee-table-main.jpg",
+      "./public/images/products/medina-coffee-table-detail.jpg",
+      "./public/images/products/medina-coffee-table-detail.jpg",
     ],
     tags: ["handcrafted", "new"],
+    stock: 4,
   },
   {
     id: "3",
@@ -131,11 +134,12 @@ export const products: Product[] = [
     inStock: true,
     featured: false,
     images: [
-      "./public/images/atlas-shelf-main.jpg",
-      "./public/images/atlas-shelf-detail.jpg",
-      "./public/images/atlas-shelf-lifestyle.jpg",
+      "./public/images/products/atlas-shelf-main.jpg",
+      "./public/images/products/atlas-shelf-detail.jpg",
+      "./public/images/products/atlas-shelf-lifestyle.jpg",
     ],
     tags: ["handcrafted"],
+    stock: 4,
   },
   {
     id: "4",
@@ -162,11 +166,12 @@ export const products: Product[] = [
     inStock: false,
     featured: true,
     images: [
-      "./public/images/kasbah-lamp-main.jpg",
-      "./public/images/kasbah-lamp-detail.jpg",
-      "./public/images/kasbah-lamp-lifestyle.jpg",
+      "./public/images/products/kasbah-lamp-main.jpg",
+      "./public/images/products/kasbah-lamp-detail.jpg",
+      "./public/images/products/kasbah-lamp-lifestyle.jpg",
     ],
     tags: ["bestseller"],
+    stock: 8,
   },
   {
     id: "5",
@@ -193,11 +198,12 @@ export const products: Product[] = [
     inStock: true,
     featured: false,
     images: [
-      "./public/images/sabil-vase-main.jpg",
-      "./public/images/sabil-vase-detail.jpg",
-      "./public/images/sabil-vase-lifestyle.jpg",
+      "./public/images/products/sabil-vase-main.jpg",
+      "./public/images/products/sabil-vase-detail.jpg",
+      "./public/images/products/sabil-vase-lifestyle.jpg",
     ],
     tags: ["new", "handcrafted"],
+    stock: 6,
   },
   {
     id: "6",
@@ -224,11 +230,12 @@ export const products: Product[] = [
     inStock: false,
     featured: true,
     images: [
-      "./public/images/dar-bed-main.jpg",
-      "./public/images/dar-bed-detail.jpg",
-      "./public/images/dar-bed-lifestyle.jpg",
+      "./public/images/products/dar-bed-main.jpg",
+      "./public/images/products/dar-bed-detail.jpg",
+      "./public/images/products/dar-bed-lifestyle.jpg",
     ],
     tags: ["new"],
+    stock: 4,
   },
 
   // ─── OUTDOOR ─────────────────────────────────────────────
@@ -261,11 +268,12 @@ export const products: Product[] = [
     inStock: true,
     featured: true,
     images: [
-      "./public/images/riad-daybed-main.jpg",
-      "./public/images/riad-daybed-detail.jpg",
-      "./public/images/riad-daybed-lifestyle.jpg",
+      "./public/images/products/riad-daybed-main.jpg",
+      "./public/images/products/riad-daybed-detail.jpg",
+      "./public/images/products/riad-daybed-lifestyle.jpg",
     ],
     tags: ["bestseller", "handcrafted"],
+    stock: 4,
   },
   {
     id: "8",
@@ -296,11 +304,12 @@ export const products: Product[] = [
     inStock: true,
     featured: false,
     images: [
-      "./public/images/sahara-table-main.jpg",
-      "./public/images/sahara-table-detail.jpg",
-      "./public/images/sahara-table-lifestyle.jpg",
+      "./public/images/products/sahara-table-main.jpg",
+      "./public/images/products/sahara-table-detail.jpg",
+      "./public/images/products/sahara-table-lifestyle.jpg",
     ],
     tags: ["new"],
+    stock: 4,
   },
   {
     id: "9",
@@ -327,10 +336,11 @@ export const products: Product[] = [
     inStock: true,
     featured: false,
     images: [
-      "./public/images/terrace-lantern-main.jpg",
-      "./public/images/terrace-lantern-detail.jpg",
-      "./public/images/terrace-lantern-lifestyle.jpg",
+      "./public/images/products/terrace-lantern-main.jpg",
+      "./public/images/products/terrace-lantern-detail.jpg",
+      "./public/images/products/terrace-lantern-lifestyle.jpg",
     ],
     tags: ["handcrafted", "bestseller"],
+    stock: 12,
   },
 ];
