@@ -23,7 +23,6 @@
     "react-dom": "^19.2.5",
     "react-i18next": "^17.0.8",
     "react-router-dom": "^7.15.1",
-    "router-dom": "^3.0.3",
     "swiper": "^12.2.0",
     "tailwindcss": "^4.2.1",
     "three": "^0.184.0",
