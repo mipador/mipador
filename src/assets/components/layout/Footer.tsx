@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
           <div className="col-span-1 sm:col-span-2 lg:col-span-2 lg:pr-8">
             <Link to="/" className="inline-block mb-6">
               <img
-                src="./public/images/LogoMipadorFooter.png"
+                src="/public/images/LogoMipadorFooter.png"
                 alt="Mipador"
                 className="h-16 w-auto object-contain"
               />
