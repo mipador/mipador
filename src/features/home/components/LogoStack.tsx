@@ -19,10 +19,10 @@ const css = `
 
 // ── Put your atmosphere/product images here ───────────────────
 const images = [
-  { src: "/public/images/atmosphere-2.png", alt: "Mipador — craftsmanship" },
-  { src: "/public/images/atmosphere-3.png", alt: "Mipador — slow living" },
-  { src: "/public/images/atmosphere-4.png", alt: "Mipador — outdoor space" },
-  { src: "/public/images/atmosphere-5.png", alt: "Mipador — morning light" },
+  { src: "/images/atmosphere-2.png", alt: "Mipador — craftsmanship" },
+  { src: "/images/atmosphere-3.png", alt: "Mipador — slow living" },
+  { src: "/images/atmosphere-4.png", alt: "Mipador — outdoor space" },
+  { src: "/images/atmosphere-5.png", alt: "Mipador — morning light" },
 ];
 
 const LogoStack = () => {
@@ -49,7 +49,7 @@ const LogoStack = () => {
         {/* Logo card — always first */}
         <SwiperSlide className="rounded-[2rem] overflow-hidden shadow-2xl">
             <img
-              src="/public/images/atmosphere-1.png"
+              src="/images/atmosphere-1.png"
               alt="Mipador"
               className="w-full h-full object-cover"
               draggable={false}

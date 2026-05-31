@@ -36,7 +36,7 @@ const BrandPromise = () => (
 
         <div className="relative h-[480px] rounded-3xl overflow-hidden">
           <img
-            src="/public/images/atmosphere-2.jpg"
+            src="/images/atmosphere-2.jpg"
             alt="Mipador craftsmanship"
             className="w-full h-full object-cover"
           />
