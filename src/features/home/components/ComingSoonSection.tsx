@@ -41,7 +41,7 @@ const ComingSoonSection = () => {
         </p>
 
         <div className="flex justify-center">
-          <div className="flex bg-[#3D1A12]/10 p-1 rounded-full border border-[#3D1A12]/10 max-w-md w-full">
+          <div className="flex bg-[#3D1A12]/5 p-1 rounded-full border border-[#3D1A12]/10 max-w-md w-full">
 
             <input
               type="email"

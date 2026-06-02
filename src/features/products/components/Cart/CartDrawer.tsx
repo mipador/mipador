@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { X, Plus, Minus, Trash2, ShoppingBag, ShoppingCart } from "lucide-react";
 import { useProductStore } from "../../../../store/product.store";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link , useParams } from "react-router-dom";
 import OrderForm from "../Order/OrderForm";
 
 const DELIVERY = 150;
@@ -29,6 +29,11 @@ const CartDrawer: React.FC = () => {
     item: (typeof cart)[number];
     product: (typeof allProducts)[number];
   }[];
+
+  const { lang } = useParams();
+
+  const currentLang = lang || "en";
+
 
   return (
     <AnimatePresence>
