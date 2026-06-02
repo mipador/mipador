@@ -2,12 +2,24 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/assets/favicon-C8dosnPC.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mipador</title>
-    <script type="module" crossorigin src="/assets/index-DtU8Cny0.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BcRZzhDz.css">
+
+    <!-- GitHub Pages SPA fix -->
+    <script>
+      (function () {
+        const redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/assets/index-u08tjaJX.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DfPx8-_T.css">
   </head>
+
   <body>
     <div id="root"></div>
   </body>
