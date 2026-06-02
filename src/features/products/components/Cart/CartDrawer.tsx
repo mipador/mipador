@@ -82,7 +82,7 @@ const CartDrawer: React.FC = () => {
                       Add a piece you love.
                     </p>
                     <Link
-                      to="/products"
+                      to={`/${currentLang}/products`}
                       onClick={() => setCartOpen(false)}
                       className="text-[10px] font-black uppercase tracking-widest text-[#3D1A12] border-b border-[#3D1A12]/30 pb-0.5"
                     >

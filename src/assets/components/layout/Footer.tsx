@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation , useParams } from "react-router-dom";
 
 const Footer: React.FC = () => {
   const { pathname } = useLocation();
@@ -20,6 +20,8 @@ const Footer: React.FC = () => {
     setEmail("");
   };
 
+    const { lang } = useParams();
+  const currentLang = lang || "en";
   return (
     <footer className="w-full bg-[#F6F4F1] pt-20 pb-8 px-6 md:px-12 border-t border-[#3D1A12]/10">
       <div className="max-w-7xl mx-auto">
@@ -27,7 +29,7 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-y-14 gap-x-10 mb-16">
           {/* Brand column — spans 2 */}
           <div className="col-span-1 sm:col-span-2 lg:col-span-2 lg:pr-8">
-            <Link to="/" className="inline-block mb-6">
+            <Link to={`/${currentLang}/`} className="inline-block mb-6">
               <img
                 src="/images/LogoMipadorFooter.png"
                 alt="Mipador"
@@ -124,13 +126,13 @@ const Footer: React.FC = () => {
             </p>
             <ul className="space-y-4">
               <li>
-                <Link to="/products" className={linkClass("/products")}>
+                <Link to={`/${currentLang}/products`} className={linkClass("/products")}>
                   All Pieces
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/products?location=indoor"
+                  to={`/${currentLang}/products?location=indoor`}
                   className="text-sm text-[#3D1A12]/50 hover:text-[#3D1A12] transition-colors duration-200"
                 >
                   Indoor
@@ -138,7 +140,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  to="/products?location=outdoor"
+                  to={`/${currentLang}/products?location=outdoor`}
                   className="text-sm text-[#3D1A12]/50 hover:text-[#3D1A12] transition-colors duration-200"
                 >
                   Outdoor
@@ -146,7 +148,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  to="/products?tag=new"
+                  to={`/${currentLang}/products?tag=new`}
                   className="text-sm text-[#3D1A12]/50 hover:text-[#3D1A12] transition-colors duration-200"
                 >
                   New Arrivals
@@ -162,25 +164,25 @@ const Footer: React.FC = () => {
             </p>
             <ul className="space-y-4">
               <li>
-                <Link to="/about" className={linkClass("/about")}>
+                <Link to={`/${currentLang}/about`} className={linkClass("/about")}>
                   Our Story
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/about#craft"
+                  to={`/${currentLang}/about#craft`}
                   className="text-sm text-[#3D1A12]/50 hover:text-[#3D1A12] transition-colors duration-200"
                 >
                   Craftsmanship
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className={linkClass("/contact")}>
+                <Link to={`/${currentLang}/contact`} className={linkClass("/contact")}>
                   Contact
                 </Link>
               </li>
               <li>
-                <Link to="/faqs" className={linkClass("/faqs")}>
+                <Link to={`/${currentLang}/faqs`} className={linkClass("/faqs")}>
                   FAQs
                 </Link>
               </li>
@@ -231,19 +233,19 @@ const Footer: React.FC = () => {
           </p>
           <div className="flex gap-6">
             <Link
-              to="/privacy-policy"
+              to={`/${currentLang}/privacy-policy`}
               className="hover:text-[#3D1A12] transition-colors"
             >
               Privacy Policy
             </Link>
             <Link
-              to="/terms-of-service"
+              to={`/${currentLang}/terms-of-service`}
               className="hover:text-[#3D1A12] transition-colors"
             >
               Terms & Conditions
             </Link>
             <Link
-              to="/refund-policy"
+              to={`/${currentLang}/refund-policy`}
               className="hover:text-[#3D1A12] transition-colors"
             >
               Refund Policy

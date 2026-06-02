@@ -5,10 +5,14 @@ import BrandPromise from "./components/BrandPromise";
 // import Testimonials from "./components/Testimonials";
 import ModelGrid from "./components/ModelGrid";
 import FeatureGrid from "./components/FeatureGrid";
-import { Link } from "react-router-dom";
+import { Link , useParams } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
 function About() {
+
+    const { lang } = useParams();
+  const currentLang = lang || "en";
+
   return (
     <div className="bg-[#F6F4F1] font-sans selection:bg-[#C9922A]/20">
       <AboutHero />
@@ -44,13 +48,13 @@ function About() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to="/products"
+              to={`/${currentLang}/products`}
               className="inline-flex items-center justify-center gap-3 bg-[#C9922A] text-white px-10 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-[#B8821A] transition-all active:scale-95"
             >
               Explore Collection <ArrowRight size={13} />
             </Link>
             <Link
-              to="/contact"
+              to={`/${currentLang}/contact`}
               className="inline-flex items-center justify-center gap-3 border border-white/20 text-white px-10 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white/5 transition-all"
             >
               Talk to Us

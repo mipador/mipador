@@ -1,13 +1,14 @@
 import React from "react";
 import { useProductStore } from "../../../store/product.store";
-import ProductCard from "../../products/components/ProductGrid/ProductCard";
-import { Link } from "react-router-dom";
+import ProductCardHomePage from "../../products/components/ProductGrid/ProductCardHomePage";
+import { Link,useParams } from "react-router-dom";
 
 const SelectedWorksSection: React.FC = () => {
   const { allProducts } = useProductStore();
 
   const featured = allProducts.filter((p) => p.featured).slice(0, 3);
-
+  const { lang } = useParams();
+  const currentLang = lang || "en";
   return (
     <section className="bg-[#F4F4F4] py-20 px-6">
       <div className="max-w-7xl mx-auto">
@@ -26,7 +27,7 @@ const SelectedWorksSection: React.FC = () => {
           </div>
 
           <Link
-            to="/products"
+            to={`/${currentLang}/products`}
             className="text-xs font-black uppercase tracking-widest border-b-2 border-[#3D1A12] pb-1 text-[#3D1A12] hover:text-[#4D2A22] hover:border-[#4D2A22] transition-colors"
           >
             Explore the Collection
@@ -43,7 +44,7 @@ const SelectedWorksSection: React.FC = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
             {featured.map((item) => (
-              <ProductCard key={item.id} product={item} />
+              <ProductCardHomePage key={item.id} product={item} />
             ))}
           </div>
         )}

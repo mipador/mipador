@@ -67,7 +67,7 @@ const TrustBadges: React.FC = () => (
     {[
       { icon: "🤝", label: "Handcrafted", sub: "By Moroccan artisans" },
       { icon: "📦", label: "Free delivery", sub: "On all orders" },
-      { icon: "↩️", label: "14-day returns", sub: "No questions asked" },
+      { icon: "↩️", label: "7-day returns", sub: "No questions asked" },
     ].map((b) => (
       <div
         key={b.label}
@@ -108,7 +108,8 @@ const ProductDetailPage: React.FC = () => {
   const [imgIndex, setImgIndex] = useState(0);
   const [added, setAdded] = useState(false);
   const [quantity, setQuantity] = useState(1);
-
+  const { lang } = useParams();
+  const currentLang = lang || "en";
   const product = products.find((p) => p.slug === slug);
 
   if (!product) {
@@ -118,7 +119,7 @@ const ProductDetailPage: React.FC = () => {
           This piece doesn't exist.
         </p>
         <Link
-          to="/products"
+          to={`/${currentLang}/products`}
           className="text-[10px] font-black uppercase tracking-widest text-[#C9922A] border-b border-[#C9922A]/40 pb-0.5"
         >
           Back to Collection
@@ -156,7 +157,7 @@ const ProductDetailPage: React.FC = () => {
 
         {/* Back */}
         <Link
-          to="/products"
+          to={`/${currentLang}/products`}
           className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#3D1A12]/40 hover:text-[#3D1A12] transition-colors mb-8 md:mb-14"
         >
           <ArrowLeft size={13} /> Back to Collection
@@ -470,7 +471,7 @@ const ProductDetailPage: React.FC = () => {
               {related.map((p) => (
                 <Link
                   key={p.id}
-                  to={`/products/${p.slug}`}
+                  to={`/${currentLang}/products/${p.slug}`}
                   className="flex flex-col group"
                   onClick={() => {
                     setImgIndex(0);

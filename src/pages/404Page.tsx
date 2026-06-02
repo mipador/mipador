@@ -1,12 +1,13 @@
-import React from "react";
+import { Link, useParams } from "react-router-dom";
 
 const NotFound: React.FC = () => {
+  const { lang } = useParams();
+
+  const base = `/${lang || "en"}`;
+
   return (
     <div className="min-h-screen bg-[#F7F7F7] flex flex-col items-center justify-center px-6 font-sans">
-      {/* Brand Header Style */}
-
       <main className="text-center">
-        {/* Large 404 Number with a subtle brand brown tint */}
         <h2 className="text-[120px] font-light leading-none text-[#3D1A12]/10 mb-4">
           404
         </h2>
@@ -16,25 +17,16 @@ const NotFound: React.FC = () => {
         </h3>
 
         <p className="text-[#3D1A12]/70 max-w-md mx-auto mb-10 leading-relaxed">
-          The page you are looking for doesn't exist or has been moved. Let's
-          get you back to where things feel right.
+          The page you are looking for doesn't exist or has been moved.
         </p>
 
-        {/* The mipador Signature Button Style in Brand Brown */}
-        <a
-          href="/"
-          className="inline-block bg-[#3D1A12] text-[#F7F7F7] px-10 py-3 text-sm font-medium tracking-wide rounded-sm transition-opacity hover:opacity-90"
+        <Link
+          to={base}
+          className="inline-block bg-[#3D1A12] text-[#F7F7F7] px-10 py-3 text-sm rounded-sm"
         >
           Back to Home
-        </a>
+        </Link>
       </main>
-
-      {/* Subtle Footer */}
-      <footer className="absolute bottom-10 w-full text-center">
-        <p className="text-xs text-[#3D1A12]/50 tracking-widest uppercase">
-          © 2026 mipador. All rights reserved.
-        </p>
-      </footer>
     </div>
   );
 };

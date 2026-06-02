@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link , useParams } from "react-router-dom";
 import LogoStack from "./LogoStack";
 import MagicRings from "./MagicRings";
 
@@ -16,7 +16,9 @@ const HeroSection = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const scale   = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
   const y       = useTransform(scrollYProgress, [0, 0.5], [0, 50]);
-
+  const { lang } = useParams();
+  const currentLang = lang || "en";
+  
   return (
     <section
       ref={targetRef}
@@ -92,13 +94,13 @@ const HeroSection = () => {
           className="mt-6 flex flex-col sm:flex-row items-center gap-4"
         >
           <Link
-            to="/products"
+            to={`/${currentLang}/products`}
             className="px-10 py-4 bg-[#3D1A12] text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-[#4D2A22] transition-all active:scale-95 flex items-center gap-3 shadow-lg shadow-[#3D1A12]/10"
           >
             Discover Collection <ArrowRight size={13} />
           </Link>
           <Link
-            to="/about"
+            to={`/${currentLang}/about`}
             className="px-10 py-4 border border-[#3D1A12]/20 text-[#3D1A12] text-[10px] font-black uppercase tracking-widest rounded-xl hover:border-[#3D1A12]/50 transition-all"
           >
             Our Story
