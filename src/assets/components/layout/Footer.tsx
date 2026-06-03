@@ -37,8 +37,7 @@ const Footer: React.FC = () => {
               />
             </Link>
             <p className="text-sm text-[#3D1A12]/50 leading-relaxed max-w-xs">
-              Objects for slow living. Moroccan-crafted furniture for
-              intentional spaces — indoor and outdoor.
+              Furniture for spaces that feel alive — indoor and outdoor.
             </p>
 
             {/* Socials */}

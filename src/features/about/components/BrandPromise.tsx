@@ -5,7 +5,7 @@ const promises = [
   "Materials sourced honestly — wood, leather, clay, iron",
   "Designed to age beautifully, not expire seasonally",
   "Made in Morocco, by Moroccan hands",
-  "No fast furniture. No trend chasing. No compromise.",
+  "No empty luxury. No trend-chasing. No objects without meaning.",
   "If you don't love it, you don't need it",
 ];
 

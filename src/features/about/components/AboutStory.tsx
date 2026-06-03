@@ -61,8 +61,7 @@ const AboutStory = () => (
               Every corner built to make you feel something.
             </p>
             <p className="text-[#3D1A12] font-semibold">
-              That's what we're trying to bottle. Not luxury. Not status. Just
-              the feeling of a space that's completely, quietly yours.
+              Just the feeling of a space that gives you energy, clarity, warmth, and freedom the moment you walk into it.
             </p>
           </div>
 
@@ -81,8 +80,14 @@ const AboutStory = () => (
             </p>
             <p className="text-[#3D1A12] font-bold text-sm leading-relaxed">
               Mipador exists for the people who are done with that. Buy less.
-              Choose honestly. Own things you actually love — not to signal
-              anything, but because they make you feel
+              Choose honestly. 
+              Choose things because they make your life feel richer.
+                Because they inspire you.
+                Because they make your space feel like yours.
+
+                Not to impress.
+                Not to perform.
+                Just to live better.
               <span className="text-[#C9922A]"> free</span>.
             </p>
           </div>

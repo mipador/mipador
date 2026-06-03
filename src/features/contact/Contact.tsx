@@ -1,10 +1,12 @@
 import ContactForm from "./components/ContactForm";
 import ContactHero from "./components/ContactHero";
 import ContactInfo from "./components/ContactInfo";
+import ScrollToTop from "../../../src/components/ScrollToTop";
+
 const ContactPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#F6F4F1] p-6 md:p-12 lg:p-24 selection:bg-[#3D1E16] selection:text-white">
-      
+      <ScrollToTop />
       <div className="max-w-6xl mx-auto">
         <ContactHero />
 

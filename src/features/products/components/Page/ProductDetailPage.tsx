@@ -9,6 +9,7 @@ import {
 import { products } from "../../../../data/products";
 import { useProductStore } from "../../../../store/product.store";
 import OrderForm from "../Order/OrderForm";
+import ScrollToTop from "../../../../../src/components/ScrollToTop";
 
 // ── CRO Alert bar ──────────────────────────────────────────
 const StockAlert: React.FC<{ stock: number }> = ({ stock }) => {
@@ -152,7 +153,7 @@ const ProductDetailPage: React.FC = () => {
 
   return (
     <div className="relative min-h-screen bg-[#F6F4F1] overflow-hidden">
-
+<ScrollToTop />
       <div className="max-w-7xl mx-auto px-4 md:px-6 pt-24 md:pt-32 pb-24">
 
         {/* Back */}

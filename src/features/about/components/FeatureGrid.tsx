@@ -3,8 +3,8 @@ import { Wind, Sun, Moon, Mountain, Droplets, Star, Circle, Triangle } from "luc
 const touches = [
   { icon: Sun, title: "Zellige geometry", desc: "Mathematical beauty from 10th century Fès" },
   { icon: Mountain, title: "Atlas cedar", desc: "Wood that smells like memory" },
-  { icon: Moon, title: "Riad silence", desc: "Architecture built around emptiness" },
-  { icon: Wind, title: "Saharan patience", desc: "Things made slowly, to last forever" },
+  { icon: Moon, title: "Riad light", desc: "Spaces designed around emotion and air" },
+  { icon: Wind, title: "Saharan freedom", desc: "Open space. Endless perspective. Absolute calm." },
   { icon: Droplets, title: "Tadelakt plaster", desc: "Waterproof lime polished with stone" },
   { icon: Star, title: "Amazigh symbols", desc: "5000 years of indigenous expression" },
   { icon: Circle, title: "Mashrabiya light", desc: "Shadows as decoration" },

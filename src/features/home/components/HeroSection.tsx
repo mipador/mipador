@@ -26,10 +26,11 @@ const IMAGE_ASSETS = {
 const HERO_CONTENT = {
   eyebrow: "Mipador Collection",
   // headline: "Your space should feel like freedom, not performance.",
-  headline: "Made to move free",
+  headline: "Made for spaces that breathe",
+  headline2: "beats a room full of noise",
   subheadline:
     "When you stop consuming and start living, you discover the profound beauty of intentional spaces. Fewer objects. Deeper meaning. A home that reflects who you truly are.",
-  badge: "Own less. Feel more.",
+  badge: "Be. Not own.",
   cta_primary: {
     text: "Explore Collection",
     link: "/products",
@@ -151,13 +152,12 @@ const HeroSection = () => {
           alt={currentImage.alt}
           className="w-full h-full object-cover"
           style={{
+            objectPosition: isMobile ? "60% center" : "center",
             filter: useTransform(brightness, (v) => `brightness(${v})`),
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: isLoaded ? 1 : 0 }}
-          transition={{
-            duration: 1.2,
-          }}
+          transition={{ duration: 1.2 }}
           onLoad={() => setIsLoaded(true)}
         />
 
@@ -222,23 +222,45 @@ const HeroSection = () => {
           <motion.h1
             variants={itemVariants}
             className="
-    text-5xl
-    sm:text-6xl
-    md:text-7xl
-    lg:text-[6rem]
-    font-semibold
-    tracking-[-0.05em]
-    leading-[0.95]
-    max-w-5xl
-    mx-auto
+              text-5xl
+              sm:text-6xl
+              md:text-7xl
+              lg:text-[6rem]
+              font-semibold
+              tracking-[-0.05em]
+              leading-[0.95]
+              max-w-5xl
+              mx-auto
 
-    text-gradient-animated
-    text-stroke-soft
-    text-glow
-  "
+              text-gradient-animated
+              text-stroke-soft
+              text-glow
+            "
           >
             {HERO_CONTENT.headline}
           </motion.h1>
+
+          {/* Headline 2 */}
+          {/* <motion.h1
+            variants={itemVariants}
+            className="
+              text-5xl
+              sm:text-6xl
+              md:text-7xl
+              lg:text-[6rem]
+              font-semibold
+              tracking-[-0.05em]
+              leading-[0.95]
+              max-w-5xl
+              mx-auto
+
+              text-gradient-animated
+              text-stroke-soft
+              text-glow
+            "
+          >
+            {HERO_CONTENT.headline2}
+          </motion.h1> */}
 
           {/* Divider */}
           <motion.div
@@ -265,7 +287,7 @@ const HeroSection = () => {
           </motion.div>
 
           {/* Subheadline */}
-          <motion.p
+          {/* <motion.p
   variants={itemVariants}
   className="
     max-w-2xl
@@ -281,7 +303,7 @@ const HeroSection = () => {
   "
 >
   {HERO_CONTENT.subheadline}
-</motion.p>
+</motion.p> */}
 
           {/* CTA Buttons */}
           <motion.div
@@ -393,8 +415,8 @@ const HeroSection = () => {
                   gap-3
                   rounded-xl
                   border
-                  border-white/20
-                  bg-white/5
+                  border-white
+                  bg-black/40
                   backdrop-blur-md
                   px-8
                   py-4

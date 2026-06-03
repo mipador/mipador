@@ -3,21 +3,21 @@ import { Leaf, Compass, Flame } from "lucide-react";
 const values = [
   {
     icon: Compass,
-    title: "Intentional",
+    title: "Freedom",
     description:
       "Nothing we make is accidental. Every proportion, every material, every finish is chosen because it earns its place in your space.",
   },
   {
     icon: Flame,
-    title: "Handcrafted",
+    title: "Craftsmanship",
     description:
       "Made by artisans in Morocco who learned their craft before they could read. Hands that understand wood, clay, leather, and iron differently than machines ever could.",
   },
   {
     icon: Leaf,
-    title: "Honest",
+    title: "Honest Beauty",
     description:
-      "We don't chase trends. We don't make things to impress. We make things that age beautifully, that feel better with time, that you'll still love in twenty years.",
+      "We create things that still feel good years later, Objects with soul, Materials that age beautifully,Spaces that help people breathe, create, connect, and feel present again.",
   },
 ];
 

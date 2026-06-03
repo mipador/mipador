@@ -7,6 +7,7 @@ import ModelGrid from "./components/ModelGrid";
 import FeatureGrid from "./components/FeatureGrid";
 import { Link , useParams } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import ScrollToTop from "../../../src/components/ScrollToTop";
 
 function About() {
 
@@ -15,6 +16,7 @@ function About() {
 
   return (
     <div className="bg-[#F6F4F1] font-sans selection:bg-[#C9922A]/20">
+      <ScrollToTop />
       <AboutHero />
       <AboutStory />
       <ModelGrid />
@@ -39,7 +41,7 @@ function About() {
             Live in a space
             <br />
             <span className="text-[#C9922A]/70 italic font-light">
-              that feels like you.
+              that gives something back to you .
             </span>
           </h2>
           <p className="text-white/50 text-base mb-12 leading-relaxed max-w-xl mx-auto">

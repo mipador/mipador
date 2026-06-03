@@ -17,8 +17,7 @@
     90deg,
     #ffffff,
     #fbf4ed,
-    #fdf9f1,
-    #f0e9de,
+    #ffffff,
     #f6f4f1
   );
   background-size: 300% 300%;
@@ -29,7 +28,7 @@
 }
 
 .text-stroke-soft {
-  -webkit-text-stroke: 0.6px rgba(244, 229, 214, 0.25);
+  -webkit-text-stroke: 0.6px rgba(255, 255, 255, 0.788);
 }
 
 .text-glow {

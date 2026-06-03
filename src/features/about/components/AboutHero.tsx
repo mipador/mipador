@@ -45,8 +45,8 @@ const AboutHero = () => (
         transition={{ duration: 0.8, delay: 0.45 }}
         className="text-black/40 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto"
       >
-        Rooted in Moroccan craftsmanship. Shaped by slow living.
-        Built for people who choose what they bring into their space — consciously.
+        Rooted in Moroccan craftsmanship.
+Built for people who want more freedom, more warmth, and more meaning in the way they live.
       </motion.p>
     </div>
 

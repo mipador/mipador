@@ -7,6 +7,7 @@ import ProductFilters from "../ProductFilters/ProductFilters";
 import Pagination from "../Pagination/Pagination";
 import CartDrawer from "../Cart/CartDrawer";
 import { AnimatePresence, motion } from "framer-motion";
+import ScrollToTop from "../../../../../src/components/ScrollToTop";
 
 export const ITEMS_PER_PAGE = 9;
 
@@ -25,6 +26,7 @@ const ProductsPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#F6F4F1]">
+      <ScrollToTop />
       <CartDrawer />
 
       {/* Floating cart button */}
