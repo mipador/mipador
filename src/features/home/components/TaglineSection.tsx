@@ -61,8 +61,8 @@ const TaglineSection = () => {
             >
               {/* moving light effect */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#3D1A12]/10 blur-2xl rounded-full animate-pulse" />
-                <div className="absolute bottom-0 right-0 w-40 h-40 bg-[#3D1A12]/10 blur-2xl rounded-full animate-pulse" />
+                <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#3D1A12]/10 blur-2xl rounded-xl animate-pulse" />
+                <div className="absolute bottom-0 right-0 w-40 h-40 bg-[#3D1A12]/10 blur-2xl rounded-xl animate-pulse" />
               </div>
 
               {/* floating shine sweep */}

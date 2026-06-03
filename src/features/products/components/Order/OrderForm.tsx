@@ -117,7 +117,7 @@ Please confirm availability. Thank you.`;
   if (sent) {
     return (
       <div className="flex flex-col items-center justify-center py-8 text-center gap-3">
-        <div className="w-12 h-12 rounded-full bg-[#3D1A12]/8 flex items-center justify-center">
+        <div className="w-12 h-12 rounded-xl bg-[#3D1A12]/8 flex items-center justify-center">
           <Check size={20} className="text-[#3D1A12]" />
         </div>
         <div>

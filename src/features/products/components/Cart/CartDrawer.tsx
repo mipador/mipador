@@ -66,7 +66,7 @@ const CartDrawer: React.FC = () => {
               </div>
               <button
                 onClick={() => { setCartOpen(false); setShowOrderForm(false); }}
-                className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#3D1A12]/8 transition-colors"
+                className="w-8 h-8 flex items-center justify-center rounded-xl hover:bg-[#3D1A12]/8 transition-colors"
               >
                 <X size={16} className="text-[#3D1A12]" />
               </button>
@@ -98,7 +98,7 @@ const CartDrawer: React.FC = () => {
                   cartProducts.map(({ item, product }) => (
                     <div
                       key={item.productId}
-                      className="flex gap-4 bg-white rounded-2xl p-4"
+                      className="flex gap-4 bg-white rounded-xl p-4"
                     >
                       {/* Image */}
                       <div className="w-20 h-20 rounded-xl bg-[#EFEBE9] overflow-hidden shrink-0">
@@ -186,7 +186,7 @@ const CartDrawer: React.FC = () => {
 
                   {/* Inline order form */}
                   {showOrderForm && (
-                    <div className="bg-white rounded-2xl p-5">
+                    <div className="bg-white rounded-xl p-5">
                       <p className="text-[10px] font-black uppercase tracking-widest text-[#3D1A12]/40 mb-5">
                         Complete your order
                       </p>

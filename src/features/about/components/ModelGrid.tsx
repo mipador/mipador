@@ -32,7 +32,7 @@ const ModelGrid = () => (
         {spaces.map((space, i) => (
           <div
             key={i}
-            className="bg-white border border-[#3D1A12]/8 rounded-2xl p-5 hover:border-[#C9922A]/30 hover:bg-[#EFEBE9] transition-all group cursor-default"
+            className="bg-white border border-[#3D1A12]/8 rounded-xl p-5 hover:border-[#C9922A]/30 hover:bg-[#EFEBE9] transition-all group cursor-default"
           >
             <p className="text-xs font-black text-[#3D1A12] tracking-tight">
               {space}

@@ -40,7 +40,7 @@ const CoreFeatures = () => (
             key={i}
             className="bg-white/5 border border-white/10 rounded-3xl p-10 hover:bg-white/8 transition-all group"
           >
-            <div className="w-12 h-12 rounded-2xl bg-[#C9922A]/15 flex items-center justify-center mb-8 group-hover:bg-[#C9922A]/25 transition-colors">
+            <div className="w-12 h-12 rounded-xl bg-[#C9922A]/15 flex items-center justify-center mb-8 group-hover:bg-[#C9922A]/25 transition-colors">
               <v.icon className="text-[#C9922A]" size={22} />
             </div>
             <h3 className="text-xl font-black text-white mb-4 tracking-tight">

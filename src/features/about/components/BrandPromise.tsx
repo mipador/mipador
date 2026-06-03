@@ -25,7 +25,7 @@ const BrandPromise = () => (
           <div className="space-y-5">
             {promises.map((p, i) => (
               <div key={i} className="flex items-start gap-4">
-                <div className="w-5 h-5 rounded-full bg-[#C9922A]/15 flex items-center justify-center shrink-0 mt-0.5">
+                <div className="w-5 h-5 rounded-xl bg-[#C9922A]/15 flex items-center justify-center shrink-0 mt-0.5">
                   <Check className="text-[#C9922A]" size={11} />
                 </div>
                 <span className="text-[#3D1A12]/70 text-sm leading-relaxed">{p}</span>
@@ -36,7 +36,7 @@ const BrandPromise = () => (
 
         <div className="relative h-[480px] rounded-3xl overflow-hidden">
           <img
-            src="/images/atmosphere-2.jpg"
+            src="/images/hero.jpg"
             alt="Mipador craftsmanship"
             className="w-full h-full object-cover"
           />

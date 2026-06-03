@@ -19,7 +19,7 @@ const Pagination: React.FC = () => {
       {/* Previous Button */}
       <button
         onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
-        className="w-14 h-14 flex items-center justify-center rounded-full bg-transparent border border-[#3D1A12]/10 text-[#3D1A12] transition-all hover:bg-[#4D2A22] hover:text-[#F4F4F4] disabled:opacity-20"
+        className="w-14 h-14 flex items-center justify-center rounded-xl bg-transparent border border-[#3D1A12]/10 text-[#3D1A12] transition-all hover:bg-[#4D2A22] hover:text-[#F4F4F4] disabled:opacity-20"
         disabled={currentPage === 1}
         aria-label="Previous page"
       >
@@ -32,7 +32,7 @@ const Pagination: React.FC = () => {
           <button
             key={n}
             onClick={() => handlePageChange(n)}
-            className={`transition-all duration-500 rounded-full ${
+            className={`transition-all duration-500 rounded-xl ${
               n === currentPage
                 ? "bg-[#3D1A12] w-8 h-2.5"
                 : "bg-[#3D1A12]/10 w-2.5 h-2.5 hover:bg-[#3D1A12]/30"
@@ -45,7 +45,7 @@ const Pagination: React.FC = () => {
       {/* Next Button */}
       <button
         onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
-        className="w-14 h-14 flex items-center justify-center rounded-full bg-transparent border border-[#3D1A12]/10 text-[#3D1A12] transition-all hover:bg-[#4D2A22] hover:text-[#F4F4F4] disabled:opacity-20"
+        className="w-14 h-14 flex items-center justify-center rounded-xl bg-transparent border border-[#3D1A12]/10 text-[#3D1A12] transition-all hover:bg-[#4D2A22] hover:text-[#F4F4F4] disabled:opacity-20"
         disabled={currentPage === totalPages}
         aria-label="Next page"
       >

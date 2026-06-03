@@ -15,33 +15,33 @@ const ProductCardHomePage: React.FC<{ product: Product }> = ({ product }) => {
       className="flex flex-col group"
     >
       {/* Image */}
-      <div className="relative aspect-[3/4] rounded-2xl bg-[#EFEBE9] overflow-hidden">
+      <div className="relative aspect-[3/4] rounded-xl bg-[#EFEBE9] overflow-hidden">
         {/* Badges */}
         <div className="absolute top-3 left-3 z-20 flex flex-col gap-1.5">
           {product.tags.includes("new") && (
-            <span className="px-2.5 py-1 bg-[#C9922A] text-white text-[9px] font-black uppercase tracking-widest rounded-full">
+            <span className="px-2.5 py-1 bg-[#C9922A] text-white text-[9px] font-black uppercase tracking-widest rounded-xl">
               New
             </span>
           )}
           {product.tags.includes("bestseller") && (
-            <span className="px-2.5 py-1 bg-[#3D1A12] text-white text-[9px] font-black uppercase tracking-widest rounded-full">
+            <span className="px-2.5 py-1 bg-[#3D1A12] text-white text-[9px] font-black uppercase tracking-widest rounded-xl">
               Bestseller
             </span>
           )}
           {isComingSoon && (
-            <span className="px-2.5 py-1 bg-white/90 text-[#3D1A12] text-[9px] font-black uppercase tracking-widest rounded-full">
+            <span className="px-2.5 py-1 bg-white/90 text-[#3D1A12] text-[9px] font-black uppercase tracking-widest rounded-xl">
               Coming Soon
             </span>
           )}
           {isOutOfStock && (
-            <span className="px-2.5 py-1 bg-white/90 text-[#3D1A12]/60 text-[9px] font-black uppercase tracking-widest rounded-full">
+            <span className="px-2.5 py-1 bg-white/90 text-[#3D1A12]/60 text-[9px] font-black uppercase tracking-widest rounded-xl">
               Sold Out
             </span>
           )}
         </div>
 
         {/* Location badge */}
-        <div className="absolute top-3 right-3 z-20 px-2.5 py-1 bg-white/80 backdrop-blur-md rounded-full">
+        <div className="absolute top-3 right-3 z-20 px-2.5 py-1 bg-white/80 backdrop-blur-md rounded-xl">
           <p className="text-[9px] font-black uppercase tracking-widest text-[#3D1A12]/50">
             {product.location}
           </p>

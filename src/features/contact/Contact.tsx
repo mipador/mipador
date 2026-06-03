@@ -12,9 +12,9 @@ const ContactPage: React.FC = () => {
           <div className="space-y-12">
             <ContactInfo />
             {/* Minimal Map Placeholder */}
-            <div className="w-full h-56 bg-[#E6E3DF] rounded-2xl flex items-center justify-center border border-[#DEDAD5]">
+            <div className="w-full h-56 bg-[#E6E3DF] rounded-xl flex items-center justify-center border border-[#DEDAD5]">
               
-                <div className="w-full h-56 rounded-2xl overflow-hidden border border-[#DEDAD5]">
+                <div className="w-full h-56 rounded-xl overflow-hidden border border-[#DEDAD5]">
                 <iframe
                   title="Casablanca Location"
                   src="https://www.google.com/maps?q=Casablanca, Morocco&output=embed"

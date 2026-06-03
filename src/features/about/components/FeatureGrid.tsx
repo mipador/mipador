@@ -27,7 +27,7 @@ const FeatureGrid = () => (
         {touches.map((item, i) => (
           <div
             key={i}
-            className="bg-white border border-[#3D1A12]/8 rounded-2xl p-6 hover:bg-[#EFEBE9] hover:border-[#C9922A]/20 transition-all group"
+            className="bg-white border border-[#3D1A12]/8 rounded-xl p-6 hover:bg-[#EFEBE9] hover:border-[#C9922A]/20 transition-all group"
           >
             <item.icon
               className="text-[#C9922A] mb-5 transition-transform group-hover:scale-110"

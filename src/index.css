@@ -1,1 +1,39 @@
 @import "tailwindcss";
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.text-gradient-animated {
+  background: linear-gradient(
+    90deg,
+    #ffffff,
+    #fbf4ed,
+    #fdf9f1,
+    #f0e9de,
+    #f6f4f1
+  );
+  background-size: 300% 300%;
+  animation: gradientMove 8s ease infinite;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-stroke-soft {
+  -webkit-text-stroke: 0.6px rgba(244, 229, 214, 0.25);
+}
+
+.text-glow {
+  text-shadow:
+    0 0 20px rgba(198, 169, 139, 0.15),
+    0 0 40px rgba(0, 0, 0, 0.6);
+}

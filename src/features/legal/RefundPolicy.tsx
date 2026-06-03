@@ -45,7 +45,7 @@ const RefundPolicy = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-white border border-[#3D1A12]/8 rounded-2xl p-8">
+              <div className="bg-white border border-[#3D1A12]/8 rounded-xl p-8">
                 <p className="text-[10px] font-black uppercase tracking-widest text-[#3D1A12]/40 mb-4">
                   Exchange
                 </p>
@@ -54,7 +54,7 @@ const RefundPolicy = () => {
                   for the one that truly belongs in your space.
                 </p>
               </div>
-              <div className="bg-white border border-[#3D1A12]/8 rounded-2xl p-8">
+              <div className="bg-white border border-[#3D1A12]/8 rounded-xl p-8">
                 <p className="text-[10px] font-black uppercase tracking-widest text-[#3D1A12]/40 mb-4">
                   Refund
                 </p>

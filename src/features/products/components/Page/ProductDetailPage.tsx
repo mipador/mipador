@@ -38,7 +38,7 @@ const StockAlert: React.FC<{ stock: number }> = ({ stock }) => {
 
   return (
     <div className="flex items-center gap-2">
-      <div className="w-2 h-2 rounded-full bg-green-500" />
+      <div className="w-2 h-2 rounded-xl bg-green-500" />
       <p className="text-xs font-black text-green-600 uppercase tracking-widest">
         In Stock · Ready to order
       </p>
@@ -168,7 +168,7 @@ const ProductDetailPage: React.FC = () => {
 
           {/* ── Images ── */}
           <div className="flex flex-col gap-3">
-            <div className="relative aspect-[4/5] rounded-2xl bg-[#EFEBE9] overflow-hidden">
+            <div className="relative aspect-[4/5] rounded-xl bg-[#EFEBE9] overflow-hidden">
               {product.images[imgIndex] ? (
                 <img
                   src={product.images[imgIndex]}
@@ -184,7 +184,7 @@ const ProductDetailPage: React.FC = () => {
               )}
 
               {isUnavailable && (
-                <div className="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur rounded-full">
+                <div className="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur rounded-xl">
                   <p className="text-[9px] font-black uppercase tracking-widest text-[#3D1A12]">
                     {isComingSoon ? "Coming Soon" : "Sold Out"}
                   </p>
@@ -193,7 +193,7 @@ const ProductDetailPage: React.FC = () => {
 
               {/* Badges */}
               {product.tags.includes("bestseller") && (
-                <div className="absolute top-4 right-4 px-3 py-1 bg-[#3D1A12] rounded-full">
+                <div className="absolute top-4 right-4 px-3 py-1 bg-[#3D1A12] rounded-xl">
                   <p className="text-[9px] font-black uppercase tracking-widest text-white">
                     Bestseller
                   </p>
@@ -204,7 +204,7 @@ const ProductDetailPage: React.FC = () => {
                 <>
                   <button
                     onClick={() => setImgIndex((i) => Math.max(0, i - 1))}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/80 rounded-full flex items-center justify-center hover:bg-white transition-colors"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/80 rounded-xl flex items-center justify-center hover:bg-white transition-colors"
                   >
                     <ChevronLeft size={15} className="text-[#3D1A12]" />
                   </button>
@@ -214,7 +214,7 @@ const ProductDetailPage: React.FC = () => {
                         Math.min(product.images.length - 1, i + 1)
                       )
                     }
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/80 rounded-full flex items-center justify-center hover:bg-white transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/80 rounded-xl flex items-center justify-center hover:bg-white transition-colors"
                   >
                     <ChevronRight size={15} className="text-[#3D1A12]" />
                   </button>
@@ -228,7 +228,7 @@ const ProductDetailPage: React.FC = () => {
                     <button
                       key={i}
                       onClick={() => setImgIndex(i)}
-                      className={`transition-all duration-300 rounded-full ${
+                      className={`transition-all duration-300 rounded-xl ${
                         i === imgIndex
                           ? "bg-white w-6 h-1.5"
                           : "bg-white/40 w-1.5 h-1.5"
@@ -301,7 +301,7 @@ const ProductDetailPage: React.FC = () => {
 
             {/* ── ORDER FORM — always visible ── */}
             {!isUnavailable && (
-              <div className="bg-white rounded-2xl p-5 border border-[#3D1A12]/8 flex flex-col gap-4">
+              <div className="bg-white rounded-xl p-5 border border-[#3D1A12]/8 flex flex-col gap-4">
                 <p className="text-[10px] font-black uppercase tracking-widest text-[#3D1A12]/40">
                   Acheter maintenant
                 </p>
@@ -395,7 +395,7 @@ const ProductDetailPage: React.FC = () => {
                   {product.materials.map((m, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 bg-white border border-[#3D1A12]/10 rounded-full text-[10px] font-black uppercase tracking-wider text-[#3D1A12]/50"
+                      className="px-3 py-1 bg-white border border-[#3D1A12]/10 rounded-xl text-[10px] font-black uppercase tracking-wider text-[#3D1A12]/50"
                     >
                       {m}
                     </span>
@@ -478,7 +478,7 @@ const ProductDetailPage: React.FC = () => {
                     window.scrollTo({ top: 0, behavior: "smooth" });
                   }}
                 >
-                  <div className="aspect-[3/4] rounded-2xl bg-[#EFEBE9] overflow-hidden">
+                  <div className="aspect-[3/4] rounded-xl bg-[#EFEBE9] overflow-hidden">
                     {p.images[0] ? (
                       <img
                         src={p.images[0]}

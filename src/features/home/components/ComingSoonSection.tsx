@@ -22,7 +22,7 @@ const ComingSoonSection = () => {
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
-          className="bg-[#FFFFFF] inline-block px-4 py-1 border border-[#3D1A12]/20 rounded-full mb-8"
+          className="bg-[#FFFFFF] inline-block px-4 py-1 border border-[#3D1A12]/20 rounded-xl mb-8"
         >
           <span className="text-[#3D1A12] text-[9px] font-black uppercase tracking-[0.3em]">
             New Collection • In Progress
@@ -41,7 +41,7 @@ const ComingSoonSection = () => {
         </p>
 
         <div className="flex justify-center">
-          <div className="flex bg-[#3D1A12]/5 p-1 rounded-full border border-[#3D1A12]/10 max-w-md w-full">
+          <div className="flex bg-[#3D1A12]/5 p-1 rounded-xl border border-[#3D1A12]/10 max-w-md w-full">
 
             <input
               type="email"
@@ -49,7 +49,7 @@ const ComingSoonSection = () => {
               className="bg-transparent border-none focus:ring-0 text-[#3D1A12] placeholder:text-[#3D1A12]/30 text-[10px] font-bold uppercase tracking-widest px-6 flex-1"
             />
 
-            <button className="px-6 py-3 bg-[#3D1A12] text-[#F4F4F4] text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-[#4D2A22] transition-colors">
+            <button className="px-6 py-3 bg-[#3D1A12] text-[#F4F4F4] text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-[#4D2A22] transition-colors">
               Notify Me
             </button>
 

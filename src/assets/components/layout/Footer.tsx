@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="w-8 h-8 flex items-center justify-center rounded-full bg-[#3D1A12]/8 text-[#3D1A12]/60 hover:bg-[#3D1A12] hover:text-white transition-all duration-300"
+                className="w-8 h-8 flex items-center justify-center rounded-xl bg-[#3D1A12]/8 text-[#3D1A12]/60 hover:bg-[#3D1A12] hover:text-white transition-all duration-300"
               >
                 <svg
                   className="w-3.5 h-3.5"
@@ -72,7 +72,7 @@ const Footer: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="TikTok"
-                className="w-8 h-8 flex items-center justify-center rounded-full bg-[#3D1A12]/8 text-[#3D1A12]/60 hover:bg-[#3D1A12] hover:text-white transition-all duration-300"
+                className="w-8 h-8 flex items-center justify-center rounded-xl bg-[#3D1A12]/8 text-[#3D1A12]/60 hover:bg-[#3D1A12] hover:text-white transition-all duration-300"
               >
                 <svg
                   className="w-3.5 h-3.5"
@@ -89,7 +89,7 @@ const Footer: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Pinterest"
-                className="w-8 h-8 flex items-center justify-center rounded-full bg-[#3D1A12]/8 text-[#3D1A12]/60 hover:bg-[#3D1A12] hover:text-white transition-all duration-300"
+                className="w-8 h-8 flex items-center justify-center rounded-xl bg-[#3D1A12]/8 text-[#3D1A12]/60 hover:bg-[#3D1A12] hover:text-white transition-all duration-300"
               >
                 <svg
                   className="w-3.5 h-3.5"
@@ -106,7 +106,7 @@ const Footer: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"
-                className="w-8 h-8 flex items-center justify-center rounded-full bg-[#3D1A12]/8 text-[#3D1A12]/60 hover:bg-[#3D1A12] hover:text-white transition-all duration-300"
+                className="w-8 h-8 flex items-center justify-center rounded-xl bg-[#3D1A12]/8 text-[#3D1A12]/60 hover:bg-[#3D1A12] hover:text-white transition-all duration-300"
               >
                 <svg
                   className="w-3.5 h-3.5"

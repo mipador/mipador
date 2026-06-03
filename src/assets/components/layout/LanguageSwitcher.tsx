@@ -81,7 +81,7 @@ export default function LanguageSwitcher() {
         <img
           src={current.flag}
           alt={current.label}
-          className="w-5 h-5 rounded-full object-cover"
+          className="w-5 h-5 rounded-xl object-cover"
         />
 
         <span className="text-[11px] font-semibold tracking-wide text-[#3D1A12]">
@@ -104,7 +104,7 @@ export default function LanguageSwitcher() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.96 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className="absolute right-0 top-[120%] w-44 overflow-hidden rounded-2xl border border-[#3D1A12]/10 bg-white/95 backdrop-blur-2xl shadow-[0_10px_40px_rgba(0,0,0,0.08)]"
+            className="absolute right-0 top-[120%] w-44 overflow-hidden rounded-xl border border-[#3D1A12]/10 bg-white/95 backdrop-blur-2xl shadow-[0_10px_40px_rgba(0,0,0,0.08)]"
           >
             {languages.map((l) => (
               <button
@@ -119,7 +119,7 @@ export default function LanguageSwitcher() {
                 <img
                   src={l.flag}
                   alt={l.label}
-                  className="w-5 h-5 rounded-full object-cover"
+                  className="w-5 h-5 rounded-xl object-cover"
                 />
 
                 <div className="flex flex-col items-start">

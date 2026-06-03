@@ -31,7 +31,7 @@ const ProductsPage: React.FC = () => {
       {cartCount > 0 && (
         <button
           onClick={() => setCartOpen(true)}
-          className="fixed bottom-6 right-6 z-40 bg-[#3D1A12] text-white px-5 py-3.5 rounded-2xl flex items-center gap-3 shadow-xl shadow-[#3D1A12]/20 hover:bg-[#4D2A22] active:scale-95 transition-all"
+          className="fixed bottom-6 right-6 z-40 bg-[#3D1A12] text-white px-5 py-3.5 rounded-xl flex items-center gap-3 shadow-xl shadow-[#3D1A12]/20 hover:bg-[#4D2A22] active:scale-95 transition-all"
         >
           <ShoppingBag size={16} />
           <span className="text-[10px] font-black uppercase tracking-widest">
@@ -77,7 +77,7 @@ const ProductsPage: React.FC = () => {
             className="lg:hidden self-start flex items-center gap-2 bg-white border border-[#3D1A12]/10 px-4 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest text-[#3D1A12]"
           >
             <SlidersHorizontal size={13} />
-            Filters {hasActiveFilters() && <span className="w-1.5 h-1.5 rounded-full bg-[#C9922A] inline-block" />}
+            Filters {hasActiveFilters() && <span className="w-1.5 h-1.5 rounded-xl bg-[#C9922A] inline-block" />}
           </button>
         </div>
 
@@ -131,7 +131,7 @@ const ProductsPage: React.FC = () => {
             >
               {/* Handle */}
               <div className="flex justify-center pt-3 pb-1">
-                <div className="w-10 h-1 rounded-full bg-[#3D1A12]/15" />
+                <div className="w-10 h-1 rounded-xl bg-[#3D1A12]/15" />
               </div>
 
               <div className="flex items-center justify-between px-6 py-4 border-b border-[#3D1A12]/10">
@@ -140,7 +140,7 @@ const ProductsPage: React.FC = () => {
                 </p>
                 <button
                   onClick={() => setMobileFiltersOpen(false)}
-                  className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#3D1A12]/8 transition-colors"
+                  className="w-8 h-8 flex items-center justify-center rounded-xl hover:bg-[#3D1A12]/8 transition-colors"
                 >
                   <X size={16} className="text-[#3D1A12]" />
                 </button>

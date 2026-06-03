@@ -59,8 +59,8 @@ const Navbar: React.FC = () => {
         }}
         className={`w-full transition-all duration-500 ease-in-out border border-white/10 ${
           scrolled
-            ? "max-w-2xl bg-[#f6f4f1]/92 backdrop-blur-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] rounded-2xl"
-            : "max-w-7xl bg-[#f6f4f1]/72 backdrop-blur-xl rounded-3xl"
+            ? "max-w-2xl bg-[#f6f4f1]/92 backdrop-blur-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] rounded-xl"
+            : "max-w-7xl bg-[#f6f4f1]/72 backdrop-blur-xl rounded-xl"
         }`}
       >
         <div

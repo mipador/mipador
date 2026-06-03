@@ -33,7 +33,7 @@ export const FaqItem: React.FC<FaqItemProps> = ({
           {question}
         </span>
         <span
-          className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 ${
+          className={`shrink-0 w-7 h-7 rounded-xl flex items-center justify-center transition-all duration-300 ${
             isOpen
               ? "bg-[#3D1A12] text-white"
               : "bg-[#3D1A12]/8 text-[#3D1A12]/40 group-hover:bg-[#3D1A12]/15"
