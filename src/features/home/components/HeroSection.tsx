@@ -150,9 +150,13 @@ const HeroSection = () => {
           key={currentImage.url}
           src={currentImage.url}
           alt={currentImage.alt}
-          className="w-full h-full object-cover"
+          className="
+            w-full
+            h-full
+            object-cover
+            object-center
+          "
           style={{
-            objectPosition: "center",
             filter: useTransform(brightness, (v) => `brightness(${v})`),
           }}
           initial={{ opacity: 0 }}
