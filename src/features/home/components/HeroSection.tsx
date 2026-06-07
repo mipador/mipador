@@ -152,7 +152,7 @@ const HeroSection = () => {
           alt={currentImage.alt}
           className="w-full h-full object-cover"
           style={{
-            objectPosition: isMobile ? "60% center" : "center",
+            objectPosition: "center",
             filter: useTransform(brightness, (v) => `brightness(${v})`),
           }}
           initial={{ opacity: 0 }}

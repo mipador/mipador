@@ -23,7 +23,7 @@ jobs:
 
       - name: Run fixes
         run: |
-          # --ignore-unknown stops it from crashing on things like favicon.svg
+          # --ignore-unknown stops it from crashing on things like favicon.ico
           npx prettier --write "src/**/*.{ts,tsx,js,jsx,json,css,md}" "public/**/*" "*.{js,ts,json,md}" --ignore-unknown
           
           # ESLint targets your source code logic
