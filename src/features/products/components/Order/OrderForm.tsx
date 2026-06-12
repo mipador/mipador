@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ShoppingCart, Check, Loader } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { WHATSAPP_NUMBER } from "../../../../config/whatsapp";
 
 export interface OrderLine {
   name: string;
@@ -49,8 +50,6 @@ const Field: React.FC<FieldProps> = ({
     )}
   </div>
 );
-
-const WHATSAPP_NUMBER = "212612918900";
 
 const OrderForm: React.FC<OrderFormProps> = ({ lines, total, onSuccess }) => {
   const { t } = useTranslation();

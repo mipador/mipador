@@ -161,5 +161,11 @@
     "terms": "Terms & Conditions",
     "refund": "Refund Policy",
     "copyright": "© {{year}} Mipador Studio. All rights reserved."
+  },
+  "whatsapp": {
+    "chatWithUs": "Chat with us on WhatsApp",
+    "orderViaWhatsApp": "Order via WhatsApp",
+    "orderViaWhatsAppHint": "Skip the form — we'll handle it on WhatsApp",
+    "quickMessage": "Hello Mipador, I'd like to inquire about the following pieces:"
   }
 }

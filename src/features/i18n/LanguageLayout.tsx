@@ -6,6 +6,7 @@ import Navbar from "../../assets/components/layout/Navbar";
 import Footer from "../../assets/components/layout/Footer";
 import AmbientBackground from "../../components/AmbientBackground";
 import CartDrawer from "../products/components/Cart/CartDrawer";
+import FloatingWhatsApp from "../../components/FloatingWhatsApp";
 
 import Homepage from "../home/Homepage";
 import ProductsPage from "../products/components/Page/ProductsPage";
@@ -68,6 +69,7 @@ export default function LanguageLayout() {
       <AmbientBackground />
       <Navbar />
       <CartDrawer />
+      <FloatingWhatsApp />
 
       <main className="flex-1 relative z-10">
         <Routes>

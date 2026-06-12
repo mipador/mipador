@@ -161,5 +161,11 @@
     "terms": "Conditions générales",
     "refund": "Politique de remboursement",
     "copyright": "© {{year}} Studio Mipador. Tous droits réservés."
+  },
+  "whatsapp": {
+    "chatWithUs": "Discuter sur WhatsApp",
+    "orderViaWhatsApp": "Commander via WhatsApp",
+    "orderViaWhatsAppHint": "Sans formulaire — on gère ça sur WhatsApp",
+    "quickMessage": "Bonjour Mipador, je souhaite me renseigner sur les pièces suivantes :"
   }
 }
