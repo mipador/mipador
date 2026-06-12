@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ShoppingCart, Check, Loader } from "lucide-react";
+import { ShoppingCart, Check, Loader, Banknote, CreditCard } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { WHATSAPP_NUMBER } from "../../../../config/whatsapp";
 
@@ -51,12 +51,65 @@ const Field: React.FC<FieldProps> = ({
   </div>
 );
 
+// ── Payment method option card ─────────────────────────────
+const PaymentOption: React.FC<{
+  selected: boolean;
+  disabled?: boolean;
+  icon: React.ReactNode;
+  label: string;
+  desc: string;
+  badge?: string;
+  onClick: () => void;
+}> = ({ selected, disabled, icon, label, desc, badge, onClick }) => (
+  <button
+    type="button"
+    onClick={onClick}
+    disabled={disabled}
+    className={`relative flex items-center gap-3 w-full rounded-xl border px-4 py-3 text-left transition-all duration-200 ${
+      disabled
+        ? "opacity-40 cursor-not-allowed bg-[#F6F4F1] border-[#3D1A12]/8"
+        : selected
+        ? "border-[#3D1A12] bg-[#3D1A12]/5 shadow-[0_0_0_1px_#3D1A12]"
+        : "border-[#3D1A12]/15 bg-[#F6F4F1] hover:border-[#3D1A12]/30"
+    }`}
+  >
+    <div className={`shrink-0 w-9 h-9 rounded-lg flex items-center justify-center ${
+      selected ? "bg-[#3D1A12] text-white" : "bg-white text-[#3D1A12]/50"
+    }`}>
+      {icon}
+    </div>
+    <div className="flex-1 min-w-0">
+      <p className={`text-xs font-black uppercase tracking-widest ${
+        selected ? "text-[#3D1A12]" : "text-[#3D1A12]/60"
+      }`}>
+        {label}
+      </p>
+      <p className="text-[10px] text-[#3D1A12]/35 font-light mt-0.5">{desc}</p>
+    </div>
+    {!disabled && (
+      <div className={`shrink-0 w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all ${
+        selected ? "border-[#3D1A12] bg-[#3D1A12]" : "border-[#3D1A12]/25"
+      }`}>
+        {selected && <Check size={8} className="text-white" strokeWidth={3} />}
+      </div>
+    )}
+    {badge && (
+      <span className="absolute top-2 right-2 px-2 py-0.5 bg-[#C9922A]/15 text-[#C9922A] text-[8px] font-black uppercase tracking-widest rounded-lg">
+        {badge}
+      </span>
+    )}
+  </button>
+);
+
+// ── Main form ──────────────────────────────────────────────
 const OrderForm: React.FC<OrderFormProps> = ({ lines, total, onSuccess }) => {
   const { t } = useTranslation();
   const [form, setForm] = useState({ name: "", phone: "", city: "", address: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+  // CoD is the only active option; "online" is a B2 placeholder
+  const [paymentMethod] = useState<"cod" | "online">("cod");
 
   const validate = () => {
     const e: Record<string, string> = {};
@@ -91,6 +144,7 @@ Name: ${form.name}
 Phone: ${form.phone}
 City: ${form.city}
 Address: ${form.address}
+Payment: ${paymentMethod === "cod" ? t("order.cod") : t("order.onlinePayment")}
 ──────────────────
 
 Order:
@@ -131,6 +185,32 @@ Please confirm availability. Thank you.`;
 
   return (
     <div className="flex flex-col gap-4">
+
+      {/* Payment method selector */}
+      <div className="flex flex-col gap-2">
+        <p className="text-[10px] font-black uppercase tracking-widest text-[#3D1A12]/45">
+          {t("order.paymentMethod")}
+        </p>
+        <PaymentOption
+          selected={paymentMethod === "cod"}
+          icon={<Banknote size={15} />}
+          label={t("order.cod")}
+          desc={t("order.codDesc")}
+          onClick={() => {/* CoD is always active */}}
+        />
+        {/* TODO B2: wire up payment gateway (Stripe / CMI / PayZone) — swap disabled for real handler */}
+        <PaymentOption
+          selected={false}
+          disabled
+          icon={<CreditCard size={15} />}
+          label={t("order.onlinePayment")}
+          desc={t("order.codDesc")}
+          badge={t("order.onlineSoon")}
+          onClick={() => {}}
+        />
+      </div>
+
+      {/* Contact fields */}
       <div className="grid grid-cols-2 gap-3">
         <Field
           label={t("order.fullName")} placeholder={t("order.namePlaceholder")}

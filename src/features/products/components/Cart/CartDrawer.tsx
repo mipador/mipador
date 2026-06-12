@@ -148,7 +148,7 @@ const CartDrawer: React.FC = () => {
               <button
                 ref={closeButtonRef}
                 onClick={handleClose}
-                className="w-8 h-8 flex items-center justify-center rounded-xl hover:bg-[#3D1A12]/8 transition-colors"
+                className="w-11 h-11 flex items-center justify-center rounded-xl hover:bg-[#3D1A12]/8 transition-colors"
                 aria-label={t("cart.close")}
               >
                 <X size={16} className="text-[#3D1A12]" />
@@ -258,14 +258,19 @@ const CartDrawer: React.FC = () => {
                 <div className="px-6 pb-8 border-t border-[#3D1A12]/10 pt-5 space-y-4">
 
                   {/* Totals */}
-                  <div className="space-y-2">
+                  <div className="space-y-2.5">
                     <div className="flex justify-between text-xs text-[#3D1A12]/50">
                       <span>{t("cart.subtotal")}</span>
                       <span>{total.toLocaleString()} MAD</span>
                     </div>
-                    <div className="flex justify-between text-xs text-[#3D1A12]/50">
-                      <span>{t("cart.deliveryEstimate")}</span>
-                      <span>{DELIVERY} MAD</span>
+                    <div className="flex items-start justify-between gap-2 bg-[#C9922A]/6 border border-[#C9922A]/15 rounded-xl px-3 py-2.5">
+                      <div>
+                        <p className="text-xs font-black text-[#3D1A12]/70">{t("cart.deliveryEstimate")}</p>
+                        <p className="text-[9px] text-[#C9922A] font-black uppercase tracking-wider mt-0.5">
+                          {t("cart.freeDeliveryOver", { amount: "1 500" })}
+                        </p>
+                      </div>
+                      <span className="text-sm font-black text-[#3D1A12] shrink-0">{DELIVERY} MAD</span>
                     </div>
                     <div className="flex justify-between text-sm font-black text-[#3D1A12] pt-2 border-t border-[#3D1A12]/10">
                       <span>{t("cart.total")}</span>
