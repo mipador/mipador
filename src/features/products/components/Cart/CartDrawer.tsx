@@ -200,6 +200,8 @@ const CartDrawer: React.FC = () => {
                             <img
                               src={product.images[0]}
                               alt={product.name}
+                              loading="lazy"
+                              decoding="async"
                               className="w-full h-full object-cover"
                             />
                           )}

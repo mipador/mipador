@@ -320,7 +320,7 @@ const ProductDetailPage: React.FC = () => {
                         : "border-transparent opacity-50 hover:opacity-80"
                     }`}
                   >
-                    <img src={img} alt="" className="w-full h-full object-cover" />
+                    <img src={img} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                   </button>
                 ))}
               </div>
@@ -551,6 +551,8 @@ const ProductDetailPage: React.FC = () => {
                       <img
                         src={p.images[0]}
                         alt={p.name}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                       />
                     ) : (

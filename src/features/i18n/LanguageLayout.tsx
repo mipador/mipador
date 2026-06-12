@@ -1,5 +1,5 @@
 import { useParams, Navigate, Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import i18n from "../../i18n";
 
@@ -9,18 +9,21 @@ import AmbientBackground from "../../components/AmbientBackground";
 import CartDrawer from "../products/components/Cart/CartDrawer";
 import FloatingWhatsApp from "../../components/FloatingWhatsApp";
 
-import Homepage from "../home/Homepage";
-import ProductsPage from "../products/components/Page/ProductsPage";
-import About from "../about/About";
-import Contact from "../contact/Contact";
-import NotFound from "../../pages/404Page";
+// ── Lazy-loaded pages (code-split per route) ──────────────
+const Homepage        = lazy(() => import("../home/Homepage"));
+const ProductsPage    = lazy(() => import("../products/components/Page/ProductsPage"));
+const ProductDetailPage = lazy(() => import("../products/components/Page/ProductDetailPage"));
+const WishlistPage    = lazy(() => import("../products/components/Page/WishlistPage"));
+const About           = lazy(() => import("../about/About"));
+const Contact         = lazy(() => import("../contact/Contact"));
+const NotFound        = lazy(() => import("../../pages/404Page"));
+const PrivacyPolicy   = lazy(() => import("../legal/PrivacyPolicy"));
+const RefundPolicy    = lazy(() => import("../legal/RefundPolicy"));
+const TermsOfService  = lazy(() => import("../legal/TermsOfService"));
+const FaqsPage        = lazy(() => import("../../pages/FaqsPage"));
 
-import PrivacyPolicy from "../legal/PrivacyPolicy";
-import RefundPolicy from "../legal/RefundPolicy";
-import TermsOfService from "../legal/TermsOfService";
-import FaqsPage from "../../pages/FaqsPage";
-import ProductDetailPage from "../products/components/Page/ProductDetailPage";
-import WishlistPage from "../products/components/Page/WishlistPage";
+// Blank fallback — page fade transition covers the transition seam
+const PageLoader = () => <div className="min-h-screen bg-[#F6F4F1]" />;
 
 const supported = ["en", "fr", "ar", "ma"];
 
@@ -29,28 +32,23 @@ export default function LanguageLayout() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // ✅ SINGLE SYNC SYSTEM (URL → everything)
+  // SINGLE SYNC SYSTEM (URL → everything)
   useEffect(() => {
     if (!lang || !supported.includes(lang)) return;
 
-    // i18n sync
     i18n.changeLanguage(lang);
-
-    // localStorage sync
     localStorage.setItem("lang", lang);
 
-    // RTL / LTR + lang attribute
     const isRTL = lang === "ar" || lang === "ma";
     document.documentElement.dir = isRTL ? "rtl" : "ltr";
     document.documentElement.lang = lang;
   }, [lang]);
 
-  // optional: first visit detection ONLY ONCE
+  // First-visit browser language detection
   useEffect(() => {
     if (localStorage.getItem("lang")) return;
 
     const browserLang = navigator.language.toLowerCase();
-
     let detected = "en";
     if (browserLang.includes("fr")) detected = "fr";
     else if (browserLang.includes("ar")) detected = "ar";
@@ -61,7 +59,7 @@ export default function LanguageLayout() {
       const path = window.location.pathname.split("/").slice(2).join("/");
       navigate(`/${detected}/${path}`);
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!lang || !supported.includes(lang)) {
     return <Navigate to="/en" replace />;
@@ -82,21 +80,23 @@ export default function LanguageLayout() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
         >
-          <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="/products" element={<ProductsPage />} />
-            <Route path="/products/:slug" element={<ProductDetailPage />} />
-            <Route path="/wishlist" element={<WishlistPage />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<Homepage />} />
+              <Route path="/products" element={<ProductsPage />} />
+              <Route path="/products/:slug" element={<ProductDetailPage />} />
+              <Route path="/wishlist" element={<WishlistPage />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
 
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/refund-policy" element={<RefundPolicy />} />
-            <Route path="/terms-of-service" element={<TermsOfService />} />
-            <Route path="/faqs" element={<FaqsPage />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/refund-policy" element={<RefundPolicy />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
+              <Route path="/faqs" element={<FaqsPage />} />
 
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
         </motion.main>
       </AnimatePresence>
 
