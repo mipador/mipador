@@ -6,6 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import OrderForm from "../Order/OrderForm";
 import { WHATSAPP_NUMBER } from "../../../../config/whatsapp";
+import TrustBadges from "../../../../components/TrustBadges";
 
 const DELIVERY = 150;
 
@@ -271,6 +272,9 @@ const CartDrawer: React.FC = () => {
                       <span>{grandTotal.toLocaleString()} MAD</span>
                     </div>
                   </div>
+
+                  {/* Trust signals — shown before committing to order */}
+                  {!showOrderForm && <TrustBadges />}
 
                   {/* Toggle order form */}
                   <button

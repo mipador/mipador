@@ -5,11 +5,11 @@ import {
   ChevronRight, Check, AlertTriangle,
   Clock, Minus, Plus, Star,
 } from "lucide-react";
-// Users
 import { products } from "../../../../data/products";
 import { useProductStore } from "../../../../store/product.store";
 import OrderForm from "../Order/OrderForm";
 import ScrollToTop from "../../../../../src/components/ScrollToTop";
+import TrustBadges from "../../../../components/TrustBadges";
 
 // ── CRO Alert bar ──────────────────────────────────────────
 const StockAlert: React.FC<{ stock: number }> = ({ stock }) => {
@@ -61,28 +61,6 @@ const StockAlert: React.FC<{ stock: number }> = ({ stock }) => {
 //     </div>
 //   );
 // };
-
-// ── Trust badges ────────────────────────────────────────────
-const TrustBadges: React.FC = () => (
-  <div className="grid grid-cols-3 gap-3">
-    {[
-      { icon: "🤝", label: "Handcrafted", sub: "By Moroccan artisans" },
-      { icon: "📦", label: "Free delivery", sub: "On all orders" },
-      { icon: "↩️", label: "7-day returns", sub: "No questions asked" },
-    ].map((b) => (
-      <div
-        key={b.label}
-        className="flex flex-col items-center text-center bg-[#F6F4F1] rounded-xl p-3 gap-1"
-      >
-        <span className="text-lg">{b.icon}</span>
-        <p className="text-[9px] font-black uppercase tracking-wider text-[#3D1A12]">
-          {b.label}
-        </p>
-        <p className="text-[9px] text-[#3D1A12]/40 leading-tight">{b.sub}</p>
-      </div>
-    ))}
-  </div>
-);
 
 // ── Star rating (static for now) ────────────────────────────
 const StarRating: React.FC = () => (
