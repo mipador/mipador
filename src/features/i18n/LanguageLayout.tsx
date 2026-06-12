@@ -5,6 +5,7 @@ import i18n from "../../i18n";
 import Navbar from "../../assets/components/layout/Navbar";
 import Footer from "../../assets/components/layout/Footer";
 import AmbientBackground from "../../components/AmbientBackground";
+import CartDrawer from "../products/components/Cart/CartDrawer";
 
 import Homepage from "../home/Homepage";
 import ProductsPage from "../products/components/Page/ProductsPage";
@@ -33,6 +34,11 @@ export default function LanguageLayout() {
 
     // localStorage sync
     localStorage.setItem("lang", lang);
+
+    // RTL / LTR + lang attribute
+    const isRTL = lang === "ar" || lang === "ma";
+    document.documentElement.dir = isRTL ? "rtl" : "ltr";
+    document.documentElement.lang = lang;
   }, [lang]);
 
   // optional: first visit detection ONLY ONCE
@@ -61,6 +67,7 @@ export default function LanguageLayout() {
     <div className="flex flex-col min-h-screen">
       <AmbientBackground />
       <Navbar />
+      <CartDrawer />
 
       <main className="flex-1 relative z-10">
         <Routes>

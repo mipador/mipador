@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ShoppingCart, Check, Loader } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export interface OrderLine {
   name: string;
@@ -15,7 +16,6 @@ interface OrderFormProps {
 }
 
 interface FieldProps {
-  k: string;
   label: string;
   placeholder: string;
   type?: string;
@@ -24,7 +24,6 @@ interface FieldProps {
   onChange: (val: string) => void;
 }
 
-// ── Moved outside component — fixes the error ──────────────
 const Field: React.FC<FieldProps> = ({
   label, placeholder, type = "text", value, error, onChange,
 }) => (
@@ -54,19 +53,18 @@ const Field: React.FC<FieldProps> = ({
 const WHATSAPP_NUMBER = "212612918900";
 
 const OrderForm: React.FC<OrderFormProps> = ({ lines, total, onSuccess }) => {
-  const [form, setForm] = useState({
-    name: "", phone: "", city: "", address: "",
-  });
+  const { t } = useTranslation();
+  const [form, setForm] = useState({ name: "", phone: "", city: "", address: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
 
   const validate = () => {
     const e: Record<string, string> = {};
-    if (!form.name.trim()) e.name = "Required";
-    if (!form.phone.trim()) e.phone = "Required";
-    if (!form.city.trim()) e.city = "Required";
-    if (!form.address.trim()) e.address = "Required";
+    if (!form.name.trim())    e.name    = t("order.required");
+    if (!form.phone.trim())   e.phone   = t("order.required");
+    if (!form.city.trim())    e.city    = t("order.required");
+    if (!form.address.trim()) e.address = t("order.required");
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -122,10 +120,10 @@ Please confirm availability. Thank you.`;
         </div>
         <div>
           <p className="text-sm font-black text-[#3D1A12] tracking-tight">
-            Order sent.
+            {t("order.successTitle")}
           </p>
           <p className="text-xs text-[#3D1A12]/40 mt-1 font-light">
-            We'll confirm via WhatsApp within 24h.
+            {t("order.successBody")}
           </p>
         </div>
       </div>
@@ -136,19 +134,19 @@ Please confirm availability. Thank you.`;
     <div className="flex flex-col gap-4">
       <div className="grid grid-cols-2 gap-3">
         <Field
-          k="name" label="Full Name" placeholder="Your name"
+          label={t("order.fullName")} placeholder={t("order.namePlaceholder")}
           value={form.name} error={errors.name} onChange={setField("name")}
         />
         <Field
-          k="phone" label="Phone" placeholder="+212 6XX XXX XXX" type="tel"
+          label={t("order.phone")} placeholder={t("order.phonePlaceholder")} type="tel"
           value={form.phone} error={errors.phone} onChange={setField("phone")}
         />
         <Field
-          k="city" label="City" placeholder="Casablanca..."
+          label={t("order.city")} placeholder={t("order.cityPlaceholder")}
           value={form.city} error={errors.city} onChange={setField("city")}
         />
         <Field
-          k="address" label="Address" placeholder="Street, area..."
+          label={t("order.address")} placeholder={t("order.addressPlaceholder")}
           value={form.address} error={errors.address} onChange={setField("address")}
         />
       </div>
@@ -159,14 +157,14 @@ Please confirm availability. Thank you.`;
         className="w-full bg-[#3D1A12] text-white py-4 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-[#4D2A22] active:scale-95 transition-all disabled:opacity-60"
       >
         {sending ? (
-          <><Loader size={13} className="animate-spin" /> Sending...</>
+          <><Loader size={13} className="animate-spin" /> {t("order.sending")}</>
         ) : (
-          <><ShoppingCart size={13} /> Place Order · {total.toLocaleString()} MAD</>
+          <><ShoppingCart size={13} /> {t("order.submit", { total: total.toLocaleString() })}</>
         )}
       </button>
 
       <p className="text-center text-[9px] text-[#3D1A12]/25 uppercase tracking-widest">
-        We confirm within 24h · Free to cancel
+        {t("order.disclaimer")}
       </p>
     </div>
   );

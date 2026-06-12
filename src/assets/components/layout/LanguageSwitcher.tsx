@@ -21,15 +21,15 @@ const languages = [
     short: "AR",
     flag: "/flags/ar.png",
   },
-  // {
-  //   code: "ma",
-  //   label: "maroc",
-  //   short: "MA",
-  //   flag: "/flags/ma.png",
-  // },
+  {
+    code: "ma",
+    label: "دارجة",
+    short: "MA",
+    flag: "/flags/ma.png",
+  },
 ];
 
-export default function LanguageSwitcher() {
+export default function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
   const { lang } = useParams();
   const navigate = useNavigate();
 
@@ -76,7 +76,10 @@ export default function LanguageSwitcher() {
     <div className="relative z-40" ref={wrapperRef}>
       <button
         onClick={() => setOpen(!open)}
-        className="group flex items-center gap-2 px-2.5 py-2 rounded-xl border border-[#3D1A12]/10 bg-white/70 backdrop-blur-xl hover:bg-white transition-all duration-300"
+        className={`group flex items-center rounded-xl border border-[#3D1A12]/10 bg-white/70 backdrop-blur-xl hover:bg-white transition-all duration-300 ${
+          compact ? "p-2" : "gap-2 px-2.5 py-2"
+        }`}
+        aria-label={current.label}
       >
         <img
           src={current.flag}
@@ -84,17 +87,20 @@ export default function LanguageSwitcher() {
           className="w-5 h-5 rounded-xl object-cover"
         />
 
-        <span className="text-[11px] font-semibold tracking-wide text-[#3D1A12]">
-          {current.short}
-        </span>
-
-        <motion.span
-          animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
-          className="text-[10px] text-[#3D1A12]/50"
-        >
-          ▼
-        </motion.span>
+        {!compact && (
+          <>
+            <span className="text-[11px] font-semibold tracking-wide text-[#3D1A12]">
+              {current.short}
+            </span>
+            <motion.span
+              animate={{ rotate: open ? 180 : 0 }}
+              transition={{ duration: 0.2 }}
+              className="text-[10px] text-[#3D1A12]/50"
+            >
+              ▼
+            </motion.span>
+          </>
+        )}
       </button>
 
       <AnimatePresence>
