@@ -1,5 +1,6 @@
-import { useParams, Navigate, Routes, Route, useNavigate } from "react-router-dom";
+import { useParams, Navigate, Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import i18n from "../../i18n";
 
 import Navbar from "../../assets/components/layout/Navbar";
@@ -25,7 +26,8 @@ const supported = ["en", "fr", "ar", "ma"];
 
 export default function LanguageLayout() {
   const { lang } = useParams();
-  const navigate = useNavigate(); // ✅ FIX #1
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // ✅ SINGLE SYNC SYSTEM (URL → everything)
   useEffect(() => {
@@ -72,23 +74,31 @@ export default function LanguageLayout() {
       <CartDrawer />
       <FloatingWhatsApp />
 
-      <main className="flex-1 relative z-10">
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/products" element={<ProductsPage />} />
-          <Route path="/products/:slug" element={<ProductDetailPage />} />
-          <Route path="/wishlist" element={<WishlistPage />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
+      <AnimatePresence initial={false}>
+        <motion.main
+          key={location.pathname}
+          className="flex-1 relative z-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/products" element={<ProductsPage />} />
+            <Route path="/products/:slug" element={<ProductDetailPage />} />
+            <Route path="/wishlist" element={<WishlistPage />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
 
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/refund-policy" element={<RefundPolicy />} />
-          <Route path="/terms-of-service" element={<TermsOfService />} />
-          <Route path="/faqs" element={<FaqsPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/refund-policy" element={<RefundPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/faqs" element={<FaqsPage />} />
 
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </main>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </motion.main>
+      </AnimatePresence>
 
       <Footer />
     </div>

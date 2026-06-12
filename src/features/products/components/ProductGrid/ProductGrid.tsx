@@ -1,37 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import type { Product } from "../../../../store/product.store";
 import ProductCard from "./ProductCard";
-import { motion } from "framer-motion";
-import { useTranslation } from "react-i18next";
+import ProductCardSkeleton from "./ProductCardSkeleton";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
-const gridVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.07 } },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 28 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease: EASE },
-  },
-};
-
 const ProductGrid: React.FC<{ products: Product[] }> = ({ products }) => {
-  const { t } = useTranslation();
+  const shouldReduce = useReducedMotion();
+  const [ready, setReady] = useState(false);
 
-  if (products.length === 0) {
+  // Show skeleton briefly on mount and on every filter-driven re-key
+  useEffect(() => {
+    setReady(false);
+    const id = setTimeout(() => setReady(true), 260);
+    return () => clearTimeout(id);
+  }, [products]);
+
+  const gridVariants = {
+    hidden: {},
+    visible: { transition: { staggerChildren: shouldReduce ? 0 : 0.07 } },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: shouldReduce ? 0 : 24 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: shouldReduce ? 0.01 : 0.55, ease: EASE },
+    },
+  };
+
+  if (!ready) {
     return (
-      <div className="flex flex-col items-center justify-center py-40 bg-white/50 rounded-3xl border-2 border-dashed border-[#3D1A12]/10">
-        <p className="text-[#3D1A12]/40 font-black italic text-sm">
-          {t("products.noResults")}
-        </p>
-        <p className="text-[#3D1A12]/25 text-xs mt-2 uppercase tracking-widest">
-          {t("products.clearAllFilters")}
-        </p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24">
+        {Array.from({ length: Math.min(products.length || 6, 6) }).map((_, i) => (
+          <ProductCardSkeleton key={i} />
+        ))}
       </div>
     );
   }
