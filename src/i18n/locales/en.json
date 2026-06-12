@@ -225,6 +225,13 @@
     "orderViaWhatsAppHint": "Skip the form — we'll handle it on WhatsApp",
     "quickMessage": "Hello Mipador, I'd like to inquire about the following pieces:"
   },
+  "visualizer": {
+    "heading": "View in 3D",
+    "view3D": "View in 3D",
+    "arHint": "Tap the AR icon inside the viewer to place this piece in your space using your camera.",
+    "comingSoon": "3D model coming soon",
+    "comingSoonHint": "We're working on bringing every piece to life in 3D. Check back soon."
+  },
   "reviews": {
     "heading": "Customer Reviews",
     "count_one": "{{count}} review",

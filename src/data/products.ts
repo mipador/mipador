@@ -41,6 +41,7 @@ export interface Product {
   images: string[];                // multiple images: [main, detail, lifestyle]
   tags: string[];                  // for filtering: ["bestseller", "new", "handcrafted"]
   stock: number;
+  model?: string;                  // URL to .glb file for 3D viewer (optional)
 }
 
 export const products: Product[] = [

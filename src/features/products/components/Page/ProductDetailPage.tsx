@@ -14,6 +14,7 @@ import ScrollToTop from "../../../../components/ScrollToTop";
 import TrustBadges from "../../../../components/TrustBadges";
 import { useSEO, useJsonLd } from "../../../../hooks/useSEO";
 import { ReviewsSection } from "../Reviews/ReviewsSection";
+import { RoomVisualizer } from "../../../../components/RoomVisualizer";
 
 // ── Collapsible product detail section ────────────────────
 const DetailSection: React.FC<{
@@ -562,6 +563,13 @@ const ProductDetailPage: React.FC = () => {
                     {t("product.leadTimeValue", { time: product.leadTime })}
                   </p>
                 </div>
+              </DetailSection>
+
+              <DetailSection label={t("visualizer.heading")}>
+                <RoomVisualizer
+                  productName={product.name}
+                  glbUrl={product.model}
+                />
               </DetailSection>
             </div>
           </div>
