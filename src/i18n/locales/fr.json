@@ -224,5 +224,15 @@
     "orderViaWhatsApp": "Commander via WhatsApp",
     "orderViaWhatsAppHint": "Sans formulaire — on gère ça sur WhatsApp",
     "quickMessage": "Bonjour Mipador, je souhaite me renseigner sur les pièces suivantes :"
+  },
+  "reviews": {
+    "heading": "Avis clients",
+    "count_one": "{{count}} avis",
+    "count_other": "{{count}} avis",
+    "noReviews": "Aucun avis pour l'instant — soyez le premier.",
+    "verified": "Vérifié",
+    "shareHeading": "Vous avez aimé votre pièce ?",
+    "shareBody": "Partagez votre expérience sur WhatsApp — votre témoignage aide d'autres à découvrir la qualité artisanale.",
+    "shareBtn": "Partager mon avis"
   }
 }

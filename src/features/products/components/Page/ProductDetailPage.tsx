@@ -7,11 +7,13 @@ import {
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { products } from "../../../../data/products";
+import { getProductReviews, getAvgRating } from "../../../../data/reviews";
 import { useProductStore } from "../../../../store/product.store";
 import OrderForm from "../Order/OrderForm";
 import ScrollToTop from "../../../../components/ScrollToTop";
 import TrustBadges from "../../../../components/TrustBadges";
 import { useSEO, useJsonLd } from "../../../../hooks/useSEO";
+import { ReviewsSection } from "../Reviews/ReviewsSection";
 
 // ── Collapsible product detail section ────────────────────
 const DetailSection: React.FC<{
@@ -86,23 +88,32 @@ const StockAlert: React.FC<{ stock: number }> = ({ stock }) => {
   );
 };
 
-// ── Star rating (static — reviews feature coming in B1) ───
-const StarRating: React.FC = () => (
-  <div className="flex items-center gap-2">
-    <div className="flex gap-0.5">
-      {[...Array(5)].map((_, i) => (
-        <Star
-          key={i}
-          size={13}
-          className={i < 4 ? "text-[#C9922A] fill-[#C9922A]" : "text-[#3D1A12]/20"}
-        />
-      ))}
+// ── Star rating ───────────────────────────────────────────
+const StarRating: React.FC<{ rating: number; count: number }> = ({ rating, count }) => {
+  const { t } = useTranslation();
+  return (
+    <div className="flex items-center gap-2">
+      <div className="flex gap-0.5">
+        {[1, 2, 3, 4, 5].map((n) => (
+          <Star
+            key={n}
+            size={13}
+            className={
+              n <= Math.round(rating)
+                ? "text-[#C9922A] fill-[#C9922A]"
+                : "text-[#3D1A12]/20"
+            }
+          />
+        ))}
+      </div>
+      <p className="text-xs text-[#3D1A12]/40 font-light">
+        {count > 0
+          ? `${rating.toFixed(1)} · ${t("reviews.count", { count })}`
+          : t("reviews.noReviews")}
+      </p>
     </div>
-    <p className="text-xs text-[#3D1A12]/40 font-light">
-      4.8 · <span className="font-black text-[#3D1A12]">24 orders</span>
-    </p>
-  </div>
-);
+  );
+};
 
 // ── Main page ─────────────────────────────────────────────
 const ProductDetailPage: React.FC = () => {
@@ -118,6 +129,8 @@ const ProductDetailPage: React.FC = () => {
   const [zoomed, setZoomed] = useState(false);
 
   const product = products.find((p) => p.slug === slug);
+  const productReviews = getProductReviews(product?.id ?? "");
+  const avgRating = getAvgRating(product?.id ?? "");
 
   // Close zoom on Escape
   useEffect(() => {
@@ -376,7 +389,7 @@ const ProductDetailPage: React.FC = () => {
             </div>
 
             {/* Rating */}
-            <StarRating />
+            <StarRating rating={avgRating} count={productReviews.length} />
 
             {/* Price */}
             <div>
@@ -553,6 +566,9 @@ const ProductDetailPage: React.FC = () => {
             </div>
           </div>
         </div>
+
+        {/* ── Reviews ── */}
+        <ReviewsSection productId={product.id} productName={product.name} />
 
         {/* ── Related products ── */}
         {related.length > 0 && (

@@ -224,5 +224,15 @@
     "orderViaWhatsApp": "Order via WhatsApp",
     "orderViaWhatsAppHint": "Skip the form — we'll handle it on WhatsApp",
     "quickMessage": "Hello Mipador, I'd like to inquire about the following pieces:"
+  },
+  "reviews": {
+    "heading": "Customer Reviews",
+    "count_one": "{{count}} review",
+    "count_other": "{{count}} reviews",
+    "noReviews": "No reviews yet — be the first.",
+    "verified": "Verified",
+    "shareHeading": "Loved your piece?",
+    "shareBody": "Share your experience on WhatsApp — your words help others find what they're looking for.",
+    "shareBtn": "Share Experience"
   }
 }

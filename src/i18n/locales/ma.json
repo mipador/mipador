@@ -224,5 +224,15 @@
     "orderViaWhatsApp": "طلب عبر واتساب",
     "orderViaWhatsAppHint": "بلا فورم — غادي نخدمو على واتساب",
     "quickMessage": "السلام عليكم ميبادور، بغيت نسقسي على هاد القطع:"
+  },
+  "reviews": {
+    "heading": "آراء الزبائن",
+    "count_one": "{{count}} رأي",
+    "count_other": "{{count}} آراء",
+    "noReviews": "ما كاين تا رأي — كون لول.",
+    "verified": "مؤكد",
+    "shareHeading": "عجبك البيسا؟",
+    "shareBody": "شارك تجربتك على واتساب — كلمتك كتعاون ناس أخرين يلقاو الجودة الحقيقية.",
+    "shareBtn": "شارك تجربتك"
   }
 }
