@@ -98,7 +98,7 @@ const Navbar: React.FC = () => {
             <Link
               to={`/${currentLang}/wishlist`}
               aria-label={t("wishlist.heading")}
-              className="relative w-9 h-9 flex items-center justify-center rounded-xl hover:bg-[#3D1A12]/5 transition-colors"
+              className="relative w-11 h-11 flex items-center justify-center rounded-xl hover:bg-[#3D1A12]/5 transition-colors"
             >
               <Heart size={17} className="text-[#3D1A12]" />
               <AnimatePresence mode="popLayout">
@@ -125,7 +125,7 @@ const Navbar: React.FC = () => {
                   ? t("nav.openCartCount", { count: cartCount })
                   : t("nav.openCart")
               }
-              className="relative w-9 h-9 flex items-center justify-center rounded-xl hover:bg-[#3D1A12]/5 transition-colors"
+              className="relative w-11 h-11 flex items-center justify-center rounded-xl hover:bg-[#3D1A12]/5 transition-colors"
             >
               <ShoppingBag size={17} className="text-[#3D1A12]" />
               <AnimatePresence mode="popLayout">
@@ -166,7 +166,7 @@ const Navbar: React.FC = () => {
 
             {/* Mobile hamburger */}
             <button
-              className="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-xl hover:bg-[#3D1A12]/5 transition-colors"
+              className="md:hidden w-11 h-11 flex flex-col items-center justify-center gap-1.5 rounded-xl hover:bg-[#3D1A12]/5 transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={t("nav.toggleMenu")}
               aria-expanded={isMobileMenuOpen}

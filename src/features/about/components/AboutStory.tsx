@@ -9,7 +9,7 @@ const AboutStory = () => {
   return (
     <section className="pt-26 px-6 bg-[#F6F4F1]">
       <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-20 items-center">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-center">
 
           {/* Video */}
           <motion.div
@@ -17,7 +17,7 @@ const AboutStory = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.9, ease: EASE }}
-            className="relative h-[520px] rounded-3xl overflow-hidden order-2 md:order-1 group cursor-pointer"
+            className="relative h-[280px] md:h-[520px] rounded-3xl overflow-hidden order-2 md:order-1 group cursor-pointer"
           >
             <video
               autoPlay

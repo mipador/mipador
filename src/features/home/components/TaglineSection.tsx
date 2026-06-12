@@ -15,7 +15,7 @@ const TaglineSection = () => {
   ];
 
   return (
-    <section className="relative py-32 bg-[#F4F4F4] flex items-center justify-center overflow-hidden">
+    <section className="relative py-16 md:py-32 bg-[#F4F4F4] flex items-center justify-center overflow-hidden">
 
       <div
         className="absolute inset-0 opacity-[0.1] pointer-events-none z-0"
@@ -40,7 +40,7 @@ const TaglineSection = () => {
           {t("tagline.headlineEnd")}
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mt-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 mt-12 md:mt-24">
           {features.map((item, i) => (
             <motion.div
               key={i}
@@ -48,7 +48,7 @@ const TaglineSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ delay: i * 0.12, duration: 0.6, ease: EASE }}
-              className="group relative flex flex-col items-center text-center p-8 rounded-3xl bg-[#FFFFFF]/70 border border-[#3D1A12]/10 overflow-hidden transition-all duration-500 hover:scale-[1.03] hover:border-[#3D1A12]/30"
+              className="group relative flex flex-col items-center text-center p-6 md:p-8 rounded-3xl bg-[#FFFFFF]/70 border border-[#3D1A12]/10 overflow-hidden transition-all duration-500 hover:scale-[1.03] hover:border-[#3D1A12]/30"
             >
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                 <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#3D1A12]/10 blur-2xl rounded-xl animate-pulse" />

@@ -30,7 +30,7 @@ const AboutHero = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2, ease: EASE }}
-          className="text-[#4D2A22] text-6xl md:text-8xl font-black tracking-tight leading-none mb-8"
+          className="text-[#4D2A22] text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-none mb-8"
         >
           {t("about.headline")}
           <br />

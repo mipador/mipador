@@ -7,7 +7,7 @@ import ProductGrid from "../ProductGrid/ProductGrid";
 import ProductFilters from "../ProductFilters/ProductFilters";
 import Pagination from "../Pagination/Pagination";
 import { AnimatePresence, motion } from "framer-motion";
-import ScrollToTop from "../../../../../src/components/ScrollToTop";
+import ScrollToTop from "../../../../components/ScrollToTop";
 
 export const ITEMS_PER_PAGE = 9;
 

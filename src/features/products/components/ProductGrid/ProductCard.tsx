@@ -109,7 +109,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
             whileTap={{ scale: 1.3 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
             aria-label={wishlisted ? t("wishlist.remove") : t("wishlist.add")}
-            className="absolute bottom-3 right-3 z-30 w-8 h-8 rounded-xl bg-white/80 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors shadow-sm"
+            className="absolute bottom-2 right-2 z-30 w-11 h-11 rounded-xl bg-white/80 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors shadow-sm"
           >
             <Heart
               size={14}

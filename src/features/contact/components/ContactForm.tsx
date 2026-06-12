@@ -13,7 +13,7 @@ const ContactForm: React.FC = () => {
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.3, ease: EASE }}
-      className="space-y-6 p-8 bg-white rounded-xl"
+      className="space-y-6 p-5 md:p-8 bg-white rounded-xl"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <input
