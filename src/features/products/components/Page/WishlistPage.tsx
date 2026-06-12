@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useProductStore } from "../../../../store/product.store";
 import ProductCard from "../ProductGrid/ProductCard";
+import { useSEO } from "../../../../hooks/useSEO";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -18,6 +19,7 @@ const cardVariants = {
 
 export default function WishlistPage() {
   const { t } = useTranslation();
+  useSEO(t("wishlist.heading"));
   const { lang } = useParams();
   const currentLang = lang || "en";
   const getWishlistProducts = useProductStore((s) => s.getWishlistProducts);

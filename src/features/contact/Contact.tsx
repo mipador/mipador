@@ -1,9 +1,11 @@
 import ContactForm from "./components/ContactForm";
 import ContactHero from "./components/ContactHero";
 import ContactInfo from "./components/ContactInfo";
-import ScrollToTop from "../../../src/components/ScrollToTop";
+import ScrollToTop from "../../components/ScrollToTop";
+import { useSEO } from "../../hooks/useSEO";
 
 const ContactPage: React.FC = () => {
+  useSEO("Contact", "Get in touch with Mipador Studio — questions about our collection, orders, or just saying hello.");
   return (
     <div className="min-h-screen bg-[#F6F4F1] p-6 md:p-12 lg:p-24 selection:bg-[#3D1E16] selection:text-white">
       <ScrollToTop />

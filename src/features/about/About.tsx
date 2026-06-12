@@ -5,13 +5,14 @@ import BrandPromise from "./components/BrandPromise";
 // import Testimonials from "./components/Testimonials";
 import ModelGrid from "./components/ModelGrid";
 import FeatureGrid from "./components/FeatureGrid";
-import { Link , useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import ScrollToTop from "../../../src/components/ScrollToTop";
+import ScrollToTop from "../../components/ScrollToTop";
+import { useSEO } from "../../hooks/useSEO";
 
 function About() {
-
-    const { lang } = useParams();
+  useSEO("Our Story", "Rooted in Moroccan craftsmanship — Mipador builds worlds, not just furniture. Our story, our philosophy.");
+  const { lang } = useParams();
   const currentLang = lang || "en";
 
   return (

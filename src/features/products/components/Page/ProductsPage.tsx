@@ -8,6 +8,7 @@ import ProductFilters from "../ProductFilters/ProductFilters";
 import Pagination from "../Pagination/Pagination";
 import { AnimatePresence, motion } from "framer-motion";
 import ScrollToTop from "../../../../components/ScrollToTop";
+import { useSEO } from "../../../../hooks/useSEO";
 
 export const ITEMS_PER_PAGE = 9;
 
@@ -17,6 +18,7 @@ const ProductsPage: React.FC = () => {
     hasActiveFilters, resetFilters, setLocationFilter,
   } = useProductStore();
   const { t } = useTranslation();
+  useSEO(t("products.heading"), "Browse the full Mipador collection — handcrafted Moroccan furniture and decor for indoor and outdoor spaces.");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   const filteredData = getFilteredProducts();

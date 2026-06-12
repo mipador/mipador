@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import {
@@ -11,6 +11,7 @@ import { useProductStore } from "../../../../store/product.store";
 import OrderForm from "../Order/OrderForm";
 import ScrollToTop from "../../../../components/ScrollToTop";
 import TrustBadges from "../../../../components/TrustBadges";
+import { useSEO, useJsonLd } from "../../../../hooks/useSEO";
 
 // ── Collapsible product detail section ────────────────────
 const DetailSection: React.FC<{
@@ -133,6 +134,37 @@ const ProductDetailPage: React.FC = () => {
     document.body.style.overflow = zoomed ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [zoomed]);
+
+  // SEO — runs for every product (hooks must be unconditional)
+  useSEO(
+    product ? product.name : t("product.notFound"),
+    product ? product.description : undefined
+  );
+  const jsonLdSchema = useMemo(() => {
+    if (!product) return null;
+    const availability =
+      product.status === "available"
+        ? "https://schema.org/InStock"
+        : product.status === "out-of-stock"
+        ? "https://schema.org/OutOfStock"
+        : "https://schema.org/PreOrder";
+    return {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: product.name,
+      description: product.description,
+      image: product.images,
+      brand: { "@type": "Brand", name: "Mipador" },
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "MAD",
+        price: product.price,
+        availability,
+        seller: { "@type": "Organization", name: "Mipador Studio" },
+      },
+    };
+  }, [product]);
+  useJsonLd(jsonLdSchema);
 
   if (!product) {
     return (

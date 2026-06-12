@@ -4,6 +4,7 @@ import { faqData } from "../data/faqs";
 import type { FAQ } from "../data/faqs";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { useSEO } from "../hooks/useSEO";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -18,6 +19,7 @@ const CATEGORIES: { key: Category; labelKey: string }[] = [
 const FaqsPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<Category>("Technical Support");
   const { t } = useTranslation();
+  useSEO(t("faqs.heading"), t("faqs.body"));
 
   const filteredFaqs = faqData.filter((faq: FAQ) => faq.category === activeCategory);
 
