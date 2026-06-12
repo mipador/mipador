@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useProductStore } from "../../../../store/product.store";
-import { SlidersHorizontal, X } from "lucide-react";
+import { SlidersHorizontal, X, Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import ProductToolbar from "../ProductToolbar/ProductToolbar";
 import ProductGrid from "../ProductGrid/ProductGrid";
@@ -14,7 +14,7 @@ export const ITEMS_PER_PAGE = 9;
 const ProductsPage: React.FC = () => {
   const {
     getFilteredProducts, currentPage,
-    hasActiveFilters, resetFilters,
+    hasActiveFilters, resetFilters, setLocationFilter,
   } = useProductStore();
   const { t } = useTranslation();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -74,16 +74,38 @@ const ProductsPage: React.FC = () => {
 
           <div className="flex-1 min-w-0">
             {filteredData.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-32 text-center">
-                <p className="text-[#3D1A12]/30 font-black text-sm uppercase tracking-widest mb-4">
-                  {t("products.noResults")}
-                </p>
-                <button
-                  onClick={resetFilters}
-                  className="text-[10px] font-black uppercase tracking-widest text-[#C9922A] hover:text-[#3D1A12] transition-colors border-b border-[#C9922A]/40 pb-0.5"
-                >
-                  {t("products.clearAllFilters")}
-                </button>
+              <div className="flex flex-col items-center justify-center py-24 text-center gap-5">
+                <div className="w-16 h-16 rounded-xl bg-[#3D1A12]/5 flex items-center justify-center">
+                  <Search size={22} className="text-[#3D1A12]/20" />
+                </div>
+                <div className="space-y-1.5">
+                  <p className="text-[#3D1A12]/50 font-black text-sm uppercase tracking-widest">
+                    {t("products.noResults")}
+                  </p>
+                  <p className="text-[#3D1A12]/30 text-xs font-light max-w-xs mx-auto leading-relaxed">
+                    {t("products.noResultsHint")}
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2 justify-center">
+                  <button
+                    onClick={resetFilters}
+                    className="px-4 py-2 bg-[#3D1A12] text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-[#4D2A22] transition-colors"
+                  >
+                    {t("products.noResultsAll")}
+                  </button>
+                  <button
+                    onClick={() => { resetFilters(); setLocationFilter("indoor"); }}
+                    className="px-4 py-2 bg-white border border-[#3D1A12]/15 text-[#3D1A12]/60 text-[10px] font-black uppercase tracking-widest rounded-xl hover:border-[#3D1A12]/30 hover:text-[#3D1A12] transition-colors"
+                  >
+                    {t("products.noResultsIndoor")}
+                  </button>
+                  <button
+                    onClick={() => { resetFilters(); setLocationFilter("outdoor"); }}
+                    className="px-4 py-2 bg-white border border-[#3D1A12]/15 text-[#3D1A12]/60 text-[10px] font-black uppercase tracking-widest rounded-xl hover:border-[#3D1A12]/30 hover:text-[#3D1A12] transition-colors"
+                  >
+                    {t("products.noResultsOutdoor")}
+                  </button>
+                </div>
               </div>
             ) : (
               <>
@@ -122,7 +144,7 @@ const ProductsPage: React.FC = () => {
                 </p>
                 <button
                   onClick={() => setMobileFiltersOpen(false)}
-                  className="w-8 h-8 flex items-center justify-center rounded-xl hover:bg-[#3D1A12]/8 transition-colors"
+                  className="w-11 h-11 flex items-center justify-center rounded-xl hover:bg-[#3D1A12]/8 transition-colors"
                 >
                   <X size={16} className="text-[#3D1A12]" />
                 </button>

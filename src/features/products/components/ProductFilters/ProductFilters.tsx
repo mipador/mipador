@@ -1,34 +1,24 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useProductStore } from "../../../../store/product.store";
 
-type SectionProps = {
-  title: string;
-  children: React.ReactNode;
-};
-
-const Section: React.FC<SectionProps> = ({ title, children }) => (
+const Section: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
   <div>
-    <h4 className="text-[9px] font-black uppercase tracking-[0.3em] text-[#3D1A12]/35 mb-5">
+    <h4 className="text-[9px] font-black uppercase tracking-[0.3em] text-[#3D1A12]/35 mb-4">
       {title}
     </h4>
     {children}
   </div>
 );
 
-type FilterBtnProps = {
+const FilterBtn: React.FC<{
   active: boolean;
   onClick: () => void;
   children: React.ReactNode;
-};
-
-const FilterBtn: React.FC<FilterBtnProps> = ({
-  active,
-  onClick,
-  children,
-}) => (
+}> = ({ active, onClick, children }) => (
   <button
     onClick={onClick}
-    className={`text-left text-sm transition-all duration-200 font-bold ${
+    className={`text-left w-full py-1.5 text-sm transition-all duration-200 font-bold ${
       active
         ? "text-[#3D1A12] translate-x-1.5"
         : "text-[#3D1A12]/35 hover:text-[#3D1A12]/70"
@@ -38,21 +28,15 @@ const FilterBtn: React.FC<FilterBtnProps> = ({
   </button>
 );
 
-const ProductFilters: React.FC<{ mobile?: boolean }> = ({
-  mobile = false,
-}) => {
+const ProductFilters: React.FC<{ mobile?: boolean }> = ({ mobile = false }) => {
+  const { t } = useTranslation();
   const {
-    selectedCategory,
-    setSelectedCategory,
-    selectedCollection,
-    setSelectedCollection,
-    locationFilter,
-    setLocationFilter,
-    inStockOnly,
-    setInStockOnly,
+    selectedCategory, setSelectedCategory,
+    selectedCollection, setSelectedCollection,
+    locationFilter, setLocationFilter,
+    inStockOnly, setInStockOnly,
     resetFilters,
-    getAllCategories,
-    getAllCollections,
+    getAllCategories, getAllCollections,
   } = useProductStore();
 
   const categories = getAllCategories();
@@ -61,14 +45,12 @@ const ProductFilters: React.FC<{ mobile?: boolean }> = ({
   return (
     <div
       className={`flex flex-col gap-8 shrink-0 ${
-        mobile
-          ? "w-full"
-          : "hidden lg:flex w-52 sticky top-28 h-fit"
+        mobile ? "w-full" : "hidden lg:flex w-52 sticky top-28 h-fit"
       }`}
     >
       {/* Space */}
-      <Section title="Space">
-        <div className="flex flex-col gap-2.5">
+      <Section title={t("products.filterSpace")}>
+        <div className="flex flex-col gap-0.5">
           {(["all", "indoor", "outdoor"] as const).map((loc) => (
             <FilterBtn
               key={loc}
@@ -76,18 +58,18 @@ const ProductFilters: React.FC<{ mobile?: boolean }> = ({
               onClick={() => setLocationFilter(loc)}
             >
               {loc === "all"
-                ? "All Spaces"
+                ? t("products.filterAllSpaces")
                 : loc === "indoor"
-                ? "Indoor"
-                : "Outdoor"}
+                ? t("footer.indoor")
+                : t("footer.outdoor")}
             </FilterBtn>
           ))}
         </div>
       </Section>
 
       {/* Category */}
-      <Section title="Category">
-        <div className="flex flex-col gap-2.5">
+      <Section title={t("products.filterCategory")}>
+        <div className="flex flex-col gap-0.5">
           {categories.map((cat) => (
             <FilterBtn
               key={cat}
@@ -101,8 +83,8 @@ const ProductFilters: React.FC<{ mobile?: boolean }> = ({
       </Section>
 
       {/* Collection */}
-      <Section title="Collection">
-        <div className="flex flex-col gap-2.5">
+      <Section title={t("products.filterCollection")}>
+        <div className="flex flex-col gap-0.5">
           {collections.map((col) => (
             <FilterBtn
               key={col}
@@ -116,8 +98,8 @@ const ProductFilters: React.FC<{ mobile?: boolean }> = ({
       </Section>
 
       {/* Availability */}
-      <Section title="Availability">
-        <label className="flex items-center gap-3 cursor-pointer">
+      <Section title={t("products.filterAvailability")}>
+        <label className="flex items-center gap-3 cursor-pointer py-1">
           <input
             type="checkbox"
             checked={inStockOnly}
@@ -125,7 +107,7 @@ const ProductFilters: React.FC<{ mobile?: boolean }> = ({
             className="w-4 h-4 accent-[#3D1A12]"
           />
           <span className="text-sm font-bold text-[#3D1A12]/60">
-            In Stock Only
+            {t("products.filterInStockOnly")}
           </span>
         </label>
       </Section>
@@ -135,7 +117,7 @@ const ProductFilters: React.FC<{ mobile?: boolean }> = ({
         onClick={resetFilters}
         className="text-left text-[9px] font-black uppercase tracking-widest text-[#3D1A12]/25 hover:text-[#3D1A12]/50 transition-colors"
       >
-        Reset Filters
+        {t("products.filterReset")}
       </button>
     </div>
   );
