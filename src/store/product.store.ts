@@ -27,6 +27,9 @@ interface ProductStore {
   cart: CartItem[];
   cartOpen: boolean;
 
+  // Wishlist
+  wishlist: string[];
+
   // Quick view
   quickViewId: string | null;
 
@@ -48,6 +51,12 @@ interface ProductStore {
   setCartOpen: (open: boolean) => void;
   getCartCount: () => number;
   getCartTotal: () => number;
+
+  // Wishlist actions
+  toggleWishlist: (productId: string) => void;
+  isWishlisted: (productId: string) => boolean;
+  getWishlistProducts: () => typeof allProductsData;
+  getWishlistCount: () => number;
 
   // Quick view
   setQuickViewId: (id: string | null) => void;
@@ -77,6 +86,7 @@ export const useProductStore = create<ProductStore>()(
       ...defaultFilters,
       cart: [],
       cartOpen: false,
+      wishlist: [],
       quickViewId: null,
 
       setSearchQuery: (q) => set({ searchQuery: q, currentPage: 1 }),
@@ -115,6 +125,21 @@ export const useProductStore = create<ProductStore>()(
         }, 0);
       },
 
+      toggleWishlist: (productId) => {
+        const { wishlist } = get();
+        set({
+          wishlist: wishlist.includes(productId)
+            ? wishlist.filter((id) => id !== productId)
+            : [...wishlist, productId],
+        });
+      },
+      isWishlisted: (productId) => get().wishlist.includes(productId),
+      getWishlistProducts: () => {
+        const { wishlist, allProducts } = get();
+        return allProducts.filter((p) => wishlist.includes(p.id));
+      },
+      getWishlistCount: () => get().wishlist.length,
+
       setQuickViewId: (id) => set({ quickViewId: id }),
 
       getFilteredProducts: () => {
@@ -152,7 +177,7 @@ export const useProductStore = create<ProductStore>()(
     }),
     {
       name: "mipador-store",
-      partialize: (state) => ({ cart: state.cart }),
+      partialize: (state) => ({ cart: state.cart, wishlist: state.wishlist }),
     }
   )
 );

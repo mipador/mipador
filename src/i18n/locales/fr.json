@@ -143,6 +143,7 @@
     "tagline": "Mobilier pour des espaces qui se sentent vivants — intérieur et extérieur.",
     "collectionHeading": "Collection",
     "allPieces": "Toutes les pièces",
+    "wishlist": "Liste de souhaits",
     "indoor": "Intérieur",
     "outdoor": "Extérieur",
     "newArrivals": "Nouveautés",
@@ -161,6 +162,16 @@
     "terms": "Conditions générales",
     "refund": "Politique de remboursement",
     "copyright": "© {{year}} Studio Mipador. Tous droits réservés."
+  },
+  "wishlist": {
+    "heading": "Liste de souhaits",
+    "count_one": "{{count}} pièce sauvegardée",
+    "count_other": "{{count}} pièces sauvegardées",
+    "empty": "Votre liste de souhaits est vide",
+    "emptyHint": "Sauvegardez les pièces que vous aimez pour les retrouver facilement.",
+    "exploreCollection": "Explorer la Collection",
+    "add": "Ajouter à la liste",
+    "remove": "Retirer de la liste"
   },
   "whatsapp": {
     "chatWithUs": "Discuter sur WhatsApp",

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingBag } from "lucide-react";
+import { ShoppingBag, Heart } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -21,6 +21,7 @@ const Navbar: React.FC = () => {
       .filter((i) => s.allProducts.some((p) => p.id === i.productId))
       .reduce((sum, i) => sum + i.quantity, 0)
   );
+  const wishlistCount = useProductStore((s) => s.getWishlistCount());
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -92,6 +93,29 @@ const Navbar: React.FC = () => {
           {/* Right actions */}
           <div className="flex items-center gap-2.5">
             <LanguageSwitcher compact={scrolled} />
+
+            {/* Wishlist button */}
+            <Link
+              to={`/${currentLang}/wishlist`}
+              aria-label={t("wishlist.heading")}
+              className="relative w-9 h-9 flex items-center justify-center rounded-xl hover:bg-[#3D1A12]/5 transition-colors"
+            >
+              <Heart size={17} className="text-[#3D1A12]" />
+              <AnimatePresence mode="popLayout">
+                {wishlistCount > 0 && (
+                  <motion.span
+                    key={wishlistCount}
+                    initial={{ scale: 0.4, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0, opacity: 0 }}
+                    transition={{ type: "spring", stiffness: 600, damping: 22 }}
+                    className="absolute -top-0.5 -right-0.5 min-w-[17px] h-[17px] px-1 flex items-center justify-center rounded-full bg-[#3D1A12] text-white text-[9px] font-black leading-none pointer-events-none"
+                  >
+                    {wishlistCount > 99 ? "99+" : wishlistCount}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </Link>
 
             {/* Cart button with animated badge */}
             <button
@@ -188,6 +212,24 @@ const Navbar: React.FC = () => {
                     {item.label}
                   </Link>
                 ))}
+
+                <Link
+                  to={`/${currentLang}/wishlist`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`flex items-center gap-2 text-base font-bold transition-colors duration-300 ${
+                    location.pathname.includes("/wishlist")
+                      ? "text-[#3D1A12]"
+                      : "text-[#3D1A12]/50"
+                  }`}
+                >
+                  <Heart size={16} />
+                  {t("wishlist.heading")}
+                  {wishlistCount > 0 && (
+                    <span className="ml-1 min-w-[18px] h-[18px] px-1 flex items-center justify-center rounded-full bg-[#3D1A12] text-white text-[9px] font-black">
+                      {wishlistCount}
+                    </span>
+                  )}
+                </Link>
 
                 <Link
                   to={`/${currentLang}/products`}

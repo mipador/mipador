@@ -143,6 +143,7 @@
     "tagline": "Furniture for spaces that feel alive — indoor and outdoor.",
     "collectionHeading": "Collection",
     "allPieces": "All Pieces",
+    "wishlist": "Wishlist",
     "indoor": "Indoor",
     "outdoor": "Outdoor",
     "newArrivals": "New Arrivals",
@@ -161,6 +162,16 @@
     "terms": "Terms & Conditions",
     "refund": "Refund Policy",
     "copyright": "© {{year}} Mipador Studio. All rights reserved."
+  },
+  "wishlist": {
+    "heading": "Wishlist",
+    "count_one": "{{count}} piece saved",
+    "count_other": "{{count}} pieces saved",
+    "empty": "Your wishlist is empty",
+    "emptyHint": "Save the pieces you love to find them easily later.",
+    "exploreCollection": "Explore Collection",
+    "add": "Save to wishlist",
+    "remove": "Remove from wishlist"
   },
   "whatsapp": {
     "chatWithUs": "Chat with us on WhatsApp",

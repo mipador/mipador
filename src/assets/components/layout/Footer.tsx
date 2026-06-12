@@ -116,6 +116,11 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link to={`/${currentLang}/wishlist`} className={linkClass("/wishlist")}>
+                  {t("footer.wishlist")}
+                </Link>
+              </li>
+              <li>
                 <Link to={`/${currentLang}/products?location=indoor`} className="text-sm text-[#3D1A12]/50 hover:text-[#3D1A12] transition-colors duration-200">
                   {t("footer.indoor")}
                 </Link>

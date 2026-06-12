@@ -19,6 +19,7 @@ import RefundPolicy from "../legal/RefundPolicy";
 import TermsOfService from "../legal/TermsOfService";
 import FaqsPage from "../../pages/FaqsPage";
 import ProductDetailPage from "../products/components/Page/ProductDetailPage";
+import WishlistPage from "../products/components/Page/WishlistPage";
 
 const supported = ["en", "fr", "ar", "ma"];
 
@@ -76,6 +77,7 @@ export default function LanguageLayout() {
           <Route path="/" element={<Homepage />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/products/:slug" element={<ProductDetailPage />} />
+          <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
 

@@ -2,12 +2,14 @@ import React from "react";
 import type { Product } from "../../../../store/product.store";
 import { useProductStore } from "../../../../store/product.store";
 import { useParams, Link } from "react-router-dom";
-import { ShoppingBag } from "lucide-react";
+import { ShoppingBag, Heart } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
-  const { addToCart } = useProductStore();
+  const { addToCart, toggleWishlist } = useProductStore();
+  const wishlist = useProductStore((s) => s.wishlist);
+  const wishlisted = wishlist.includes(product.id);
   const { t } = useTranslation();
   const isComingSoon = product.status === "coming-soon";
   const isOutOfStock = product.status === "out-of-stock";
@@ -17,6 +19,12 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     e.preventDefault();
     e.stopPropagation();
     if (!isUnavailable) addToCart(product.id);
+  };
+
+  const handleWishlist = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleWishlist(product.id);
   };
 
   const { lang } = useParams();
@@ -94,6 +102,24 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
               </span>
             </div>
           )}
+
+          {/* Wishlist toggle */}
+          <motion.button
+            onClick={handleWishlist}
+            whileTap={{ scale: 1.3 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            aria-label={wishlisted ? t("wishlist.remove") : t("wishlist.add")}
+            className="absolute bottom-3 right-3 z-30 w-8 h-8 rounded-xl bg-white/80 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors shadow-sm"
+          >
+            <Heart
+              size={14}
+              className={`transition-all duration-200 ${
+                wishlisted
+                  ? "text-[#3D1A12] fill-[#3D1A12]"
+                  : "text-[#3D1A12]/40"
+              }`}
+            />
+          </motion.button>
         </div>
 
         {/* Info */}
