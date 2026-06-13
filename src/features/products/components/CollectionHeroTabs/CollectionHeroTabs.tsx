@@ -4,23 +4,23 @@ import { useTranslation } from "react-i18next";
 import { useProductStore } from "../../../../store/product.store";
 
 // TODO: Replace hero images with dedicated indoor/outdoor lifestyle photography
-const INDOOR_HERO = "/images/products/wabi-lounge-chair-lifestyle.jpg";
-const OUTDOOR_HERO = "/images/products/kasbah-lamp-lifestyle.jpg";
+const INDOOR_HERO = "/images/products/indoor.jpg";
+const OUTDOOR_HERO = "/images/products/outdoor.jpg";
 
 // Representative image per subcategory — maps to the best matching product shot
 // TODO: Update each entry as dedicated category photography becomes available
 const CAT_IMAGES: Record<string, string> = {
-  "Seating":          "/images/products/wabi-lounge-chair-main.jpg",
-  "Tables":           "/images/products/medina-coffee-table-main.jpg",
-  "Lighting":         "/images/products/kasbah-lamp-main.jpg",
-  "Decor":            "/images/products/sabil-vase-main.jpg",
-  "Shelving":         "/images/products/atlas-shelf-main.jpg",
-  "Storage":          "/images/products/atlas-shelf-lifestyle.jpg",
-  "Beds":             "/images/products/wabi-lounge-chair-lifestyle.jpg",
-  "Outdoor Seating":  "/images/products/wabi-lounge-chair-lifestyle.jpg",
-  "Outdoor Tables":   "/images/products/medina-coffee-table-main.jpg",
-  "Outdoor Lighting": "/images/products/kasbah-lamp-lifestyle.jpg",
-  "Outdoor Decor":    "/images/products/sabil-vase-lifestyle.jpg",
+  "Seating":          "/images/products/seating.jpg",
+  "Tables":           "/images/products/table.jpg",
+  "Lighting":         "/images/products/lighting.jpg",
+  "Decor":            "/images/products/decor.jpg",
+  "Shelving":         "/images/products/shelving.jpg",
+  "Storage":          "/images/products/storage.jpg",
+  "Beds":             "/images/products/beds.jpg",
+  "Outdoor Seating":  "/images/products/outdoorSeating.jpg",
+  "Outdoor Tables":   "/images/products/outdoorTables.jpg",
+  "Outdoor Lighting": "/images/products/outdoorLighting.jpg",
+  "Outdoor Decor":    "/images/products/outdoorDecor.jpg",
 };
 
 const INDOOR_SUBS = [
