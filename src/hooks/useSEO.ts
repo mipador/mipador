@@ -1,22 +1,153 @@
 import { useEffect } from "react";
+import { useLocation, useParams } from "react-router-dom";
 
 const SITE_NAME = "Mipador";
-const DEFAULT_DESCRIPTION =
-  "Moroccan furniture and decor for spaces that breathe — handcrafted indoors & outdoors.";
+const SITE_URL = "https://mipador.com";
+const OG_DEFAULT_IMAGE = `${SITE_URL}/images/hero.jpg`;
 
-export function useSEO(title: string, description: string = DEFAULT_DESCRIPTION) {
-  useEffect(() => {
-    document.title = title ? `${title} — ${SITE_NAME}` : SITE_NAME;
+const LANGS = ["en", "fr", "ar"] as const;
+type Lang = (typeof LANGS)[number];
 
-    let meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
-    if (!meta) {
-      meta = document.createElement("meta");
-      meta.setAttribute("name", "description");
-      document.head.appendChild(meta);
-    }
-    meta.setAttribute("content", description);
-  }, [title, description]);
+const LOCALE_MAP: Record<Lang, string> = {
+  en: "en_MA",
+  fr: "fr_MA",
+  ar: "ar_MA",
+};
+
+const DEFAULT_DESCS: Record<Lang, string> = {
+  en: "Premium Moroccan furniture and home decor — handcrafted artisanal pieces for contemporary interiors and outdoor spaces. Shop luxury furniture in Morocco.",
+  fr: "Mobilier et décoration intérieure premium au Maroc — pièces artisanales contemporaines. Découvrez le meuble haut de gamme marocain.",
+  ar: "أثاث فاخر وديكور منزلي مغربي — قطع حرفية يدوية لتصاميم داخلية معاصرة. تسوق الأثاث الفاخر في المغرب.",
+};
+
+// ── DOM helpers ───────────────────────────────────────────────────────────────
+
+function setMeta(attr: "name" | "property", key: string, value: string) {
+  let el = document.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
+  if (!el) {
+    el = document.createElement("meta");
+    el.setAttribute(attr, key);
+    document.head.appendChild(el);
+  }
+  el.setAttribute("content", value);
 }
+
+function setCanonical(href: string) {
+  let el = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  if (!el) {
+    el = document.createElement("link");
+    el.setAttribute("rel", "canonical");
+    document.head.appendChild(el);
+  }
+  el.setAttribute("href", href);
+}
+
+function setHreflang(hreflang: string, href: string) {
+  let el = document.querySelector<HTMLLinkElement>(
+    `link[rel="alternate"][hreflang="${hreflang}"]`
+  );
+  if (!el) {
+    el = document.createElement("link");
+    el.setAttribute("rel", "alternate");
+    el.setAttribute("hreflang", hreflang);
+    document.head.appendChild(el);
+  }
+  el.setAttribute("href", href);
+}
+
+// ── useSEO ───────────────────────────────────────────────────────────────────
+// Drop-in replacement — keeps (title, description?) signature.
+// Automatically injects OG, Twitter Card, canonical, hreflang, and sets
+// <html lang dir> from the URL's :lang segment.
+// Options:
+//   ogImage   — full URL to the page-specific social share image
+//   ogType    — schema.org page type: "website" (default) | "product" | etc.
+//   imageAlt  — alt text for OG + Twitter images (defaults to resolved title)
+
+interface SeoOptions {
+  ogImage?: string;
+  ogType?: string;
+  imageAlt?: string;
+}
+
+export function useSEO(title: string, description?: string, options?: SeoOptions) {
+  const location = useLocation();
+  const { lang } = useParams<{ lang: string }>();
+  const currentLang: Lang = LANGS.includes(lang as Lang)
+    ? (lang as Lang)
+    : "en";
+
+  const ogImg = options?.ogImage ?? OG_DEFAULT_IMAGE;
+  const ogType = options?.ogType ?? "website";
+  const imageAlt = options?.imageAlt;
+
+  useEffect(() => {
+    const resolvedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
+    const resolvedDesc = description ?? DEFAULT_DESCS[currentLang];
+    const locale = LOCALE_MAP[currentLang];
+    const resolvedImgAlt = imageAlt ?? resolvedTitle;
+
+    // <html> attributes — drives browser font/layout and assistive tech
+    document.documentElement.setAttribute("lang", currentLang);
+    document.documentElement.setAttribute(
+      "dir",
+      currentLang === "ar" ? "rtl" : "ltr"
+    );
+
+    // Title
+    document.title = resolvedTitle;
+
+    // ── Primary meta ─────────────────────────────────────────────────────────
+    setMeta("name", "description", resolvedDesc);
+    setMeta(
+      "name",
+      "robots",
+      "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1"
+    );
+
+    // ── Open Graph ───────────────────────────────────────────────────────────
+    setMeta("property", "og:type", ogType);
+    setMeta("property", "og:site_name", SITE_NAME);
+    setMeta("property", "og:title", resolvedTitle);
+    setMeta("property", "og:description", resolvedDesc);
+    setMeta("property", "og:image", ogImg);
+    setMeta("property", "og:image:width", "1200");
+    setMeta("property", "og:image:height", "630");
+    setMeta("property", "og:image:alt", resolvedImgAlt);
+    setMeta("property", "og:url", `${SITE_URL}/#${location.pathname}`);
+    setMeta("property", "og:locale", locale);
+
+    // ── Twitter Card ─────────────────────────────────────────────────────────
+    setMeta("name", "twitter:card", "summary_large_image");
+    setMeta("name", "twitter:site", "@mipador");
+    setMeta("name", "twitter:title", resolvedTitle);
+    setMeta("name", "twitter:description", resolvedDesc);
+    setMeta("name", "twitter:image", ogImg);
+    setMeta("name", "twitter:image:alt", resolvedImgAlt);
+
+    // ── Canonical ────────────────────────────────────────────────────────────
+    setCanonical(`${SITE_URL}/#${location.pathname}`);
+
+    // ── hreflang alternates ──────────────────────────────────────────────────
+    // Strip the lang prefix to get the rest of the path
+    const pathParts = location.pathname.split("/").filter(Boolean); // ["en","products",...]
+    const restPath = pathParts.slice(1).join("/"); // "products/..." without lang
+
+    LANGS.forEach((l) => {
+      const href = `${SITE_URL}/#/${l}${restPath ? `/${restPath}` : ""}`;
+      setHreflang(l, href);
+    });
+    // x-default → English
+    setHreflang(
+      "x-default",
+      `${SITE_URL}/#/en${restPath ? `/${restPath}` : ""}`
+    );
+  }, [title, description, currentLang, location.pathname, ogImg, ogType, imageAlt]);
+}
+
+// ── useJsonLd ────────────────────────────────────────────────────────────────
+// Accepts a single schema object or null.
+// Use { "@context": "https://schema.org", "@graph": [...] } for multi-type pages.
 
 export function useJsonLd(schema: Record<string, unknown> | null) {
   useEffect(() => {

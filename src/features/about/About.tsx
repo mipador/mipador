@@ -7,13 +7,64 @@ import ModelGrid from "./components/ModelGrid";
 import FeatureGrid from "./components/FeatureGrid";
 import { Link, useParams } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import ScrollToTop from "../../components/ScrollToTop";
-import { useSEO } from "../../hooks/useSEO";
+import { useSEO, useJsonLd } from "../../hooks/useSEO";
+
+const SITE_URL = "https://mipador.com";
+
+const ABOUT_LABELS: Record<string, { home: string; about: string }> = {
+  en: { home: "Home", about: "Our Story" },
+  fr: { home: "Accueil", about: "Notre Histoire" },
+  ar: { home: "الرئيسية", about: "قصتنا" },
+};
 
 function About() {
-  useSEO("Our Story", "Rooted in Moroccan craftsmanship — Mipador builds worlds, not just furniture. Our story, our philosophy.");
-  const { lang } = useParams();
+  const { t } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
   const currentLang = lang || "en";
+  const l = currentLang;
+  const labels = ABOUT_LABELS[l] ?? ABOUT_LABELS.en;
+
+  useSEO(t("seo.aboutTitle"), t("seo.aboutDesc"));
+
+  const schema = useMemo(
+    () => ({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "AboutPage",
+          "@id": `${SITE_URL}/#/${l}/about#webpage`,
+          "url": `${SITE_URL}/#/${l}/about`,
+          "name": `${t("seo.aboutTitle")} | Mipador`,
+          "description": t("seo.aboutDesc"),
+          "isPartOf": { "@id": `${SITE_URL}/#website` },
+          "about": { "@id": `${SITE_URL}/#organization` },
+          "inLanguage": l,
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": labels.home,
+              "item": `${SITE_URL}/#/${l}/`,
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": labels.about,
+              "item": `${SITE_URL}/#/${l}/about`,
+            },
+          ],
+        },
+      ],
+    }),
+    [l, t, labels]
+  );
+  useJsonLd(schema);
 
   return (
     <div className="bg-[#F6F4F1] font-sans selection:bg-[#C9922A]/20">

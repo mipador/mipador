@@ -2,10 +2,89 @@ import ContactForm from "./components/ContactForm";
 import ContactHero from "./components/ContactHero";
 import ContactInfo from "./components/ContactInfo";
 import ScrollToTop from "../../components/ScrollToTop";
-import { useSEO } from "../../hooks/useSEO";
+import { useMemo } from "react";
+import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useSEO, useJsonLd } from "../../hooks/useSEO";
+
+const SITE_URL = "https://mipador.com";
+
+const CONTACT_LABELS: Record<string, { home: string; contact: string }> = {
+  en: { home: "Home", contact: "Contact" },
+  fr: { home: "Accueil", contact: "Contact" },
+  ar: { home: "الرئيسية", contact: "تواصل" },
+};
 
 const ContactPage: React.FC = () => {
-  useSEO("Contact", "Get in touch with Mipador Studio — questions about our collection, orders, or just saying hello.");
+  const { t } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
+  const l = lang || "en";
+  const labels = CONTACT_LABELS[l] ?? CONTACT_LABELS.en;
+
+  useSEO(t("seo.contactTitle"), t("seo.contactDesc"));
+
+  const schema = useMemo(
+    () => ({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ContactPage",
+          "@id": `${SITE_URL}/#/${l}/contact#webpage`,
+          "url": `${SITE_URL}/#/${l}/contact`,
+          "name": `${t("seo.contactTitle")} | Mipador`,
+          "description": t("seo.contactDesc"),
+          "isPartOf": { "@id": `${SITE_URL}/#website` },
+          "inLanguage": l,
+        },
+        {
+          "@type": ["LocalBusiness", "FurnitureStore"],
+          "@id": `${SITE_URL}/#business`,
+          "name": "Mipador",
+          "description":
+            "Premium handcrafted Moroccan furniture and home decor studio in Casablanca. Contemporary pieces inspired by Moroccan artisanal traditions.",
+          "url": `${SITE_URL}`,
+          "image": `${SITE_URL}/images/hero.jpg`,
+          "logo": `${SITE_URL}/images/LogoMipadorNavBar.png`,
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Casablanca",
+            "addressRegion": "Grand Casablanca-Settat",
+            "addressCountry": "MA",
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 33.5731,
+            "longitude": -7.5898,
+          },
+          "priceRange": "MAD 1,200 – MAD 15,000",
+          "currenciesAccepted": "MAD",
+          "paymentAccepted": "Cash on Delivery, Bank Transfer",
+          "areaServed": "Morocco",
+          "hasMap": "https://www.google.com/maps?q=Casablanca,Morocco",
+          "parentOrganization": { "@id": `${SITE_URL}/#organization` },
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": labels.home,
+              "item": `${SITE_URL}/#/${l}/`,
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": labels.contact,
+              "item": `${SITE_URL}/#/${l}/contact`,
+            },
+          ],
+        },
+      ],
+    }),
+    [l, t, labels]
+  );
+  useJsonLd(schema);
   return (
     <div className="min-h-screen bg-[#F6F4F1] p-6 md:p-12 lg:p-24 selection:bg-[#3D1E16] selection:text-white">
       <ScrollToTop />

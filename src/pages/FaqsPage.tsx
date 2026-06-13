@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Accordion from "../components/Accordion";
 import { faqData } from "../data/faqs";
 import type { FAQ } from "../data/faqs";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { useSEO } from "../hooks/useSEO";
+import { useParams } from "react-router-dom";
+import { useSEO, useJsonLd } from "../hooks/useSEO";
 
+const SITE_URL = "https://mipador.com";
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
 type Category = FAQ["category"];
@@ -16,10 +18,64 @@ const CATEGORIES: { key: Category; labelKey: string }[] = [
   { key: "Payment & billing", labelKey: "faqs.catPayment" },
 ];
 
+const FAQ_BREADCRUMB: Record<string, { home: string; faqs: string }> = {
+  en: { home: "Home", faqs: "FAQ" },
+  fr: { home: "Accueil", faqs: "FAQ" },
+  ar: { home: "الرئيسية", faqs: "الأسئلة الشائعة" },
+};
+
 const FaqsPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<Category>("Technical Support");
   const { t } = useTranslation();
-  useSEO(t("faqs.heading"), t("faqs.body"));
+  const { lang } = useParams<{ lang: string }>();
+  const l = lang || "en";
+  const bc = FAQ_BREADCRUMB[l] ?? FAQ_BREADCRUMB.en;
+
+  useSEO(t("seo.faqsTitle"), t("seo.faqsDesc"));
+
+  const schema = useMemo(
+    () => ({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "FAQPage",
+          "@id": `${SITE_URL}/#/${l}/faqs#webpage`,
+          "url": `${SITE_URL}/#/${l}/faqs`,
+          "name": `${t("seo.faqsTitle")} | Mipador`,
+          "description": t("seo.faqsDesc"),
+          "isPartOf": { "@id": `${SITE_URL}/#website` },
+          "inLanguage": l,
+          "mainEntity": faqData.map((faq) => ({
+            "@type": "Question",
+            "name": faq.question,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": faq.answer,
+            },
+          })),
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": bc.home,
+              "item": `${SITE_URL}/#/${l}/`,
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": bc.faqs,
+              "item": `${SITE_URL}/#/${l}/faqs`,
+            },
+          ],
+        },
+      ],
+    }),
+    [l, t, bc]
+  );
+  useJsonLd(schema);
 
   const filteredFaqs = faqData.filter((faq: FAQ) => faq.category === activeCategory);
 

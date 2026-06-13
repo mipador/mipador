@@ -149,35 +149,137 @@ const ProductDetailPage: React.FC = () => {
     return () => { document.body.style.overflow = ""; };
   }, [zoomed]);
 
+  const SITE_URL = "https://mipador.com";
+
+  const productOgImage = product?.images[0]
+    ? product.images[0].startsWith("http")
+      ? product.images[0]
+      : `${SITE_URL}${product.images[0]}`
+    : undefined;
+
   // SEO — runs for every product (hooks must be unconditional)
   useSEO(
-    product ? product.name : t("product.notFound"),
-    product ? product.description : undefined
+    product
+      ? `${product.name} — ${product.tagline}`
+      : t("product.notFound"),
+    product
+      ? `${product.description} Handcrafted in Morocco by Mipador. ${product.materials.join(", ")}.`
+      : undefined,
+    product
+      ? {
+          ogImage: productOgImage,
+          ogType: "product",
+          imageAlt: `${product.name} — ${product.tagline} | Mipador`,
+        }
+      : undefined
   );
+
   const jsonLdSchema = useMemo(() => {
     if (!product) return null;
+
     const availability =
       product.status === "available"
         ? "https://schema.org/InStock"
         : product.status === "out-of-stock"
         ? "https://schema.org/OutOfStock"
         : "https://schema.org/PreOrder";
-    return {
+
+    const productUrl = `${SITE_URL}/#/${currentLang}/products/${product.slug}`;
+
+    const BREADCRUMB_LABELS: Record<string, { home: string; collection: string }> = {
+      en: { home: "Home", collection: "Collection" },
+      fr: { home: "Accueil", collection: "Collection" },
+      ar: { home: "الرئيسية", collection: "المجموعة" },
+    };
+    const bc = BREADCRUMB_LABELS[currentLang] ?? BREADCRUMB_LABELS.en;
+
+    const schema: Record<string, unknown> = {
       "@context": "https://schema.org",
       "@type": "Product",
-      name: product.name,
-      description: product.description,
-      image: product.images,
-      brand: { "@type": "Brand", name: "Mipador" },
-      offers: {
+      "@id": productUrl,
+      "name": product.name,
+      "description": product.description,
+      "sku": product.slug,
+      "url": productUrl,
+      "image": product.images.map((img) =>
+        img.startsWith("http") ? img : `${SITE_URL}${img}`
+      ),
+      "brand": {
+        "@type": "Brand",
+        "name": "Mipador",
+        "@id": `${SITE_URL}/#organization`,
+      },
+      "manufacturer": {
+        "@type": "Organization",
+        "name": "Mipador",
+        "@id": `${SITE_URL}/#organization`,
+      },
+      "material": product.materials.join(", "),
+      "category": product.category,
+      "offers": {
         "@type": "Offer",
-        priceCurrency: "MAD",
-        price: product.price,
-        availability,
-        seller: { "@type": "Organization", name: "Mipador Studio" },
+        "priceCurrency": "MAD",
+        "price": product.price,
+        "availability": availability,
+        "url": productUrl,
+        "priceValidUntil": "2027-12-31",
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": {
+          "@type": "Organization",
+          "name": "Mipador",
+          "@id": `${SITE_URL}/#organization`,
+        },
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": bc.home,
+            "item": `${SITE_URL}/#/${currentLang}/`,
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": bc.collection,
+            "item": `${SITE_URL}/#/${currentLang}/products`,
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": product.name,
+            "item": productUrl,
+          },
+        ],
       },
     };
-  }, [product]);
+
+    if (productReviews.length > 0) {
+      schema["aggregateRating"] = {
+        "@type": "AggregateRating",
+        "ratingValue": avgRating.toFixed(1),
+        "reviewCount": productReviews.length,
+        "bestRating": 5,
+        "worstRating": 1,
+      };
+      schema["review"] = productReviews.map((r) => ({
+        "@type": "Review",
+        "name": r.title,
+        "reviewBody": r.body,
+        "datePublished": r.date,
+        "author": { "@type": "Person", "name": r.author },
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": r.rating,
+          "bestRating": 5,
+          "worstRating": 1,
+        },
+      }));
+    }
+
+    return schema;
+  }, [product, productReviews, avgRating, currentLang]);
   useJsonLd(jsonLdSchema);
 
   if (!product) {

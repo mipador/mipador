@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
+import { useParams } from "react-router-dom";
 import { useProductStore } from "../../../../store/product.store";
 import { SlidersHorizontal, X, Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -8,9 +9,18 @@ import ProductFilters from "../ProductFilters/ProductFilters";
 import Pagination from "../Pagination/Pagination";
 import { AnimatePresence, motion } from "framer-motion";
 import ScrollToTop from "../../../../components/ScrollToTop";
-import { useSEO } from "../../../../hooks/useSEO";
+import { useSEO, useJsonLd } from "../../../../hooks/useSEO";
+import { products } from "../../../../data/products";
 
 export const ITEMS_PER_PAGE = 9;
+
+const SITE_URL = "https://mipador.com";
+
+const COLLECTION_LABELS: Record<string, { home: string; collection: string }> = {
+  en: { home: "Home", collection: "Collection" },
+  fr: { home: "Accueil", collection: "Collection" },
+  ar: { home: "الرئيسية", collection: "المجموعة" },
+};
 
 const ProductsPage: React.FC = () => {
   const {
@@ -18,7 +28,62 @@ const ProductsPage: React.FC = () => {
     hasActiveFilters, resetFilters, setLocationFilter,
   } = useProductStore();
   const { t } = useTranslation();
-  useSEO(t("products.heading"), "Browse the full Mipador collection — handcrafted Moroccan furniture and decor for indoor and outdoor spaces.");
+  const { lang } = useParams<{ lang: string }>();
+  const l = lang || "en";
+  const labels = COLLECTION_LABELS[l] ?? COLLECTION_LABELS.en;
+
+  useSEO(t("seo.productsTitle"), t("seo.productsDesc"));
+
+  const schema = useMemo(
+    () => ({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "CollectionPage",
+          "@id": `${SITE_URL}/#/${l}/products#webpage`,
+          "url": `${SITE_URL}/#/${l}/products`,
+          "name": `${t("seo.productsTitle")} | Mipador`,
+          "description": t("seo.productsDesc"),
+          "isPartOf": { "@id": `${SITE_URL}/#website` },
+          "inLanguage": l,
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": labels.home,
+              "item": `${SITE_URL}/#/${l}/`,
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": labels.collection,
+              "item": `${SITE_URL}/#/${l}/products`,
+            },
+          ],
+        },
+        {
+          "@type": "ItemList",
+          "name": "Mipador Furniture & Decor Collection",
+          "url": `${SITE_URL}/#/${l}/products`,
+          "numberOfItems": products.length,
+          "itemListElement": products.map((p, i) => ({
+            "@type": "ListItem",
+            "position": i + 1,
+            "name": p.name,
+            "url": `${SITE_URL}/#/${l}/products/${p.slug}`,
+            "image": p.images[0]
+              ? `${SITE_URL}${p.images[0]}`
+              : undefined,
+          })),
+        },
+      ],
+    }),
+    [l, t, labels]
+  );
+  useJsonLd(schema);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   const filteredData = getFilteredProducts();
