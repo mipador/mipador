@@ -61,9 +61,9 @@ const TaglineSection = () => {
                 <div className="mb-6 text-[#3D1A12] transition-transform duration-300 group-hover:scale-110">
                   {item.icon}
                 </div>
-                <h4 className="text-lg font-bold mb-2 uppercase tracking-tight text-[#3D1A12]">
+                <h3 className="text-lg font-bold mb-2 uppercase tracking-tight text-[#3D1A12]">
                   {t(item.titleKey)}
-                </h4>
+                </h3>
                 <p className="text-[#3D1A12]/60 text-sm leading-relaxed">
                   {t(item.descKey)}
                 </p>

@@ -59,6 +59,10 @@ const HeroSection = () => {
           key={currentImage.url}
           src={currentImage.url}
           alt={currentImage.alt}
+          width={isMobile ? 768 : 1920}
+          height={isMobile ? 1024 : 1080}
+          fetchPriority="high"
+          decoding="async"
           className="w-full h-full object-cover object-center"
           style={{ filter: useTransform(brightness, (v) => `brightness(${v})`) }}
           initial={{ opacity: 0 }}

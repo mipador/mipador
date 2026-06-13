@@ -1,6 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, Smartphone, RotateCcw } from "lucide-react";
 import { useTranslation } from "react-i18next";
+
+const MODEL_VIEWER_URL =
+  "https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js";
+
+function loadModelViewer() {
+  if (document.querySelector(`script[src="${MODEL_VIEWER_URL}"]`)) return;
+  const s = document.createElement("script");
+  s.type = "module";
+  s.src = MODEL_VIEWER_URL;
+  document.head.appendChild(s);
+}
 
 interface Props {
   productName: string;
@@ -12,6 +23,10 @@ export function RoomVisualizer({ productName, glbUrl, posterUrl }: Props) {
   const { t } = useTranslation();
   const [active, setActive] = useState(false);
   const [key, setKey] = useState(0);
+
+  useEffect(() => {
+    if (active) loadModelViewer();
+  }, [active]);
 
   if (!glbUrl) {
     return (

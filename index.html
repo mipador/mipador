@@ -58,10 +58,20 @@
     <link rel="alternate" hreflang="ar" href="https://mipador.com/#/ar/" />
     <link rel="alternate" hreflang="x-default" href="https://mipador.com/#/en/" />
 
-    <!-- ── Performance: preconnect ──────────────────────────────────────── -->
+    <!-- ── Performance: preconnect + LCP preload ────────────────────────── -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://ajax.googleapis.com" />
+    <link rel="preload" as="image" href="/images/Hero1.jpg" media="(min-width: 768px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/images/HeroMobile.jpg" media="(max-width: 767px)" fetchpriority="high" />
+
+    <!-- ── Google Analytics GA4 — replace G-R0VK88J0HK with your Measurement ID ── -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R0VK88J0HK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-R0VK88J0HK');
+    </script>
 
     <!-- ── GitHub Pages SPA fix ─────────────────────────────────────────── -->
     <script>
@@ -185,8 +195,6 @@
     }
     </script>
 
-    <!-- model-viewer web component (lazy-loaded, only used on product pages) -->
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
   </head>
 
   <body>

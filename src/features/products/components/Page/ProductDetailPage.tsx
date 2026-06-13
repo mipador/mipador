@@ -468,7 +468,7 @@ const ProductDetailPage: React.FC = () => {
                         : "border-transparent opacity-50 hover:opacity-80"
                     }`}
                   >
-                    <img src={img} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                    <img src={img} alt={`${product.name} — view ${i + 1}`} loading="lazy" decoding="async" className="w-full h-full object-cover" />
                   </button>
                 ))}
               </div>

@@ -40,10 +40,10 @@ const SelectedWorksSection: React.FC = () => {
                   <span key={i}>{word} </span>
                 )
               )}
+              <span className="block mt-2 text-[#3D1A12]/60 font-bold uppercase tracking-[0.3em] text-[10px] not-italic">
+                {t("home.selectedWorksSub")}
+              </span>
             </h2>
-            <p className="mt-2 text-[#3D1A12]/60 font-bold uppercase tracking-[0.3em] text-[10px]">
-              {t("home.selectedWorksSub")}
-            </p>
           </div>
 
           <Link
