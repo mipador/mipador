@@ -163,7 +163,7 @@ const ProductDetailPage: React.FC = () => {
       ? `${product.name} — ${product.tagline}`
       : t("product.notFound"),
     product
-      ? `${product.description} Handcrafted in Morocco by Mipador. ${product.materials.join(", ")}.`
+      ? `${product.description} Made by Mipador Studio. ${product.materials.join(", ")}.`
       : undefined,
     product
       ? {

@@ -19,10 +19,10 @@ const css = `
 
 // ── Put your atmosphere/product images here ───────────────────
 const images = [
-  { src: "/images/atmosphere-2.png", alt: "Mipador — craftsmanship" },
-  { src: "/images/atmosphere-3.png", alt: "Mipador — slow living" },
-  { src: "/images/atmosphere-4.png", alt: "Mipador — outdoor space" },
-  { src: "/images/atmosphere-5.png", alt: "Mipador — morning light" },
+  { src: "/images/atmosphere-2.png", alt: "Mipador — contemporary furniture, Morocco" },
+  { src: "/images/atmosphere-3.png", alt: "Mipador — spaces that breathe" },
+  { src: "/images/atmosphere-4.png", alt: "Mipador — outdoor furniture, Morocco" },
+  { src: "/images/atmosphere-5.png", alt: "Mipador — premium home decor, Casablanca" },
 ];
 
 const LogoStack = () => {

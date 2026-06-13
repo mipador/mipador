@@ -11,7 +11,7 @@
     "openCartCount_other": "Panier, {{count}} articles"
   },
   "hero": {
-    "eyebrow": "Collection Mipador",
+    "eyebrow": "Mipador — Studio Mobilier Marocain",
     "headline": "Conçu pour les espaces qui respirent",
     "badge": "Être. Pas avoir.",
     "exploreCollection": "Explorer la Collection",
@@ -162,7 +162,7 @@
     "comingSoonButton": "Me notifier"
   },
   "footer": {
-    "tagline": "Mobilier pour des espaces qui se sentent vivants — intérieur et extérieur.",
+    "tagline": "Mobilier artisanal marocain pour des espaces qui se sentent vivants — livraison dans tout le Maroc.",
     "collectionHeading": "Collection",
     "allPieces": "Toutes les pièces",
     "wishlist": "Liste de souhaits",
@@ -243,15 +243,15 @@
     "shareBtn": "Partager mon avis"
   },
   "seo": {
-    "homeTitle": "Mobilier & Décoration Marocaine Premium",
-    "homeDesc": "Mipador — mobilier artisanal marocain pour des espaces qui respirent. Pièces intérieures et extérieures conçues pour durer. Découvrez le meuble haut de gamme marocain.",
-    "productsTitle": "Collection Mobilier Marocain — Pièces Artisanales Intérieur & Extérieur",
-    "productsDesc": "Parcourez la collection Mipador — mobilier marocain artisanal premium et décoration d'intérieur. Sièges, tables, luminaires, étagères et objets céramiques pour intérieur et extérieur.",
-    "aboutTitle": "Notre Histoire — Artisanat Marocain & Design Contemporain",
-    "aboutDesc": "Ancrés dans la tradition artisanale marocaine — Mipador crée des univers, pas seulement des meubles. Découvrez notre histoire, notre philosophie et ce qui rend chaque pièce unique.",
-    "contactTitle": "Contact — Studio de Mobilier Marocain Mipador, Casablanca",
-    "contactDesc": "Contactez le Studio Mipador — questions sur notre collection de mobilier artisanal marocain, commandes sur mesure, livraison au Maroc ou visites à Casablanca.",
-    "faqsTitle": "FAQ — Questions sur le Mobilier Marocain",
+    "homeTitle": "Mobilier & Décoration Contemporains Premium — Mipador, Maroc",
+    "homeDesc": "Mipador — mobilier et décoration contemporains pour des espaces qui vous font sentir libre, vivant et chez vous. Pièces premium intérieur et extérieur, faites pour durer. Basé à Casablanca, livraison à Casablanca, Rabat, Marrakech et partout au Maroc.",
+    "productsTitle": "La Collection — Mobilier & Décoration Contemporains | Mipador",
+    "productsDesc": "Découvrez la collection Mipador — mobilier et décoration contemporains premium pour des espaces qui respirent. Sièges, tables, luminaires, étagères et objets céramiques. Livraison dans tout le Maroc.",
+    "aboutTitle": "Notre Histoire — Nous Construisons des Univers, Pas Seulement des Meubles",
+    "aboutDesc": "Mipador a été conçu pour ceux qui veulent plus de liberté, de chaleur et de sens dans leur façon de vivre. Découvrez l'histoire et la philosophie derrière chaque pièce.",
+    "contactTitle": "Contact — Studio Mipador, Casablanca",
+    "contactDesc": "Contactez le Studio Mipador — questions sur notre collection, pièces sur mesure, livraison au Maroc ou juste pour dire bonjour.",
+    "faqsTitle": "FAQ — Mobilier, Commandes & Livraison au Maroc",
     "faqsDesc": "Tout ce que vous devez savoir sur Mipador — matériaux, commandes, livraison au Maroc, modes de paiement et notre politique de retour sous 7 jours."
   }
 }

@@ -37,7 +37,7 @@ const BrandPromise = () => (
         <div className="relative h-[480px] rounded-3xl overflow-hidden">
           <img
             src="/images/hero.jpg"
-            alt="Mipador craftsmanship"
+            alt="Mipador — spaces that make you feel alive"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#2A0F08]/50 to-transparent" />

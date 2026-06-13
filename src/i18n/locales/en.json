@@ -11,7 +11,7 @@
     "openCartCount_other": "Open cart, {{count}} items"
   },
   "hero": {
-    "eyebrow": "Mipador Collection",
+    "eyebrow": "Mipador — Moroccan Furniture Studio",
     "headline": "Made for spaces that breathe",
     "badge": "Be. Not own.",
     "exploreCollection": "Explore Collection",
@@ -162,7 +162,7 @@
     "comingSoonButton": "Notify Me"
   },
   "footer": {
-    "tagline": "Furniture for spaces that feel alive — indoor and outdoor.",
+    "tagline": "Handcrafted Moroccan furniture for spaces that feel alive — delivered across Morocco.",
     "collectionHeading": "Collection",
     "allPieces": "All Pieces",
     "wishlist": "Wishlist",
@@ -243,15 +243,15 @@
     "shareBtn": "Share Experience"
   },
   "seo": {
-    "homeTitle": "Premium Moroccan Furniture & Home Decor",
-    "homeDesc": "Mipador — handcrafted Moroccan furniture and decor for spaces that breathe. Indoor and outdoor artisanal pieces made to age beautifully. Shop luxury furniture in Morocco.",
-    "productsTitle": "Moroccan Furniture Collection — Handcrafted Indoor & Outdoor Pieces",
-    "productsDesc": "Browse the full Mipador collection — premium handcrafted Moroccan furniture and home decor. Seating, tables, lighting, shelving, and ceramic objects for indoor and outdoor spaces.",
-    "aboutTitle": "Our Story — Moroccan Craftsmanship & Contemporary Design",
-    "aboutDesc": "Rooted in Moroccan artisanal tradition — Mipador builds worlds, not just furniture. Discover our story, our philosophy, and what makes every piece unique.",
-    "contactTitle": "Contact — Mipador Moroccan Furniture Studio, Casablanca",
-    "contactDesc": "Get in touch with Mipador Studio — questions about our handcrafted Moroccan furniture collection, custom orders, delivery across Morocco, or showroom visits in Casablanca.",
-    "faqsTitle": "FAQ — Moroccan Furniture Questions Answered",
+    "homeTitle": "Premium Contemporary Furniture & Home Decor — Mipador, Morocco",
+    "homeDesc": "Mipador — contemporary furniture and home decor for spaces that make you feel free, alive, and at home. Premium indoor and outdoor pieces, made to last. Based in Casablanca, delivered to Casablanca, Rabat, Marrakech, and across Morocco.",
+    "productsTitle": "The Collection — Contemporary Furniture & Home Decor | Mipador",
+    "productsDesc": "Browse the Mipador collection — premium contemporary furniture and home decor for spaces that breathe. Seating, tables, lighting, shelving, and ceramic objects. Delivered across Morocco.",
+    "aboutTitle": "Our Story — We Build Worlds, Not Just Furniture",
+    "aboutDesc": "Mipador was built for people who want more freedom, warmth, and meaning in the way they live. Discover the story and philosophy behind every piece.",
+    "contactTitle": "Contact — Mipador Studio, Casablanca",
+    "contactDesc": "Get in touch with Mipador Studio — questions about our collection, custom pieces, delivery across Morocco, or just to say hello.",
+    "faqsTitle": "FAQ — Furniture, Orders & Delivery in Morocco",
     "faqsDesc": "Everything you need to know about Mipador — materials, ordering, delivery across Morocco, payment methods, and our 7-day return policy."
   }
 }

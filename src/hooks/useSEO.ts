@@ -15,9 +15,9 @@ const LOCALE_MAP: Record<Lang, string> = {
 };
 
 const DEFAULT_DESCS: Record<Lang, string> = {
-  en: "Premium Moroccan furniture and home decor — handcrafted artisanal pieces for contemporary interiors and outdoor spaces. Shop luxury furniture in Morocco.",
-  fr: "Mobilier et décoration intérieure premium au Maroc — pièces artisanales contemporaines. Découvrez le meuble haut de gamme marocain.",
-  ar: "أثاث فاخر وديكور منزلي مغربي — قطع حرفية يدوية لتصاميم داخلية معاصرة. تسوق الأثاث الفاخر في المغرب.",
+  en: "Mipador — contemporary furniture and home decor for spaces that make you feel free and alive. Premium indoor and outdoor pieces. Based in Casablanca, delivered to Casablanca, Rabat, Marrakech, and across Morocco.",
+  fr: "Mipador — mobilier et décoration contemporains pour des espaces qui vous font sentir libre et vivant. Pièces premium intérieur et extérieur. Basé à Casablanca, livraison à Casablanca, Rabat, Marrakech et partout au Maroc.",
+  ar: "ميبادور — أثاث وديكور معاصر لفضاءات تجعلك تشعر بالحرية والحياة. قطع فاخرة داخلية وخارجية. مقرّنا الدار البيضاء، نوصّل إلى الدار البيضاء والرباط ومراكش وجميع أنحاء المغرب.",
 };
 
 // ── DOM helpers ───────────────────────────────────────────────────────────────

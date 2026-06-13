@@ -41,7 +41,7 @@ const ContactPage: React.FC = () => {
           "@id": `${SITE_URL}/#business`,
           "name": "Mipador",
           "description":
-            "Premium handcrafted Moroccan furniture and home decor studio in Casablanca. Contemporary pieces inspired by Moroccan artisanal traditions.",
+            "Premium contemporary furniture and home decor studio based in Casablanca, Morocco. Designed for spaces that breathe — indoor and outdoor pieces delivered across Morocco.",
           "url": `${SITE_URL}`,
           "image": `${SITE_URL}/images/hero.jpg`,
           "logo": `${SITE_URL}/images/LogoMipadorNavBar.png`,

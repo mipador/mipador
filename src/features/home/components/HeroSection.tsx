@@ -6,8 +6,8 @@ import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const IMAGE_ASSETS = {
-  desktop: { url: "/images/Hero1.jpg",      alt: "Mipador Collection - Desktop" },
-  mobile:  { url: "/images/HeroMobile.jpg", alt: "Mipador Collection - Mobile" },
+  desktop: { url: "/images/Hero1.jpg",      alt: "Mipador — Premium Moroccan Furniture & Home Decor, Casablanca Morocco" },
+  mobile:  { url: "/images/HeroMobile.jpg", alt: "Mipador — Handcrafted Moroccan Furniture Studio, Morocco" },
 };
 
 const containerVariants: Variants = {
