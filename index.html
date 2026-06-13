@@ -1,12 +1,69 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mipador</title>
 
-    <!-- GitHub Pages SPA fix -->
+    <!-- ── Favicons ─────────────────────────────────────────────────────── -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon1.svg" />
+    <meta name="theme-color" content="#3D1A12" />
+    <meta name="msapplication-TileColor" content="#3D1A12" />
+    <meta name="application-name" content="Mipador" />
+    <meta name="apple-mobile-web-app-title" content="Mipador" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- ── Primary meta (overridden per-page by React useSEO) ───────────── -->
+    <title>Mipador — Premium Moroccan Furniture &amp; Home Decor</title>
+    <meta name="description" content="Premium Moroccan furniture and home decor — handcrafted artisanal pieces for contemporary interiors and outdoor spaces. Shop luxury furniture in Morocco." />
+    <meta name="author" content="Mipador" />
+    <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+    <meta name="keywords" content="Moroccan furniture, luxury furniture Morocco, premium furniture Morocco, handmade furniture Morocco, modern Moroccan furniture, Moroccan home decor, artisan furniture Morocco, interior design Morocco, meuble maroc, mobilier design maroc, décoration intérieure maroc, meubles haut de gamme maroc, أثاث المغرب, أثاث فاخر المغرب, ديكور منزلي المغرب" />
+
+    <!-- ── Open Graph (default — overridden per-page) ───────────────────── -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Mipador" />
+    <meta property="og:title" content="Mipador — Premium Moroccan Furniture &amp; Home Decor" />
+    <meta property="og:description" content="Premium Moroccan furniture and home decor — handcrafted artisanal pieces for contemporary interiors. Shop luxury furniture in Morocco." />
+    <meta property="og:image" content="https://mipador.com/images/hero.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Mipador — Premium Moroccan Furniture &amp; Home Decor" />
+    <meta property="og:url" content="https://mipador.com" />
+    <meta property="og:locale" content="en_MA" />
+    <meta property="og:locale:alternate" content="fr_MA" />
+    <meta property="og:locale:alternate" content="ar_MA" />
+
+    <!-- ── Twitter Card (default — overridden per-page) ─────────────────── -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@mipador" />
+    <meta name="twitter:title" content="Mipador — Premium Moroccan Furniture &amp; Home Decor" />
+    <meta name="twitter:description" content="Premium Moroccan furniture and home decor — handcrafted artisanal pieces for contemporary interiors." />
+    <meta name="twitter:image" content="https://mipador.com/images/hero.jpg" />
+
+    <!-- ── Geo / Local SEO ───────────────────────────────────────────────── -->
+    <meta name="geo.region" content="MA" />
+    <meta name="geo.placename" content="Casablanca, Morocco" />
+    <meta name="geo.position" content="33.5731;-7.5898" />
+    <meta name="ICBM" content="33.5731, -7.5898" />
+
+    <!-- ── Canonical (default — overridden per-page) ────────────────────── -->
+    <link rel="canonical" href="https://mipador.com/" />
+
+    <!-- ── hreflang (default — overridden per-page) ─────────────────────── -->
+    <link rel="alternate" hreflang="en" href="https://mipador.com/#/en/" />
+    <link rel="alternate" hreflang="fr" href="https://mipador.com/#/fr/" />
+    <link rel="alternate" hreflang="ar" href="https://mipador.com/#/ar/" />
+    <link rel="alternate" hreflang="x-default" href="https://mipador.com/#/en/" />
+
+    <!-- ── Performance: preconnect ──────────────────────────────────────── -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://ajax.googleapis.com" />
+
+    <!-- ── GitHub Pages SPA fix ─────────────────────────────────────────── -->
     <script>
       (function () {
         const redirect = sessionStorage.redirect;
@@ -16,13 +73,108 @@
         }
       })();
     </script>
+
+    <!-- ── Global JSON-LD: Organization + LocalBusiness + WebSite ───────── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": ["Organization", "Brand"],
+          "@id": "https://mipador.com/#organization",
+          "name": "Mipador",
+          "alternateName": ["Mipador Studio", "ميبادور"],
+          "url": "https://mipador.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://mipador.com/images/LogoMipadorNavBar.png",
+            "width": 180,
+            "height": 60
+          },
+          "image": "https://mipador.com/images/hero.jpg",
+          "description": "Premium Moroccan furniture and home decor — handcrafted artisanal pieces inspired by Moroccan craftsmanship, contemporary design, and intentional living.",
+          "foundingDate": "2024",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Casablanca",
+            "addressRegion": "Grand Casablanca-Settat",
+            "addressCountry": "MA"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "availableLanguage": ["English", "French", "Arabic"]
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "Morocco"
+          },
+          "knowsAbout": [
+            "Moroccan furniture",
+            "luxury home decor",
+            "artisanal craftsmanship",
+            "interior design",
+            "contemporary furniture Morocco"
+          ],
+          "sameAs": [
+            "https://www.instagram.com/mipador",
+            "https://www.facebook.com/mipador"
+          ]
+        },
+        {
+          "@type": ["LocalBusiness", "FurnitureStore"],
+          "@id": "https://mipador.com/#business",
+          "name": "Mipador",
+          "description": "Premium handcrafted Moroccan furniture and home decor studio in Casablanca. Contemporary pieces inspired by Moroccan artisanal traditions.",
+          "url": "https://mipador.com",
+          "image": "https://mipador.com/images/hero.jpg",
+          "logo": "https://mipador.com/images/LogoMipadorNavBar.png",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Casablanca",
+            "addressRegion": "Grand Casablanca-Settat",
+            "addressCountry": "MA"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 33.5731,
+            "longitude": -7.5898
+          },
+          "priceRange": "MAD 1,200 – MAD 15,000",
+          "currenciesAccepted": "MAD",
+          "paymentAccepted": "Cash on Delivery, Bank Transfer",
+          "areaServed": "Morocco",
+          "hasMap": "https://www.google.com/maps?q=Casablanca,Morocco",
+          "parentOrganization": { "@id": "https://mipador.com/#organization" }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://mipador.com/#website",
+          "url": "https://mipador.com",
+          "name": "Mipador",
+          "description": "Premium Moroccan furniture and home decor",
+          "publisher": { "@id": "https://mipador.com/#organization" },
+          "inLanguage": ["en", "fr", "ar"],
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://mipador.com/#/en/products?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    }
+    </script>
+
     <!-- model-viewer web component (lazy-loaded, only used on product pages) -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
-    <script type="module" crossorigin src="/assets/index-CnmV0V3d.js"></script>
+    <script type="module" crossorigin src="/assets/index-0KhV2zZZ.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-C8-fxduE.css">
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root"></div>
   </body>
 </html>
