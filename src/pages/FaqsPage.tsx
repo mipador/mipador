@@ -39,8 +39,8 @@ const FaqsPage: React.FC = () => {
       "@graph": [
         {
           "@type": "FAQPage",
-          "@id": `${SITE_URL}/#/${l}/faqs#webpage`,
-          "url": `${SITE_URL}/#/${l}/faqs`,
+          "@id": `${SITE_URL}/${l}/faqs#webpage`,
+          "url": `${SITE_URL}/${l}/faqs`,
           "name": `${t("seo.faqsTitle")} | Mipador`,
           "description": t("seo.faqsDesc"),
           "isPartOf": { "@id": `${SITE_URL}/#website` },
@@ -61,13 +61,13 @@ const FaqsPage: React.FC = () => {
               "@type": "ListItem",
               "position": 1,
               "name": bc.home,
-              "item": `${SITE_URL}/#/${l}/`,
+              "item": `${SITE_URL}/${l}/`,
             },
             {
               "@type": "ListItem",
               "position": 2,
               "name": bc.faqs,
-              "item": `${SITE_URL}/#/${l}/faqs`,
+              "item": `${SITE_URL}/${l}/faqs`,
             },
           ],
         },

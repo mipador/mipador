@@ -3,7 +3,7 @@ import { useLocation, useParams } from "react-router-dom";
 
 const SITE_NAME = "Mipador";
 const SITE_URL = "https://mipador.com";
-const OG_DEFAULT_IMAGE = `${SITE_URL}/images/hero.jpg`;
+const OG_DEFAULT_IMAGE = `${SITE_URL}/images/hero.webp`;
 
 const LANGS = ["en", "fr", "ar"] as const;
 type Lang = (typeof LANGS)[number];
@@ -114,7 +114,7 @@ export function useSEO(title: string, description?: string, options?: SeoOptions
     setMeta("property", "og:image:width", "1200");
     setMeta("property", "og:image:height", "630");
     setMeta("property", "og:image:alt", resolvedImgAlt);
-    setMeta("property", "og:url", `${SITE_URL}/#${location.pathname}`);
+    setMeta("property", "og:url", `${SITE_URL}${location.pathname}`);
     setMeta("property", "og:locale", locale);
 
     // ── Twitter Card ─────────────────────────────────────────────────────────
@@ -126,7 +126,7 @@ export function useSEO(title: string, description?: string, options?: SeoOptions
     setMeta("name", "twitter:image:alt", resolvedImgAlt);
 
     // ── Canonical ────────────────────────────────────────────────────────────
-    setCanonical(`${SITE_URL}/#${location.pathname}`);
+    setCanonical(`${SITE_URL}${location.pathname}`);
 
     // ── hreflang alternates ──────────────────────────────────────────────────
     // Strip the lang prefix to get the rest of the path
@@ -134,13 +134,13 @@ export function useSEO(title: string, description?: string, options?: SeoOptions
     const restPath = pathParts.slice(1).join("/"); // "products/..." without lang
 
     LANGS.forEach((l) => {
-      const href = `${SITE_URL}/#/${l}${restPath ? `/${restPath}` : ""}`;
+      const href = `${SITE_URL}/${l}${restPath ? `/${restPath}` : ""}`;
       setHreflang(l, href);
     });
     // x-default → English
     setHreflang(
       "x-default",
-      `${SITE_URL}/#/en${restPath ? `/${restPath}` : ""}`
+      `${SITE_URL}/en${restPath ? `/${restPath}` : ""}`
     );
   }, [title, description, currentLang, location.pathname, ogImg, ogType, imageAlt]);
 }

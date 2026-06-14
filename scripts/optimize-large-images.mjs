@@ -13,28 +13,28 @@ const root = resolve(__dir, "..");
 const jobs = [
   // Mobile hero — 9.5 MB, max display width ~900 px on mobile
   {
-    src: "public/images/HeroMobile.jpg",
+    src: "public/images/HeroMobile.webp",
     maxWidth: 900,
     quality: 72,
     format: "jpeg",
   },
   // Desktop hero — 1.1 MB, reasonable but can tighten
   {
-    src: "public/images/Hero1.jpg",
+    src: "public/images/Hero1.webp",
     maxWidth: 1600,
     quality: 75,
     format: "jpeg",
   },
   // Signboard mockup (unused in prod UI but in public) — 1.1 MB
   {
-    src: "public/images/01 Free Round Signboard Mockup.jpg",
+    src: "public/images/01 Free Round Signboard Mockup.webp",
     maxWidth: 1200,
     quality: 75,
     format: "jpeg",
   },
   // Desktop hero alt
   {
-    src: "public/images/hero.jpg",
+    src: "public/images/hero.webp",
     maxWidth: 1600,
     quality: 75,
     format: "jpeg",

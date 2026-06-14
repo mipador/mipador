@@ -29,8 +29,8 @@ const ContactPage: React.FC = () => {
       "@graph": [
         {
           "@type": "ContactPage",
-          "@id": `${SITE_URL}/#/${l}/contact#webpage`,
-          "url": `${SITE_URL}/#/${l}/contact`,
+          "@id": `${SITE_URL}/${l}/contact#webpage`,
+          "url": `${SITE_URL}/${l}/contact`,
           "name": `${t("seo.contactTitle")} | Mipador`,
           "description": t("seo.contactDesc"),
           "isPartOf": { "@id": `${SITE_URL}/#website` },
@@ -43,7 +43,7 @@ const ContactPage: React.FC = () => {
           "description":
             "Premium contemporary furniture and home decor studio based in Casablanca, Morocco. Designed for spaces that breathe — indoor and outdoor pieces delivered across Morocco.",
           "url": `${SITE_URL}`,
-          "image": `${SITE_URL}/images/hero.jpg`,
+          "image": `${SITE_URL}/images/hero.webp`,
           "logo": `${SITE_URL}/images/LogoMipadorNavBar.png`,
           "address": {
             "@type": "PostalAddress",
@@ -70,13 +70,13 @@ const ContactPage: React.FC = () => {
               "@type": "ListItem",
               "position": 1,
               "name": labels.home,
-              "item": `${SITE_URL}/#/${l}/`,
+              "item": `${SITE_URL}/${l}/`,
             },
             {
               "@type": "ListItem",
               "position": 2,
               "name": labels.contact,
-              "item": `${SITE_URL}/#/${l}/contact`,
+              "item": `${SITE_URL}/${l}/contact`,
             },
           ],
         },

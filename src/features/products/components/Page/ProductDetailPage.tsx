@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
+import { createPortal } from "react-dom";
 import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import {
@@ -7,6 +8,7 @@ import {
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { products } from "../../../../data/products";
+import { localizeProduct } from "../../../../utils/localizeProduct";
 import { getProductReviews, getAvgRating } from "../../../../data/reviews";
 import { useProductStore } from "../../../../store/product.store";
 import OrderForm from "../Order/OrderForm";
@@ -15,6 +17,304 @@ import TrustBadges from "../../../../components/TrustBadges";
 import { useSEO, useJsonLd } from "../../../../hooks/useSEO";
 import { ReviewsSection } from "../Reviews/ReviewsSection";
 import { RoomVisualizer } from "../../../../components/RoomVisualizer";
+import { toWebp } from "../../../../utils/image";
+
+// ── Helpers ───────────────────────────────────────────────
+const clampPan = (z: number, x: number, y: number) => {
+  const lim = Math.max(0, (z - 1) * 320);
+  return { x: Math.max(-lim, Math.min(lim, x)), y: Math.max(-lim, Math.min(lim, y)) };
+};
+
+// ── Full-screen image lightbox with zoom + pan ─────────────
+const ImageLightbox: React.FC<{
+  images: string[];
+  index: number;
+  setIndex: (i: number) => void;
+  onClose: () => void;
+  productName: string;
+}> = ({ images, index, setIndex, onClose, productName }) => {
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const shouldReduce = useReducedMotion();
+
+  const zoomRef = useRef(1);
+  const panRef = useRef({ x: 0, y: 0 });
+  const dragRef = useRef({ on: false, mx0: 0, my0: 0, px0: 0, py0: 0 });
+  const lastDist = useRef<number | null>(null);
+  const touchPan = useRef<{ x0: number; y0: number; px0: number; py0: number } | null>(null);
+  const swipeX = useRef<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const clickMoved = useRef(false);
+  const MAX_ZOOM = 4;
+
+  const commit = useCallback((nz: number, np: { x: number; y: number }) => {
+    const p = nz <= 1 ? { x: 0, y: 0 } : clampPan(nz, np.x, np.y);
+    zoomRef.current = nz; panRef.current = p;
+    setZoom(nz); setPan(p);
+  }, []);
+
+  const reset = useCallback(() => commit(1, { x: 0, y: 0 }), [commit]);
+  const goTo = useCallback((i: number) => { commit(1, { x: 0, y: 0 }); setIndex(i); }, [commit, setIndex]);
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = ""; };
+  }, []);
+
+  useEffect(() => {
+    const h = (e: KeyboardEvent) => {
+      if (e.key === "Escape") { onClose(); return; }
+      if ((e.key === "ArrowLeft") && zoomRef.current <= 1) { goTo(Math.max(0, index - 1)); }
+      if ((e.key === "ArrowRight") && zoomRef.current <= 1) { goTo(Math.min(images.length - 1, index + 1)); }
+      if (e.key === "+" || e.key === "=") commit(Math.min(MAX_ZOOM, zoomRef.current + 0.5), panRef.current);
+      if (e.key === "-") commit(Math.max(1, zoomRef.current - 0.5), panRef.current);
+      if (e.key === "0") reset();
+    };
+    window.addEventListener("keydown", h);
+    return () => window.removeEventListener("keydown", h);
+  }, [onClose, index, images.length, setIndex, goTo, reset, commit]);
+
+  // Wheel zoom — tracks cursor position
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const h = (e: WheelEvent) => {
+      e.preventDefault();
+      const rect = el.getBoundingClientRect();
+      const cx = e.clientX - rect.left - rect.width / 2;
+      const cy = e.clientY - rect.top - rect.height / 2;
+      const nz = Math.max(1, Math.min(MAX_ZOOM, zoomRef.current + (e.deltaY < 0 ? 0.3 : -0.3)));
+      if (nz <= 1) { commit(1, { x: 0, y: 0 }); return; }
+      const r = nz / zoomRef.current;
+      commit(nz, { x: cx * (1 - r) + panRef.current.x * r, y: cy * (1 - r) + panRef.current.y * r });
+    };
+    el.addEventListener("wheel", h, { passive: false });
+    return () => el.removeEventListener("wheel", h);
+  }, [commit]);
+
+  const onMD = (e: React.MouseEvent) => {
+    if (zoomRef.current <= 1) return;
+    e.preventDefault();
+    clickMoved.current = false;
+    dragRef.current = { on: true, mx0: e.clientX, my0: e.clientY, px0: panRef.current.x, py0: panRef.current.y };
+    setIsDragging(true);
+  };
+  const onMM = (e: React.MouseEvent) => {
+    if (!dragRef.current.on) return;
+    const dx = e.clientX - dragRef.current.mx0;
+    const dy = e.clientY - dragRef.current.my0;
+    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) clickMoved.current = true;
+    const np = clampPan(zoomRef.current, dragRef.current.px0 + dx, dragRef.current.py0 + dy);
+    panRef.current = np; setPan(np);
+  };
+  const onMU = () => { dragRef.current.on = false; setIsDragging(false); };
+
+  // Click: toggle 1× ↔ 2×, zoomed to cursor
+  const onContainerClick = (e: React.MouseEvent) => {
+    if (clickMoved.current) { clickMoved.current = false; return; }
+    const rect = containerRef.current!.getBoundingClientRect();
+    const cx = e.clientX - rect.left - rect.width / 2;
+    const cy = e.clientY - rect.top - rect.height / 2;
+    if (zoomRef.current > 1) reset();
+    else commit(2, { x: cx * (1 - 2), y: cy * (1 - 2) });
+  };
+
+  // Touch: pinch-to-zoom + drag-to-pan + swipe-to-navigate
+  const onTS = (e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      lastDist.current = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY);
+    } else if (e.touches.length === 1) {
+      if (zoomRef.current > 1) {
+        touchPan.current = { x0: e.touches[0].clientX, y0: e.touches[0].clientY, px0: panRef.current.x, py0: panRef.current.y };
+      } else {
+        swipeX.current = e.touches[0].clientX;
+      }
+    }
+  };
+  const onTM = (e: React.TouchEvent) => {
+    e.preventDefault();
+    if (e.touches.length === 2 && lastDist.current !== null) {
+      const d = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY);
+      const nz = Math.max(1, Math.min(MAX_ZOOM, zoomRef.current * (d / lastDist.current)));
+      if (nz <= 1) commit(1, { x: 0, y: 0 });
+      else { zoomRef.current = nz; setZoom(nz); }
+      lastDist.current = d;
+    } else if (e.touches.length === 1 && touchPan.current && zoomRef.current > 1) {
+      const np = clampPan(zoomRef.current, touchPan.current.px0 + e.touches[0].clientX - touchPan.current.x0, touchPan.current.py0 + e.touches[0].clientY - touchPan.current.y0);
+      panRef.current = np; setPan(np);
+    }
+  };
+  const onTE = (e: React.TouchEvent) => {
+    if (swipeX.current !== null && zoomRef.current <= 1) {
+      const dx = e.changedTouches[0].clientX - swipeX.current;
+      if (Math.abs(dx) > 50) {
+        if (dx < 0) goTo(Math.min(images.length - 1, index + 1));
+        else goTo(Math.max(0, index - 1));
+      }
+      swipeX.current = null;
+    }
+    lastDist.current = null;
+    touchPan.current = null;
+  };
+
+  const img = images[index];
+
+  return createPortal(
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.18 }}
+      className="fixed inset-0 z-[9999] bg-black/94 flex flex-col select-none"
+      role="dialog"
+      aria-modal="true"
+    >
+      {/* Top bar */}
+      <div className="flex items-center justify-between px-5 py-3 shrink-0 border-b border-white/8">
+        <span className="text-white/35 text-[10px] font-black uppercase tracking-[0.22em]">
+          {index + 1} / {images.length}
+        </span>
+        <div className="flex items-center gap-0.5 bg-white/8 rounded-xl px-2 py-1">
+          <button
+            onClick={() => commit(Math.max(1, zoomRef.current - 0.5), panRef.current)}
+            disabled={zoom <= 1}
+            aria-label="Zoom out"
+            className="w-8 h-7 flex items-center justify-center text-white/55 hover:text-white disabled:opacity-20 rounded-lg hover:bg-white/10 transition-colors"
+          >
+            <Minus size={12} />
+          </button>
+          <span className="text-white/45 text-[10px] font-black w-10 text-center tabular-nums">
+            {Math.round(zoom * 100)}%
+          </span>
+          <button
+            onClick={() => commit(Math.min(MAX_ZOOM, zoomRef.current + 0.5), panRef.current)}
+            disabled={zoom >= MAX_ZOOM}
+            aria-label="Zoom in"
+            className="w-8 h-7 flex items-center justify-center text-white/55 hover:text-white disabled:opacity-20 rounded-lg hover:bg-white/10 transition-colors"
+          >
+            <Plus size={12} />
+          </button>
+          {zoom > 1 && (
+            <button
+              onClick={reset}
+              aria-label="Reset zoom"
+              className="ml-1 h-6 px-2 text-[9px] font-black uppercase tracking-wide text-white/40 hover:text-white border border-white/12 hover:border-white/30 rounded-lg transition-colors"
+            >
+              1:1
+            </button>
+          )}
+        </div>
+        <button
+          onClick={onClose}
+          aria-label="Close"
+          className="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+        >
+          <X size={15} />
+        </button>
+      </div>
+
+      {/* Image area */}
+      <div
+        ref={containerRef}
+        className="flex-1 relative overflow-hidden"
+        onMouseDown={onMD}
+        onMouseMove={onMM}
+        onMouseUp={onMU}
+        onMouseLeave={onMU}
+        onClick={onContainerClick}
+        onTouchStart={onTS}
+        onTouchMove={onTM}
+        onTouchEnd={onTE}
+        style={{ cursor: zoom > 1 ? (isDragging ? "grabbing" : "grab") : "zoom-in" }}
+      >
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={index}
+            className="absolute inset-0 flex items-center justify-center"
+            initial={shouldReduce ? {} : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={shouldReduce ? {} : { opacity: 0 }}
+            transition={{ duration: 0.18 }}
+          >
+            <div
+              style={{
+                transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
+                transformOrigin: "center",
+                transition: isDragging ? "none" : "transform 0.1s ease-out",
+                willChange: "transform",
+              }}
+            >
+              <picture style={{ display: "contents" }}>
+                <source srcSet={toWebp(img)} type="image/webp" />
+                <img
+                  src={img}
+                  alt={`${productName} — ${index + 1}`}
+                  draggable={false}
+                  style={{
+                    maxWidth: "90vw",
+                    maxHeight: "78vh",
+                    objectFit: "contain",
+                    display: "block",
+                    userSelect: "none",
+                    pointerEvents: "none",
+                  }}
+                />
+              </picture>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Prev / Next */}
+        {index > 0 && (
+          <button
+            onClick={(e) => { e.stopPropagation(); goTo(index - 1); }}
+            aria-label="Previous image"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-xl bg-white/10 hover:bg-white/22 backdrop-blur-sm flex items-center justify-center text-white transition-colors"
+          >
+            <ChevronLeft size={20} />
+          </button>
+        )}
+        {index < images.length - 1 && (
+          <button
+            onClick={(e) => { e.stopPropagation(); goTo(index + 1); }}
+            aria-label="Next image"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-xl bg-white/10 hover:bg-white/22 backdrop-blur-sm flex items-center justify-center text-white transition-colors"
+          >
+            <ChevronRight size={20} />
+          </button>
+        )}
+
+        {zoom === 1 && (
+          <p className="absolute bottom-3 left-1/2 -translate-x-1/2 pointer-events-none text-white/22 text-[9px] font-black uppercase tracking-[0.22em]">
+            Scroll or click · Pinch on mobile
+          </p>
+        )}
+      </div>
+
+      {/* Thumbnail strip */}
+      {images.length > 1 && (
+        <div className="flex items-center justify-center gap-2.5 px-5 py-3 shrink-0 border-t border-white/8 overflow-x-auto">
+          {images.map((th, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              className={`shrink-0 w-12 h-12 rounded-lg overflow-hidden transition-all duration-200 ring-2 ${
+                i === index ? "ring-white opacity-100" : "ring-transparent opacity-30 hover:opacity-60"
+              }`}
+            >
+              <picture style={{ display: "contents" }}>
+                <source srcSet={toWebp(th)} type="image/webp" />
+                <img src={th} alt={`${productName} ${i + 1}`} loading="lazy" className="w-full h-full object-cover" />
+              </picture>
+            </button>
+          ))}
+        </div>
+      )}
+    </motion.div>,
+    document.body
+  );
+};
 
 // ── Collapsible product detail section ────────────────────
 const DetailSection: React.FC<{
@@ -121,33 +421,18 @@ const ProductDetailPage: React.FC = () => {
   const { slug, lang } = useParams<{ slug: string; lang: string }>();
   const { addToCart } = useProductStore();
   const { t } = useTranslation();
-  const shouldReduce = useReducedMotion();
   const currentLang = lang || "en";
 
   const [imgIndex, setImgIndex] = useState(0);
   const [added, setAdded] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [zoomed, setZoomed] = useState(false);
+  const touchStartX = useRef<number | null>(null);
 
-  const product = products.find((p) => p.slug === slug);
+  const rawProduct = products.find((p) => p.slug === slug);
+  const product = rawProduct ? localizeProduct(rawProduct, currentLang) : undefined;
   const productReviews = getProductReviews(product?.id ?? "");
   const avgRating = getAvgRating(product?.id ?? "");
-
-  // Close zoom on Escape
-  useEffect(() => {
-    if (!zoomed) return;
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setZoomed(false);
-    };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [zoomed]);
-
-  // Scroll lock while zoomed
-  useEffect(() => {
-    document.body.style.overflow = zoomed ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [zoomed]);
 
   const SITE_URL = "https://mipador.com";
 
@@ -184,7 +469,7 @@ const ProductDetailPage: React.FC = () => {
         ? "https://schema.org/OutOfStock"
         : "https://schema.org/PreOrder";
 
-    const productUrl = `${SITE_URL}/#/${currentLang}/products/${product.slug}`;
+    const productUrl = `${SITE_URL}/${currentLang}/products/${product.slug}`;
 
     const BREADCRUMB_LABELS: Record<string, { home: string; collection: string }> = {
       en: { home: "Home", collection: "Collection" },
@@ -237,13 +522,13 @@ const ProductDetailPage: React.FC = () => {
             "@type": "ListItem",
             "position": 1,
             "name": bc.home,
-            "item": `${SITE_URL}/#/${currentLang}/`,
+            "item": `${SITE_URL}/${currentLang}/`,
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": bc.collection,
-            "item": `${SITE_URL}/#/${currentLang}/products`,
+            "item": `${SITE_URL}/${currentLang}/products`,
           },
           {
             "@type": "ListItem",
@@ -325,39 +610,16 @@ const ProductDetailPage: React.FC = () => {
     <div className="relative min-h-screen bg-[#F6F4F1] overflow-hidden">
       <ScrollToTop />
 
-      {/* ── Image zoom lightbox ── */}
+      {/* ── Image lightbox ── */}
       <AnimatePresence>
-        {zoomed && currentImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.22 }}
-            onClick={() => setZoomed(false)}
-            className="fixed inset-0 z-[90] bg-black/85 flex items-center justify-center p-4 cursor-zoom-out"
-            role="dialog"
-            aria-modal="true"
-            aria-label={t("product.zoomClose")}
-          >
-            <motion.img
-              initial={shouldReduce ? {} : { scale: 0.88, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={shouldReduce ? {} : { scale: 0.88, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 280, damping: 26 }}
-              src={currentImage}
-              alt={product.name}
-              onClick={(e) => e.stopPropagation()}
-              className="max-w-full max-h-full object-contain rounded-xl shadow-2xl"
-              style={{ maxHeight: "90vh" }}
-            />
-            <button
-              onClick={() => setZoomed(false)}
-              className="absolute top-4 right-4 w-10 h-10 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/25 transition-colors"
-              aria-label={t("product.zoomClose")}
-            >
-              <X size={18} />
-            </button>
-          </motion.div>
+        {zoomed && product && (
+          <ImageLightbox
+            images={product.images}
+            index={imgIndex}
+            setIndex={setImgIndex}
+            onClose={() => setZoomed(false)}
+            productName={product.name}
+          />
         )}
       </AnimatePresence>
 
@@ -372,103 +634,162 @@ const ProductDetailPage: React.FC = () => {
         </Link>
 
         {/* ── Main grid: image | info ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 lg:gap-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 lg:gap-24 md:items-start">
 
-          {/* ── Images ── */}
-          <div className="flex flex-col gap-3">
+          {/* ── Images — sticky on desktop ── */}
+          <div className="flex flex-col gap-3 md:sticky md:top-28">
 
-            {/* Main image — click to zoom */}
-            <div className="relative aspect-[4/5] rounded-xl bg-[#EFEBE9] overflow-hidden">
-              <div
-                className={`w-full h-full ${currentImage ? "cursor-zoom-in" : ""}`}
-                onClick={() => currentImage && setZoomed(true)}
-                role={currentImage ? "button" : undefined}
-                tabIndex={currentImage ? 0 : undefined}
-                onKeyDown={(e) => e.key === "Enter" && currentImage && setZoomed(true)}
-                aria-label={currentImage ? t("product.zoomClose") : undefined}
-              >
-                {currentImage ? (
-                  <img
-                    src={currentImage}
-                    alt={product.name}
-                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.02]"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <p className="text-[#3D1A12]/20 text-xs font-black uppercase tracking-widest">
-                      {product.collection}
-                    </p>
-                  </div>
-                )}
-              </div>
+            {/* Desktop: left thumbnail strip + main image */}
+            <div className="flex gap-3 items-start">
 
-              {isUnavailable && (
-                <div className="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur rounded-xl pointer-events-none">
-                  <p className="text-[9px] font-black uppercase tracking-widest text-[#3D1A12]">
-                    {isComingSoon ? t("card.comingSoon") : t("card.soldOut")}
-                  </p>
-                </div>
-              )}
-
-              {product.tags.includes("bestseller") && (
-                <div className="absolute top-4 right-4 px-3 py-1 bg-[#3D1A12] rounded-xl pointer-events-none">
-                  <p className="text-[9px] font-black uppercase tracking-widest text-white">
-                    {t("card.bestseller")}
-                  </p>
-                </div>
-              )}
-
+              {/* Vertical thumbnails — desktop only */}
               {product.images.length > 1 && (
-                <>
-                  <button
-                    onClick={() => setImgIndex((i) => Math.max(0, i - 1))}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/80 rounded-xl flex items-center justify-center hover:bg-white transition-colors"
-                    aria-label="Previous image"
-                  >
-                    <ChevronLeft size={15} className="text-[#3D1A12]" />
-                  </button>
-                  <button
-                    onClick={() =>
-                      setImgIndex((i) => Math.min(product.images.length - 1, i + 1))
-                    }
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/80 rounded-xl flex items-center justify-center hover:bg-white transition-colors"
-                    aria-label="Next image"
-                  >
-                    <ChevronRight size={15} className="text-[#3D1A12]" />
-                  </button>
-                </>
-              )}
-
-              {product.images.length > 1 && (
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 pointer-events-none">
-                  {product.images.map((_, i) => (
+                <div className="hidden md:flex flex-col gap-2 w-[66px] shrink-0">
+                  {product.images.map((img, i) => (
                     <button
                       key={i}
-                      onClick={(e) => { e.stopPropagation(); setImgIndex(i); }}
-                      className={`pointer-events-auto transition-all duration-300 rounded-xl ${
-                        i === imgIndex ? "bg-white w-6 h-1.5" : "bg-white/40 w-1.5 h-1.5"
+                      onClick={() => setImgIndex(i)}
+                      className={`w-full aspect-[4/5] rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                        i === imgIndex
+                          ? "border-[#3D1A12] opacity-100"
+                          : "border-transparent opacity-35 hover:opacity-65"
                       }`}
-                      aria-label={`Image ${i + 1}`}
-                    />
+                    >
+                      <picture style={{ display: "contents" }}>
+                        <source srcSet={toWebp(img)} type="image/webp" />
+                        <img src={img} alt={`${product.name} — ${i + 1}`} loading="lazy" className="w-full h-full object-cover" />
+                      </picture>
+                    </button>
                   ))}
                 </div>
               )}
+
+              {/* Main image */}
+              <div
+                className="relative flex-1 aspect-[4/5] rounded-xl bg-[#EFEBE9] overflow-hidden cursor-zoom-in"
+                onClick={() => setZoomed(true)}
+                onKeyDown={(e) => e.key === "Enter" && setZoomed(true)}
+                tabIndex={0}
+                role="button"
+                aria-label={t("product.zoomClose")}
+                onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
+                onTouchEnd={(e) => {
+                  if (touchStartX.current === null) return;
+                  const dx = e.changedTouches[0].clientX - touchStartX.current;
+                  if (Math.abs(dx) > 50) {
+                    if (dx < 0) setImgIndex((i) => Math.min(product.images.length - 1, i + 1));
+                    else setImgIndex((i) => Math.max(0, i - 1));
+                  }
+                  touchStartX.current = null;
+                }}
+              >
+                {/* Animated image transition */}
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    key={imgIndex}
+                    className="absolute inset-0"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.22 }}
+                  >
+                    {currentImage ? (
+                      <picture style={{ display: "contents" }}>
+                        <source srcSet={toWebp(currentImage)} type="image/webp" />
+                        <img
+                          src={currentImage}
+                          alt={product.name}
+                          className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.015]"
+                        />
+                      </picture>
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <p className="text-[#3D1A12]/20 text-xs font-black uppercase tracking-widest">
+                          {product.collection}
+                        </p>
+                      </div>
+                    )}
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Badges */}
+                {isUnavailable && (
+                  <div className="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur rounded-xl pointer-events-none">
+                    <p className="text-[9px] font-black uppercase tracking-widest text-[#3D1A12]">
+                      {isComingSoon ? t("card.comingSoon") : t("card.soldOut")}
+                    </p>
+                  </div>
+                )}
+                {product.tags.includes("bestseller") && (
+                  <div className="absolute top-4 right-4 px-3 py-1 bg-[#3D1A12] rounded-xl pointer-events-none">
+                    <p className="text-[9px] font-black uppercase tracking-widest text-white">
+                      {t("card.bestseller")}
+                    </p>
+                  </div>
+                )}
+
+                {/* Mobile prev/next arrows */}
+                {product.images.length > 1 && (
+                  <>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); setImgIndex((i) => Math.max(0, i - 1)); }}
+                      disabled={imgIndex === 0}
+                      className="md:hidden absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/85 rounded-xl flex items-center justify-center disabled:opacity-0 hover:bg-white transition-all duration-200"
+                      aria-label="Previous image"
+                    >
+                      <ChevronLeft size={15} className="text-[#3D1A12]" />
+                    </button>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); setImgIndex((i) => Math.min(product.images.length - 1, i + 1)); }}
+                      disabled={imgIndex === product.images.length - 1}
+                      className="md:hidden absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/85 rounded-xl flex items-center justify-center disabled:opacity-0 hover:bg-white transition-all duration-200"
+                      aria-label="Next image"
+                    >
+                      <ChevronRight size={15} className="text-[#3D1A12]" />
+                    </button>
+                  </>
+                )}
+
+                {/* Dot indicators — mobile */}
+                {product.images.length > 1 && (
+                  <div className="md:hidden absolute bottom-3.5 left-1/2 -translate-x-1/2 flex gap-1.5 pointer-events-none">
+                    {product.images.map((_, i) => (
+                      <div
+                        key={i}
+                        className={`transition-all duration-300 rounded-full ${
+                          i === imgIndex ? "bg-white w-5 h-1.5" : "bg-white/40 w-1.5 h-1.5"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                )}
+
+                {/* Zoom hint — desktop */}
+                <div className="hidden md:flex absolute bottom-3.5 right-3.5 items-center gap-1.5 bg-black/22 backdrop-blur-sm rounded-lg px-2.5 py-1.5 pointer-events-none">
+                  <span className="text-[9px] font-black uppercase tracking-wider text-white/65">
+                    Click to zoom
+                  </span>
+                </div>
+              </div>
             </div>
 
-            {/* Thumbnails — scrollable on all screen sizes */}
+            {/* Mobile thumbnail strip */}
             {product.images.length > 1 && (
-              <div className="flex gap-3 overflow-x-auto pb-1 snap-x snap-mandatory">
+              <div className="flex md:hidden gap-2 overflow-x-auto pb-1 snap-x snap-mandatory">
                 {product.images.map((img, i) => (
                   <button
                     key={i}
                     onClick={() => setImgIndex(i)}
-                    className={`shrink-0 w-20 h-20 rounded-xl overflow-hidden border-2 transition-all snap-start ${
+                    className={`shrink-0 w-[68px] h-[68px] rounded-xl overflow-hidden border-2 transition-all snap-start ${
                       i === imgIndex
-                        ? "border-[#3D1A12]"
-                        : "border-transparent opacity-50 hover:opacity-80"
+                        ? "border-[#3D1A12] opacity-100"
+                        : "border-transparent opacity-40 hover:opacity-70"
                     }`}
                   >
-                    <img src={img} alt={`${product.name} — view ${i + 1}`} loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                    <picture style={{ display: "contents" }}>
+                      <source srcSet={toWebp(img)} type="image/webp" />
+                      <img src={img} alt={`${product.name} — ${i + 1}`} loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                    </picture>
                   </button>
                 ))}
               </div>
@@ -706,13 +1027,16 @@ const ProductDetailPage: React.FC = () => {
                 >
                   <div className="aspect-[3/4] rounded-xl bg-[#EFEBE9] overflow-hidden">
                     {p.images[0] ? (
-                      <img
-                        src={p.images[0]}
-                        alt={p.name}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
-                      />
+                      <picture style={{ display: "contents" }}>
+                        <source srcSet={toWebp(p.images[0])} type="image/webp" />
+                        <img
+                          src={p.images[0]}
+                          alt={p.name}
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
+                        />
+                      </picture>
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
                         <p className="text-[#3D1A12]/20 text-xs font-black uppercase tracking-widest">

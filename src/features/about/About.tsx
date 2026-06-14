@@ -35,8 +35,8 @@ function About() {
       "@graph": [
         {
           "@type": "AboutPage",
-          "@id": `${SITE_URL}/#/${l}/about#webpage`,
-          "url": `${SITE_URL}/#/${l}/about`,
+          "@id": `${SITE_URL}/${l}/about#webpage`,
+          "url": `${SITE_URL}/${l}/about`,
           "name": `${t("seo.aboutTitle")} | Mipador`,
           "description": t("seo.aboutDesc"),
           "isPartOf": { "@id": `${SITE_URL}/#website` },
@@ -50,13 +50,13 @@ function About() {
               "@type": "ListItem",
               "position": 1,
               "name": labels.home,
-              "item": `${SITE_URL}/#/${l}/`,
+              "item": `${SITE_URL}/${l}/`,
             },
             {
               "@type": "ListItem",
               "position": 2,
               "name": labels.about,
-              "item": `${SITE_URL}/#/${l}/about`,
+              "item": `${SITE_URL}/${l}/about`,
             },
           ],
         },

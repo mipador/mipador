@@ -5,30 +5,33 @@ import { useParams, Link } from "react-router-dom";
 import { ShoppingBag, Heart } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { toWebp } from "../../../../utils/image";
+import { localizeProduct } from "../../../../utils/localizeProduct";
 
-const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
+const ProductCard: React.FC<{ product: Product }> = ({ product: rawProduct }) => {
   const { addToCart, toggleWishlist } = useProductStore();
   const wishlist = useProductStore((s) => s.wishlist);
-  const wishlisted = wishlist.includes(product.id);
+  const wishlisted = wishlist.includes(rawProduct.id);
   const { t } = useTranslation();
-  const isComingSoon = product.status === "coming-soon";
-  const isOutOfStock = product.status === "out-of-stock";
+  const isComingSoon = rawProduct.status === "coming-soon";
+  const isOutOfStock = rawProduct.status === "out-of-stock";
   const isUnavailable = isComingSoon || isOutOfStock;
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (!isUnavailable) addToCart(product.id);
+    if (!isUnavailable) addToCart(rawProduct.id);
   };
 
   const handleWishlist = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    toggleWishlist(product.id);
+    toggleWishlist(rawProduct.id);
   };
 
   const { lang } = useParams();
   const currentLang = lang || "en";
+  const product = localizeProduct(rawProduct, currentLang);
 
   return (
     <motion.div
@@ -80,13 +83,21 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
             } ${isComingSoon ? "blur-lg opacity-40" : ""}`}
           >
             {product.images[0] ? (
-              <img
-                src={product.images[0]}
-                alt={product.name}
-                loading="lazy"
-                decoding="async"
-                className="w-full h-full object-cover"
-              />
+              <picture style={{ display: "contents" }}>
+                <source
+                  srcSet={toWebp(product.images[0])}
+                  type="image/webp"
+                  sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1024px) calc(50vw - 56px), 370px"
+                />
+                <img
+                  src={product.images[0]}
+                  alt={product.name}
+                  loading="lazy"
+                  decoding="async"
+                  sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1024px) calc(50vw - 56px), 370px"
+                  className="w-full h-full object-cover"
+                />
+              </picture>
             ) : (
               <div className="w-full h-full flex items-center justify-center">
                 <p className="text-[#3D1A12]/20 text-xs font-black uppercase tracking-widest">

@@ -6,24 +6,23 @@ import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const IMAGE_ASSETS = {
-  desktop: { url: "/images/Hero1.jpg",      alt: "Mipador — Premium Moroccan Furniture & Home Decor, Casablanca Morocco" },
-  mobile:  { url: "/images/HeroMobile.jpg", alt: "Mipador — Handcrafted Moroccan Furniture Studio, Morocco" },
+  desktop: { url: "/images/Hero1.webp",      alt: "Mipador — Premium Moroccan Furniture & Home Decor, Casablanca Morocco" },
+  mobile:  { url: "/images/HeroMobile.webp", alt: "Mipador — Handcrafted Moroccan Furniture Studio, Morocco" },
 };
 
 const containerVariants: Variants = {
   hidden:  { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } },
+  visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0 } },
 };
 
 const itemVariants: Variants = {
-  hidden:  { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] } },
+  hidden:  { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
 };
 
 const HeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
   const { t } = useTranslation();
 
   const { lang } = useParams<{ lang?: string }>();
@@ -59,16 +58,12 @@ const HeroSection = () => {
           key={currentImage.url}
           src={currentImage.url}
           alt={currentImage.alt}
-          width={isMobile ? 768 : 1920}
-          height={isMobile ? 1024 : 1080}
+          width={isMobile ? 900 : 1600}
+          height={isMobile ? 1350 : 1200}
           fetchPriority="high"
           decoding="async"
           className="w-full h-full object-cover object-center"
           style={{ filter: useTransform(brightness, (v) => `brightness(${v})`) }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isLoaded ? 1 : 0 }}
-          transition={{ duration: 1.2 }}
-          onLoad={() => setIsLoaded(true)}
         />
 
         <div
@@ -85,7 +80,7 @@ const HeroSection = () => {
         />
         <div
           className="absolute inset-0 opacity-[0.06] mix-blend-soft-light"
-          style={{ backgroundImage: "url('https://grainy-gradients.vercel.app/noise.svg')" }}
+          style={{ backgroundImage: "url('/noise.svg')" }}
         />
       </motion.div>
 

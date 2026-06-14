@@ -4,23 +4,23 @@ import { useTranslation } from "react-i18next";
 import { useProductStore } from "../../../../store/product.store";
 
 // TODO: Replace hero images with dedicated indoor/outdoor lifestyle photography
-const INDOOR_HERO = "/images/products/indoor.jpg";
-const OUTDOOR_HERO = "/images/products/outdoor.jpg";
+const INDOOR_HERO = "/images/products/indoor.webp";
+const OUTDOOR_HERO = "/images/products/outdoor.webp";
 
 // Representative image per subcategory — maps to the best matching product shot
 // TODO: Update each entry as dedicated category photography becomes available
 const CAT_IMAGES: Record<string, string> = {
-  "Seating":          "/images/products/seating.jpg",
-  "Tables":           "/images/products/table.jpg",
-  "Lighting":         "/images/products/lighting.jpg",
-  "Decor":            "/images/products/decor.jpg",
-  "Shelving":         "/images/products/shelving.jpg",
-  "Storage":          "/images/products/storage.jpg",
-  "Beds":             "/images/products/beds.jpg",
-  "Outdoor Seating":  "/images/products/outdoorSeating.jpg",
-  "Outdoor Tables":   "/images/products/outdoorTables.jpg",
-  "Outdoor Lighting": "/images/products/outdoorLighting.jpg",
-  "Outdoor Decor":    "/images/products/outdoorDecor.jpg",
+  "Seating":          "/images/products/seating.webp",
+  "Tables":           "/images/products/table.webp",
+  "Lighting":         "/images/products/lighting.webp",
+  "Decor":            "/images/products/decor.webp",
+  "Shelving":         "/images/products/shelving.webp",
+  "Storage":          "/images/products/storage.webp",
+  "Beds":             "/images/products/beds.webp",
+  "Outdoor Seating":  "/images/products/outdoorSeating.webp",
+  "Outdoor Tables":   "/images/products/outdoorTables.webp",
+  "Outdoor Lighting": "/images/products/outdoorLighting.webp",
+  "Outdoor Decor":    "/images/products/outdoorDecor.webp",
 };
 
 const INDOOR_SUBS = [

@@ -1,29 +1,9 @@
 @import "tailwindcss";
 
-@keyframes gradientMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 .text-gradient-animated {
-  background: linear-gradient(
-    90deg,
-    #ffffff,
-    #fbf4ed,
-    #ffffff,
-    #f6f4f1
-  );
-  background-size: 300% 300%;
-  animation: gradientMove 8s ease infinite;
-
+  background: linear-gradient(90deg, #ffffff 0%, #fbf4ed 33%, #ffffff 66%, #f6f4f1 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 

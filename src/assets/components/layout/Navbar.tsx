@@ -62,8 +62,10 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <Link to={`/${currentLang}`} className="shrink-0">
             <img
-              src="/images/LogoMipadorNavBar.png"
+              src="/images/LogoMipadorNavBar.webp"
               alt="Mipador"
+              width={183}
+              height={28}
               className="h-7 w-auto object-contain"
             />
           </Link>
@@ -147,9 +149,9 @@ const Navbar: React.FC = () => {
             <AnimatePresence>
               {!scrolled && (
                 <motion.div
-                  initial={{ opacity: 0, width: 0 }}
-                  animate={{ opacity: 1, width: "auto" }}
-                  exit={{ opacity: 0, width: 0 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
                   transition={{ duration: 0.25 }}
                   className="overflow-hidden"
                 >
@@ -191,10 +193,11 @@ const Navbar: React.FC = () => {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              initial={{ opacity: 0, scaleY: 0.95 }}
+              animate={{ opacity: 1, scaleY: 1 }}
+              exit={{ opacity: 0, scaleY: 0.95 }}
+              transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+              style={{ transformOrigin: "top" }}
               className="md:hidden overflow-hidden border-t border-[#3D1A12]/10 bg-[#f6f4f1]/95 backdrop-blur-2xl"
             >
               <div className="flex flex-col px-6 py-6 gap-5">

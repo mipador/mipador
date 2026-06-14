@@ -4,4 +4,4 @@ export const WHATSAPP_NUMBER = "212612918900";
 
 // TODO: Customize the pre-filled support greeting if needed
 export const WHATSAPP_SUPPORT_MESSAGE =
-  "Hello Mipador, I have a question about your collection.";
+  "Salam, Mipador : ";

@@ -7,6 +7,8 @@ import { useTranslation } from "react-i18next";
 import OrderForm from "../Order/OrderForm";
 import { WHATSAPP_NUMBER } from "../../../../config/whatsapp";
 import TrustBadges from "../../../../components/TrustBadges";
+import { toWebp } from "../../../../utils/image";
+import { localizeProduct } from "../../../../utils/localizeProduct";
 
 const DELIVERY = 150;
 
@@ -25,20 +27,20 @@ const CartDrawer: React.FC = () => {
   const total = getCartTotal();
   const grandTotal = total + (total > 0 ? DELIVERY : 0);
 
+  const { lang } = useParams();
+  const currentLang = lang || "en";
+  const isRTL = currentLang === "ar" || currentLang === "ma";
+
   const cartProducts = cart
     .map((item) => {
-      const product = allProducts.find((p) => p.id === item.productId);
-      if (!product) return null;
-      return { item, product };
+      const raw = allProducts.find((p) => p.id === item.productId);
+      if (!raw) return null;
+      return { item, product: localizeProduct(raw, currentLang) };
     })
     .filter(Boolean) as {
     item: (typeof cart)[number];
     product: (typeof allProducts)[number];
   }[];
-
-  const { lang } = useParams();
-  const currentLang = lang || "en";
-  const isRTL = currentLang === "ar" || currentLang === "ma";
 
   const handleClose = () => {
     setCartOpen(false);
@@ -190,20 +192,23 @@ const CartDrawer: React.FC = () => {
                         layout
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20, height: 0, marginBottom: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
                         transition={{ duration: 0.25 }}
                         className="flex gap-4 bg-white rounded-xl p-4"
                       >
                         {/* Image */}
                         <div className="w-20 h-20 rounded-xl bg-[#EFEBE9] overflow-hidden shrink-0">
                           {product.images[0] && (
-                            <img
-                              src={product.images[0]}
-                              alt={product.name}
-                              loading="lazy"
-                              decoding="async"
-                              className="w-full h-full object-cover"
-                            />
+                            <picture style={{ display: "contents" }}>
+                              <source srcSet={toWebp(product.images[0])} type="image/webp" />
+                              <img
+                                src={product.images[0]}
+                                alt={product.name}
+                                loading="lazy"
+                                decoding="async"
+                                className="w-full h-full object-cover"
+                              />
+                            </picture>
                           )}
                         </div>
 

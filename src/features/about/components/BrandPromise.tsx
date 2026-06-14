@@ -35,11 +35,14 @@ const BrandPromise = () => (
         </div>
 
         <div className="relative h-[480px] rounded-3xl overflow-hidden">
-          <img
-            src="/images/hero.jpg"
-            alt="Mipador — spaces that make you feel alive"
-            className="w-full h-full object-cover"
-          />
+          <picture style={{ display: "contents" }}>
+            <source srcSet="/images/hero.webp" type="image/webp" />
+            <img
+              src="/images/hero.webp"
+              alt="Mipador — spaces that make you feel alive"
+              className="w-full h-full object-cover"
+            />
+          </picture>
           <div className="absolute inset-0 bg-gradient-to-t from-[#2A0F08]/50 to-transparent" />
           <div className="absolute bottom-8 left-8 right-8">
             <p className="text-white/50 text-xs font-black uppercase tracking-widest mb-2">
