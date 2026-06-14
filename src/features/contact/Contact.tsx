@@ -1,6 +1,7 @@
 import ContactForm from "./components/ContactForm";
 import ContactHero from "./components/ContactHero";
 import ContactInfo from "./components/ContactInfo";
+import CasablancaMap from "./components/CasablancaMap";
 import ScrollToTop from "../../components/ScrollToTop";
 import { useMemo } from "react";
 import { useParams } from "react-router-dom";
@@ -94,19 +95,7 @@ const ContactPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <div className="space-y-12">
             <ContactInfo />
-            {/* Minimal Map Placeholder */}
-            <div className="w-full h-56 bg-[#E6E3DF] rounded-xl flex items-center justify-center border border-[#DEDAD5]">
-              
-                <div className="w-full h-56 rounded-xl overflow-hidden border border-[#DEDAD5]">
-                <iframe
-                  title="Casablanca Location"
-                  src="https://www.google.com/maps?q=Casablanca, Morocco&output=embed"
-                  className="w-full h-full"
-                  loading="lazy"
-                />
-              </div>
-              
-            </div>
+            <CasablancaMap />
           </div>
 
           <div className="bg-[#EFECE8] p-8 md:p-10 rounded-[2.5rem] border border-[#E6E3DF]">
