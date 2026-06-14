@@ -21,12 +21,12 @@ const languages = [
     short: "AR",
     flag: "/flags/ar.png",
   },
-  {
-    code: "ma",
-    label: "دارجة",
-    short: "MA",
-    flag: "/flags/ma.png",
-  },
+  // {
+  //   code: "ma",
+  //   label: "دارجة",
+  //   short: "MA",
+  //   flag: "/flags/ma.png",
+  // },
 ];
 
 export default function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
