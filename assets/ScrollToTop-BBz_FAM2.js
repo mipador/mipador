@@ -1,0 +1,1 @@
+import{a as t}from"./vendor-i18n-DjHt9t_3.js";import{b as r}from"./vendor-react-CZqsRM58.js";const s=()=>{const{pathname:o}=r();return t.useEffect(()=>{window.scrollTo({top:0,left:0,behavior:"auto"})},[o]),null};export{s as S};
