@@ -48,7 +48,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product: rawProduct }) =>
           {/* Badges */}
           <div className="absolute top-3 left-3 z-20 flex flex-col gap-1.5">
             {product.tags.includes("new") && (
-              <span className="px-2.5 py-1 bg-[#C9922A] text-white text-[9px] font-black uppercase tracking-widest rounded-xl">
+              <span className="px-2.5 py-1 bg-[#C9922A] text-[#3D1A12] text-[9px] font-black uppercase tracking-widest rounded-xl">
                 {t("card.new")}
               </span>
             )}

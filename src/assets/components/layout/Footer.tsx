@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
     `transition-colors duration-200 text-sm ${
       pathname === path
         ? "text-[#3D1A12] font-semibold"
-        : "text-[#3D1A12]/50 hover:text-[#3D1A12]"
+        : "text-[#3D1A12]/65 hover:text-[#3D1A12]"
     }`;
 
   const handleSubscribe = (e: React.FormEvent) => {
@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
                 className="h-16 w-auto object-contain"
               />
             </Link>
-            <p className="text-sm text-[#3D1A12]/50 leading-relaxed max-w-xs">
+            <p className="text-sm text-[#3D1A12]/65 leading-relaxed max-w-xs">
               {t("footer.tagline")}
             </p>
 
@@ -108,7 +108,7 @@ const Footer: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#3D1A12]/40 mb-6">
+            <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#3D1A12]/60 mb-6">
               {t("footer.collectionHeading")}
             </p>
             <ul className="space-y-4">
@@ -123,17 +123,17 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to={`/${currentLang}/products?location=indoor`} className="text-sm text-[#3D1A12]/50 hover:text-[#3D1A12] transition-colors duration-200">
+                <Link to={`/${currentLang}/products?location=indoor`} className="text-sm text-[#3D1A12]/65 hover:text-[#3D1A12] transition-colors duration-200">
                   {t("footer.indoor")}
                 </Link>
               </li>
               <li>
-                <Link to={`/${currentLang}/products?location=outdoor`} className="text-sm text-[#3D1A12]/50 hover:text-[#3D1A12] transition-colors duration-200">
+                <Link to={`/${currentLang}/products?location=outdoor`} className="text-sm text-[#3D1A12]/65 hover:text-[#3D1A12] transition-colors duration-200">
                   {t("footer.outdoor")}
                 </Link>
               </li>
               <li>
-                <Link to={`/${currentLang}/products?tag=new`} className="text-sm text-[#3D1A12]/50 hover:text-[#3D1A12] transition-colors duration-200">
+                <Link to={`/${currentLang}/products?tag=new`} className="text-sm text-[#3D1A12]/65 hover:text-[#3D1A12] transition-colors duration-200">
                   {t("footer.newArrivals")}
                 </Link>
               </li>
@@ -147,7 +147,7 @@ const Footer: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#3D1A12]/40 mb-6">
+            <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#3D1A12]/60 mb-6">
               {t("footer.studioHeading")}
             </p>
             <ul className="space-y-4">
@@ -157,7 +157,7 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to={`/${currentLang}/about#craft`} className="text-sm text-[#3D1A12]/50 hover:text-[#3D1A12] transition-colors duration-200">
+                <Link to={`/${currentLang}/about#craft`} className="text-sm text-[#3D1A12]/65 hover:text-[#3D1A12] transition-colors duration-200">
                   {t("footer.craftsmanship")}
                 </Link>
               </li>
@@ -182,10 +182,10 @@ const Footer: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="col-span-1 sm:col-span-2 lg:col-span-2 lg:pl-8"
           >
-            <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#3D1A12]/40 mb-6">
+            <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#3D1A12]/60 mb-6">
               {t("footer.journalHeading")}
             </p>
-            <p className="text-sm text-[#3D1A12]/50 leading-relaxed mb-6">
+            <p className="text-sm text-[#3D1A12]/65 leading-relaxed mb-6">
               {t("footer.journalBody")}
             </p>
 
@@ -215,7 +215,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 border-t border-[#3D1A12]/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-[#3D1A12]/40">
+        <div className="pt-8 border-t border-[#3D1A12]/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-[#3D1A12]/65">
           <p>{t("footer.copyright", { year: new Date().getFullYear() })}</p>
           <div className="flex gap-6">
             <Link to={`/${currentLang}/privacy-policy`} className="hover:text-[#3D1A12] transition-colors">

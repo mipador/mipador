@@ -35,12 +35,12 @@ const SelectedWorksSection: React.FC = () => {
             <h2 className="text-4xl md:text-5xl font-black text-[#3D1A12] tracking-tighter">
               {t("home.selectedWorks").split(" ").map((word, i, arr) =>
                 i === arr.length - 1 ? (
-                  <span key={i} className="text-[#3D1A12]/30 italic">{word}</span>
+                  <span key={i} className="text-[#3D1A12]/50 italic">{word}</span>
                 ) : (
                   <span key={i}>{word} </span>
                 )
               )}
-              <span className="block mt-2 text-[#3D1A12]/60 font-bold uppercase tracking-[0.3em] text-[10px] not-italic">
+              <span className="block mt-2 text-[#3D1A12]/70 font-bold uppercase tracking-[0.3em] text-[10px] not-italic">
                 {t("home.selectedWorksSub")}
               </span>
             </h2>

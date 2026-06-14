@@ -36,7 +36,7 @@ const ComingSoonSection = () => {
         >
           {t("home.comingSoonHeading")}
           <br />
-          <span className="text-[#3D1A12]/30 italic">{t("home.comingSoonSub")}</span>
+          <span className="text-[#3D1A12]/50 italic">{t("home.comingSoonSub")}</span>
         </motion.h2>
 
         <motion.p
@@ -44,7 +44,7 @@ const ComingSoonSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2, ease: EASE }}
-          className="text-[#3D1A12]/60 max-w-md mx-auto text-sm leading-relaxed mb-10"
+          className="text-[#3D1A12]/70 max-w-md mx-auto text-sm leading-relaxed mb-10"
         >
           {t("home.comingSoonBody")}
         </motion.p>
