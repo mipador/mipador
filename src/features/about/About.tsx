@@ -1,5 +1,6 @@
 import AboutHero from "./components/AboutHero";
 import AboutStory from "./components/AboutStory";
+import VisionSection from "./components/VisionSection";
 import CoreFeatures from "./components/CoreFeatures";
 import BrandPromise from "./components/BrandPromise";
 // import Testimonials from "./components/Testimonials";
@@ -71,6 +72,7 @@ function About() {
       <ScrollToTop />
       <AboutHero />
       <AboutStory />
+      <VisionSection />
       <ModelGrid />
       <CoreFeatures />
       <FeatureGrid />
