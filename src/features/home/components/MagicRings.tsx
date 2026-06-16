@@ -245,7 +245,7 @@ export default function MagicRings({
       renderer.setPixelRatio(dpr);
       uniforms.uResolution.value.set(w * dpr, h * dpr);
     };
-    resize();
+    requestAnimationFrame(resize);
     window.addEventListener("resize", resize);
     const ro = new ResizeObserver(resize);
     ro.observe(mount);

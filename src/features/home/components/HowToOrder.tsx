@@ -49,7 +49,7 @@ const HowToOrder: React.FC = () => {
             <motion.img
               ref={lineRef}
               className="w-full opacity-60"
-              src="https://cdn.rareblocks.xyz/collection/celebration/images/steps/2/curved-dotted-line.svg"
+              src="/curved-step-line.svg"
               alt=""
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : { opacity: 0 }}

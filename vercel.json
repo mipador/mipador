@@ -7,21 +7,39 @@
   ],
   "headers": [
     {
-      "source": "/assets/(.*)",
+      "source": "/assets/:path+",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     },
     {
-      "source": "/images/(.*)",
+      "source": "/images/:path+",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=2592000, stale-while-revalidate=86400" }
       ]
     },
     {
-      "source": "/flags/(.*)",
+      "source": "/flags/:path+",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=2592000, immutable" }
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/:file+.svg",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/robots.txt",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400" }
+      ]
+    },
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400" }
       ]
     }
   ]

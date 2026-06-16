@@ -11,33 +11,40 @@ const __dir = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dir, "..");
 
 const jobs = [
-  // Mobile hero — 9.5 MB, max display width ~900 px on mobile
+  // NavBar logo — 3352x512 displayed at ~183x28 (@2x = 366x56)
+  {
+    src: "public/images/LogoMipadorNavBar.webp",
+    maxWidth: 400,
+    quality: 85,
+    format: "webp",
+  },
+  // Footer logo — 2284x512 displayed at ~286x64 (@2x = 572x128)
+  {
+    src: "public/images/LogoMipadorFooter.webp",
+    maxWidth: 600,
+    quality: 85,
+    format: "webp",
+  },
+  // Mobile hero — displayed at ~549x823 (@2x = 1098x1646)
   {
     src: "public/images/HeroMobile.webp",
     maxWidth: 900,
     quality: 72,
-    format: "jpeg",
+    format: "webp",
   },
   // Desktop hero — 1.1 MB, reasonable but can tighten
   {
     src: "public/images/Hero1.webp",
     maxWidth: 1600,
     quality: 75,
-    format: "jpeg",
+    format: "webp",
   },
-  // Signboard mockup (unused in prod UI but in public) — 1.1 MB
-  {
-    src: "public/images/01 Free Round Signboard Mockup.webp",
-    maxWidth: 1200,
-    quality: 75,
-    format: "jpeg",
-  },
-  // Desktop hero alt
+  // hero.webp used in BrandPromise + OG image
   {
     src: "public/images/hero.webp",
     maxWidth: 1600,
     quality: 75,
-    format: "jpeg",
+    format: "webp",
   },
 ];
 
@@ -61,7 +68,9 @@ for (const job of jobs) {
   const image = sharp(input).resize({ width: job.maxWidth, withoutEnlargement: true });
 
   let buf;
-  if (job.format === "jpeg") {
+  if (job.format === "webp") {
+    buf = await image.webp({ quality: job.quality }).toBuffer();
+  } else if (job.format === "jpeg") {
     buf = await image.jpeg({ quality: job.quality, mozjpeg: true }).toBuffer();
   } else {
     buf = await image.png({ quality: job.quality, compressionLevel: 9 }).toBuffer();

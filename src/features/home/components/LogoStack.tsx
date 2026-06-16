@@ -4,26 +4,17 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-cards";
 
-const css = `
-  .mipador-swiper {
-    width: 240px;
-    height: 270px;
-  }
-  @media (min-width: 768px) {
-    .mipador-swiper {
-      width: 280px;
-      height: 320px;
-    }
-  }
-`;
-
-// ── Put your atmosphere/product images here ───────────────────
 const images = [
   { src: "/images/atmosphere-2.webp", alt: "Mipador — contemporary furniture, Morocco" },
   { src: "/images/atmosphere-3.webp", alt: "Mipador — spaces that breathe" },
   { src: "/images/atmosphere-4.webp", alt: "Mipador — outdoor furniture, Morocco" },
   { src: "/images/atmosphere-5.webp", alt: "Mipador — premium home decor, Casablanca" },
 ];
+
+const isMd = typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches;
+const swiperStyle = isMd
+  ? { width: "280px", height: "320px" }
+  : { width: "240px", height: "270px" };
 
 const LogoStack = () => {
   return (
@@ -33,8 +24,6 @@ const LogoStack = () => {
       transition={{ duration: 0.9, delay: 0.2 }}
       className="relative flex items-center justify-center"
     >
-      <style>{css}</style>
-
       <Swiper
         effect="cards"
         grabCursor={true}
@@ -44,20 +33,18 @@ const LogoStack = () => {
           disableOnInteraction: false,
         }}
         modules={[EffectCards, Autoplay]}
-        className="mipador-swiper"
+        style={swiperStyle}
       >
-        {/* Logo card — always first */}
         <SwiperSlide className="rounded-[2rem] overflow-hidden shadow-2xl">
-            <img
-              src="/images/atmosphere-1.webp"
-              alt="Mipador"
-              className="w-full h-full object-cover"
-              draggable={false}
-            />
-            <div className="absolute inset-0 bg-[#3D1A12]/10" />
+          <img
+            src="/images/atmosphere-1.webp"
+            alt="Mipador"
+            className="w-full h-full object-cover"
+            draggable={false}
+          />
+          <div className="absolute inset-0 bg-[#3D1A12]/10" />
         </SwiperSlide>
 
-        {/* Atmosphere image cards */}
         {images.map((img, i) => (
           <SwiperSlide key={i} className="rounded-[2rem] overflow-hidden shadow-xl">
             <img
@@ -66,7 +53,6 @@ const LogoStack = () => {
               className="w-full h-full object-cover"
               draggable={false}
             />
-            {/* subtle warm overlay */}
             <div className="absolute inset-0 bg-[#3D1A12]/10" />
           </SwiperSlide>
         ))}
