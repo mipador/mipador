@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useMemo } from "react";
+import React, { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
@@ -154,6 +154,56 @@ function ColorBand({ swatches }: { swatches: { hex: string }[] }) {
         transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 2.5 }}
       />
     </div>
+  );
+}
+
+// ── Mood image pair ───────────────────────────────────────────────────────────
+// Desktop: parent needs `group` class — hover crossfades primary → secondary.
+// Mobile:  no hover, so auto-cycles every 3 s instead.
+// Drop images in /public/palette-moods/{id}.jpg and {id}2.jpg.
+function MoodImagePair({
+  id,
+  alt,
+  layout,
+  swatches,
+}: {
+  id: string;
+  alt: string;
+  layout: SwatchLayout;
+  swatches: { hex: string }[];
+}) {
+  const [showSecond, setShowSecond] = useState(false);
+
+  useEffect(() => {
+    // Only auto-cycle on touch/no-hover devices
+    if (!window.matchMedia("(hover: none)").matches) return;
+    const timer = setInterval(() => setShowSecond((v) => !v), 3000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <>
+      {/* SVG design — always present as fallback */}
+      <div className="absolute inset-0">
+        <SwatchPreview swatches={swatches} layout={layout} />
+      </div>
+      {/* Primary image: visible by default, fades out on hover or when cycling */}
+      <img
+        src={`/palette-moods/${id}.jpg`}
+        alt={alt}
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 group-hover:opacity-0 ${showSecond ? "opacity-0" : "opacity-100"}`}
+        loading="lazy"
+        onError={(e) => { e.currentTarget.style.display = "none"; }}
+      />
+      {/* Secondary image: hidden by default, fades in on hover or when cycling */}
+      <img
+        src={`/palette-moods/${id}2.jpg`}
+        alt={alt}
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 group-hover:opacity-100 ${showSecond ? "opacity-100" : "opacity-0"}`}
+        loading="lazy"
+        onError={(e) => { e.currentTarget.style.display = "none"; }}
+      />
+    </>
   );
 }
 
@@ -326,27 +376,13 @@ const ColorPalettePicker: React.FC = () => {
                       className="group flex flex-col overflow-hidden rounded-2xl cursor-pointer text-start shadow-sm hover:shadow-xl transition-shadow duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3D1A12]/30"
                       style={{ backgroundColor: theme.bg }}
                     >
-                      {/* ── Mood image (drop files in /public/palette-moods/{id}.jpg + {id}2.jpg) */}
+                      {/* ── Mood image */}
                       <div className="w-full aspect-[4/3] relative overflow-hidden">
-                        {/* SVG design as background / fallback */}
-                        <div className="absolute inset-0">
-                          <SwatchPreview swatches={palette.swatches} layout={theme.layout} />
-                        </div>
-                        {/* Primary image — fades out on hover */}
-                        <img
-                          src={`/palette-moods/${palette.id}.jpg`}
+                        <MoodImagePair
+                          id={palette.id}
                           alt={palette.name[paletteLang]}
-                          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 group-hover:opacity-0"
-                          loading="lazy"
-                          onError={(e) => { e.currentTarget.style.display = "none"; }}
-                        />
-                        {/* Hover image — fades in on hover */}
-                        <img
-                          src={`/palette-moods/${palette.id}2.jpg`}
-                          alt={palette.name[paletteLang]}
-                          className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 group-hover:opacity-100"
-                          loading="lazy"
-                          onError={(e) => { e.currentTarget.style.display = "none"; }}
+                          layout={theme.layout}
+                          swatches={palette.swatches}
                         />
                       </div>
 
@@ -385,18 +421,13 @@ const ColorPalettePicker: React.FC = () => {
                 className="rounded-3xl overflow-hidden mb-5"
                 style={{ backgroundColor: activeTheme.bg }}
               >
-                {/* Mood image area */}
-                <div className="w-full relative" style={{ aspectRatio: "16/7" }}>
-                  {/* SVG fallback */}
-                  <div className="absolute inset-0 opacity-80">
-                    <SwatchPreview swatches={activePalette.swatches} layout={activeTheme.layout} />
-                  </div>
-                  {/* Mood photo */}
-                  <img
-                    src={`/palette-moods/${activePalette.id}.jpg`}
+                {/* Mood image area — group enables hover crossfade on desktop */}
+                <div className="group w-full relative" style={{ aspectRatio: "16/7" }}>
+                  <MoodImagePair
+                    id={activePalette.id}
                     alt={activePalette.name[paletteLang]}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    onError={(e) => { e.currentTarget.style.display = "none"; }}
+                    layout={activeTheme.layout}
+                    swatches={activePalette.swatches}
                   />
                 </div>
 
