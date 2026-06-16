@@ -6,6 +6,7 @@
     "discover": "اكتشف",
     "discoverCollection": "اكتشف المجموعة",
     "toggleMenu": "فتح القائمة",
+    "colorTool": "لوحة الألوان",
     "openCart": "فتح سلة المشتريات",
     "openCartCount_one": "سلة المشتريات، {{count}} منتج",
     "openCartCount_other": "سلة المشتريات، {{count}} منتجات"
@@ -176,7 +177,11 @@
     "comingSoonSub": "القادم",
     "comingSoonBody": "لا نتعجل ما يجب أن يكون خالداً. المجموعة القادمة من ميبادور تتشكّل ببطء — بالأيدي، بالمواد، بالصبر.",
     "comingSoonPlaceholder": "بريدك الإلكتروني",
-    "comingSoonButton": "أعلمني"
+    "comingSoonButton": "أعلمني",
+    "freeToolHeading": "اكتشف لوحة الألوان",
+    "freeToolHeadingSoft": "المثالية لغرفتك.",
+    "freeToolBody": "اختر نوع غرفتك وأجواءك — احصل على لوحة مغربية مع قطع أثاث متناسقة. مجانية، فورية، بدون تسجيل.",
+    "freeToolCta": "جرّب الأداة المجانية"
   },
   "footer": {
     "tagline": "أثاث مغربي حرفي لفضاءات تنبض بالحياة — توصيل في جميع أنحاء المغرب.",
@@ -337,6 +342,68 @@
     "promise6": "إن لم تحبه، فأنت لا تحتاجه",
     "imageCaption1": "غصن شجرة. حجر مسطح. شمس تتسلل عبر الشبكة.",
     "imageCaption2": "الجمال لا يحتاج إذناً."
+  },
+  "colorPicker": {
+    "seo": {
+      "title": "مولّد لوحات ألوان الغرف المجاني — أسلوب مغربي",
+      "desc": "اكتشف لوحة الألوان المثالية لغرفتك — أداة مجانية. تنسيقات ألوان مستوحاة من المغرب لغرف الجلوس والغرف والمكاتب والمزيد. مع توصيات أثاث ميبادور."
+    },
+    "hero": {
+      "eyebrow": "أداة مجانية — بدون تسجيل",
+      "heading": "اكتشف اللوحة",
+      "headingSoft": "المثالية لغرفتك.",
+      "body": "اختر نوع غرفتك وأجواءك. احصل على لوحة ألوان مغربية مع قطع أثاث متناسقة — في ثوانٍ."
+    },
+    "step1": {
+      "label": "الخطوة 1 من 2",
+      "heading": "ما هي غرفتك؟",
+      "livingRoom": "غرفة الجلوس",
+      "bedroom": "غرفة النوم",
+      "workspace": "مكتب منزلي",
+      "diningRoom": "غرفة الطعام",
+      "terrace": "التراس",
+      "readingCorner": "ركن القراءة",
+      "bathroom": "الحمام",
+      "kitchen": "المطبخ"
+    },
+    "step2": {
+      "label": "الخطوة 2 من 2",
+      "heading": "ما هي أجواؤك؟",
+      "back": "رجوع",
+      "warmCozy": "دافئ ومريح",
+      "warmCozyDesc": "تيراكوتا، جوز، أوكر",
+      "freshBright": "منعش ومضيء",
+      "freshBrightDesc": "مريمية، كتان، رماد طبيعي",
+      "boldDramatic": "جريء ودرامي",
+      "boldDramaticDesc": "أزرق داكن، تبغ، نحاس",
+      "naturalMinimal": "طبيعي وبسيط",
+      "naturalMinimalDesc": "طين، حجر، رمل دافئ"
+    },
+    "results": {
+      "yourPalette": "لوحتك",
+      "wall": "لون الجدار",
+      "accentWall": "جدار مميز",
+      "woodTone": "نبرة الخشب",
+      "textiles": "المنسوجات",
+      "metalDecor": "معدن وديكور",
+      "copyHex": "نسخ رموز الألوان",
+      "copied": "تم النسخ!",
+      "theVibe": "الجو العام",
+      "youllFeel": "ستشعر بـ",
+      "bestFor": "الأمثل لـ",
+      "matchingPieces": "قطع تتناسب مع هذه اللوحة",
+      "viewProduct": "عرض القطعة",
+      "startOver": "البدء من جديد",
+      "talkToUs": "أعجبتك هذه اللوحة؟",
+      "talkToUsHint": "أخبرنا بألوانك وغرفتك — سنساعدك في اختيار القطع المناسبة من ميبادور.",
+      "shopCollection": "تصفح المجموعة"
+    },
+    "palettes": {
+      "warmCozyName": "دفء مراكش",
+      "freshBrightName": "ربيع الأطلس",
+      "boldDramaticName": "ليل الصحراء",
+      "naturalMinimalName": "هدوء البادية"
+    }
   },
   "seo": {
     "homeTitle": "أثاث داخلي وديكور — مجموعة ميبادور، المغرب",

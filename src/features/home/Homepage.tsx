@@ -6,6 +6,7 @@ import ComingSoonSection from "./components/ComingSoonSection";
 import HeroSection from "./components/HeroSection";
 import HowToOrder from "./components/HowToOrder";
 import TaglineSection from "./components/TaglineSection";
+import FreeToolTeaser from "./components/FreeToolTeaser";
 import ScrollToTop from "../../components/ScrollToTop";
 import { useSEO, useJsonLd } from "../../hooks/useSEO";
 
@@ -100,6 +101,7 @@ const HomePage: React.FC = () => {
       <ScrollToTop />
       <HeroSection />
       <SelectedWorksSection />
+      <FreeToolTeaser />
       <HowToOrder />
       <ComingSoonSection />
       <TaglineSection />

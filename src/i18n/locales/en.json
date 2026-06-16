@@ -6,6 +6,7 @@
     "discover": "Discover",
     "discoverCollection": "Discover Collection",
     "toggleMenu": "Toggle menu",
+    "colorTool": "Color Palette",
     "openCart": "Open cart",
     "openCartCount_one": "Open cart, {{count}} item",
     "openCartCount_other": "Open cart, {{count}} items"
@@ -176,7 +177,11 @@
     "comingSoonSub": "CHAPTER",
     "comingSoonBody": "We don't rush what should be timeless. The next Mipador collection is being shaped slowly — by hand, by material, by patience.",
     "comingSoonPlaceholder": "YOUR EMAIL",
-    "comingSoonButton": "Notify Me"
+    "comingSoonButton": "Notify Me",
+    "freeToolHeading": "Find your room's",
+    "freeToolHeadingSoft": "perfect color palette.",
+    "freeToolBody": "Pick your room type and mood — get a Moroccan-inspired palette with matching furniture picks. Free, instant, no sign-up.",
+    "freeToolCta": "Try the free tool"
   },
   "footer": {
     "tagline": "Handcrafted Moroccan furniture for spaces that feel alive — delivered across Morocco.",
@@ -337,6 +342,68 @@
     "promise6": "If you don't love it, you don't need it",
     "imageCaption1": "A tree branch. A flat stone. Sunlight through lattice.",
     "imageCaption2": "Beauty doesn't require permission."
+  },
+  "colorPicker": {
+    "seo": {
+      "title": "Free Room Color Palette Generator — Moroccan Style",
+      "desc": "Find the perfect color palette for your room — free tool. Get Moroccan-inspired color combinations for living rooms, bedrooms, workspaces, and more. With matching Mipador furniture recommendations."
+    },
+    "hero": {
+      "eyebrow": "Free Tool — No sign-up needed",
+      "heading": "Find your room's",
+      "headingSoft": "perfect palette.",
+      "body": "Pick your room type and mood. Get a curated Moroccan-inspired color palette with matching furniture pieces — in seconds."
+    },
+    "step1": {
+      "label": "Step 1 of 2",
+      "heading": "What's your room?",
+      "livingRoom": "Living Room",
+      "bedroom": "Bedroom",
+      "workspace": "Home Office",
+      "diningRoom": "Dining Room",
+      "terrace": "Terrace",
+      "readingCorner": "Reading Corner",
+      "bathroom": "Bathroom",
+      "kitchen": "Kitchen"
+    },
+    "step2": {
+      "label": "Step 2 of 2",
+      "heading": "What's your mood?",
+      "back": "Back",
+      "warmCozy": "Warm & Cozy",
+      "warmCozyDesc": "Terracotta, walnut, ochre",
+      "freshBright": "Fresh & Bright",
+      "freshBrightDesc": "Sage, linen, natural ash",
+      "boldDramatic": "Bold & Dramatic",
+      "boldDramaticDesc": "Deep navy, tobacco, brass",
+      "naturalMinimal": "Natural & Minimal",
+      "naturalMinimalDesc": "Clay, stone, warm sand"
+    },
+    "results": {
+      "yourPalette": "Your Palette",
+      "wall": "Wall",
+      "accentWall": "Accent Wall",
+      "woodTone": "Wood Tone",
+      "textiles": "Textiles",
+      "metalDecor": "Metal & Decor",
+      "copyHex": "Copy hex codes",
+      "copied": "Copied!",
+      "theVibe": "The Vibe",
+      "youllFeel": "You'll feel",
+      "bestFor": "Best for",
+      "matchingPieces": "Pieces that match this palette",
+      "viewProduct": "View piece",
+      "startOver": "Start over",
+      "talkToUs": "Love this palette?",
+      "talkToUsHint": "Tell us your colors and room — we'll help you choose the right Mipador pieces.",
+      "shopCollection": "Shop the Collection"
+    },
+    "palettes": {
+      "warmCozyName": "Marrakech Warmth",
+      "freshBrightName": "Atlas Spring",
+      "boldDramaticName": "Saharan Night",
+      "naturalMinimalName": "Desert Calm"
+    }
   },
   "seo": {
     "homeTitle": "Moroccan Indoor Furniture & Home Decor Collection",

@@ -5,19 +5,25 @@ const SITE_NAME = "Mipador";
 const SITE_URL = "https://mipador.com";
 const OG_DEFAULT_IMAGE = `${SITE_URL}/images/hero.webp`;
 
-const LANGS = ["en", "fr", "ar"] as const;
+const LANGS = ["en", "fr", "ar", "ma"] as const;
 type Lang = (typeof LANGS)[number];
+
+const HREFLANG_LANGS = ["en", "fr", "ar"] as const;
 
 const LOCALE_MAP: Record<Lang, string> = {
   en: "en_MA",
   fr: "fr_MA",
   ar: "ar_MA",
+  ma: "ar_MA",
 };
+
+const RTL_LANGS = new Set<Lang>(["ar", "ma"]);
 
 const DEFAULT_DESCS: Record<Lang, string> = {
   en: "Mipador — contemporary furniture and home decor for spaces that make you feel free and alive. Premium indoor and outdoor pieces. Based in Casablanca, delivered to Casablanca, Rabat, Marrakech, and across Morocco.",
   fr: "Mipador — mobilier et décoration contemporains pour des espaces qui vous font sentir libre et vivant. Pièces premium intérieur et extérieur. Basé à Casablanca, livraison à Casablanca, Rabat, Marrakech et partout au Maroc.",
   ar: "ميبادور — أثاث وديكور معاصر لفضاءات تجعلك تشعر بالحرية والحياة. قطع فاخرة داخلية وخارجية. مقرّنا الدار البيضاء، نوصّل إلى الدار البيضاء والرباط ومراكش وجميع أنحاء المغرب.",
+  ma: "ميبادور — أثاث وديكور معاصر لبلاصات كتخليك تحس بالحرية والحياة. قطع فاخرة من الداخل والخارج. مقرنا الدار البيضاء، التوصيل فجميع أنحاء المغرب.",
 };
 
 // ── DOM helpers ───────────────────────────────────────────────────────────────
@@ -91,7 +97,7 @@ export function useSEO(title: string, description?: string, options?: SeoOptions
     document.documentElement.setAttribute("lang", currentLang);
     document.documentElement.setAttribute(
       "dir",
-      currentLang === "ar" ? "rtl" : "ltr"
+      RTL_LANGS.has(currentLang) ? "rtl" : "ltr"
     );
 
     // Title
@@ -133,7 +139,8 @@ export function useSEO(title: string, description?: string, options?: SeoOptions
     const pathParts = location.pathname.split("/").filter(Boolean); // ["en","products",...]
     const restPath = pathParts.slice(1).join("/"); // "products/..." without lang
 
-    LANGS.forEach((l) => {
+    // Only use ISO-recognized language tags for hreflang ("ma" is not valid)
+    HREFLANG_LANGS.forEach((l) => {
       const href = `${SITE_URL}/${l}${restPath ? `/${restPath}` : ""}`;
       setHreflang(l, href);
     });

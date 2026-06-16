@@ -6,6 +6,7 @@
     "discover": "Découvrir",
     "discoverCollection": "Découvrir la Collection",
     "toggleMenu": "Ouvrir le menu",
+    "colorTool": "Palette Couleurs",
     "openCart": "Ouvrir le panier",
     "openCartCount_one": "Panier, {{count}} article",
     "openCartCount_other": "Panier, {{count}} articles"
@@ -176,7 +177,11 @@
     "comingSoonSub": "CHAPITRE",
     "comingSoonBody": "Nous ne pressons pas ce qui doit être intemporel. La prochaine collection Mipador se façonne lentement — à la main, par le matériau, avec patience.",
     "comingSoonPlaceholder": "VOTRE EMAIL",
-    "comingSoonButton": "Me notifier"
+    "comingSoonButton": "Me notifier",
+    "freeToolHeading": "Trouvez la palette",
+    "freeToolHeadingSoft": "parfaite pour votre espace.",
+    "freeToolBody": "Choisissez votre pièce et votre ambiance — obtenez une palette marocaine avec des meubles assortis. Gratuit, instantané, sans inscription.",
+    "freeToolCta": "Essayer l'outil gratuit"
   },
   "footer": {
     "tagline": "Mobilier artisanal marocain pour des espaces qui se sentent vivants — livraison dans tout le Maroc.",
@@ -337,6 +342,68 @@
     "promise6": "Si vous ne l'aimez pas, vous n'en avez pas besoin",
     "imageCaption1": "Une branche d'arbre. Une pierre plate. Soleil à travers le treillis.",
     "imageCaption2": "La beauté ne demande pas permission."
+  },
+  "colorPicker": {
+    "seo": {
+      "title": "Générateur Gratuit de Palette Couleurs — Style Marocain",
+      "desc": "Trouvez la palette de couleurs parfaite pour votre pièce — outil gratuit. Combinaisons de couleurs marocaines pour salons, chambres, bureaux et plus. Avec des recommandations de meubles Mipador."
+    },
+    "hero": {
+      "eyebrow": "Outil gratuit — Sans inscription",
+      "heading": "Trouvez la palette",
+      "headingSoft": "parfaite pour votre espace.",
+      "body": "Choisissez votre type de pièce et votre ambiance. Obtenez une palette de couleurs marocaine avec des meubles assortis — en quelques secondes."
+    },
+    "step1": {
+      "label": "Étape 1 sur 2",
+      "heading": "Quelle est votre pièce ?",
+      "livingRoom": "Salon",
+      "bedroom": "Chambre",
+      "workspace": "Bureau à domicile",
+      "diningRoom": "Salle à manger",
+      "terrace": "Terrasse",
+      "readingCorner": "Coin Lecture",
+      "bathroom": "Salle de bain",
+      "kitchen": "Cuisine"
+    },
+    "step2": {
+      "label": "Étape 2 sur 2",
+      "heading": "Quelle est votre ambiance ?",
+      "back": "Retour",
+      "warmCozy": "Chaud & Cosy",
+      "warmCozyDesc": "Terre cuite, noyer, ocre",
+      "freshBright": "Frais & Lumineux",
+      "freshBrightDesc": "Sauge, lin, frêne naturel",
+      "boldDramatic": "Audacieux & Dramatique",
+      "boldDramaticDesc": "Bleu marine, tabac, laiton",
+      "naturalMinimal": "Naturel & Minimaliste",
+      "naturalMinimalDesc": "Argile, pierre, sable chaud"
+    },
+    "results": {
+      "yourPalette": "Votre Palette",
+      "wall": "Mur",
+      "accentWall": "Mur Accent",
+      "woodTone": "Ton Bois",
+      "textiles": "Textiles",
+      "metalDecor": "Métal & Décor",
+      "copyHex": "Copier les codes hex",
+      "copied": "Copié !",
+      "theVibe": "L'Ambiance",
+      "youllFeel": "Vous ressentirez",
+      "bestFor": "Idéal pour",
+      "matchingPieces": "Pièces qui s'accordent avec cette palette",
+      "viewProduct": "Voir la pièce",
+      "startOver": "Recommencer",
+      "talkToUs": "Vous aimez cette palette ?",
+      "talkToUsHint": "Dites-nous vos couleurs et votre pièce — nous vous aiderons à choisir les bonnes pièces Mipador.",
+      "shopCollection": "Voir la Collection"
+    },
+    "palettes": {
+      "warmCozyName": "Chaleur de Marrakech",
+      "freshBrightName": "Printemps de l'Atlas",
+      "boldDramaticName": "Nuit Saharienne",
+      "naturalMinimalName": "Calme du Désert"
+    }
   },
   "seo": {
     "homeTitle": "Mobilier & Décoration Intérieure — Collection Maroc",

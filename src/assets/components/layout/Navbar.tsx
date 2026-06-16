@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingBag, Heart } from "lucide-react";
+import { ShoppingBag, Heart, Palette } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -31,6 +31,8 @@ const Navbar: React.FC = () => {
     { label: t("nav.about"),      path: `/${currentLang}/about` },
     { label: t("nav.contact"),    path: `/${currentLang}/contact` },
   ];
+
+  const toolPath = `/${currentLang}/tools/color-palette`;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -95,6 +97,17 @@ const Navbar: React.FC = () => {
           {/* Right actions */}
           <div className="flex items-center gap-2.5">
             <LanguageSwitcher compact={scrolled} />
+
+            {/* Color palette tool — icon button */}
+            <Link
+              to={toolPath}
+              aria-label={t("nav.colorTool")}
+              className={`relative w-11 h-11 flex items-center justify-center rounded-xl hover:bg-[#3D1A12]/5 transition-colors ${
+                location.pathname.includes("/tools/color-palette") ? "text-[#3D1A12]" : "text-[#3D1A12]/55"
+              }`}
+            >
+              <Palette size={17} />
+            </Link>
 
             {/* Wishlist button */}
             <Link
@@ -215,6 +228,19 @@ const Navbar: React.FC = () => {
                     {item.label}
                   </Link>
                 ))}
+
+                <Link
+                  to={toolPath}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`flex items-center gap-2 text-base font-bold transition-colors duration-300 ${
+                    location.pathname.includes("/tools/color-palette")
+                      ? "text-[#3D1A12]"
+                      : "text-[#3D1A12]/50"
+                  }`}
+                >
+                  <Palette size={15} />
+                  {t("nav.colorTool")}
+                </Link>
 
                 <Link
                   to={`/${currentLang}/wishlist`}

@@ -21,6 +21,7 @@ const PrivacyPolicy   = lazy(() => import("../legal/PrivacyPolicy"));
 const RefundPolicy    = lazy(() => import("../legal/RefundPolicy"));
 const TermsOfService  = lazy(() => import("../legal/TermsOfService"));
 const FaqsPage        = lazy(() => import("../../pages/FaqsPage"));
+const ColorPalettePicker = lazy(() => import("../tools/ColorPalettePicker"));
 
 // Blank fallback — page fade transition covers the transition seam
 const PageLoader = () => <div className="min-h-screen bg-[#F6F4F1]" />;
@@ -93,6 +94,8 @@ export default function LanguageLayout() {
               <Route path="/refund-policy" element={<RefundPolicy />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />
               <Route path="/faqs" element={<FaqsPage />} />
+
+              <Route path="/tools/color-palette" element={<ColorPalettePicker />} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>
