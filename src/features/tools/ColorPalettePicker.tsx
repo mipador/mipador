@@ -416,6 +416,17 @@ const ColorPalettePicker: React.FC = () => {
               transition={{ duration: 0.4, ease }}
               className="max-w-3xl mx-auto"
             >
+              {/* ── Start over (top) ────────────────────────────────────────── */}
+              <div className="text-center mb-6">
+                <button
+                  onClick={handleReset}
+                  className={`inline-flex items-center gap-2 text-xs font-bold text-[#3D1A12]/35 hover:text-[#3D1A12] transition-colors ${isRTL ? "flex-row-reverse" : ""}`}
+                >
+                  <RotateCcw size={12} />
+                  {t("colorPicker.results.startOver")}
+                </button>
+              </div>
+
               {/* ── Palette hero banner ──────────────────────────────────────── */}
               <div
                 className="rounded-3xl overflow-hidden mb-5"
