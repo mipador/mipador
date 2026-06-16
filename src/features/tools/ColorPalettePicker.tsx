@@ -2,24 +2,12 @@ import React, { useState, useRef, useCallback, useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, Check, Copy, MessageCircle, RotateCcw, Sparkles } from "lucide-react";
+import { Check, Copy, MessageCircle, RotateCcw, Sparkles } from "lucide-react";
 import { useSEO, useJsonLd } from "../../hooks/useSEO";
 import { products } from "../../data/products";
 import { WHATSAPP_NUMBER } from "../../config/whatsapp";
 import ScrollToTop from "../../components/ScrollToTop";
-import { PALETTES, ROOM_PRODUCTS, type PaletteId, type RoomId, type PaletteLang } from "./paletteData";
-
-// ── Room definitions ──────────────────────────────────────────────────────────
-const ROOM_TYPES: { id: RoomId; labelKey: string; icon: string }[] = [
-  { id: "living-room",    labelKey: "step1.livingRoom",    icon: "🛋️" },
-  { id: "bedroom",        labelKey: "step1.bedroom",       icon: "🛏️" },
-  { id: "workspace",      labelKey: "step1.workspace",     icon: "💻" },
-  { id: "dining-room",    labelKey: "step1.diningRoom",    icon: "🍽️" },
-  { id: "terrace",        labelKey: "step1.terrace",       icon: "☀️" },
-  { id: "reading-corner", labelKey: "step1.readingCorner", icon: "📚" },
-  { id: "bathroom",       labelKey: "step1.bathroom",      icon: "🚿" },
-  { id: "kitchen",        labelKey: "step1.kitchen",       icon: "🪴" },
-];
+import { PALETTES, type PaletteId, type PaletteLang } from "./paletteData";
 
 const SITE_URL = "https://mipador.com";
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -27,6 +15,146 @@ const ease = [0.22, 1, 0.36, 1] as const;
 function toLang(l: string): PaletteLang {
   if (l === "fr" || l === "ar" || l === "ma") return l;
   return "en";
+}
+
+// ── Per-palette card visual themes ────────────────────────────────────────────
+type SwatchLayout = "strips" | "arch" | "circles" | "diagonal" | "blocks" | "starburst";
+
+interface CardTheme {
+  bg: string;
+  textLight: boolean;
+  layout: SwatchLayout;
+}
+
+const CARD_THEMES: Record<PaletteId, CardTheme> = {
+  "warm-cozy":       { bg: "#C4845A", textLight: false, layout: "arch"      },
+  "fresh-bright":    { bg: "#D4E4D8", textLight: false, layout: "strips"    },
+  "bold-dramatic":   { bg: "#1A2834", textLight: true,  layout: "diagonal"  },
+  "natural-minimal": { bg: "#E8E4DC", textLight: false, layout: "blocks"    },
+  "riad-blue":       { bg: "#3A6B8D", textLight: true,  layout: "circles"   },
+  "tadelakt-soul":   { bg: "#9B7355", textLight: true,  layout: "diagonal"  },
+  "atlas-cedar":     { bg: "#2D3B2A", textLight: true,  layout: "strips"    },
+  "zahra-dusk":      { bg: "#C49490", textLight: false, layout: "arch"      },
+  "golden-hour":     { bg: "#C49835", textLight: false, layout: "starburst" },
+  "medina-soul":     { bg: "#1A3C3C", textLight: true,  layout: "circles"   },
+  "pure-breath":     { bg: "#F0EDE8", textLight: false, layout: "blocks"    },
+  "new-medina":      { bg: "#A04832", textLight: true,  layout: "strips"    },
+};
+
+// ── Per-palette SVG swatch designs (used as fallback when no image) ───────────
+function SwatchPreview({
+  swatches,
+  layout,
+}: {
+  swatches: { hex: string }[];
+  layout: SwatchLayout;
+}) {
+  const s = swatches;
+
+  if (layout === "strips") {
+    return (
+      <svg viewBox="0 0 100 56" className="w-full h-full" preserveAspectRatio="none">
+        {s.map((sw, i) => (
+          <rect key={i} x={i * 20} y={0} width={20} height={56} fill={sw.hex} />
+        ))}
+      </svg>
+    );
+  }
+
+  if (layout === "arch") {
+    return (
+      <svg viewBox="0 0 100 56" className="w-full h-full">
+        <rect x={0} y={0} width={100} height={56} fill={s[0].hex} />
+        <path d="M10,56 L10,30 Q10,10 32,10 Q54,10 54,30 L54,56" fill={s[1].hex} />
+        <path d="M52,56 L52,34 Q52,18 70,18 Q88,18 88,34 L88,56" fill={s[2].hex} />
+        <circle cx={82} cy={10} r={7} fill={s[3].hex} />
+        <rect x={0} y={46} width={12} height={10} fill={s[4].hex} rx={2} />
+      </svg>
+    );
+  }
+
+  if (layout === "circles") {
+    return (
+      <svg viewBox="0 0 100 56" className="w-full h-full">
+        <rect x={0} y={0} width={100} height={56} fill={s[0].hex} />
+        <circle cx={10} cy={28} r={12} fill={s[1].hex} />
+        <circle cx={32} cy={28} r={18} fill={s[2].hex} />
+        <circle cx={58} cy={28} r={18} fill={s[3].hex} />
+        <circle cx={84} cy={28} r={14} fill={s[4].hex} />
+      </svg>
+    );
+  }
+
+  if (layout === "diagonal") {
+    const tp = [0, 20, 40, 60, 80, 100];
+    const bp = [-8, 12, 32, 52, 72, 100];
+    return (
+      <svg viewBox="0 0 100 56" className="w-full h-full">
+        {s.map((sw, i) => (
+          <polygon
+            key={i}
+            points={`${tp[i]},0 ${tp[i + 1]},0 ${bp[i + 1]},56 ${bp[i]},56`}
+            fill={sw.hex}
+          />
+        ))}
+      </svg>
+    );
+  }
+
+  if (layout === "blocks") {
+    return (
+      <svg viewBox="0 0 100 56" className="w-full h-full">
+        <rect x={0}  y={0}  width={62} height={34} fill={s[0].hex} />
+        <rect x={0}  y={34} width={62} height={22} fill={s[1].hex} />
+        <rect x={62} y={0}  width={38} height={20} fill={s[2].hex} />
+        <rect x={62} y={20} width={38} height={18} fill={s[3].hex} />
+        <rect x={62} y={38} width={38} height={18} fill={s[4].hex} />
+      </svg>
+    );
+  }
+
+  if (layout === "starburst") {
+    const rays: [number, number][] = [
+      [100, 28], [87, 62], [50, 72], [13, 62],
+      [0, 28],   [13, -6], [50, -16], [87, -6],
+    ];
+    return (
+      <svg viewBox="0 0 100 56" className="w-full h-full">
+        <rect x={0} y={0} width={100} height={56} fill={s[0].hex} />
+        {rays.map(([x2, y2], i) => (
+          <line key={i} x1={50} y1={28} x2={x2} y2={y2}
+            stroke={s[4].hex} strokeWidth={1.5} opacity={0.5} />
+        ))}
+        <circle cx={50} cy={28} r={14} fill={s[1].hex} />
+        <circle cx={16} cy={11} r={6}  fill={s[2].hex} />
+        <circle cx={84} cy={45} r={5}  fill={s[3].hex} />
+        <circle cx={82} cy={9}  r={3}  fill={s[4].hex} opacity={0.8} />
+      </svg>
+    );
+  }
+
+  return null;
+}
+
+// ── Animated palette color band ───────────────────────────────────────────────
+// Each palette ID's image goes in /public/palette-moods/{id}.jpg
+function ColorBand({ swatches }: { swatches: { hex: string }[] }) {
+  return (
+    <div className="relative flex h-2.5 w-full overflow-hidden">
+      {swatches.map((sw, i) => (
+        <div key={i} className="flex-1" style={{ backgroundColor: sw.hex }} />
+      ))}
+      <motion.div
+        className="absolute inset-y-0 left-0 w-[40%] pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.45) 50%, transparent 100%)",
+        }}
+        animate={{ x: ["-120%", "400%"] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 2.5 }}
+      />
+    </div>
+  );
 }
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -37,8 +165,7 @@ const ColorPalettePicker: React.FC = () => {
   const paletteLang = toLang(l);
   const isRTL = l === "ar" || l === "ma";
 
-  const [step, setStep] = useState<1 | 2 | 3>(1);
-  const [room, setRoom] = useState<RoomId | null>(null);
+  const [step, setStep] = useState<1 | 2>(1);
   const [paletteId, setPaletteId] = useState<PaletteId | null>(null);
   const [copied, setCopied] = useState(false);
 
@@ -74,30 +201,22 @@ const ColorPalettePicker: React.FC = () => {
   useJsonLd(schema);
 
   const activePalette = paletteId ? PALETTES.find((p) => p.id === paletteId) ?? null : null;
+  const activeTheme   = paletteId ? CARD_THEMES[paletteId] : null;
 
   const recommendedProducts = useMemo(() => {
-    if (!activePalette || !room) return [];
-    const moodSlugs = activePalette.productSlugs;
-    const roomSlugs = ROOM_PRODUCTS[room];
-    const merged = [...new Set([...moodSlugs, ...roomSlugs])].slice(0, 3);
-    return merged
+    if (!activePalette) return [];
+    return activePalette.productSlugs
       .map((slug) => products.find((p) => p.slug === slug))
       .filter(Boolean) as typeof products;
-  }, [activePalette, room]);
-
-  const handleRoomSelect = useCallback((r: RoomId) => {
-    setRoom(r);
-    setStep(2);
-  }, []);
+  }, [activePalette]);
 
   const handlePaletteSelect = useCallback((id: PaletteId) => {
     setPaletteId(id);
-    setStep(3);
+    setStep(2);
     setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
   }, []);
 
   const handleReset = useCallback(() => {
-    setRoom(null);
     setPaletteId(null);
     setStep(1);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -113,14 +232,13 @@ const ColorPalettePicker: React.FC = () => {
   }, [activePalette]);
 
   const whatsappMsg = useMemo(() => {
-    if (!activePalette || !room) return "";
+    if (!activePalette) return "";
     const paletteName = activePalette.name[paletteLang];
-    const roomLabel = t(`colorPicker.step1.${room.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase())}`);
     const hexes = activePalette.swatches.map((s) => s.hex).join(", ");
     return encodeURIComponent(
-      `Hello Mipador! I used your color palette tool.\nPalette: "${paletteName}" — for my ${roomLabel}.\nColors: ${hexes}\nCan you help me choose the right pieces?`
+      `Hello Mipador! I used your color palette tool.\nPalette: "${paletteName}".\nColors: ${hexes}\nCan you help me choose the right pieces?`
     );
-  }, [activePalette, room, paletteLang, t]);
+  }, [activePalette, paletteLang]);
 
   return (
     <div className="min-h-screen bg-[#F6F4F1]">
@@ -160,7 +278,7 @@ const ColorPalettePicker: React.FC = () => {
 
       {/* ── Step progress ────────────────────────────────────────────────────── */}
       <div className="flex justify-center gap-2 mb-10 px-4">
-        {[1, 2, 3].map((s) => (
+        {[1, 2].map((s) => (
           <div
             key={s}
             className={`h-1 rounded-full transition-all duration-500 ${
@@ -174,7 +292,7 @@ const ColorPalettePicker: React.FC = () => {
       <div className="px-4 pb-28">
         <AnimatePresence mode="wait">
 
-          {/* ── Step 1: Room ──────────────────────────────────────────────────── */}
+          {/* ── Step 1: Palette grid ──────────────────────────────────────────── */}
           {step === 1 && (
             <motion.div
               key="step1"
@@ -182,50 +300,8 @@ const ColorPalettePicker: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.35, ease }}
-              className="max-w-2xl mx-auto"
+              className="max-w-5xl mx-auto"
             >
-              <p className="text-xs font-bold uppercase tracking-widest text-[#3D1A12]/35 text-center mb-2">
-                {t("colorPicker.step1.label")}
-              </p>
-              <h2 className="text-2xl font-black text-[#3D1A12] text-center mb-8">
-                {t("colorPicker.step1.heading")}
-              </h2>
-
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                {ROOM_TYPES.map((rt) => (
-                  <button
-                    key={rt.id}
-                    onClick={() => handleRoomSelect(rt.id)}
-                    className="group flex flex-col items-center justify-center gap-2.5 p-6 bg-white rounded-2xl border-2 border-transparent hover:border-[#3D1A12]/15 hover:shadow-md transition-all duration-300 cursor-pointer"
-                  >
-                    <span className="text-2xl">{rt.icon}</span>
-                    <span className="text-xs font-bold text-[#3D1A12] text-center leading-tight">
-                      {t(`colorPicker.${rt.labelKey}`)}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </motion.div>
-          )}
-
-          {/* ── Step 2: Palette mood ──────────────────────────────────────────── */}
-          {step === 2 && (
-            <motion.div
-              key="step2"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.35, ease }}
-              className="max-w-4xl mx-auto"
-            >
-              <button
-                onClick={() => setStep(1)}
-                className={`flex items-center gap-1.5 text-xs font-bold text-[#3D1A12]/45 hover:text-[#3D1A12] transition-colors mb-6 ${isRTL ? "flex-row-reverse" : ""}`}
-              >
-                <ArrowLeft size={13} className={isRTL ? "rotate-180" : ""} />
-                {t("colorPicker.step2.back")}
-              </button>
-
               <p className="text-xs font-bold uppercase tracking-widest text-[#3D1A12]/35 text-center mb-2">
                 {t("colorPicker.step2.label")}
               </p>
@@ -233,41 +309,70 @@ const ColorPalettePicker: React.FC = () => {
                 {t("colorPicker.step2.heading")}
               </h2>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-                {PALETTES.map((palette) => (
-                  <button
-                    key={palette.id}
-                    onClick={() => handlePaletteSelect(palette.id)}
-                    className="group flex flex-col gap-3 p-4 bg-white rounded-2xl border-2 border-transparent hover:border-[#3D1A12]/15 hover:shadow-md transition-all duration-300 cursor-pointer text-start"
-                  >
-                    {/* Color preview strip */}
-                    <div className="flex gap-1 w-full">
-                      {palette.swatches.map((s, i) => (
-                        <div
-                          key={i}
-                          className="flex-1 h-7 rounded-lg"
-                          style={{ backgroundColor: s.hex }}
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                {PALETTES.map((palette, idx) => {
+                  const theme = CARD_THEMES[palette.id];
+                  const textCol = theme.textLight ? "text-white" : "text-[#3D1A12]";
+                  const subCol  = theme.textLight ? "text-white/60" : "text-[#3D1A12]/50";
+                  return (
+                    <motion.button
+                      key={palette.id}
+                      onClick={() => handlePaletteSelect(palette.id)}
+                      initial={{ opacity: 0, y: 16 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.35, ease, delay: idx * 0.04 }}
+                      whileHover={{ scale: 1.03, y: -3 }}
+                      whileTap={{ scale: 0.97 }}
+                      className="group flex flex-col overflow-hidden rounded-2xl cursor-pointer text-start shadow-sm hover:shadow-xl transition-shadow duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3D1A12]/30"
+                      style={{ backgroundColor: theme.bg }}
+                    >
+                      {/* ── Mood image (drop files in /public/palette-moods/{id}.jpg + {id}2.jpg) */}
+                      <div className="w-full aspect-[4/3] relative overflow-hidden">
+                        {/* SVG design as background / fallback */}
+                        <div className="absolute inset-0">
+                          <SwatchPreview swatches={palette.swatches} layout={theme.layout} />
+                        </div>
+                        {/* Primary image — fades out on hover */}
+                        <img
+                          src={`/palette-moods/${palette.id}.jpg`}
+                          alt={palette.name[paletteLang]}
+                          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 group-hover:opacity-0"
+                          loading="lazy"
+                          onError={(e) => { e.currentTarget.style.display = "none"; }}
                         />
-                      ))}
-                    </div>
-                    <div>
-                      <p className="text-xs font-black text-[#3D1A12] leading-snug">
-                        {palette.name[paletteLang]}
-                      </p>
-                      <p className="text-[10px] text-[#3D1A12]/45 mt-0.5 leading-snug line-clamp-1">
-                        {palette.vibe[paletteLang].feel.join(" · ")}
-                      </p>
-                    </div>
-                  </button>
-                ))}
+                        {/* Hover image — fades in on hover */}
+                        <img
+                          src={`/palette-moods/${palette.id}2.jpg`}
+                          alt={palette.name[paletteLang]}
+                          className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 group-hover:opacity-100"
+                          loading="lazy"
+                          onError={(e) => { e.currentTarget.style.display = "none"; }}
+                        />
+                      </div>
+
+                      {/* ── Animated palette color band */}
+                      <ColorBand swatches={palette.swatches} />
+
+                      {/* ── Name + feel */}
+                      <div className="p-3 pb-4">
+                        <p className={`text-sm font-black leading-snug ${textCol}`}>
+                          {palette.name[paletteLang]}
+                        </p>
+                        <p className={`text-[10px] mt-0.5 leading-snug line-clamp-1 ${subCol}`}>
+                          {palette.vibe[paletteLang].feel.join(" · ")}
+                        </p>
+                      </div>
+                    </motion.button>
+                  );
+                })}
               </div>
             </motion.div>
           )}
 
-          {/* ── Step 3: Results ───────────────────────────────────────────────── */}
-          {step === 3 && activePalette && (
+          {/* ── Step 2: Results ───────────────────────────────────────────────── */}
+          {step === 2 && activePalette && activeTheme && (
             <motion.div
-              key="step3"
+              key="step2"
               ref={resultsRef}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -275,16 +380,41 @@ const ColorPalettePicker: React.FC = () => {
               transition={{ duration: 0.4, ease }}
               className="max-w-3xl mx-auto"
             >
-              {/* ── Palette name + swatches ─────────────────────────────────── */}
-              <div className="text-center mb-6">
-                <p className="text-xs font-black uppercase tracking-[0.2em] text-[#3D1A12]/35 mb-2">
-                  {t("colorPicker.results.yourPalette")}
-                </p>
-                <h2 className="text-3xl sm:text-4xl font-black text-[#3D1A12]">
-                  {activePalette.name[paletteLang]}
-                </h2>
+              {/* ── Palette hero banner ──────────────────────────────────────── */}
+              <div
+                className="rounded-3xl overflow-hidden mb-5"
+                style={{ backgroundColor: activeTheme.bg }}
+              >
+                {/* Mood image area */}
+                <div className="w-full relative" style={{ aspectRatio: "16/7" }}>
+                  {/* SVG fallback */}
+                  <div className="absolute inset-0 opacity-80">
+                    <SwatchPreview swatches={activePalette.swatches} layout={activeTheme.layout} />
+                  </div>
+                  {/* Mood photo */}
+                  <img
+                    src={`/palette-moods/${activePalette.id}.jpg`}
+                    alt={activePalette.name[paletteLang]}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    onError={(e) => { e.currentTarget.style.display = "none"; }}
+                  />
+                </div>
+
+                {/* Color band */}
+                <ColorBand swatches={activePalette.swatches} />
+
+                {/* Title */}
+                <div className={`px-6 py-5 ${activeTheme.textLight ? "text-white" : "text-[#3D1A12]"}`}>
+                  <p className={`text-xs font-black uppercase tracking-[0.2em] mb-1 ${activeTheme.textLight ? "text-white/50" : "text-[#3D1A12]/35"}`}>
+                    {t("colorPicker.results.yourPalette")}
+                  </p>
+                  <h2 className="text-3xl sm:text-4xl font-black">
+                    {activePalette.name[paletteLang]}
+                  </h2>
+                </div>
               </div>
 
+              {/* ── Swatches with hex codes ──────────────────────────────────── */}
               <div className="bg-white rounded-3xl p-6 sm:p-8 mb-5 shadow-sm">
                 <div className="grid grid-cols-5 gap-2 sm:gap-3 mb-6">
                   {activePalette.swatches.map((swatch, i) => (
@@ -326,33 +456,28 @@ const ColorPalettePicker: React.FC = () => {
 
               {/* ── Vibe section ────────────────────────────────────────────── */}
               {(() => {
-                const vibe = activePalette.vibe[paletteLang];
+                const vibe    = activePalette.vibe[paletteLang];
+                const accent  = activePalette.swatches[0].hex;
+                const accent2 = activePalette.swatches[1].hex;
                 return (
                   <motion.div
                     initial={{ opacity: 0, y: 14 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, ease, delay: 0.1 }}
                     className="rounded-3xl overflow-hidden mb-5"
-                    style={{ borderLeft: `4px solid ${activePalette.swatches[0].hex}` }}
+                    style={{ borderLeft: `4px solid ${accent}` }}
                   >
                     <div className="bg-white px-6 sm:px-8 py-8 sm:py-10">
                       <p className="text-xs font-black uppercase tracking-[0.18em] text-[#3D1A12]/35 mb-5">
                         {t("colorPicker.results.theVibe")}
                       </p>
-
-                      {/* Headline quote */}
                       <p className="text-xl sm:text-2xl font-black text-[#3D1A12] leading-snug mb-5 italic">
                         "{vibe.headline}"
                       </p>
-
-                      {/* Description */}
                       <p className="text-sm text-[#3D1A12]/65 leading-relaxed mb-8">
                         {vibe.desc}
                       </p>
-
-                      {/* Feel + Best For grid */}
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        {/* You'll feel */}
                         <div>
                           <p className="text-[10px] font-black uppercase tracking-widest text-[#3D1A12]/35 mb-3">
                             {t("colorPicker.results.youllFeel")}
@@ -362,33 +487,22 @@ const ColorPalettePicker: React.FC = () => {
                               <span
                                 key={f}
                                 className="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full text-[#3D1A12]"
-                                style={{ backgroundColor: `${activePalette.swatches[0].hex}30` }}
+                                style={{ backgroundColor: `${accent}30` }}
                               >
-                                <span
-                                  className="w-1.5 h-1.5 rounded-full shrink-0"
-                                  style={{ backgroundColor: activePalette.swatches[0].hex }}
-                                />
+                                <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: accent }} />
                                 {f}
                               </span>
                             ))}
                           </div>
                         </div>
-
-                        {/* Best for */}
                         <div>
                           <p className="text-[10px] font-black uppercase tracking-widest text-[#3D1A12]/35 mb-3">
                             {t("colorPicker.results.bestFor")}
                           </p>
                           <ul className="space-y-1.5">
                             {vibe.bestFor.map((b) => (
-                              <li
-                                key={b}
-                                className={`flex items-center gap-2 text-xs font-bold text-[#3D1A12]/70 ${isRTL ? "flex-row-reverse" : ""}`}
-                              >
-                                <span
-                                  className="w-1 h-1 rounded-full shrink-0"
-                                  style={{ backgroundColor: activePalette.swatches[1].hex }}
-                                />
+                              <li key={b} className={`flex items-center gap-2 text-xs font-bold text-[#3D1A12]/70 ${isRTL ? "flex-row-reverse" : ""}`}>
+                                <span className="w-1 h-1 rounded-full shrink-0" style={{ backgroundColor: accent2 }} />
                                 {b}
                               </li>
                             ))}
@@ -449,12 +563,15 @@ const ColorPalettePicker: React.FC = () => {
               </div>
 
               {/* ── CTAs ─────────────────────────────────────────────────────── */}
-              <div className="bg-[#3D1A12] rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row gap-5 items-center justify-between mb-8">
+              <div
+                className="rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row gap-5 items-center justify-between mb-8"
+                style={{ backgroundColor: activeTheme.bg }}
+              >
                 <div>
-                  <p className="font-black text-white mb-1">
+                  <p className={`font-black mb-1 ${activeTheme.textLight ? "text-white" : "text-[#3D1A12]"}`}>
                     {t("colorPicker.results.talkToUs")}
                   </p>
-                  <p className="text-xs text-white/50 max-w-xs">
+                  <p className={`text-xs max-w-xs ${activeTheme.textLight ? "text-white/50" : "text-[#3D1A12]/50"}`}>
                     {t("colorPicker.results.talkToUsHint")}
                   </p>
                 </div>
@@ -470,7 +587,11 @@ const ColorPalettePicker: React.FC = () => {
                   </a>
                   <Link
                     to={`/${l}/products`}
-                    className="flex items-center justify-center bg-white text-[#3D1A12] text-xs font-black uppercase tracking-widest px-5 py-3 rounded-xl hover:bg-white/90 transition-colors"
+                    className={`flex items-center justify-center text-xs font-black uppercase tracking-widest px-5 py-3 rounded-xl transition-colors ${
+                      activeTheme.textLight
+                        ? "bg-white text-[#3D1A12] hover:bg-white/90"
+                        : "bg-[#3D1A12] text-white hover:bg-[#3D1A12]/90"
+                    }`}
                   >
                     {t("colorPicker.results.shopCollection")}
                   </Link>
