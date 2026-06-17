@@ -70,17 +70,17 @@ function About() {
   return (
     <div className="bg-[#F6F4F1] font-sans selection:bg-[#C9922A]/20">
       <ScrollToTop />
-      <AboutHero />
-      <AboutStory />
-      <VisionSection />
-      <ModelGrid />
-      <CoreFeatures />
-      <FeatureGrid />
-      <BrandPromise />
+      <div id="hero"><AboutHero /></div>
+      <div id="story"><AboutStory /></div>
+      <div id="vision"><VisionSection /></div>
+      <div id="models"><ModelGrid /></div>
+      <div id="features"><CoreFeatures /></div>
+      <div id="feature-grid"><FeatureGrid /></div>
+      <div id="brand-promise"><BrandPromise /></div>
       {/* <Testimonials /> */}
 
       {/* Final CTA */}
-      <section className="py-32 px-6 bg-[#3D1A12] relative overflow-hidden">
+      <section id="cta" className="py-32 px-6 bg-[#3D1A12] relative overflow-hidden">
         <div className="absolute inset-0 opacity-10"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9922A' fill-opacity='1'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,

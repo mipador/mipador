@@ -123,12 +123,13 @@ const ProductsPage: React.FC = () => {
         </motion.div>
 
         {/* Indoor / Outdoor hero tabs + subfilter chips */}
-        <CollectionHeroTabs />
+        <div id="collection-tabs"><CollectionHeroTabs /></div>
 
         {/* Search + sort toolbar */}
-        <ProductToolbar />
+        <div id="toolbar"><ProductToolbar /></div>
 
         {/* Product grid or empty state */}
+        <div id="grid">
         {filteredData.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 text-center gap-5">
             <div className="w-16 h-16 rounded-xl bg-[#3D1A12]/5 flex items-center justify-center">
@@ -169,6 +170,7 @@ const ProductsPage: React.FC = () => {
             <Pagination />
           </>
         )}
+        </div>
       </div>
     </div>
   );

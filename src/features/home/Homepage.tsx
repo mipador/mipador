@@ -99,12 +99,12 @@ const HomePage: React.FC = () => {
   return (
     <div>
       <ScrollToTop />
-      <HeroSection />
-      <SelectedWorksSection />
-      <FreeToolTeaser />
-      <HowToOrder />
-      <ComingSoonSection />
-      <TaglineSection />
+      <div id="hero"><HeroSection /></div>
+      <div id="selected-works"><SelectedWorksSection /></div>
+      <div id="color-palette"><FreeToolTeaser /></div>
+      <div id="how-to-order"><HowToOrder /></div>
+      <div id="coming-soon"><ComingSoonSection /></div>
+      <div id="tagline"><TaglineSection /></div>
     </div>
   );
 };
