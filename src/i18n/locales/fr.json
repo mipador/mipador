@@ -178,10 +178,10 @@
     "comingSoonBody": "Nous ne pressons pas ce qui doit être intemporel. La prochaine collection Mipador se façonne lentement — à la main, par le matériau, avec patience.",
     "comingSoonPlaceholder": "VOTRE EMAIL",
     "comingSoonButton": "Me notifier",
-    "freeToolHeading": "Trouvez la palette",
-    "freeToolHeadingSoft": "parfaite pour votre espace.",
-    "freeToolBody": "Choisissez votre pièce et votre ambiance — obtenez une palette marocaine avec des meubles assortis. Gratuit, instantané, sans inscription.",
-    "freeToolCta": "Essayer l'outil gratuit"
+    "freeToolHeading": "Découvrez comment",
+    "freeToolHeadingSoft": "vivre votre couleur.",
+    "freeToolBody": "Choisissez une ambiance et recevez des rituels quotidiens, un mantra, une sensation à emporter — pas seulement une palette. Gratuit, instantané, sans inscription.",
+    "freeToolCta": "Trouver mon ambiance"
   },
   "footer": {
     "tagline": "Mobilier artisanal marocain pour des espaces qui se sentent vivants — livraison dans tout le Maroc.",
@@ -350,9 +350,9 @@
     },
     "hero": {
       "eyebrow": "Outil gratuit — Sans inscription",
-      "heading": "Trouvez la palette",
-      "headingSoft": "parfaite pour votre espace.",
-      "body": "Choisissez votre type de pièce et votre ambiance. Obtenez une palette de couleurs marocaine avec des meubles assortis — en quelques secondes."
+      "heading": "Découvrez comment",
+      "headingSoft": "vivre votre couleur.",
+      "body": "Choisissez une ambiance. Recevez une citation, des rituels quotidiens, un mantra, une sensation à emporter — en quelques secondes."
     },
     "step1": {
       "label": "Étape 1 sur 2",
@@ -397,6 +397,19 @@
       "talkToUs": "Vous aimez cette palette ?",
       "talkToUsHint": "Dites-nous vos couleurs et votre pièce — nous vous aiderons à choisir les bonnes pièces Mipador.",
       "shopCollection": "Voir la Collection"
+    },
+    "lifestyle": {
+      "aThoughtToCarry": "Une pensée à emporter",
+      "howToLive": "Comment vivre cette couleur",
+      "morning": "Matin",
+      "midday": "Midi",
+      "evening": "Soir",
+      "yourMantra": "Votre mantra",
+      "nextMantra": "Mantra suivant",
+      "soundOfThisVibe": "Le son de cette ambiance",
+      "saveVibe": "Sauvegarder cette ambiance",
+      "savedVibe": "Sauvegardé",
+      "matchingPiecesToggle": "Voir les pièces qui s'accordent avec cette ambiance"
     },
     "palettes": {
       "warmCozyName": "Chaleur de Marrakech",

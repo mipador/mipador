@@ -2,12 +2,13 @@ import React, { useState, useRef, useCallback, useMemo, useEffect } from "react"
 import { Link, useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { Check, Copy, MessageCircle, RotateCcw, Sparkles } from "lucide-react";
+import { Check, Copy, MessageCircle, RotateCcw, Sparkles, ChevronDown } from "lucide-react";
 import { useSEO, useJsonLd } from "../../hooks/useSEO";
 import { products } from "../../data/products";
 import { WHATSAPP_NUMBER } from "../../config/whatsapp";
 import ScrollToTop from "../../components/ScrollToTop";
-import { PALETTES, type PaletteId, type PaletteLang } from "./paletteData";
+import { PALETTES, type PaletteId, type PaletteLang, type RitualStep } from "./paletteData";
+import { VibeQuoteHero, RitualTimeline, MantraDeck, SoundscapeCard, SaveVibeButton } from "./VibeLifestyle";
 
 const SITE_URL = "https://mipador.com";
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -218,6 +219,13 @@ const ColorPalettePicker: React.FC = () => {
   const [step, setStep] = useState<1 | 2>(1);
   const [paletteId, setPaletteId] = useState<PaletteId | null>(null);
   const [copied, setCopied] = useState(false);
+  const [showProducts, setShowProducts] = useState(false);
+
+  const ritualTimeLabels: Record<RitualStep["time"], string> = {
+    morning: t("colorPicker.lifestyle.morning"),
+    midday: t("colorPicker.lifestyle.midday"),
+    evening: t("colorPicker.lifestyle.evening"),
+  };
 
   const resultsRef = useRef<HTMLDivElement>(null);
 
@@ -263,12 +271,14 @@ const ColorPalettePicker: React.FC = () => {
   const handlePaletteSelect = useCallback((id: PaletteId) => {
     setPaletteId(id);
     setStep(2);
+    setShowProducts(false);
     setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
   }, []);
 
   const handleReset = useCallback(() => {
     setPaletteId(null);
     setStep(1);
+    setShowProducts(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
@@ -446,13 +456,21 @@ const ColorPalettePicker: React.FC = () => {
                 <ColorBand swatches={activePalette.swatches} />
 
                 {/* Title */}
-                <div className={`px-6 py-5 ${activeTheme.textLight ? "text-white" : "text-[#3D1A12]"}`}>
-                  <p className={`text-xs font-black uppercase tracking-[0.2em] mb-1 ${activeTheme.textLight ? "text-white/50" : "text-[#3D1A12]/35"}`}>
-                    {t("colorPicker.results.yourPalette")}
-                  </p>
-                  <h2 className="text-3xl sm:text-4xl font-black">
-                    {activePalette.name[paletteLang]}
-                  </h2>
+                <div className={`px-6 py-5 flex items-end justify-between gap-4 ${activeTheme.textLight ? "text-white" : "text-[#3D1A12]"}`}>
+                  <div>
+                    <p className={`text-xs font-black uppercase tracking-[0.2em] mb-1 ${activeTheme.textLight ? "text-white/50" : "text-[#3D1A12]/35"}`}>
+                      {t("colorPicker.results.yourPalette")}
+                    </p>
+                    <h2 className="text-3xl sm:text-4xl font-black">
+                      {activePalette.name[paletteLang]}
+                    </h2>
+                  </div>
+                  <SaveVibeButton
+                    paletteId={activePalette.id}
+                    textLight={activeTheme.textLight}
+                    label={t("colorPicker.lifestyle.saveVibe")}
+                    savedLabel={t("colorPicker.lifestyle.savedVibe")}
+                  />
                 </div>
               </div>
 
@@ -556,88 +574,134 @@ const ColorPalettePicker: React.FC = () => {
                 );
               })()}
 
-              {/* ── Matching pieces ──────────────────────────────────────────── */}
-              <div className="mb-6">
-                <p className="text-xs font-black uppercase tracking-widest text-[#3D1A12]/35 mb-5 text-center">
-                  {t("colorPicker.results.matchingPieces")}
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {recommendedProducts.map((product, i) => (
+              {/* ── Lifestyle: how to live this color ─────────────────────────── */}
+              {(() => {
+                const lifestyle = activePalette.lifestyle[paletteLang];
+                const accent    = activePalette.swatches[0].hex;
+                return (
+                  <>
+                    <VibeQuoteHero
+                      quote={lifestyle.quote}
+                      accent={accent}
+                      label={t("colorPicker.lifestyle.aThoughtToCarry")}
+                    />
+                    <RitualTimeline
+                      rituals={lifestyle.rituals}
+                      paletteId={activePalette.id}
+                      isRTL={isRTL}
+                      heading={t("colorPicker.lifestyle.howToLive")}
+                      timeLabels={ritualTimeLabels}
+                    />
+                    <MantraDeck
+                      mantras={lifestyle.mantras}
+                      accent={accent}
+                      label={t("colorPicker.lifestyle.yourMantra")}
+                      nextLabel={t("colorPicker.lifestyle.nextMantra")}
+                    />
+                    <SoundscapeCard
+                      soundscape={lifestyle.soundscape}
+                      label={t("colorPicker.lifestyle.soundOfThisVibe")}
+                    />
+                  </>
+                );
+              })()}
+
+              {/* ── Matching pieces (collapsed, optional) ──────────────────────── */}
+              <div className="mb-8">
+                <button
+                  onClick={() => setShowProducts((v) => !v)}
+                  className={`w-full flex items-center justify-between gap-2 text-xs font-bold text-[#3D1A12]/45 hover:text-[#3D1A12] transition-colors px-1 py-3 ${isRTL ? "flex-row-reverse" : ""}`}
+                >
+                  {t("colorPicker.lifestyle.matchingPiecesToggle")}
+                  <motion.span animate={{ rotate: showProducts ? 180 : 0 }} transition={{ duration: 0.25, ease }}>
+                    <ChevronDown size={14} />
+                  </motion.span>
+                </button>
+                <AnimatePresence initial={false}>
+                  {showProducts && (
                     <motion.div
-                      key={product.id}
-                      initial={{ opacity: 0, y: 12 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, ease, delay: 0.15 + i * 0.08 }}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease }}
+                      className="overflow-hidden"
                     >
-                      <Link
-                        to={`/${l}/products/${product.slug}`}
-                        className="group block bg-white rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 border border-transparent hover:border-[#3D1A12]/8"
-                      >
-                        <div className="aspect-square overflow-hidden bg-[#F0EDE8]">
-                          <img
-                            src={product.images[0]}
-                            alt={product.name}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            loading="lazy"
-                          />
+                      <div className="pt-3">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+                          {recommendedProducts.map((product) => (
+                            <Link
+                              key={product.id}
+                              to={`/${l}/products/${product.slug}`}
+                              className="group block bg-white rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 border border-transparent hover:border-[#3D1A12]/8"
+                            >
+                              <div className="aspect-square overflow-hidden bg-[#F0EDE8]">
+                                <img
+                                  src={product.images[0]}
+                                  alt={product.name}
+                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                  loading="lazy"
+                                />
+                              </div>
+                              <div className="p-4">
+                                <p className="text-[10px] font-black uppercase tracking-widest text-[#3D1A12]/35 mb-1">
+                                  {product.collection}
+                                </p>
+                                <p className="text-sm font-black text-[#3D1A12] mb-1">{product.name}</p>
+                                <p className="text-xs text-[#3D1A12]/50 mb-3 line-clamp-2 leading-relaxed">
+                                  {product.tagline}
+                                </p>
+                                <div className="flex items-center justify-between">
+                                  <span className="text-sm font-black text-[#3D1A12]">
+                                    {product.price.toLocaleString()} MAD
+                                  </span>
+                                  <span className="text-xs font-bold text-[#3D1A12]/40 group-hover:text-[#3D1A12] transition-colors">
+                                    {t("colorPicker.results.viewProduct")} →
+                                  </span>
+                                </div>
+                              </div>
+                            </Link>
+                          ))}
                         </div>
-                        <div className="p-4">
-                          <p className="text-[10px] font-black uppercase tracking-widest text-[#3D1A12]/35 mb-1">
-                            {product.collection}
-                          </p>
-                          <p className="text-sm font-black text-[#3D1A12] mb-1">{product.name}</p>
-                          <p className="text-xs text-[#3D1A12]/50 mb-3 line-clamp-2 leading-relaxed">
-                            {product.tagline}
-                          </p>
-                          <div className="flex items-center justify-between">
-                            <span className="text-sm font-black text-[#3D1A12]">
-                              {product.price.toLocaleString()} MAD
-                            </span>
-                            <span className="text-xs font-bold text-[#3D1A12]/40 group-hover:text-[#3D1A12] transition-colors">
-                              {t("colorPicker.results.viewProduct")} →
-                            </span>
+
+                        {/* ── CTAs ─────────────────────────────────────────────── */}
+                        <div
+                          className="rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row gap-5 items-center justify-between"
+                          style={{ backgroundColor: activeTheme.bg }}
+                        >
+                          <div>
+                            <p className={`font-black mb-1 ${activeTheme.textLight ? "text-white" : "text-[#3D1A12]"}`}>
+                              {t("colorPicker.results.talkToUs")}
+                            </p>
+                            <p className={`text-xs max-w-xs ${activeTheme.textLight ? "text-white/50" : "text-[#3D1A12]/50"}`}>
+                              {t("colorPicker.results.talkToUsHint")}
+                            </p>
+                          </div>
+                          <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+                            <a
+                              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMsg}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={`flex items-center justify-center gap-2 bg-[#25D366] text-white text-xs font-black uppercase tracking-widest px-5 py-3 rounded-xl hover:bg-[#20b858] transition-colors ${isRTL ? "flex-row-reverse" : ""}`}
+                            >
+                              <MessageCircle size={14} />
+                              WhatsApp
+                            </a>
+                            <Link
+                              to={`/${l}/products`}
+                              className={`flex items-center justify-center text-xs font-black uppercase tracking-widest px-5 py-3 rounded-xl transition-colors ${
+                                activeTheme.textLight
+                                  ? "bg-white text-[#3D1A12] hover:bg-white/90"
+                                  : "bg-[#3D1A12] text-white hover:bg-[#3D1A12]/90"
+                              }`}
+                            >
+                              {t("colorPicker.results.shopCollection")}
+                            </Link>
                           </div>
                         </div>
-                      </Link>
+                      </div>
                     </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* ── CTAs ─────────────────────────────────────────────────────── */}
-              <div
-                className="rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row gap-5 items-center justify-between mb-8"
-                style={{ backgroundColor: activeTheme.bg }}
-              >
-                <div>
-                  <p className={`font-black mb-1 ${activeTheme.textLight ? "text-white" : "text-[#3D1A12]"}`}>
-                    {t("colorPicker.results.talkToUs")}
-                  </p>
-                  <p className={`text-xs max-w-xs ${activeTheme.textLight ? "text-white/50" : "text-[#3D1A12]/50"}`}>
-                    {t("colorPicker.results.talkToUsHint")}
-                  </p>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-                  <a
-                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMsg}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center justify-center gap-2 bg-[#25D366] text-white text-xs font-black uppercase tracking-widest px-5 py-3 rounded-xl hover:bg-[#20b858] transition-colors ${isRTL ? "flex-row-reverse" : ""}`}
-                  >
-                    <MessageCircle size={14} />
-                    WhatsApp
-                  </a>
-                  <Link
-                    to={`/${l}/products`}
-                    className={`flex items-center justify-center text-xs font-black uppercase tracking-widest px-5 py-3 rounded-xl transition-colors ${
-                      activeTheme.textLight
-                        ? "bg-white text-[#3D1A12] hover:bg-white/90"
-                        : "bg-[#3D1A12] text-white hover:bg-[#3D1A12]/90"
-                    }`}
-                  >
-                    {t("colorPicker.results.shopCollection")}
-                  </Link>
-                </div>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* Start over */}

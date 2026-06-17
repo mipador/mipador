@@ -165,7 +165,7 @@ const FreeToolTeaser: React.FC = () => {
                 </motion.div>
               ))}
               <p className="text-[10px] font-bold uppercase tracking-widest text-white/25 mt-2 text-center">
-                12 palettes · 8 rooms
+                12 vibes · daily rituals
               </p>
             </div>
           </div>

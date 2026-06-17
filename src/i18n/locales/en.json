@@ -178,10 +178,10 @@
     "comingSoonBody": "We don't rush what should be timeless. The next Mipador collection is being shaped slowly — by hand, by material, by patience.",
     "comingSoonPlaceholder": "YOUR EMAIL",
     "comingSoonButton": "Notify Me",
-    "freeToolHeading": "Find your room's",
-    "freeToolHeadingSoft": "perfect color palette.",
-    "freeToolBody": "Pick your room type and mood — get a Moroccan-inspired palette with matching furniture picks. Free, instant, no sign-up.",
-    "freeToolCta": "Try the free tool"
+    "freeToolHeading": "Discover how to",
+    "freeToolHeadingSoft": "live your color.",
+    "freeToolBody": "Pick a vibe and get daily rituals, a mantra, and a feeling to carry with you — not just a palette. Free, instant, no sign-up.",
+    "freeToolCta": "Find your vibe"
   },
   "footer": {
     "tagline": "Handcrafted Moroccan furniture for spaces that feel alive — delivered across Morocco.",
@@ -350,9 +350,9 @@
     },
     "hero": {
       "eyebrow": "Free Tool — No sign-up needed",
-      "heading": "Find your room's",
-      "headingSoft": "perfect palette.",
-      "body": "Pick your room type and mood. Get a curated Moroccan-inspired color palette with matching furniture pieces — in seconds."
+      "heading": "Discover how to",
+      "headingSoft": "live your color.",
+      "body": "Pick a vibe. Get a quote, daily rituals, a mantra, and a feeling to carry with you — in seconds."
     },
     "step1": {
       "label": "Step 1 of 2",
@@ -397,6 +397,19 @@
       "talkToUs": "Love this palette?",
       "talkToUsHint": "Tell us your colors and room — we'll help you choose the right Mipador pieces.",
       "shopCollection": "Shop the Collection"
+    },
+    "lifestyle": {
+      "aThoughtToCarry": "A thought to carry",
+      "howToLive": "How to live this color",
+      "morning": "Morning",
+      "midday": "Midday",
+      "evening": "Evening",
+      "yourMantra": "Your mantra",
+      "nextMantra": "Next mantra",
+      "soundOfThisVibe": "The sound of this vibe",
+      "saveVibe": "Save this vibe",
+      "savedVibe": "Saved",
+      "matchingPiecesToggle": "See pieces that match this vibe"
     },
     "palettes": {
       "warmCozyName": "Marrakech Warmth",

@@ -25,12 +25,25 @@ export interface VibeContent {
   bestFor: string[];
 }
 
+export interface RitualStep {
+  time: "morning" | "midday" | "evening";
+  advice: string;
+}
+
+export interface LifestyleContent {
+  quote: { text: string; source?: string };
+  rituals: RitualStep[];
+  mantras: string[];
+  soundscape: string;
+}
+
 export interface PaletteEntry {
   id: PaletteId;
   name: Record<PaletteLang, string>;
   swatches: Swatch[];
   productSlugs: string[];
   vibe: Record<PaletteLang, VibeContent>;
+  lifestyle: Record<PaletteLang, LifestyleContent>;
 }
 
 // ── Room → product preference order ──────────────────────────────────────────
@@ -90,6 +103,48 @@ export const PALETTES: PaletteEntry[] = [
         bestFor: ["أحاديث الليل", "الراحة", "التجمعات العائلية", "القراية"],
       },
     },
+    lifestyle: {
+      en: {
+        quote: { text: "A home is not built to impress guests. It's built to hold the people you love.", source: "Moroccan proverb" },
+        rituals: [
+          { time: "morning", advice: "Brew mint tea before checking your phone. Let the first ten minutes of your day be slow." },
+          { time: "midday", advice: "Step outside, even for five minutes. Let the sun touch your face before you sit back down." },
+          { time: "evening", advice: "Dim the lights an hour before bed. Light a candle instead of a screen." },
+        ],
+        mantras: ["I make room for warmth.", "Slow mornings build steady days.", "My home holds what matters.", "I choose comfort over performance.", "Every evening is an occasion."],
+        soundscape: "Oud strings, a simmering pot, distant laughter from the courtyard.",
+      },
+      fr: {
+        quote: { text: "Une maison ne se construit pas pour impressionner les invités. Elle se construit pour accueillir ceux qu'on aime.", source: "Proverbe marocain" },
+        rituals: [
+          { time: "morning", advice: "Préparez un thé à la menthe avant de regarder votre téléphone. Laissez les dix premières minutes de la journée être lentes." },
+          { time: "midday", advice: "Sortez, même cinq minutes. Laissez le soleil toucher votre visage avant de vous rasseoir." },
+          { time: "evening", advice: "Baissez les lumières une heure avant de dormir. Allumez une bougie plutôt qu'un écran." },
+        ],
+        mantras: ["Je fais de la place pour la chaleur.", "Les matins lents construisent des journées stables.", "Mon foyer contient ce qui compte.", "Je choisis le confort plutôt que la performance.", "Chaque soir devient une occasion."],
+        soundscape: "Cordes d'oud, une marmite qui mijote, des rires lointains dans la cour.",
+      },
+      ar: {
+        quote: { text: "البيت لا يُبنى لإبهار الضيوف. يُبنى ليحتضن من نحب.", source: "مثل مغربي" },
+        rituals: [
+          { time: "morning", advice: "اشرب أتاي بالنعناع قبل أن تتفقد هاتفك. اجعل أول عشر دقائق من يومك بطيئة وهادئة." },
+          { time: "midday", advice: "اخرج ولو لخمس دقائق. دع الشمس تلامس وجهك قبل أن تعود للجلوس." },
+          { time: "evening", advice: "خفّف الإضاءة قبل النوم بساعة. أشعل شمعة بدل أن تنظر إلى شاشة." },
+        ],
+        mantras: ["أفسح مكانًا للدفء.", "الصباحات الهادئة تبني أيامًا ثابتة.", "بيتي يحتضن ما يهم حقًا.", "أختار الراحة على الاستعراض.", "كل مساء يصبح مناسبة."],
+        soundscape: "أوتار العود، قِدر يغلي على نار هادئة، ضحكات بعيدة في الفناء.",
+      },
+      ma: {
+        quote: { text: "الدار ما كتبناش باش تعجب الضياف. كتبنى باش تحضن اللي كتحبهم.", source: "مثل مغربي" },
+        rituals: [
+          { time: "morning", advice: "دير أتاي بالنعناع قبل ما تشوف التيليفون ديالك. خلي أول عشر دقايق ديال نهارك بطيئين." },
+          { time: "midday", advice: "خرج ولو خمس دقايق. خلي الشمس تلمس وجهك قبل ما ترجع تقعد." },
+          { time: "evening", advice: "نقص الضوء قبل ما تنعس بساعة. شعل شمعة بدل ما تبقى فالشاشة." },
+        ],
+        mantras: ["كنفسح بلاصة للدفء.", "الصباحات الهادئة كيبنيو أيام ثابتة.", "داري كتحضن اللي يهم.", "كنختار الراحة على الواجهة.", "كل عشية كتولي مناسبة."],
+        soundscape: "أوتار العود، قدرة كتغلي بهدوء، ضحك بعيد فالصحن.",
+      },
+    },
   },
 
   // 2 ─ Fresh & Bright ─────────────────────────────────────────────────────────
@@ -133,6 +188,48 @@ export const PALETTES: PaletteEntry[] = [
         desc: "السالفية والكتان كيخدمو مع بعضهم بحال ضوء الصباح مع الأرز — بسهولة. هاد البالطة كتفتح البلاصة من غير ما تفرغها. الألوان الفاتحة ديال الخشب كتحافظ على الدفء والخضرة الهادئة كتزيد حياة. كتلاحظ راسك كتفكر بوضوح أكثر هنا.",
         feel: ["وضوح", "نشاط", "تركيز", "ارتياح"],
         bestFor: ["الصباحات", "بلاصة الخدمة", "الإبداع", "الربيع والصيف"],
+      },
+    },
+    lifestyle: {
+      en: {
+        quote: { text: "Clear air outside, a clear mind inside — one always follows the other." },
+        rituals: [
+          { time: "morning", advice: "Open every window first thing, even in winter. Let the old air out before the day starts." },
+          { time: "midday", advice: "Step away from your desk and breathe outdoors for five minutes — not at it, in it." },
+          { time: "evening", advice: "Write down one thing that felt clear today. Let go of the rest." },
+        ],
+        mantras: ["I think clearly when I breathe deeply.", "Simplicity is its own kind of luxury.", "I make space before I make plans.", "Fresh air, fresh start.", "I let mornings set the tone."],
+        soundscape: "Birdsong through an open window, the rustle of linen curtains.",
+      },
+      fr: {
+        quote: { text: "L'air pur dehors, l'esprit clair dedans — l'un suit toujours l'autre." },
+        rituals: [
+          { time: "morning", advice: "Ouvrez toutes les fenêtres dès le réveil, même en hiver. Laissez sortir l'air ancien avant que la journée commence." },
+          { time: "midday", advice: "Éloignez-vous de votre bureau et respirez dehors cinq minutes — pas à côté, dedans." },
+          { time: "evening", advice: "Notez une chose qui vous a semblé claire aujourd'hui. Laissez le reste partir." },
+        ],
+        mantras: ["Je pense clairement quand je respire profondément.", "La simplicité est un luxe en soi.", "Je fais de l'espace avant de faire des plans.", "Air frais, nouveau départ.", "Je laisse les matins donner le ton."],
+        soundscape: "Chant d'oiseaux par une fenêtre ouverte, le bruissement des rideaux en lin.",
+      },
+      ar: {
+        quote: { text: "هواء نقي في الخارج، عقل صافٍ في الداخل — أحدهما يتبع الآخر دائمًا." },
+        rituals: [
+          { time: "morning", advice: "افتح كل النوافذ فور استيقاظك، حتى في الشتاء. أخرج هواء الأمس قبل أن يبدأ يومك." },
+          { time: "midday", advice: "ابتعد عن مكتبك وتنفس في الخارج خمس دقائق — ليس بجانب الهواء، بل داخله." },
+          { time: "evening", advice: "اكتب شيئًا واحدًا بدا لك واضحًا اليوم. اترك البقية تذهب." },
+        ],
+        mantras: ["أفكر بوضوح حين أتنفس بعمق.", "البساطة نوع من الرفاهية بحد ذاتها.", "أفسح المجال قبل أن أضع الخطط.", "هواء نقي، بداية جديدة.", "أدع الصباحات تحدد نغمة يومي."],
+        soundscape: "زقزقة العصافير من نافذة مفتوحة، حفيف ستائر الكتان.",
+      },
+      ma: {
+        quote: { text: "هواء نقي بره، بال صافي داخل — واحد كيتبع الآخر ديما." },
+        rituals: [
+          { time: "morning", advice: "حل كل الشراجم منين تفيق، حتى فالبرد. خرج الهواء القديم قبل ما يبدا نهارك." },
+          { time: "midday", advice: "بعد على المكتب وتنفس فالخارج خمس دقايق — ماشي حداه، فيه." },
+          { time: "evening", advice: "كتب حاجة واحدة بانت ليك واضحة اليوم. خلي الباقي يمشي." },
+        ],
+        mantras: ["كنفكر بوضوح منين كنتنفس بعمق.", "البساطة هي شي نوع ديال الرفاهية.", "كنفسح المجال قبل ما ندير الخطط.", "هواء جديد، بداية جديدة.", "كنخلي الصباحات تحدد طابع نهاري."],
+        soundscape: "تغريد العصافر من شرجم محلول، حفيف الستائر ديال الكتان.",
       },
     },
   },
@@ -180,6 +277,48 @@ export const PALETTES: PaletteEntry[] = [
         bestFor: ["العيشة ديال الليل", "الستوديوهات", "البيرو المنزلي", "جامعو الفن"],
       },
     },
+    lifestyle: {
+      en: {
+        quote: { text: "The desert doesn't whisper. It commands — and so should the life you build." },
+        rituals: [
+          { time: "morning", advice: "Wake before the noise starts. Use the first hour for the work only you can do." },
+          { time: "midday", advice: "Protect one hour from meetings. Guard your focus like it's worth something — because it is." },
+          { time: "evening", advice: "Turn off overhead lights. Work or read by lamp light only, like candlelight in a kasbah." },
+        ],
+        mantras: ["I take up the space I need.", "Quiet confidence is still confidence.", "I choose depth over noise.", "My focus is my most valuable resource.", "I build with intention, not urgency."],
+        soundscape: "Low percussion, wind over dunes, a single oud note held long.",
+      },
+      fr: {
+        quote: { text: "Le désert ne chuchote pas. Il s'impose — et la vie que vous construisez devrait faire de même." },
+        rituals: [
+          { time: "morning", advice: "Réveillez-vous avant le bruit. Utilisez la première heure pour le travail que vous seul pouvez faire." },
+          { time: "midday", advice: "Protégez une heure des réunions. Gardez votre concentration comme si elle avait de la valeur — parce que c'est le cas." },
+          { time: "evening", advice: "Éteignez les lumières du plafond. Travaillez ou lisez seulement à la lampe, comme à la lueur d'une bougie dans une kasbah." },
+        ],
+        mantras: ["Je prends la place dont j'ai besoin.", "La confiance tranquille reste de la confiance.", "Je choisis la profondeur plutôt que le bruit.", "Ma concentration est ma ressource la plus précieuse.", "Je construis avec intention, pas avec urgence."],
+        soundscape: "Percussions graves, le vent sur les dunes, une seule note d'oud tenue longtemps.",
+      },
+      ar: {
+        quote: { text: "الصحراء لا تهمس. إنها تفرض حضورها — وهكذا يجب أن تكون الحياة التي تبنيها." },
+        rituals: [
+          { time: "morning", advice: "استيقظ قبل أن تبدأ الضوضاء. استخدم الساعة الأولى للعمل الذي لا يقدر عليه غيرك." },
+          { time: "midday", advice: "احمِ ساعة واحدة من الاجتماعات. احرس تركيزك وكأنه يستحق ذلك — لأنه كذلك فعلاً." },
+          { time: "evening", advice: "أطفئ الإضاءة العلوية. اعمل أو اقرأ بضوء المصباح فقط، كشمعة في قصبة." },
+        ],
+        mantras: ["آخذ المساحة التي أحتاجها.", "الثقة الهادئة تبقى ثقة.", "أختار العمق على الضجيج.", "تركيزي هو موردي الأثمن.", "أبني بقصد، لا بتسرع."],
+        soundscape: "إيقاع منخفض، ريح فوق الكثبان، نغمة عود واحدة ممدودة طويلًا.",
+      },
+      ma: {
+        quote: { text: "الصحرا ما كتهمسش. كتفرض راسها — وهكاك خاصها تكون الحياة اللي كتبني." },
+        rituals: [
+          { time: "morning", advice: "فيق قبل ما تبدا الضجة. استعمل أول ساعة فالخدمة اللي غير نتا قادر تديرها." },
+          { time: "midday", advice: "حمي ساعة وحدة من الاجتماعات. حارس على التركيز ديالك بحال كيستاهل — لأنه فعلا كيستاهل." },
+          { time: "evening", advice: "طفي الضو ديال السقف. خدم ولا قرا غير بضو المصباح، بحال شمعة فقصبة." },
+        ],
+        mantras: ["كناخد البلاصة اللي محتاجها.", "الثقة الهادئة تبقى ثقة.", "كنختار العمق على الضجة.", "التركيز ديالي هو الكنز ديالي.", "كنبني بقصد، ماشي بالعجلة."],
+        soundscape: "إيقاع منخفض، ريح فوق الكثبان، نوتة عود وحدة طويلة.",
+      },
+    },
   },
 
   // 4 ─ Natural & Minimal ──────────────────────────────────────────────────────
@@ -223,6 +362,48 @@ export const PALETTES: PaletteEntry[] = [
         desc: "كتان خام وحجر دافئ وتراب — هاد ألوان الأرض قبل ما تتشكل. هاد البالطة كتقلص البلاصة لأصلها، غير الصادق يبقى. ما كاين حتى حاجة تتنافس. كلشي متجانس. كتوصل هنا وكتحس، بطريقة، بيلا كنت منتظر.",
         feel: ["سكون", "راحة", "حضور", "حرية"],
         bestFor: ["التأمل", "العيشة البسيطة", "الغرف الهادئة", "طول العام"],
+      },
+    },
+    lifestyle: {
+      en: {
+        quote: { text: "Nothing asks anything of stone. It simply is — and that is enough." },
+        rituals: [
+          { time: "morning", advice: "Make your bed before anything else. Let order be the first thing you create each day." },
+          { time: "midday", advice: "Eat one meal without a screen nearby. Taste what you're actually eating." },
+          { time: "evening", advice: "Remove one object from a surface before bed. Let your space empty as your mind empties." },
+        ],
+        mantras: ["Less around me, more within me.", "I don't need to fill silence.", "Stillness is productive too.", "I keep only what earns its place.", "Calm is a discipline, not an accident."],
+        soundscape: "Wind across open sand, a single bowl of water, near silence.",
+      },
+      fr: {
+        quote: { text: "La pierre ne demande rien. Elle est, simplement — et cela suffit." },
+        rituals: [
+          { time: "morning", advice: "Faites votre lit avant toute autre chose. Que l'ordre soit la première chose que vous créez chaque jour." },
+          { time: "midday", advice: "Mangez un repas sans écran à proximité. Goûtez vraiment ce que vous mangez." },
+          { time: "evening", advice: "Retirez un objet d'une surface avant de dormir. Laissez votre espace se vider comme votre esprit se vide." },
+        ],
+        mantras: ["Moins autour de moi, plus en moi.", "Je n'ai pas besoin de remplir le silence.", "L'immobilité est productive aussi.", "Je ne garde que ce qui mérite sa place.", "Le calme est une discipline, pas un hasard."],
+        soundscape: "Le vent sur le sable, un bol d'eau, presque le silence.",
+      },
+      ar: {
+        quote: { text: "الحجر لا يطلب شيئًا. هو موجود، وهذا يكفي." },
+        rituals: [
+          { time: "morning", advice: "رتّب سريرك قبل أي شيء آخر. دع النظام يكون أول ما تصنعه كل يوم." },
+          { time: "midday", advice: "تناول وجبة واحدة بلا شاشة قريبة منك. تذوّق ما تأكله فعلاً." },
+          { time: "evening", advice: "أزل غرضًا واحدًا عن سطح ما قبل النوم. دع مساحتك تفرغ كما يفرغ عقلك." },
+        ],
+        mantras: ["أقل من حولي، أكثر بداخلي.", "لست بحاجة لملء الصمت.", "السكون منتج أيضًا.", "أحتفظ فقط بما يستحق مكانه.", "الهدوء انضباط، لا صدفة."],
+        soundscape: "ريح فوق رمال مفتوحة، وعاء ماء واحد، صمت يكاد يكون تامًا.",
+      },
+      ma: {
+        quote: { text: "الحجر ما كيطلب والو. هو كاين، وهادشي كافي." },
+        rituals: [
+          { time: "morning", advice: "رتب فراشك قبل أي حاجة أخرى. خلي الترتيب يكون أول حاجة كتدير كل يوم." },
+          { time: "midday", advice: "كول وجبة بلا شاشة قريبة منك. دوق فعلا اللي كتاكل." },
+          { time: "evening", advice: "نحي حاجة وحدة من فوق طاولة قبل ما تنعس. خلي بلاصتك تفرغ بحال ما كيفرغ عقلك." },
+        ],
+        mantras: ["شوية حولي، بزاف فيا.", "ما محتاجش نعمر الصمت.", "السكون منتج هو ايضا.", "كنحتفظ غير بللي كيستاهل بلاصته.", "الهدوء انضباط، ماشي صدفة."],
+        soundscape: "ريح فوق رمل مفتوح، طاسة ماء وحدة، سكون يقارب التام.",
       },
     },
   },
@@ -270,6 +451,48 @@ export const PALETTES: PaletteEntry[] = [
         bestFor: ["الأسطح والبلاصات الساحلية", "الحمامات", "بلاصة الخدمة", "التأمل"],
       },
     },
+    lifestyle: {
+      en: {
+        quote: { text: "Water always finds the lowest, calmest place to rest. So should you." },
+        rituals: [
+          { time: "morning", advice: "Drink a full glass of water before coffee. Let your body wake up before your mind does." },
+          { time: "midday", advice: "Find blue — sky, water, tile — and look at it for one full minute, on purpose." },
+          { time: "evening", advice: "Run water over your hands or face slowly. Let it be a small ritual, not a chore." },
+        ],
+        mantras: ["I move like water — around, not against.", "Clarity comes when I slow down.", "I let things flow instead of forcing them.", "Serenity is a choice I make daily.", "I breathe deeper near blue."],
+        soundscape: "A courtyard fountain, distant call to prayer, soft Atlantic wind.",
+      },
+      fr: {
+        quote: { text: "L'eau trouve toujours l'endroit le plus calme pour se reposer. Vous aussi." },
+        rituals: [
+          { time: "morning", advice: "Buvez un grand verre d'eau avant le café. Laissez votre corps se réveiller avant votre esprit." },
+          { time: "midday", advice: "Trouvez du bleu — ciel, eau, zellige — et regardez-le une minute entière, exprès." },
+          { time: "evening", advice: "Laissez couler l'eau lentement sur vos mains ou votre visage. Que ce soit un petit rituel, pas une corvée." },
+        ],
+        mantras: ["Je me déplace comme l'eau — autour, pas contre.", "La clarté vient quand je ralentis.", "Je laisse les choses couler au lieu de les forcer.", "La sérénité est un choix quotidien.", "Je respire plus profondément près du bleu."],
+        soundscape: "Une fontaine de cour, un appel à la prière au loin, une douce brise atlantique.",
+      },
+      ar: {
+        quote: { text: "الماء يجد دائمًا أهدأ مكان ليستقر فيه. وكذلك يجب أن تفعل أنت." },
+        rituals: [
+          { time: "morning", advice: "اشرب كأس ماء كاملًا قبل القهوة. دع جسدك يستيقظ قبل عقلك." },
+          { time: "midday", advice: "ابحث عن اللون الأزرق — سماء، ماء، زليج — وانظر إليه دقيقة كاملة، عن قصد." },
+          { time: "evening", advice: "اترك الماء يجري ببطء على يديك أو وجهك. اجعلها طقسًا صغيرًا، لا مهمة." },
+        ],
+        mantras: ["أتحرك كالماء — حول العوائق، لا ضدها.", "الوضوح يأتي حين أبطئ.", "أدع الأمور تجري بدل أن أفرضها.", "الصفاء خيار أتخذه كل يوم.", "أتنفس بعمق أكبر قرب الأزرق."],
+        soundscape: "نافورة فناء، أذان بعيد، نسيم أطلسي ناعم.",
+      },
+      ma: {
+        quote: { text: "الماء ديما كيلقى أهدى بلاصة باش يرتاح فيها. خاصك نتا تدير حتى نتا هكاك." },
+        rituals: [
+          { time: "morning", advice: "شرب كاس ماء كامل قبل القهوة. خلي جسمك يفيق قبل عقلك." },
+          { time: "midday", advice: "قلب على الأزرق — سما، ماء، زليج — وشوف فيه دقيقة كاملة، بقصد." },
+          { time: "evening", advice: "خلي الماء يجري بشوية فوق يديك ولا وجهك. خليها طقس صغير، ماشي واجب." },
+        ],
+        mantras: ["كنتحرك بحال الماء — حول العوائق، ماشي ضدها.", "الوضوح كيجي منين كنبطئ.", "كنخلي الأمور تجري بدل ما نفرضها.", "الصفاء اختيار كندير كل يوم.", "كنتنفس بعمق أكثر حدا الأزرق."],
+        soundscape: "سبيل فالصحن، أذان بعيد، نسيم أطلسي ناعم.",
+      },
+    },
   },
 
   // 6 ─ Earthy & Raw ───────────────────────────────────────────────────────────
@@ -313,6 +536,48 @@ export const PALETTES: PaletteEntry[] = [
         desc: "هادي هي البالطة ديال التادلاكت والصلصال المصنوع باليد والبلاصات اللي كتحس فيها بالعيش من أول يوم. الألوان الأوكر والأمبر كيخلقو دفء بلا حلاوة — أصيل وثابت وصادق. البيت المبني بهاد البالطة ما محتاجش لوحات — الجيطان هيا اللوحة.",
         feel: ["جذور", "أصالة", "هدوء", "انتماء"],
         bestFor: ["الصالونات وبيت الماكلة", "الديكور الحرفي", "الداخلية العضوية", "المقتنين"],
+      },
+    },
+    lifestyle: {
+      en: {
+        quote: { text: "What is made by hand carries the maker's patience inside it forever." },
+        rituals: [
+          { time: "morning", advice: "Touch something handmade before you touch your phone — a mug, a stone, your own palm." },
+          { time: "midday", advice: "Do one task slowly on purpose, the way an artisan would, even if it's small." },
+          { time: "evening", advice: "Notice one mark of wear in your home — a scratch, a patina — and let it be beautiful." },
+        ],
+        mantras: ["I am allowed to take my time.", "Imperfection is evidence of life lived.", "I value what lasts over what's instant.", "My hands know things my mind forgets.", "Authenticity over polish, always."],
+        soundscape: "Hands shaping wet clay, a chisel on stone, low conversation in a workshop.",
+      },
+      fr: {
+        quote: { text: "Ce qui est fait à la main porte pour toujours la patience de son créateur." },
+        rituals: [
+          { time: "morning", advice: "Touchez quelque chose de fait main avant votre téléphone — une tasse, une pierre, votre propre paume." },
+          { time: "midday", advice: "Faites une tâche lentement et exprès, comme le ferait un artisan, même si c'est petit." },
+          { time: "evening", advice: "Remarquez une trace d'usure chez vous — une rayure, une patine — et laissez-la être belle." },
+        ],
+        mantras: ["J'ai le droit de prendre mon temps.", "L'imperfection est la preuve d'une vie vécue.", "Je valorise ce qui dure plus que ce qui est instantané.", "Mes mains savent des choses que mon esprit oublie.", "L'authenticité avant tout, toujours."],
+        soundscape: "Des mains façonnant l'argile humide, un ciseau sur la pierre, une conversation discrète dans un atelier.",
+      },
+      ar: {
+        quote: { text: "ما يُصنع باليد يحمل صبر صانعه إلى الأبد." },
+        rituals: [
+          { time: "morning", advice: "المس شيئًا مصنوعًا يدويًا قبل هاتفك — كوبًا، حجرًا، راحة يدك." },
+          { time: "midday", advice: "أنجز مهمة واحدة ببطء وعن قصد، كما يفعل الحرفي، حتى لو كانت صغيرة." },
+          { time: "evening", advice: "لاحظ أثر استخدام واحد في بيتك — خدشًا، طبقة تقادم — ودعه يكون جميلًا." },
+        ],
+        mantras: ["يحق لي أن آخذ وقتي.", "النقص دليل على حياة عاشها صاحبها.", "أُقدّر ما يدوم على ما هو سريع.", "يداي تعرفان أشياء ينساها عقلي.", "الأصالة قبل أي شيء، دائمًا."],
+        soundscape: "أيدٍ تشكّل الطين الرطب، إزميل على حجر، حديث هادئ في ورشة.",
+      },
+      ma: {
+        quote: { text: "اللي تصنع باليد كيحمل صبر صانعو لمول العمر." },
+        rituals: [
+          { time: "morning", advice: "مس حاجة مصنوعة باليد قبل التيليفون — كاس، حجرة، كف يدك." },
+          { time: "midday", advice: "دير مهمة وحدة بشوية وبقصد، بحال الصانع، حتى لو صغيرة." },
+          { time: "evening", advice: "لاحظ أثر استعمال فدارك — خدش، لون قديم — وخليه يكون زوين." },
+        ],
+        mantras: ["عندي الحق ناخد الوقت ديالي.", "النقص دليل على حياة معاشة.", "كنقدر اللي كيدوم على اللي سريع.", "يدي عارفين حوايج عقلي كينساها.", "الأصالة قبل كلشي، ديما."],
+        soundscape: "ايدي كتشكل الطين الرطب، إزميل فوق حجرة، حديث هادي فورشة.",
       },
     },
   },
@@ -360,6 +625,48 @@ export const PALETTES: PaletteEntry[] = [
         bestFor: ["الغرفة", "ركن القراية", "البيرو", "الخريف والشتاء"],
       },
     },
+    lifestyle: {
+      en: {
+        quote: { text: "The mountain doesn't rush the seasons. It simply waits, rooted, for what's next." },
+        rituals: [
+          { time: "morning", advice: "Step outside before checking any screen. Look at something green or growing for a moment." },
+          { time: "midday", advice: "Take the long way somewhere today, even by two minutes. Let yourself wander once." },
+          { time: "evening", advice: "Read one page of something that has nothing to do with work." },
+        ],
+        mantras: ["I am rooted, even when things move fast.", "Refuge is something I build, not find.", "I protect my own quiet.", "Depth takes time — I give it time.", "I am allowed a sanctuary."],
+        soundscape: "Wind through cedar branches, a creaking floorboard, a distant owl.",
+      },
+      fr: {
+        quote: { text: "La montagne ne presse pas les saisons. Elle attend, enracinée, ce qui vient." },
+        rituals: [
+          { time: "morning", advice: "Sortez avant de regarder un écran. Observez quelque chose de vert ou de vivant un instant." },
+          { time: "midday", advice: "Prenez le chemin le plus long aujourd'hui, même deux minutes de plus. Laissez-vous vagabonder une fois." },
+          { time: "evening", advice: "Lisez une page de quelque chose qui n'a rien à voir avec le travail." },
+        ],
+        mantras: ["Je suis enraciné, même quand tout va vite.", "Le refuge se construit, il ne se trouve pas.", "Je protège mon propre calme.", "La profondeur prend du temps — je le lui donne.", "J'ai le droit à un sanctuaire."],
+        soundscape: "Le vent dans les cèdres, un plancher qui craque, un hibou au loin.",
+      },
+      ar: {
+        quote: { text: "الجبل لا يستعجل الفصول. ينتظر، راسخًا، ما سيأتي." },
+        rituals: [
+          { time: "morning", advice: "اخرج قبل أن تنظر إلى أي شاشة. انظر إلى شيء أخضر أو نامٍ للحظة." },
+          { time: "midday", advice: "خذ الطريق الأطول اليوم، ولو لدقيقتين إضافيتين. دع نفسك تتجول مرة." },
+          { time: "evening", advice: "اقرأ صفحة واحدة من شيء لا علاقة له بالعمل." },
+        ],
+        mantras: ["أنا راسخ، حتى حين تتسارع الأمور.", "الملجأ يُبنى، لا يُوجد.", "أحمي هدوئي الخاص.", "العمق يحتاج وقتًا — أمنحه إياه.", "يحق لي أن أملك ملاذًا."],
+        soundscape: "ريح بين أغصان الأرز، أرضية تصرّ، بومة بعيدة.",
+      },
+      ma: {
+        quote: { text: "الجبل ما كيستعجلش الفصول. كينتظر، ثابت، اللي غادي يجي." },
+        rituals: [
+          { time: "morning", advice: "خرج قبل ما تشوف شاشة. شوف حاجة خضراء ولا نامية للحظة." },
+          { time: "midday", advice: "خود الطريق الطويلة اليوم، حتى لو دقيقتين زيادة. خلي راسك يتمشى مرة." },
+          { time: "evening", advice: "قرا صفحة من حاجة ماعندها علاقة بالخدمة." },
+        ],
+        mantras: ["أنا ثابت، حتى منين الأمور كتسرع.", "الملجأ كيتبنى، ما كيتلقاش.", "كنحمي هدوئي.", "العمق كيحتاج وقت — كنعطيه.", "عندي الحق فملجأ."],
+        soundscape: "ريح بين أغصان الأرز، أرضية كتصرصر، بومة بعيدة.",
+      },
+    },
   },
 
   // 8 ─ Dusty Rose ─────────────────────────────────────────────────────────────
@@ -403,6 +710,48 @@ export const PALETTES: PaletteEntry[] = [
         desc: "الوردي المتربّد مش حلو — ناضج ورومانسي بعمق من غير ما يحاول. هاد الألوان كتخلق بلاصات كتتنفس فيها بعمق من غير ما تحس. ناعم ومحيط، بحال الضوء اللي كيوقع قبيل الغروب — منين كيلين كلشي وما كاين حتى حاجة مستعجلة.",
         feel: ["رقة", "راحة", "حميمية", "دفء"],
         bestFor: ["الغرفة", "الصالون", "ركن القراية", "التجمعات الحميمة"],
+      },
+    },
+    lifestyle: {
+      en: {
+        quote: { text: "The softest hour of the day asks nothing of you but to notice it." },
+        rituals: [
+          { time: "morning", advice: "Linger in bed for two extra minutes. Let waking up be gentle, not abrupt." },
+          { time: "midday", advice: "Send one kind, unnecessary message to someone you love." },
+          { time: "evening", advice: "Watch the sky change color, even from a window, for as long as it takes." },
+        ],
+        mantras: ["Softness is not weakness.", "I let myself be tender today.", "Rest is something I deserve, not earn.", "I notice beauty in small, fading things.", "Intimacy starts with how I treat myself."],
+        soundscape: "A door closing softly, fabric settling, the hush just before dark.",
+      },
+      fr: {
+        quote: { text: "L'heure la plus douce de la journée ne demande qu'à être remarquée." },
+        rituals: [
+          { time: "morning", advice: "Restez au lit deux minutes de plus. Laissez le réveil être doux, pas brusque." },
+          { time: "midday", advice: "Envoyez un message gentil et inutile à quelqu'un que vous aimez." },
+          { time: "evening", advice: "Regardez le ciel changer de couleur, même par une fenêtre, aussi longtemps qu'il le faut." },
+        ],
+        mantras: ["La douceur n'est pas une faiblesse.", "Je m'autorise à être tendre aujourd'hui.", "Le repos se mérite par le simple fait d'exister.", "Je remarque la beauté dans les petites choses qui s'effacent.", "L'intimité commence par la façon dont je me traite."],
+        soundscape: "Une porte qui se ferme doucement, du tissu qui se pose, le calme juste avant la nuit.",
+      },
+      ar: {
+        quote: { text: "أرقّ ساعة في اليوم لا تطلب منك شيئًا سوى أن تلاحظها." },
+        rituals: [
+          { time: "morning", advice: "ابقَ في السرير دقيقتين إضافيتين. دع الاستيقاظ يكون لطيفًا، لا مفاجئًا." },
+          { time: "midday", advice: "أرسل رسالة لطيفة وغير ضرورية لمن تحب." },
+          { time: "evening", advice: "راقب السماء وهي تغيّر لونها، ولو من نافذة، طالما استغرق ذلك." },
+        ],
+        mantras: ["الرقة ليست ضعفًا.", "أسمح لنفسي أن أكون رقيقًا اليوم.", "الراحة حق لي، لا شيء أكسبه.", "ألاحظ الجمال في الأشياء الصغيرة الزائلة.", "الألفة تبدأ بكيفية معاملتي لنفسي."],
+        soundscape: "باب يُغلق برفق، قماش يستقر، الهدوء قبيل الظلام مباشرة.",
+      },
+      ma: {
+        quote: { text: "أرق ساعة فالنهار ما كتطلب منك والو غير تلاحظها." },
+        rituals: [
+          { time: "morning", advice: "بقى فالفراش دقيقتين زيادة. خلي الفيقان يكون لطيف، ماشي مفاجئ." },
+          { time: "midday", advice: "صيفط رسالة لطيفة وماشي ضرورية لشي واحد كتحبه." },
+          { time: "evening", advice: "تفرج فالسما وهي كتبدل اللون، حتى من شرجم، قد ما خاصها." },
+        ],
+        mantras: ["الرقة ماشي ضعف.", "كنسمح لراسي نكون رقيق اليوم.", "الراحة حق ليا، ماشي حاجة كنستاهلها.", "كنلاحظ الجمال فالحوايج الصغار اللي كتفنى.", "الألفة كتبدا بكيفاش كنعامل راسي."],
+        soundscape: "باب كيتسد بهدوء، قماش كيرتاح، السكون قبيل الظلام.",
       },
     },
   },
@@ -450,6 +799,48 @@ export const PALETTES: PaletteEntry[] = [
         bestFor: ["بيت الماكلة", "الصالون", "الاستقبال", "المناسبات"],
       },
     },
+    lifestyle: {
+      en: {
+        quote: { text: "The sun doesn't choose which moments to make beautiful. Neither should you." },
+        rituals: [
+          { time: "morning", advice: "Eat breakfast like it's a small celebration — a real plate, a real seat, no rushing." },
+          { time: "midday", advice: "Tell one person something you're grateful for, out loud, today." },
+          { time: "evening", advice: "Set the table properly tonight, even if it's just for you." },
+        ],
+        mantras: ["Ordinary days deserve celebration too.", "I find festivity in small things.", "Joy doesn't need a reason.", "I am allowed to make today feel special.", "Warmth is something I create, not wait for."],
+        soundscape: "Clinking glasses, music from another room, laughter carrying through a courtyard.",
+      },
+      fr: {
+        quote: { text: "Le soleil ne choisit pas quels moments rendre beaux. Vous non plus ne devriez pas." },
+        rituals: [
+          { time: "morning", advice: "Prenez le petit-déjeuner comme une petite célébration — une vraie assiette, une vraie place assise, sans précipitation." },
+          { time: "midday", advice: "Dites à voix haute à quelqu'un une chose pour laquelle vous êtes reconnaissant, aujourd'hui." },
+          { time: "evening", advice: "Dressez la table correctement ce soir, même si c'est juste pour vous." },
+        ],
+        mantras: ["Les jours ordinaires méritent aussi d'être célébrés.", "Je trouve la fête dans les petites choses.", "La joie n'a pas besoin de raison.", "J'ai le droit de rendre aujourd'hui spécial.", "La chaleur, c'est moi qui la crée, je ne l'attends pas."],
+        soundscape: "Des verres qui s'entrechoquent, de la musique venant d'une autre pièce, des rires qui traversent une cour.",
+      },
+      ar: {
+        quote: { text: "الشمس لا تختار أي اللحظات تجعلها جميلة. ولا ينبغي لك أيضًا." },
+        rituals: [
+          { time: "morning", advice: "تناول الفطور وكأنه احتفال صغير — طبق حقيقي، مقعد حقيقي، بلا استعجال." },
+          { time: "midday", advice: "أخبر شخصًا اليوم بصوت مسموع بشيء أنت ممتن له." },
+          { time: "evening", advice: "رتّب الطاولة بعناية الليلة، حتى لو كانت لك وحدك." },
+        ],
+        mantras: ["الأيام العادية تستحق الاحتفال أيضًا.", "أجد البهجة في الأشياء الصغيرة.", "الفرح لا يحتاج سببًا.", "يحق لي أن أجعل اليوم مميزًا.", "الدفء شيء أصنعه، لا أنتظره."],
+        soundscape: "صليل الكؤوس، موسيقى من غرفة أخرى، ضحكات تعبر الفناء.",
+      },
+      ma: {
+        quote: { text: "الشمس ما كتختارش أي لحظة تخليها زوينة. حتى نتا ماخاصكش." },
+        rituals: [
+          { time: "morning", advice: "كول الفطور بحال احتفال صغير — طبق حقيقي، بلاصة حقيقية، بلا عجلة." },
+          { time: "midday", advice: "قول لشي واحد بصوت عالي حاجة راك ممنون عليها اليوم." },
+          { time: "evening", advice: "رتب الطاولة مزيان الليلة، حتى لو غير لراسك." },
+        ],
+        mantras: ["الأيام العادية تستاهل الاحتفال هي ايضا.", "كنلقى الفرحة فالحوايج الصغار.", "الفرح ما محتاجش سبب.", "عندي الحق نخلي اليوم مميز.", "الدفء حاجة كنصنعها، ماشي كننتظرها."],
+        soundscape: "كؤوس كتصدم، موسيقى من بيت آخر، ضحك كيعدي الصحن.",
+      },
+    },
   },
 
   // 10 ─ Riad Classic ──────────────────────────────────────────────────────────
@@ -493,6 +884,48 @@ export const PALETTES: PaletteEntry[] = [
         desc: "الأزرق العميق كيحمل تقل التاريخ المغربي — برك الزليج اللي كتعكس السما، وسقوف الأرز المدهونة ديال المدارس القديمة، وحضارة كانت تعبّر على الجمال كل يوم. مع النحاس العتيق والعاج الدافئ، هاد البالطة كتحس فيها قديمة ومعاصرة فنفس الوقت.",
         feel: ["ثقافة", "ثبات", "تعقيد", "فخر"],
         bestFor: ["الصالون", "المدخل", "بيت الماكلة", "الداخلية التراثية"],
+      },
+    },
+    lifestyle: {
+      en: {
+        quote: { text: "What was made beautifully five hundred years ago can still teach you something today." },
+        rituals: [
+          { time: "morning", advice: "Learn one fact about where something in your home came from — its history, its maker." },
+          { time: "midday", advice: "Walk somewhere old today, even a single old street, and notice what's lasted." },
+          { time: "evening", advice: "Tell a story tonight — a family one, an old one — to whoever is around." },
+        ],
+        mantras: ["I carry what came before me with pride.", "Heritage is a foundation, not a weight.", "I build on what's been built before.", "Culture is something I live, not just admire.", "I am part of a longer story."],
+        soundscape: "Footsteps on worn stone, a craftsman's tools, the murmur of an old medina.",
+      },
+      fr: {
+        quote: { text: "Ce qui a été magnifiquement fait il y a cinq cents ans peut encore vous apprendre quelque chose aujourd'hui." },
+        rituals: [
+          { time: "morning", advice: "Apprenez un fait sur l'origine d'un objet chez vous — son histoire, son créateur." },
+          { time: "midday", advice: "Marchez aujourd'hui dans un lieu ancien, même une seule vieille rue, et remarquez ce qui a duré." },
+          { time: "evening", advice: "Racontez une histoire ce soir — familiale, ancienne — à qui se trouve autour de vous." },
+        ],
+        mantras: ["Je porte ce qui m'a précédé avec fierté.", "L'héritage est une fondation, pas un poids.", "Je construis sur ce qui a déjà été construit.", "La culture, je la vis, je ne fais pas que l'admirer.", "Je fais partie d'une histoire plus longue."],
+        soundscape: "Des pas sur la pierre usée, les outils d'un artisan, le murmure d'une vieille médina.",
+      },
+      ar: {
+        quote: { text: "ما صُنع بجمال منذ خمسمئة عام لا يزال قادرًا على تعليمك شيئًا اليوم." },
+        rituals: [
+          { time: "morning", advice: "تعرّف على حقيقة واحدة عن أصل شيء في بيتك — تاريخه، صانعه." },
+          { time: "midday", advice: "امشِ اليوم في مكان قديم، ولو زقاقًا واحدًا، ولاحظ ما صمد." },
+          { time: "evening", advice: "احكِ قصة الليلة — عائلية أو قديمة — لمن حولك." },
+        ],
+        mantras: ["أحمل من سبقني بفخر.", "الإرث أساس، لا عبء.", "أبني على ما بُني من قبل.", "الثقافة شيء أعيشه، لا أُعجب به فقط.", "أنا جزء من قصة أطول."],
+        soundscape: "خطى على حجر قديم، أدوات حرفي، همس مدينة عتيقة.",
+      },
+      ma: {
+        quote: { text: "اللي تصنع بزوين من خمسمية عام مازال قادر يعلمك شي حاجة اليوم." },
+        rituals: [
+          { time: "morning", advice: "تعرف على حقيقة وحدة على أصل شي حاجة فدارك — التاريخ ديالها، صانعها." },
+          { time: "midday", advice: "تمشى اليوم فبلاصة قديمة، حتى زنقة وحدة قديمة، ولاحظ اللي صمد." },
+          { time: "evening", advice: "حكي قصة الليلة — عائلية ولا قديمة — لللي حداك." },
+        ],
+        mantras: ["كنحمل اللي سبقني بفخر.", "الإرث أساس، ماشي تقل.", "كنبني على اللي تبنى من قبل.", "الثقافة حاجة كنعيشها، ماشي غير كنعجب بيها.", "أنا جزء من قصة طويلة."],
+        soundscape: "خطوات فوق حجر قديم، أدوات ديال صانع، همس ديال مدينة قديمة.",
       },
     },
   },
@@ -540,6 +973,48 @@ export const PALETTES: PaletteEntry[] = [
         bestFor: ["البساطة", "بلاصة الخدمة", "الغرفة", "طول العام"],
       },
     },
+    lifestyle: {
+      en: {
+        quote: { text: "Silence isn't empty. It's full of everything noise was covering up." },
+        rituals: [
+          { time: "morning", advice: "Sit quietly for two minutes before any input — no phone, no music, nothing." },
+          { time: "midday", advice: "Do one thing at a time today, fully, instead of three things halfway." },
+          { time: "evening", advice: "Turn off every unnecessary sound in your home for ten minutes before bed." },
+        ],
+        mantras: ["I don't need noise to feel alive.", "Quiet is where my clearest thoughts live.", "I choose presence over distraction.", "Less input, more insight.", "Stillness is not the absence of life — it's the heart of it."],
+        soundscape: "Almost nothing — a breath, a clock, the quiet hum of a calm room.",
+      },
+      fr: {
+        quote: { text: "Le silence n'est pas vide. Il est plein de tout ce que le bruit cachait." },
+        rituals: [
+          { time: "morning", advice: "Asseyez-vous tranquillement deux minutes avant toute sollicitation — pas de téléphone, pas de musique, rien." },
+          { time: "midday", advice: "Faites une chose à la fois aujourd'hui, complètement, plutôt que trois choses à moitié." },
+          { time: "evening", advice: "Éteignez tout bruit inutile chez vous pendant dix minutes avant de dormir." },
+        ],
+        mantras: ["Je n'ai pas besoin de bruit pour me sentir vivant.", "Le calme est là où vivent mes pensées les plus claires.", "Je choisis la présence plutôt que la distraction.", "Moins d'input, plus de discernement.", "L'immobilité n'est pas l'absence de vie — c'en est le cœur."],
+        soundscape: "Presque rien — un souffle, une horloge, le doux bourdonnement d'une pièce calme.",
+      },
+      ar: {
+        quote: { text: "الصمت ليس فارغًا. إنه مليء بكل ما كانت الضوضاء تخفيه." },
+        rituals: [
+          { time: "morning", advice: "اجلس بهدوء دقيقتين قبل أي مدخلات — بلا هاتف، بلا موسيقى، لا شيء." },
+          { time: "midday", advice: "أنجز شيئًا واحدًا في كل مرة اليوم، بالكامل، بدل ثلاثة أشياء بنصف اهتمام." },
+          { time: "evening", advice: "أطفئ كل صوت غير ضروري في بيتك لعشر دقائق قبل النوم." },
+        ],
+        mantras: ["لست بحاجة للضوضاء لأشعر بالحياة.", "الهدوء هو حيث تعيش أوضح أفكاري.", "أختار الحضور على التشتت.", "مدخلات أقل، بصيرة أكثر.", "السكون ليس غياب الحياة — إنه جوهرها."],
+        soundscape: "لا شيء تقريبًا — نَفَس، ساعة، طنين هادئ لغرفة ساكنة.",
+      },
+      ma: {
+        quote: { text: "الصمت ماشي فارغ. مليان بكلشي اللي كانت الضجة كتخبيه." },
+        rituals: [
+          { time: "morning", advice: "قعد بهدوء دقيقتين قبل أي حاجة — بلا تيليفون، بلا موسيقى، والو." },
+          { time: "midday", advice: "دير حاجة وحدة فكل مرة اليوم، بالكامل، بدل تلاتة حوايج بنص اهتمام." },
+          { time: "evening", advice: "طفي كل صوت ماشي ضروري فدارك عشر دقايق قبل ما تنعس." },
+        ],
+        mantras: ["ما محتاجش الضجة باش نحس بالحياة.", "الهدوء هو فين كتعيش أفكاري الواضحة.", "كنختار الحضور على التشتيت.", "مدخلات أقل، فهم أكثر.", "السكون ماشي غياب الحياة — هو قلبها."],
+        soundscape: "ما كاين والو تقريبا — نفس، ساعة، طنين هادي ديال بيت ساكن.",
+      },
+    },
   },
 
   // 12 ─ Terracotta Modern ─────────────────────────────────────────────────────
@@ -583,6 +1058,48 @@ export const PALETTES: PaletteEntry[] = [
         desc: "التيراكوتا المعاصرة ما كتعتذرش على أصولها — كتملكها. هاد البالطة كتجيب الجرأة الخام ديال الأرض المغربية فحساسية عصرية. الألوان الداكنة كتزيد دراما، والألوان الفاتحة كتضوي البيت بدفء، والتأثير الكلي واثق ولافت وحي من غير اعتذار.",
         feel: ["جرأة", "دفء", "ثقة", "عصرية"],
         bestFor: ["الصالون", "بيت الماكلة", "الكوزين", "البلاصات المميزة"],
+      },
+    },
+    lifestyle: {
+      en: {
+        quote: { text: "Honor where you come from by being unapologetically yourself today." },
+        rituals: [
+          { time: "morning", advice: "Wear or use one thing today that's unmistakably you, no matter who's watching." },
+          { time: "midday", advice: "Say what you actually think in at least one conversation today." },
+          { time: "evening", advice: "Do one bold, small thing you've been putting off out of politeness." },
+        ],
+        mantras: ["I don't need to shrink to fit in.", "Confidence honors where I come from.", "I am modern and rooted, both at once.", "Boldness is a form of honesty.", "I own my story instead of editing it."],
+        soundscape: "Modern beats laid over traditional strings, a city awake at night.",
+      },
+      fr: {
+        quote: { text: "Honorez vos origines en étant pleinement vous-même aujourd'hui." },
+        rituals: [
+          { time: "morning", advice: "Portez ou utilisez aujourd'hui quelque chose qui vous ressemble vraiment, peu importe qui regarde." },
+          { time: "midday", advice: "Dites ce que vous pensez vraiment dans au moins une conversation aujourd'hui." },
+          { time: "evening", advice: "Faites une petite chose audacieuse que vous repoussiez par politesse." },
+        ],
+        mantras: ["Je n'ai pas besoin de me réduire pour m'intégrer.", "La confiance honore mes origines.", "Je suis moderne et enraciné, les deux à la fois.", "L'audace est une forme d'honnêteté.", "J'assume mon histoire au lieu de la modifier."],
+        soundscape: "Des rythmes modernes posés sur des cordes traditionnelles, une ville éveillée la nuit.",
+      },
+      ar: {
+        quote: { text: "كرّم أصلك بأن تكون نفسك دون اعتذار اليوم." },
+        rituals: [
+          { time: "morning", advice: "ارتدِ أو استخدم اليوم شيئًا يعبّر عنك حقًا، بغض النظر عمّن يراقب." },
+          { time: "midday", advice: "قل ما تفكر فيه فعلًا في محادثة واحدة على الأقل اليوم." },
+          { time: "evening", advice: "افعل شيئًا جريئًا صغيرًا كنت تؤجله بدافع المجاملة." },
+        ],
+        mantras: ["لست بحاجة لأن أصغّر نفسي لأنسجم.", "الثقة تكرّم أصلي.", "أنا عصري وراسخ في آن واحد.", "الجرأة شكل من أشكال الصدق.", "أملك قصتي بدل أن أعدّلها."],
+        soundscape: "إيقاعات عصرية فوق أوتار تقليدية، مدينة مستيقظة ليلًا.",
+      },
+      ma: {
+        quote: { text: "كرم الأصل ديالك بكونك راسك بلا اعتذار اليوم." },
+        rituals: [
+          { time: "morning", advice: "لبس ولا استعمل اليوم حاجة كتعبر عليك فعلا، اللي يشوف يشوف." },
+          { time: "midday", advice: "قول اللي كتفكر فيه فعلا فمحادثة وحدة على الأقل اليوم." },
+          { time: "evening", advice: "دير حاجة جريئة صغيرة كنتي مخليها بسبب المجاملة." },
+        ],
+        mantras: ["ما محتاجش نصغر راسي باش نتلايم.", "الثقة كتكرم الأصل ديالي.", "أنا عصري وثابت فنفس الوقت.", "الجرأة شكل من أشكال الصدق.", "كنملك قصتي بدل ما نبدلها."],
+        soundscape: "إيقاعات عصرية فوق أوتار تقليدية، مدينة فايقة بالليل.",
       },
     },
   },
