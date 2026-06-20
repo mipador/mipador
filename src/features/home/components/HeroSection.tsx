@@ -1,14 +1,16 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const IMAGE_ASSETS = {
-  desktop: { url: "/images/Hero1.webp",      alt: "Mipador — Premium Moroccan Furniture & Home Decor, Casablanca Morocco" },
+  desktop: { url: "/images/hero0.webp",      alt: "Mipador — Premium Moroccan Furniture & Home Decor, Casablanca Morocco" },
   mobile:  { url: "/images/HeroMobile.webp", alt: "Mipador — Handcrafted Moroccan Furniture Studio, Morocco" },
 };
+
+const FEATURE_THUMB = { url: "/images/atmosphere-1.webp", alt: "Mipador — handcrafted Moroccan textiles and decor" };
 
 const containerVariants: Variants = {
   hidden:  { opacity: 0 },
@@ -41,172 +43,145 @@ const HeroSection = () => {
   });
 
   const textOpacity  = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
-  const textY        = useTransform(scrollYProgress, [0, 0.4],  [0, -80]);
-  const imageScale   = useTransform(scrollYProgress, [0, 1],    [1, 1.12]);
+  const textY        = useTransform(scrollYProgress, [0, 0.4],  [0, -60]);
+  const imageScale   = useTransform(scrollYProgress, [0, 1],    [1, 1.08]);
   const brightness   = useTransform(scrollYProgress, [0, 0.5],  [1, 0.8]);
 
   const currentImage = isMobile ? IMAGE_ASSETS.mobile : IMAGE_ASSETS.desktop;
 
   return (
-    <section
-      ref={containerRef}
-      className="relative min-h-screen overflow-hidden bg-[#0F0B09]"
-    >
-      {/* Background image */}
-      <motion.div className="absolute inset-0" style={{ scale: imageScale }}>
-        <motion.img
-          key={currentImage.url}
-          src={currentImage.url}
-          alt={currentImage.alt}
-          width={isMobile ? 900 : 1600}
-          height={isMobile ? 1350 : 1200}
-          fetchPriority="high"
-          decoding="async"
-          className="w-full h-full object-cover object-center"
-          style={{ filter: useTransform(brightness, (v) => `brightness(${v})`) }}
-        />
-
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `radial-gradient(circle at center, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 55%, rgba(0,0,0,0.75) 100%)`,
-          }}
-        />
-        <div
-          className="absolute inset-0 opacity-60"
-          style={{
-            background: `linear-gradient(135deg, rgba(77,42,34,0.45) 0%, transparent 40%, rgba(198,169,139,0.15) 100%)`,
-          }}
-        />
-        <div
-          className="absolute inset-0 opacity-[0.06] mix-blend-soft-light"
-          style={{ backgroundImage: "url('/noise.svg')" }}
-        />
-      </motion.div>
-
-      {/* Content */}
+    <section className="relative bg-[#FBF4ED] px-3 sm:px-5 lg:px-6 pt-3 sm:pt-4 lg:pt-5 pb-3 sm:pb-5">
       <motion.div
-        style={{ opacity: textOpacity, y: textY }}
-        className="relative z-10 flex items-center justify-center min-h-screen px-6 sm:px-10"
+        ref={containerRef}
+        className="relative overflow-hidden rounded-3xl min-h-[78vh] sm:min-h-[82vh] lg:min-h-[88vh] bg-[#1C140F] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.45)]"
       >
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="max-w-4xl mx-auto text-center"
-        >
-          {/* Eyebrow */}
-          <motion.p
-            variants={itemVariants}
-            className="text-[10px] uppercase tracking-[0.4em] text-[#C6A98B]/70 font-light mb-6"
-          >
-            {t("hero.eyebrow")}
-          </motion.p>
+        {/* Background image */}
+        <motion.div className="absolute inset-0" style={{ scale: imageScale }}>
+          <motion.img
+            key={currentImage.url}
+            src={currentImage.url}
+            alt={currentImage.alt}
+            width={isMobile ? 900 : 1600}
+            height={isMobile ? 1350 : 1200}
+            fetchPriority="high"
+            decoding="async"
+            className="w-full h-full object-cover object-center"
+            animate={{ scale: [1, 1.035, 1] }}
+            transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+            style={{ filter: useTransform(brightness, (v) => `brightness(${v}) saturate(1.12) contrast(1.05)`) }}
+          />
 
-          {/* Headline */}
-          <motion.h1
-            variants={itemVariants}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-[6rem] font-semibold tracking-[-0.05em] leading-[0.95] max-w-5xl mx-auto text-gradient-animated text-stroke-soft text-glow"
-          >
-            {t("hero.headline")}
-          </motion.h1>
-
-          {/* Divider */}
-          <motion.div variants={itemVariants} className="flex justify-center my-10">
-            <motion.div
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="h-px w-28 bg-gradient-to-r from-transparent via-[#C6A98B] to-transparent"
-            />
-          </motion.div>
-
-          {/* CTA buttons */}
+          {/* Shine sweep */}
           <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-14"
-          >
-            {/* Primary */}
-            <motion.div
-              whileHover={{ scale: 1.04, y: -4 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: "spring", stiffness: 260, damping: 18 }}
-            >
-              <Link
-                to={`/${currentLang}/products`}
-                className="group relative inline-flex items-center gap-3 overflow-hidden rounded-xl bg-[#F6F4F1] px-8 py-4 text-sm font-medium tracking-[0.15em] uppercase text-[#2A1814] shadow-[0_10px_40px_rgba(0,0,0,0.25)]"
-              >
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-white/0 via-white/40 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%]" />
-                <span className="relative z-10">{t("hero.exploreCollection")}</span>
-                <motion.div
-                  animate={{ x: [0, 4, 0] }}
-                  transition={{ duration: 1.8, repeat: Infinity }}
-                  className="relative z-10"
-                >
-                  <ArrowRight size={18} />
-                </motion.div>
-              </Link>
-            </motion.div>
+            initial={{ x: "-120%", opacity: 0 }}
+            animate={{ x: "120%", opacity: [0, 0.35, 0] }}
+            transition={{ duration: 1.8, delay: 0.5, ease: "easeInOut" }}
+            className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg]"
+          />
 
-            {/* Secondary */}
-            <motion.div
-              whileHover={{ scale: 1.04, y: -4 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: "spring", stiffness: 260, damping: 18 }}
-            >
-              <Link
-                to={`/${currentLang}/about`}
-                className="group inline-flex items-center gap-3 rounded-xl border border-white bg-black/40 backdrop-blur-md px-8 py-4 text-sm uppercase tracking-[0.15em] text-[#F6F4F1] transition-all duration-500 hover:bg-white/10 hover:border-white/40"
-              >
-                {t("hero.ourStory")}
-              </Link>
-            </motion.div>
-          </motion.div>
-
-          {/* Badge */}
-          <motion.p
-            variants={itemVariants}
-            className="mt-12 text-xs uppercase tracking-[0.25em] text-[#E8DED1]/45 font-light"
-          >
-            {t("hero.badge")}
-          </motion.p>
+          <div
+            className="absolute inset-0"
+            style={{
+              background: `radial-gradient(circle at center, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.42) 55%, rgba(0,0,0,0.72) 100%)`,
+            }}
+          />
+          <div
+            className="absolute inset-0 opacity-60"
+            style={{
+              background: `linear-gradient(135deg, rgba(77,42,34,0.45) 0%, transparent 40%, rgba(198,169,139,0.18) 100%)`,
+            }}
+          />
+          <div
+            className="absolute inset-0 opacity-[0.06] mix-blend-soft-light"
+            style={{ backgroundImage: "url('/noise.svg')" }}
+          />
         </motion.div>
-      </motion.div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 1.4 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20"
-      >
+        {/* Headline content */}
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-3"
+          style={{ opacity: textOpacity, y: textY }}
+          className="relative z-10 flex items-center justify-center text-center px-6 sm:px-10 h-full pt-16 sm:pt-20"
         >
-          <div className="w-px h-10 bg-gradient-to-b from-[#C6A98B] to-transparent" />
-          <p className="text-[10px] uppercase tracking-[0.35em] text-[#F6F4F1]/40">
-            {t("hero.scroll")}
-          </p>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="max-w-4xl mx-auto"
+          >
+            <motion.p
+              variants={itemVariants}
+              className="text-[10px] uppercase tracking-[0.4em] text-[#C6A98B]/70 font-light mb-5"
+            >
+              {t("hero.eyebrow")}
+            </motion.p>
+
+            <motion.h1
+              variants={itemVariants}
+              className="font-rounded text-4xl sm:text-5xl md:text-6xl lg:text-[5.5rem] font-bold tracking-tight leading-[1.2] max-w-5xl mx-auto text-[#F6F4F1] text-stroke-brand drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
+            >
+              {t("hero.headline")}
+            </motion.h1>
+          </motion.div>
         </motion.div>
+
+        {/* Floating card — feature caption + CTA, bottom left */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute bottom-6 left-6 right-6 sm:right-auto lg:bottom-8 lg:left-8 z-10 sm:max-w-sm rounded-3xl border border-[#3D1A12]/10 bg-[#FBF4ED] shadow-[0_25px_60px_-12px_rgba(0,0,0,0.55)] p-4 sm:p-5 flex flex-col items-stretch gap-4"
+        >
+          <div className="w-full flex items-center gap-3">
+            <img
+              src={FEATURE_THUMB.url}
+              alt={FEATURE_THUMB.alt}
+              width={56}
+              height={56}
+              loading="lazy"
+              className="w-12 h-12 rounded-lg object-cover shrink-0"
+            />
+            <p className="text-xs leading-snug text-[#3D1A12]/80 font-light">
+              {t("hero.featureCaption")}
+            </p>
+            <Link
+              to={`/${currentLang}/about`}
+              aria-label={t("hero.ourStory")}
+              className="ml-auto shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-[#3D1A12] text-[#F6F4F1] hover:bg-[#2A1814] transition-colors"
+            >
+              <ArrowUpRight size={15} />
+            </Link>
+          </div>
+
+          <motion.div
+            whileHover={{ scale: 1.03, y: -3 }}
+            whileTap={{ scale: 0.97 }}
+            className="w-full rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.2)]"
+          >
+            <Link
+              to={`/${currentLang}/products`}
+              className="group relative flex items-center justify-center gap-3 overflow-hidden rounded-xl bg-[#3D1A12] px-7 py-4 text-sm font-medium tracking-[0.1em] uppercase text-[#F6F4F1] hover:bg-[#2A1814] transition-colors"
+            >
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%]" />
+              <span className="relative z-10">{t("hero.exploreCollection")}</span>
+              <motion.div
+                animate={{ x: [0, 4, 0] }}
+                transition={{ duration: 1.8, repeat: Infinity }}
+                className="relative z-10"
+              >
+                <ArrowRight size={18} />
+              </motion.div>
+            </Link>
+          </motion.div>
+        </motion.div>
+
+        {/* Ambient glow */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.18 }}
+          transition={{ duration: 2 }}
+          className="absolute -bottom-20 -right-20 w-[500px] h-[500px] rounded-full bg-[#C6A98B] blur-[140px] z-0 pointer-events-none"
+        />
       </motion.div>
-
-      {/* Ambient glow */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.18 }}
-        transition={{ duration: 2 }}
-        className="absolute -bottom-20 -right-20 w-[500px] h-[500px] rounded-xl bg-[#C6A98B] blur-[140px] z-0"
-      />
-
-      {/* Top accent */}
-      <motion.div
-        initial={{ opacity: 0, rotate: -12 }}
-        animate={{ opacity: 0.25, rotate: 0 }}
-        transition={{ duration: 1.2, delay: 0.8 }}
-        className="hidden lg:block absolute top-14 left-14 border border-[#C6A98B]/20 w-24 h-24 rounded-xl z-0"
-      />
     </section>
   );
 };

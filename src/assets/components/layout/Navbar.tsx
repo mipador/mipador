@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
 
   const cartOpen = useProductStore((s) => s.cartOpen);
   const setCartOpen = useProductStore((s) => s.setCartOpen);
-  // Only count items whose product still exists — prevents phantom badge from stale persisted data
+
   const cartCount = useProductStore((s) =>
     s.cart
       .filter((i) => s.allProducts.some((p) => p.id === i.productId))
@@ -25,6 +25,9 @@ const Navbar: React.FC = () => {
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const isHome = location.pathname === `/${currentLang}` || location.pathname === `/${currentLang}/`;
+  const onHero = isHome && !scrolled;
 
   const navItems = [
     { label: t("nav.collection"), path: `/${currentLang}/products` },
@@ -42,18 +45,20 @@ const Navbar: React.FC = () => {
 
   return (
     <div
-      className={`fixed top-0 left-0 right-0 z-30 flex justify-center px-4 pt-4 transition-opacity duration-200 ${
+      className={`fixed top-0 left-0 right-0 z-30 flex justify-center transition-all duration-500 ${
         cartOpen ? "opacity-0 pointer-events-none" : ""
-      }`}
+      } ${onHero ? "px-3 sm:px-5 lg:px-6 pt-3 sm:pt-4 lg:pt-5" : "px-4 pt-4"}`}
     >
       <motion.nav
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className={`w-full transition-all duration-500 ease-in-out border border-white/10 ${
+        className={`transition-all duration-500 ease-in-out ${
           scrolled
-            ? "max-w-2xl bg-[#f6f4f1]/92 backdrop-blur-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] rounded-xl"
-            : "max-w-7xl bg-[#f6f4f1]/72 backdrop-blur-xl rounded-xl"
+            ? "w-full max-w-2xl bg-[#f6f4f1]/92 backdrop-blur-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] rounded-xl border border-white/10"
+            : onHero
+            ? "w-full bg-transparent rounded-xl"
+            : "w-full max-w-7xl bg-transparent rounded-xl"
         }`}
       >
         <div
@@ -68,7 +73,8 @@ const Navbar: React.FC = () => {
               alt="Mipador"
               width={183}
               height={28}
-              className="h-7 w-auto object-contain"
+              className="h-7 w-auto object-contain transition-all duration-500"
+              style={onHero ? { filter: "brightness(0) invert(1) drop-shadow(0 2px 6px rgba(0,0,0,0.5))" } : undefined}
             />
           </Link>
 
@@ -78,17 +84,21 @@ const Navbar: React.FC = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`relative text-sm font-semibold transition-all duration-300 group ${
-                  location.pathname === item.path
+                className={`relative text-sm font-bold transition-all duration-300 group ${
+                  onHero
+                    ? `drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)] ${
+                        location.pathname === item.path ? "text-white" : "text-white/90 hover:text-white"
+                      }`
+                    : location.pathname === item.path
                     ? "text-[#3D1A12]"
                     : "text-[#3D1A12]/55 hover:text-[#3D1A12] hover:tracking-[0.02em]"
                 }`}
               >
                 {item.label}
                 <span
-                  className={`absolute -bottom-1 left-0 h-px bg-[#3D1A12] transition-all duration-300 ${
-                    location.pathname === item.path ? "w-full" : "w-0 group-hover:w-full"
-                  }`}
+                  className={`absolute -bottom-1 left-0 h-px transition-all duration-300 ${
+                    onHero ? "bg-[#C6A98B]" : "bg-[#3D1A12]"
+                  } ${location.pathname === item.path ? "w-full" : "w-0 group-hover:w-full"}`}
                 />
               </Link>
             ))}
@@ -102,8 +112,10 @@ const Navbar: React.FC = () => {
             <Link
               to={toolPath}
               aria-label={t("nav.colorTool")}
-              className={`relative w-11 h-11 flex items-center justify-center rounded-xl hover:bg-[#3D1A12]/5 transition-colors ${
-                location.pathname.includes("/tools/color-palette") ? "text-[#3D1A12]" : "text-[#3D1A12]/55"
+              className={`hidden md:flex relative w-11 h-11 items-center justify-center rounded-xl transition-colors ${
+                onHero
+                  ? `hover:bg-white/10 drop-shadow-[0_2px_5px_rgba(0,0,0,0.6)] ${location.pathname.includes("/tools/color-palette") ? "text-white" : "text-white/90"}`
+                  : `hover:bg-[#3D1A12]/5 ${location.pathname.includes("/tools/color-palette") ? "text-[#3D1A12]" : "text-[#3D1A12]/55"}`
               }`}
             >
               <Palette size={17} />
@@ -113,9 +125,11 @@ const Navbar: React.FC = () => {
             <Link
               to={`/${currentLang}/wishlist`}
               aria-label={t("wishlist.heading")}
-              className="relative w-11 h-11 flex items-center justify-center rounded-xl hover:bg-[#3D1A12]/5 transition-colors"
+              className={`hidden md:flex relative w-11 h-11 items-center justify-center rounded-xl transition-colors ${
+                onHero ? "hover:bg-white/10" : "hover:bg-[#3D1A12]/5"
+              }`}
             >
-              <Heart size={17} className="text-[#3D1A12]" />
+              <Heart size={17} className={onHero ? "text-white/90 drop-shadow-[0_2px_5px_rgba(0,0,0,0.6)]" : "text-[#3D1A12]"} />
               <AnimatePresence mode="popLayout">
                 {wishlistCount > 0 && (
                   <motion.span
@@ -124,7 +138,9 @@ const Navbar: React.FC = () => {
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 0, opacity: 0 }}
                     transition={{ type: "spring", stiffness: 600, damping: 22 }}
-                    className="absolute -top-0.5 -right-0.5 min-w-[17px] h-[17px] px-1 flex items-center justify-center rounded-full bg-[#3D1A12] text-white text-[9px] font-black leading-none pointer-events-none"
+                    className={`absolute -top-0.5 -right-0.5 min-w-[17px] h-[17px] px-1 flex items-center justify-center rounded-full text-[9px] font-black leading-none pointer-events-none ${
+                      onHero ? "bg-[#F6F4F1] text-[#2A1814]" : "bg-[#3D1A12] text-white"
+                    }`}
                   >
                     {wishlistCount > 99 ? "99+" : wishlistCount}
                   </motion.span>
@@ -140,9 +156,11 @@ const Navbar: React.FC = () => {
                   ? t("nav.openCartCount", { count: cartCount })
                   : t("nav.openCart")
               }
-              className="relative w-11 h-11 flex items-center justify-center rounded-xl hover:bg-[#3D1A12]/5 transition-colors"
+              className={`hidden md:flex relative w-11 h-11 items-center justify-center rounded-xl transition-colors ${
+                onHero ? "hover:bg-white/10" : "hover:bg-[#3D1A12]/5"
+              }`}
             >
-              <ShoppingBag size={17} className="text-[#3D1A12]" />
+              <ShoppingBag size={17} className={onHero ? "text-white/90 drop-shadow-[0_2px_5px_rgba(0,0,0,0.6)]" : "text-[#3D1A12]"} />
               <AnimatePresence mode="popLayout">
                 {cartCount > 0 && (
                   <motion.span
@@ -151,7 +169,9 @@ const Navbar: React.FC = () => {
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 0, opacity: 0 }}
                     transition={{ type: "spring", stiffness: 600, damping: 22 }}
-                    className="absolute -top-0.5 -right-0.5 min-w-[17px] h-[17px] px-1 flex items-center justify-center rounded-full bg-[#3D1A12] text-white text-[9px] font-black leading-none pointer-events-none"
+                    className={`absolute -top-0.5 -right-0.5 min-w-[17px] h-[17px] px-1 flex items-center justify-center rounded-full text-[9px] font-black leading-none pointer-events-none ${
+                      onHero ? "bg-[#F6F4F1] text-[#2A1814]" : "bg-[#3D1A12] text-white"
+                    }`}
                   >
                     {cartCount > 99 ? "99+" : cartCount}
                   </motion.span>
@@ -171,7 +191,11 @@ const Navbar: React.FC = () => {
                   <Link
                     to={`/${currentLang}/products`}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="hidden md:flex items-center justify-center text-xs font-black uppercase tracking-widest bg-[#3D1A12] text-white px-5 py-2.5 rounded-xl hover:bg-[#4D2A22] transition-all duration-300 shadow-sm whitespace-nowrap"
+                    className={`hidden md:flex items-center justify-center text-xs font-black uppercase tracking-widest px-5 py-2.5 rounded-xl transition-all duration-300 shadow-sm whitespace-nowrap ${
+                      onHero
+                        ? "bg-[#F6F4F1] text-[#2A1814] hover:bg-white"
+                        : "bg-[#3D1A12] text-white hover:bg-[#4D2A22]"
+                    }`}
                   >
                     {t("nav.discover")}
                   </Link>
@@ -181,22 +205,24 @@ const Navbar: React.FC = () => {
 
             {/* Mobile hamburger */}
             <button
-              className="md:hidden w-11 h-11 flex flex-col items-center justify-center gap-1.5 rounded-xl hover:bg-[#3D1A12]/5 transition-colors"
+              className={`md:hidden w-11 h-11 flex flex-col items-center justify-center gap-1.5 rounded-xl transition-colors ${
+                onHero ? "hover:bg-white/10" : "hover:bg-[#3D1A12]/5"
+              }`}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={t("nav.toggleMenu")}
               aria-expanded={isMobileMenuOpen}
             >
               <motion.span
                 animate={isMobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-                className="block h-px w-5 bg-[#3D1A12]"
+                className={`block h-px w-5 ${onHero ? "bg-white" : "bg-[#3D1A12]"}`}
               />
               <motion.span
                 animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-                className="block h-px w-4 bg-[#3D1A12]"
+                className={`block h-px w-4 ${onHero ? "bg-white" : "bg-[#3D1A12]"}`}
               />
               <motion.span
                 animate={isMobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-                className="block h-px w-5 bg-[#3D1A12]"
+                className={`block h-px w-5 ${onHero ? "bg-white" : "bg-[#3D1A12]"}`}
               />
             </button>
           </div>
@@ -211,7 +237,9 @@ const Navbar: React.FC = () => {
               exit={{ opacity: 0, scaleY: 0.95 }}
               transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
               style={{ transformOrigin: "top" }}
-              className="md:hidden overflow-hidden border-t border-[#3D1A12]/10 bg-[#f6f4f1]/95 backdrop-blur-2xl"
+              className={`md:hidden overflow-hidden backdrop-blur-2xl ${
+                onHero ? "border-t border-white/15 bg-black/35" : "border-t border-[#3D1A12]/10 bg-[#f6f4f1]/95"
+              }`}
             >
               <div className="flex flex-col px-6 py-6 gap-5">
                 {navItems.map((item) => (
@@ -220,7 +248,11 @@ const Navbar: React.FC = () => {
                     to={item.path}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={`text-base font-bold transition-colors duration-300 ${
-                      location.pathname === item.path
+                      onHero
+                        ? location.pathname === item.path
+                          ? "text-white"
+                          : "text-white/55"
+                        : location.pathname === item.path
                         ? "text-[#3D1A12]"
                         : "text-[#3D1A12]/50"
                     }`}
@@ -233,7 +265,11 @@ const Navbar: React.FC = () => {
                   to={toolPath}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`flex items-center gap-2 text-base font-bold transition-colors duration-300 ${
-                    location.pathname.includes("/tools/color-palette")
+                    onHero
+                      ? location.pathname.includes("/tools/color-palette")
+                        ? "text-white"
+                        : "text-white/55"
+                      : location.pathname.includes("/tools/color-palette")
                       ? "text-[#3D1A12]"
                       : "text-[#3D1A12]/50"
                   }`}
@@ -246,7 +282,11 @@ const Navbar: React.FC = () => {
                   to={`/${currentLang}/wishlist`}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`flex items-center gap-2 text-base font-bold transition-colors duration-300 ${
-                    location.pathname.includes("/wishlist")
+                    onHero
+                      ? location.pathname.includes("/wishlist")
+                        ? "text-white"
+                        : "text-white/55"
+                      : location.pathname.includes("/wishlist")
                       ? "text-[#3D1A12]"
                       : "text-[#3D1A12]/50"
                   }`}
@@ -254,16 +294,46 @@ const Navbar: React.FC = () => {
                   <Heart size={16} />
                   {t("wishlist.heading")}
                   {wishlistCount > 0 && (
-                    <span className="ml-1 min-w-[18px] h-[18px] px-1 flex items-center justify-center rounded-full bg-[#3D1A12] text-white text-[9px] font-black">
+                    <span
+                      className={`ml-1 min-w-[18px] h-[18px] px-1 flex items-center justify-center rounded-full text-[9px] font-black ${
+                        onHero ? "bg-[#F6F4F1] text-[#2A1814]" : "bg-[#3D1A12] text-white"
+                      }`}
+                    >
                       {wishlistCount}
                     </span>
                   )}
                 </Link>
 
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setCartOpen(true);
+                  }}
+                  className={`flex items-center gap-2 text-base font-bold transition-colors duration-300 ${
+                    onHero ? "text-white/55" : "text-[#3D1A12]/50"
+                  }`}
+                >
+                  <ShoppingBag size={16} />
+                  {t("nav.openCart")}
+                  {cartCount > 0 && (
+                    <span
+                      className={`ml-1 min-w-[18px] h-[18px] px-1 flex items-center justify-center rounded-full text-[9px] font-black ${
+                        onHero ? "bg-[#F6F4F1] text-[#2A1814]" : "bg-[#3D1A12] text-white"
+                      }`}
+                    >
+                      {cartCount}
+                    </span>
+                  )}
+                </button>
+
                 <Link
                   to={`/${currentLang}/products`}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-center w-full bg-[#3D1A12] text-white text-xs font-black uppercase tracking-widest py-3.5 rounded-xl hover:bg-[#4D2A22] transition-colors"
+                  className={`block text-center w-full text-xs font-black uppercase tracking-widest py-3.5 rounded-xl transition-colors ${
+                    onHero
+                      ? "bg-[#F6F4F1] text-[#2A1814] hover:bg-white"
+                      : "bg-[#3D1A12] text-white hover:bg-[#4D2A22]"
+                  }`}
                 >
                   {t("nav.discoverCollection")}
                 </Link>
