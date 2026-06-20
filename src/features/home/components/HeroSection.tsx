@@ -53,7 +53,7 @@ const HeroSection = () => {
     <section className="relative bg-[#FBF4ED] px-3 sm:px-5 lg:px-6 pt-3 sm:pt-4 lg:pt-5 pb-3 sm:pb-5">
       <motion.div
         ref={containerRef}
-        className="relative overflow-hidden rounded-3xl min-h-[78vh] sm:min-h-[82vh] lg:min-h-[88vh] bg-[#1C140F] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.45)]"
+        className="relative overflow-hidden rounded-3xl min-h-[94dvh] sm:min-h-[92vh] lg:min-h-[95vh] bg-[#1C140F] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.45)]"
       >
         {/* Background image */}
         <motion.div className="absolute inset-0" style={{ scale: imageScale }}>
