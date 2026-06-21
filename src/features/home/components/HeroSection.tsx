@@ -6,7 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const IMAGE_ASSETS = {
-  desktop: { url: "/images/hero0.webp",      alt: "Mipador — Premium Moroccan Furniture & Home Decor, Casablanca Morocco" },
+  desktop: { url: "/images/hero01.webp",      alt: "Mipador — Premium Moroccan Furniture & Home Decor, Casablanca Morocco" },
   mobile:  { url: "/images/HeroMobile.webp", alt: "Mipador — Handcrafted Moroccan Furniture Studio, Morocco" },
 };
 
