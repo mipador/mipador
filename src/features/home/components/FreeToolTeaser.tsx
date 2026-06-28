@@ -120,15 +120,16 @@ const FreeToolTeaser: React.FC = () => {
             transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 4 }}
           />
 
-          {/* Diagonal shimmer sweep */}
+          {/* Diagonal shimmer sweep — plays once on mount */}
           <motion.div
             className="absolute top-0 bottom-0 pointer-events-none"
             style={{
               left: 0, width: "22%",
               background: "linear-gradient(108deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%)",
             }}
-            animate={{ x: ["-100%", "550%"] }}
-            transition={{ duration: 3.5, repeat: Infinity, ease: "linear", repeatDelay: 9 }}
+            initial={{ x: "-100%" }}
+            animate={{ x: "550%" }}
+            transition={{ duration: 2, delay: 0.6, ease: "easeInOut" }}
           />
 
           {/* Texture dots */}
@@ -175,11 +176,9 @@ const FreeToolTeaser: React.FC = () => {
                   style={{ backgroundColor: card.bg }}
                 >
                   {card.dot ? (
-                    <motion.div
+                    <div
                       className="w-3 h-3 rounded-full"
                       style={{ backgroundColor: card.dot }}
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut", delay: i * 0.3 }}
                     />
                   ) : (
                     <p className="text-[9px] font-bold uppercase tracking-widest text-white/25">

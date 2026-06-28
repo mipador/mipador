@@ -53,7 +53,7 @@ const HeroSection = () => {
     <section className="relative bg-[#FBF4ED] px-3 sm:px-5 lg:px-6 pt-3 sm:pt-4 lg:pt-5 pb-3 sm:pb-5">
       <motion.div
         ref={containerRef}
-        className="relative overflow-hidden rounded-3xl min-h-[94dvh] sm:min-h-[92vh] lg:min-h-[95vh] bg-[#1C140F] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.45)]"
+        className="relative overflow-hidden rounded-3xl min-h-[94dvh] sm:min-h-[92vh] lg:min-h-[95vh] bg-[#1C140F]"
       >
         {/* Background image */}
         <motion.div className="absolute inset-0" style={{ scale: imageScale }}>
@@ -106,21 +106,25 @@ const HeroSection = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="max-w-4xl mx-auto"
+            className="max-w-5xl mx-auto flex flex-col items-center gap-8"
           >
-            <motion.p
-              variants={itemVariants}
-              className="text-[10px] uppercase tracking-[0.4em] text-[#C6A98B]/70 font-light mb-5"
-            >
-              {t("hero.eyebrow")}
-            </motion.p>
-
             <motion.h1
               variants={itemVariants}
-              className="font-rounded text-4xl sm:text-5xl md:text-6xl lg:text-[5.5rem] font-bold tracking-tight leading-[1.2] max-w-5xl mx-auto text-[#F6F4F1] text-stroke-brand drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
+              className="font-rounded text-[3.4rem] sm:text-[5.2rem] md:text-[6.8rem] lg:text-[8.5rem] font-light tracking-[-0.03em] leading-[1.04] text-white"
             >
               {t("hero.headline")}
             </motion.h1>
+
+            <motion.div
+              variants={itemVariants}
+              className="flex items-center gap-5"
+            >
+              <div className="w-10 h-px bg-white/20" />
+              <p className="text-[9px] uppercase tracking-[0.55em] text-white/35 font-light">
+                {t("hero.badge")}
+              </p>
+              <div className="w-10 h-px bg-white/20" />
+            </motion.div>
           </motion.div>
         </motion.div>
 
@@ -129,7 +133,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute bottom-6 left-6 right-6 sm:right-auto lg:bottom-8 lg:left-8 z-10 sm:max-w-sm rounded-3xl border border-[#3D1A12]/10 bg-[#FBF4ED] shadow-[0_25px_60px_-12px_rgba(0,0,0,0.55)] p-4 sm:p-5 flex flex-col items-stretch gap-4"
+          className="absolute bottom-6 left-6 right-6 sm:right-auto lg:bottom-8 lg:left-8 z-10 sm:max-w-sm rounded-3xl bg-[#FBF4ED] p-4 sm:p-5 flex flex-col items-stretch gap-4"
         >
           <div className="w-full flex items-center gap-3">
             <img
@@ -155,7 +159,7 @@ const HeroSection = () => {
           <motion.div
             whileHover={{ scale: 1.03, y: -3 }}
             whileTap={{ scale: 0.97 }}
-            className="w-full rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.2)]"
+            className="w-full rounded-xl"
           >
             <Link
               to={`/${currentLang}/products`}
@@ -163,13 +167,7 @@ const HeroSection = () => {
             >
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%]" />
               <span className="relative z-10">{t("hero.exploreCollection")}</span>
-              <motion.div
-                animate={{ x: [0, 4, 0] }}
-                transition={{ duration: 1.8, repeat: Infinity }}
-                className="relative z-10"
-              >
-                <ArrowRight size={18} />
-              </motion.div>
+              <ArrowRight size={18} className="relative z-10" />
             </Link>
           </motion.div>
         </motion.div>

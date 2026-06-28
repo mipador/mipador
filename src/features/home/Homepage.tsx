@@ -7,6 +7,7 @@ import HeroSection from "./components/HeroSection";
 import HowToOrder from "./components/HowToOrder";
 import TaglineSection from "./components/TaglineSection";
 import FreeToolTeaser from "./components/FreeToolTeaser";
+import ManifestoSection from "./components/ManifestoSection";
 import ScrollToTop from "../../components/ScrollToTop";
 import { useSEO, useJsonLd } from "../../hooks/useSEO";
 
@@ -101,10 +102,11 @@ const HomePage: React.FC = () => {
       <ScrollToTop />
       <div id="hero"><HeroSection /></div>
       <div id="selected-works"><SelectedWorksSection /></div>
-      <div id="color-palette"><FreeToolTeaser /></div>
+      <div id="manifesto"><ManifestoSection /></div>
       <div id="how-to-order"><HowToOrder /></div>
-      <div id="coming-soon"><ComingSoonSection /></div>
       <div id="tagline"><TaglineSection /></div>
+      <div id="color-palette"><FreeToolTeaser /></div>
+      <div id="coming-soon"><ComingSoonSection /></div>
     </div>
   );
 };

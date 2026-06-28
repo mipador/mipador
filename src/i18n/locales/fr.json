@@ -72,6 +72,7 @@
     "comingSoon": "Bientôt disponible",
     "soldOut": "Épuisé",
     "addToCart": "Ajouter au panier",
+    "reserveYours": "Réserver cette pièce",
     "viewDetails": "Voir les détails"
   },
   "cart": {
@@ -124,14 +125,14 @@
     "headline": "Des objets façonnés par la retenue.",
     "headlineSoft": "Conçus pour exister discrètement dans votre vie, sans la dominer.",
     "headlineEnd": "Faits pour vieillir, pas pour être remplacés.",
-    "craftTitle": "Savoir-faire fiable & sécurisé",
-    "craftDesc": "Chaque pièce est soigneusement vérifiée et livrée avec le plus grand soin.",
-    "deliveryTitle": "Livraison rapide au Maroc",
-    "deliveryDesc": "Expédition rapide et fiable partout au Maroc, directement chez vous.",
-    "supportTitle": "Assistance personnelle 24h/24",
-    "supportDesc": "Nous restons disponibles pour répondre à vos questions avant et après votre commande.",
-    "returnsTitle": "Retours sous 7 jours",
-    "returnsDesc": "Sans questions. Si ce n'est pas ce qu'il vous faut, retournez-le sous 7 jours facilement."
+    "pillar1Title": "Intention",
+    "pillar1Desc": "Chaque pièce mérite sa place. Rien dans un espace Mipador n'est là par hasard.",
+    "pillar2Title": "Artisanat",
+    "pillar2Desc": "Façonné à la main au Maroc, avec des matériaux choisis pour leur honnêteté — pas leur prix.",
+    "pillar3Title": "Liberté",
+    "pillar3Desc": "Un espace qui vous rend quelque chose chaque fois que vous y entrez. C'est la seule mesure qui compte.",
+    "pillar4Title": "Durabilité",
+    "pillar4Desc": "Conçu pour traverser les tendances, pas seulement les survivre. Des pièces qui s'améliorent avec le temps."
   },
   "about": {
     "eyebrow": "Qui sommes-nous",
@@ -185,7 +186,9 @@
     "freeToolHeading": "Découvrez comment",
     "freeToolHeadingSoft": "vivre votre couleur.",
     "freeToolBody": "Choisissez une ambiance et recevez des rituels quotidiens, un mantra, une sensation à emporter — pas seulement une palette. Gratuit, instantané, sans inscription.",
-    "freeToolCta": "Trouver mon ambiance"
+    "freeToolCta": "Trouver mon ambiance",
+    "manifestoQuote": "Les plus beaux espaces que nous ayons jamais connus n'avaient rien à voir avec l'argent.",
+    "manifestoLocations": "Un riad à Fès  ·  Un atelier au pied de l'Atlas  ·  Une terrasse au coucher du soleil"
   },
   "footer": {
     "tagline": "Mobilier artisanal marocain pour des espaces qui se sentent vivants — livraison dans tout le Maroc.",

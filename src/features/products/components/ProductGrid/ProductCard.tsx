@@ -2,7 +2,7 @@ import React from "react";
 import type { Product } from "../../../../store/product.store";
 import { useProductStore } from "../../../../store/product.store";
 import { useParams, Link } from "react-router-dom";
-import { ShoppingBag, Heart } from "lucide-react";
+import { Bookmark, Heart } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { toWebp } from "../../../../utils/image";
@@ -36,7 +36,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product: rawProduct }) =>
   return (
     <motion.div
       whileHover={isUnavailable ? {} : { y: -6 }}
-      transition={{ type: "spring", stiffness: 280, damping: 22 }}
+      transition={{ type: "spring", stiffness: 100, damping: 30 }}
     >
       <Link
         to={`/${currentLang}/products/${product.slug}`}
@@ -174,8 +174,8 @@ const ProductCard: React.FC<{ product: Product }> = ({ product: rawProduct }) =>
               t("card.soldOut")
             ) : (
               <>
-                <ShoppingBag size={11} />
-                {t("card.addToCart")}
+                <Bookmark size={11} />
+                {t("card.reserveYours")}
               </>
             )}
           </button>
