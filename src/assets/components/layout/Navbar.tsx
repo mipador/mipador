@@ -67,7 +67,7 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <Link to={`/${currentLang}`} className="shrink-0">
             <img
-              src="/images/LogoMipadorNavBar.webp"
+              src="/images/LogoNav.webp"
               alt="Mipador"
               width={183}
               height={28}

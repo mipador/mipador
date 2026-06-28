@@ -1,16 +1,11 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import type { Variants } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-const IMAGE_ASSETS = {
-  desktop: { url: "/images/hero01.webp",      alt: "Mipador — Premium Moroccan Furniture & Home Decor, Casablanca Morocco" },
-  mobile:  { url: "/images/HeroMobile.webp", alt: "Mipador — Handcrafted Moroccan Furniture Studio, Morocco" },
-};
-
-const FEATURE_THUMB = { url: "/images/atmosphere-1.webp", alt: "Mipador — handcrafted Moroccan textiles and decor" };
+const FEATURE_THUMB = { url: "/images/atmosphere-1-thumb.webp", alt: "Mipador — handcrafted Moroccan textiles and decor" };
 
 const containerVariants: Variants = {
   hidden:  { opacity: 0 },
@@ -24,18 +19,10 @@ const itemVariants: Variants = {
 
 const HeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
   const { t } = useTranslation();
 
   const { lang } = useParams<{ lang?: string }>();
   const currentLang = lang || "en";
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -47,8 +34,6 @@ const HeroSection = () => {
   const imageScale   = useTransform(scrollYProgress, [0, 1],    [1, 1.08]);
   const brightness   = useTransform(scrollYProgress, [0, 0.5],  [1, 0.8]);
 
-  const currentImage = isMobile ? IMAGE_ASSETS.mobile : IMAGE_ASSETS.desktop;
-
   return (
     <section className="relative bg-[#FBF4ED] px-3 sm:px-5 lg:px-6 pt-3 sm:pt-4 lg:pt-5 pb-3 sm:pb-5">
       <motion.div
@@ -57,19 +42,26 @@ const HeroSection = () => {
       >
         {/* Background image */}
         <motion.div className="absolute inset-0" style={{ scale: imageScale }}>
-          <motion.img
-            key={currentImage.url}
-            src={currentImage.url}
-            alt={currentImage.alt}
-            width={isMobile ? 900 : 1600}
-            height={isMobile ? 1350 : 1200}
-            fetchPriority="high"
-            decoding="async"
-            className="w-full h-full object-cover object-center"
+          <motion.div
+            className="w-full h-full"
             animate={{ scale: [1, 1.035, 1] }}
             transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
             style={{ filter: useTransform(brightness, (v) => `brightness(${v}) saturate(1.12) contrast(1.05)`) }}
-          />
+          >
+            <picture style={{ display: "contents" }}>
+              <source media="(max-width: 767px)" srcSet="/images/HeroMobile.webp" width={677} height={1350} />
+              <source media="(min-width: 768px)" srcSet="/images/hero01.webp" width={1600} height={1200} />
+              <img
+                src="/images/hero01.webp"
+                alt="Mipador — Premium Moroccan Furniture & Home Decor, Casablanca Morocco"
+                width={1600}
+                height={1200}
+                fetchPriority="high"
+                decoding="async"
+                className="w-full h-full object-cover object-center"
+              />
+            </picture>
+          </motion.div>
 
           {/* Shine sweep */}
           <motion.div
