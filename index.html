@@ -59,10 +59,15 @@
     <link rel="alternate" hreflang="x-default" href="https://mipador.com/en/" />
 
     <!-- ── Performance: preconnect + LCP preload ────────────────────────── -->
-    <link rel="preconnect" href="https://cdn.rareblocks.xyz" />
-    <link rel="dns-prefetch" href="https://cdn.rareblocks.xyz" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" as="image" href="/images/hero01.webp" media="(min-width: 768px)" fetchpriority="high" />
     <link rel="preload" as="image" href="/images/HeroMobile.webp" media="(max-width: 767px)" fetchpriority="high" />
+
+    <!-- ── Google Fonts — async (non-render-blocking) ────────────────────── -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap" /></noscript>
 
     <!-- ── GitHub Pages SPA routing fix ────────────────────────────────────── -->
     <script>
@@ -208,11 +213,11 @@
     }
     </script>
 
-    <script type="module" crossorigin src="/assets/index-CCrGIAKh.js"></script>
+    <script type="module" crossorigin src="/assets/index-CVktRLvA.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/vendor-i18n-DjHt9t_3.js">
     <link rel="modulepreload" crossorigin href="/assets/vendor-motion-k39_2o3h.js">
     <link rel="modulepreload" crossorigin href="/assets/vendor-react-CZqsRM58.js">
-    <link rel="stylesheet" crossorigin href="/assets/index-DcxnT6yf.css">
+    <link rel="stylesheet" crossorigin href="/assets/index-CeO2MQri.css">
   </head>
 
   <body>
