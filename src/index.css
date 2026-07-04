@@ -15,7 +15,6 @@
 
 .hero-breathe {
   animation: hero-breathe 22s ease-in-out infinite;
-  will-change: transform;
 }
 
 .hero-shine {

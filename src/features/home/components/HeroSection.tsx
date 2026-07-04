@@ -41,7 +41,6 @@ const HeroSection = () => {
                 fetchPriority="high"
                 decoding="async"
                 className="w-full h-full object-cover object-center"
-                style={{ filter: "brightness(1) saturate(1.12) contrast(1.05)" }}
               />
             </picture>
           </div>
