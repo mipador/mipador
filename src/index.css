@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* ── Hero CSS animations (replaces Framer Motion on LCP element) ───────── */
+/* ── Hero CSS animations — zero Framer Motion in the critical paint path ── */
 @keyframes hero-breathe {
   0%, 100% { transform: scale(1); }
   50%       { transform: scale(1.035); }
@@ -13,13 +13,50 @@
   100% { transform: translateX(220%) skewX(-20deg); opacity: 0; }
 }
 
+@keyframes hero-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes hero-card-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hero-glow-in {
+  from { opacity: 0; }
+  to   { opacity: 0.18; }
+}
+
 .hero-breathe {
   animation: hero-breathe 22s ease-in-out infinite;
 }
 
 .hero-shine {
   animation: hero-shine 1.8s 0.5s ease-in-out forwards;
-  will-change: transform, opacity;
+}
+
+/* text fades use animation-fill-mode: both — starts hidden then fades in */
+.hero-fade-in {
+  animation: hero-fade-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-card-entrance {
+  animation: hero-card-in 0.6s 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-glow-entrance {
+  animation: hero-glow-in 2s ease forwards;
+}
+
+/* ── Navbar entrance — CSS so it never gates FCP behind JS init ─────────── */
+@keyframes nav-slide-down {
+  from { transform: translateY(-20px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+.nav-entrance {
+  animation: nav-slide-down 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .font-rounded {

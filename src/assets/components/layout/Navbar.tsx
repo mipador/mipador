@@ -47,11 +47,8 @@ const Navbar: React.FC = () => {
         cartOpen ? "opacity-0 pointer-events-none" : ""
       } ${onHero ? "px-3 sm:px-5 lg:px-6 pt-3 sm:pt-4 lg:pt-5" : "px-4 pt-4"}`}
     >
-      <motion.nav
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className={`transition-all duration-500 ease-in-out ${
+      <nav
+        className={`nav-entrance transition-all duration-500 ease-in-out ${
           scrolled
             ? "w-full max-w-2xl bg-[#f6f4f1]/92 backdrop-blur-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] rounded-xl border border-white/10"
             : onHero
@@ -311,7 +308,7 @@ const Navbar: React.FC = () => {
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.nav>
+      </nav>
     </div>
   );
 };
