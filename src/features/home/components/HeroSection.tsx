@@ -1,6 +1,5 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
-import { useRef } from "react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -12,42 +11,25 @@ const containerVariants: Variants = {
   visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0 } },
 };
 
+// opacity-only: no y offset → avoids CLS from transform-during-paint
 const itemVariants: Variants = {
-  hidden:  { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+  hidden:  { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
 };
 
 const HeroSection = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
-
   const { lang } = useParams<{ lang?: string }>();
   const currentLang = lang || "en";
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const textOpacity  = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
-  const textY        = useTransform(scrollYProgress, [0, 0.4],  [0, -60]);
-  const imageScale   = useTransform(scrollYProgress, [0, 1],    [1, 1.08]);
-  const brightness   = useTransform(scrollYProgress, [0, 0.5],  [1, 0.8]);
-
   return (
     <section className="relative bg-[#FBF4ED] px-3 sm:px-5 lg:px-6 pt-3 sm:pt-4 lg:pt-5 pb-3 sm:pb-5">
-      <motion.div
-        ref={containerRef}
-        className="relative overflow-hidden rounded-3xl min-h-[94dvh] sm:min-h-[92vh] lg:min-h-[95vh] bg-[#1C140F]"
-      >
-        {/* Background image */}
-        <motion.div className="absolute inset-0" style={{ scale: imageScale }}>
-          <motion.div
-            className="w-full h-full"
-            animate={{ scale: [1, 1.035, 1] }}
-            transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
-            style={{ filter: useTransform(brightness, (v) => `brightness(${v}) saturate(1.12) contrast(1.05)`) }}
-          >
+      {/* Plain div — no motion.div wrapper so the hero image isn't gated behind JS init */}
+      <div className="relative overflow-hidden rounded-3xl min-h-[94dvh] sm:min-h-[92vh] lg:min-h-[95vh] bg-[#1C140F]">
+
+        {/* Background image — plain divs so LCP image paints without waiting for Framer Motion */}
+        <div className="absolute inset-0">
+          <div className="w-full h-full hero-breathe">
             <picture style={{ display: "contents" }}>
               <source media="(max-width: 767px)" srcSet="/images/HeroMobile.webp" width={677} height={1350} />
               <source media="(min-width: 768px)" srcSet="/images/hero01.webp" width={1600} height={1200} />
@@ -59,41 +41,30 @@ const HeroSection = () => {
                 fetchPriority="high"
                 decoding="async"
                 className="w-full h-full object-cover object-center"
+                style={{ filter: "brightness(1) saturate(1.12) contrast(1.05)" }}
               />
             </picture>
-          </motion.div>
+          </div>
 
-          {/* Shine sweep */}
-          <motion.div
-            initial={{ x: "-120%", opacity: 0 }}
-            animate={{ x: "120%", opacity: [0, 0.35, 0] }}
-            transition={{ duration: 1.8, delay: 0.5, ease: "easeInOut" }}
-            className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg]"
-          />
+          {/* Shine sweep — CSS animation, no JS reflow */}
+          <div className="absolute inset-0 w-1/2 hero-shine bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-20deg]" />
 
           <div
             className="absolute inset-0"
-            style={{
-              background: `radial-gradient(circle at center, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.42) 55%, rgba(0,0,0,0.72) 100%)`,
-            }}
+            style={{ background: "radial-gradient(circle at center, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.42) 55%, rgba(0,0,0,0.72) 100%)" }}
           />
           <div
             className="absolute inset-0 opacity-60"
-            style={{
-              background: `linear-gradient(135deg, rgba(77,42,34,0.45) 0%, transparent 40%, rgba(198,169,139,0.18) 100%)`,
-            }}
+            style={{ background: "linear-gradient(135deg, rgba(77,42,34,0.45) 0%, transparent 40%, rgba(198,169,139,0.18) 100%)" }}
           />
           <div
             className="absolute inset-0 opacity-[0.06] mix-blend-soft-light"
             style={{ backgroundImage: "url('/noise.svg')" }}
           />
-        </motion.div>
+        </div>
 
         {/* Headline content */}
-        <motion.div
-          style={{ opacity: textOpacity, y: textY }}
-          className="relative z-10 flex items-center justify-center text-center px-6 sm:px-10 h-full pt-16 sm:pt-20"
-        >
+        <div className="relative z-10 flex items-center justify-center text-center px-6 sm:px-10 h-full pt-16 sm:pt-20">
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -107,10 +78,7 @@ const HeroSection = () => {
               {t("hero.headline")}
             </motion.h1>
 
-            <motion.div
-              variants={itemVariants}
-              className="flex items-center gap-5"
-            >
+            <motion.div variants={itemVariants} className="flex items-center gap-5">
               <div className="w-10 h-px bg-white/20" />
               <p className="text-[9px] uppercase tracking-[0.55em] text-white/35 font-light">
                 {t("hero.badge")}
@@ -118,9 +86,9 @@ const HeroSection = () => {
               <div className="w-10 h-px bg-white/20" />
             </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
 
-        {/* Floating card — feature caption + CTA, bottom left */}
+        {/* Floating card */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -148,11 +116,7 @@ const HeroSection = () => {
             </Link>
           </div>
 
-          <motion.div
-            whileHover={{ scale: 1.03, y: -3 }}
-            whileTap={{ scale: 0.97 }}
-            className="w-full rounded-xl"
-          >
+          <motion.div whileHover={{ scale: 1.03, y: -3 }} whileTap={{ scale: 0.97 }} className="w-full rounded-xl">
             <Link
               to={`/${currentLang}/products`}
               className="group relative flex items-center justify-center gap-3 overflow-hidden rounded-xl bg-[#3D1A12] px-7 py-4 text-sm font-medium tracking-[0.1em] uppercase text-[#F6F4F1] hover:bg-[#2A1814] transition-colors"
@@ -171,7 +135,7 @@ const HeroSection = () => {
           transition={{ duration: 2 }}
           className="absolute -bottom-20 -right-20 w-[500px] h-[500px] rounded-full bg-[#C6A98B] blur-[140px] z-0 pointer-events-none"
         />
-      </motion.div>
+      </div>
     </section>
   );
 };

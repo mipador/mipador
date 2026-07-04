@@ -41,6 +41,8 @@ const Footer: React.FC = () => {
             <Link to={`/${currentLang}/`} className="inline-block mb-6">
               <img
                 src="/images/LogoFooter.webp"
+                srcSet="/images/LogoFooter@1x.webp 300w, /images/LogoFooter.webp 600w"
+                sizes="285px"
                 alt="Mipador"
                 width={285}
                 height={64}
