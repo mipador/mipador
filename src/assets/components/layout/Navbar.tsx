@@ -68,6 +68,8 @@ const Navbar: React.FC = () => {
           <Link to={`/${currentLang}`} className="shrink-0">
             <img
               src="/images/LogoNav.webp"
+              srcSet="/images/LogoNav@1x.webp 200w, /images/LogoNav.webp 400w"
+              sizes="183px"
               alt="Mipador"
               width={183}
               height={28}

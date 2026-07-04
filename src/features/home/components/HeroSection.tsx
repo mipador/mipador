@@ -31,7 +31,7 @@ const HeroSection = () => {
         <div className="absolute inset-0">
           <div className="w-full h-full hero-breathe">
             <picture style={{ display: "contents" }}>
-              <source media="(max-width: 767px)" srcSet="/images/HeroMobile.webp" width={677} height={1350} />
+              <source media="(max-width: 767px)" srcSet="/images/HeroMobile-sm.webp 520w, /images/HeroMobile.webp 677w" sizes="100vw" width={677} height={1350} />
               <source media="(min-width: 768px)" srcSet="/images/hero01.webp" width={1600} height={1200} />
               <img
                 src="/images/hero01.webp"
