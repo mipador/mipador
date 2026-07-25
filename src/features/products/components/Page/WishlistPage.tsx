@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useProductStore } from "../../../../store/product.store";
 import ProductCard from "../ProductGrid/ProductCard";
 import { useSEO } from "../../../../hooks/useSEO";
+import { AlbatrossMark } from "../../../../components/AlbatrossMark";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -55,23 +56,33 @@ export default function WishlistPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6, ease: EASE }}
-            className="flex flex-col items-center justify-center py-24 text-center"
+            className="relative flex flex-col items-center justify-center py-24 text-center overflow-hidden"
           >
-            <div className="w-16 h-16 rounded-2xl bg-espresso/5 flex items-center justify-center mb-6">
-              <Heart size={28} className="text-espresso/20" />
-            </div>
-            <p className="text-espresso font-black text-sm uppercase tracking-widest mb-2">
-              {t("wishlist.empty")}
-            </p>
-            <p className="text-espresso/40 text-xs font-light mb-8 max-w-xs leading-relaxed">
-              {t("wishlist.emptyHint")}
-            </p>
-            <Link
-              to={`/${currentLang}/products`}
-              className="text-[10px] font-black uppercase tracking-widest text-espresso border-b border-espresso/30 pb-0.5 hover:border-espresso transition-colors"
+            <div
+              className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              aria-hidden="true"
             >
-              {t("wishlist.exploreCollection")}
-            </Link>
+              <div className="w-full max-w-xs text-espresso opacity-[0.04]">
+                <AlbatrossMark />
+              </div>
+            </div>
+            <div className="relative z-10 flex flex-col items-center">
+              <div className="w-16 h-16 rounded-2xl bg-espresso/5 flex items-center justify-center mb-6">
+                <Heart size={28} className="text-espresso/20" />
+              </div>
+              <p className="text-espresso font-black text-sm uppercase tracking-widest mb-2">
+                {t("wishlist.empty")}
+              </p>
+              <p className="text-espresso/40 text-xs font-light mb-8 max-w-xs leading-relaxed">
+                {t("wishlist.emptyHint")}
+              </p>
+              <Link
+                to={`/${currentLang}/products`}
+                className="text-[10px] font-black uppercase tracking-widest text-espresso border-b border-espresso/30 pb-0.5 hover:border-espresso transition-colors"
+              >
+                {t("wishlist.exploreCollection")}
+              </Link>
+            </div>
           </motion.div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10">

@@ -9,6 +9,7 @@ import { WHATSAPP_NUMBER } from "../../../../config/whatsapp";
 import TrustBadges from "../../../../components/TrustBadges";
 import { toWebp } from "../../../../utils/image";
 import { localizeProduct } from "../../../../utils/localizeProduct";
+import { AlbatrossMark } from "../../../../components/AlbatrossMark";
 
 const DELIVERY = 150;
 
@@ -167,22 +168,32 @@ const CartDrawer: React.FC = () => {
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4 }}
-                    className="flex flex-col items-center justify-center py-16 text-center"
+                    className="relative flex flex-col items-center justify-center py-16 text-center overflow-hidden"
                   >
-                    <ShoppingBag size={40} className="text-espresso/15 mb-4" />
-                    <p className="text-espresso/40 font-black text-sm uppercase tracking-widest">
-                      {t("cart.empty")}
-                    </p>
-                    <p className="text-espresso/25 text-xs mt-2 mb-5">
-                      {t("cart.emptyHint")}
-                    </p>
-                    <Link
-                      to={`/${currentLang}/products`}
-                      onClick={handleClose}
-                      className="text-[10px] font-black uppercase tracking-widest text-espresso border-b border-espresso/30 pb-0.5"
+                    <div
+                      className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                      aria-hidden="true"
                     >
-                      {t("cart.exploreCollection")}
-                    </Link>
+                      <div className="w-full max-w-xs text-espresso opacity-[0.04]">
+                        <AlbatrossMark />
+                      </div>
+                    </div>
+                    <div className="relative z-10 flex flex-col items-center">
+                      <ShoppingBag size={40} className="text-espresso/15 mb-4" />
+                      <p className="text-espresso/40 font-black text-sm uppercase tracking-widest">
+                        {t("cart.empty")}
+                      </p>
+                      <p className="text-espresso/25 text-xs mt-2 mb-5">
+                        {t("cart.emptyHint")}
+                      </p>
+                      <Link
+                        to={`/${currentLang}/products`}
+                        onClick={handleClose}
+                        className="text-[10px] font-black uppercase tracking-widest text-espresso border-b border-espresso/30 pb-0.5"
+                      >
+                        {t("cart.exploreCollection")}
+                      </Link>
+                    </div>
                   </motion.div>
                 ) : (
                   <AnimatePresence initial={false}>

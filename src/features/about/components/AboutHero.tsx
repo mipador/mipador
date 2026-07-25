@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { zelligePatternStyle } from "../../../config/patterns";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -8,13 +9,7 @@ const AboutHero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-cream">
-      <div
-        className="absolute inset-0 opacity-8"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C9922A' stroke-width='1.5'%3E%3Cpath d='M40 0L80 40L40 80L0 40Z'/%3E%3Cpath d='M40 20L60 40L40 60L20 40Z'/%3E%3C/g%3E%3C/svg%3E")`,
-          backgroundSize: "80px 80px",
-        }}
-      />
+      <div className="absolute inset-0 opacity-8" style={zelligePatternStyle()} />
 
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
         <motion.p
@@ -34,7 +29,7 @@ const AboutHero = () => {
         >
           {t("about.headline")}
           <br />
-          <span className="text-black/30 italic font-light">
+          <span className="text-espresso/30 italic font-light">
             {t("about.headlineSoft")}
           </span>
         </motion.h1>
@@ -43,7 +38,7 @@ const AboutHero = () => {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.45, ease: EASE }}
-          className="text-black/40 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto"
+          className="text-espresso/40 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto"
         >
           {t("about.heroBody")}
         </motion.p>
@@ -55,7 +50,7 @@ const AboutHero = () => {
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           className="w-px h-12 bg-gradient-to-b from-gold/40 to-transparent"
         />
-        <p className="text-[9px] font-black uppercase tracking-[0.3em] text-black/20">
+        <p className="text-[9px] font-black uppercase tracking-[0.3em] text-espresso/20">
           {t("about.scroll")}
         </p>
       </div>

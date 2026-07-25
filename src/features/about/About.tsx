@@ -12,6 +12,7 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import ScrollToTop from "../../components/ScrollToTop";
 import { useSEO, useJsonLd } from "../../hooks/useSEO";
+import { zelligePatternStyle } from "../../config/patterns";
 
 const SITE_URL = "https://mipador.com";
 
@@ -81,12 +82,7 @@ function About() {
 
       {/* Final CTA */}
       <section id="cta" className="cv-auto py-32 px-6 bg-espresso relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9922A' fill-opacity='1'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            backgroundSize: "60px 60px",
-          }}
-        />
+        <div className="absolute inset-0 opacity-10" style={zelligePatternStyle()} />
         <div className="relative z-10 max-w-3xl mx-auto text-center">
           <p className="text-[10px] font-black uppercase tracking-[0.4em] text-gold mb-6">
             Mipador Studio
