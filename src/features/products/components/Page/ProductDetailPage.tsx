@@ -324,18 +324,18 @@ const DetailSection: React.FC<{
 }> = ({ label, defaultOpen = false, children }) => {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="border-t border-[#3D1A12]/8">
+    <div className="border-t border-espresso/8">
       <button
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         className="flex w-full items-center justify-between py-4 text-left"
       >
-        <span className="text-[10px] font-black uppercase tracking-widest text-[#3D1A12]/55">
+        <span className="text-[10px] font-black uppercase tracking-widest text-espresso/55">
           {label}
         </span>
         <span
           className={`shrink-0 w-6 h-6 rounded-lg flex items-center justify-center transition-all duration-200 ${
-            open ? "bg-[#3D1A12] text-white" : "bg-[#3D1A12]/8 text-[#3D1A12]/40"
+            open ? "bg-espresso text-white" : "bg-espresso/8 text-espresso/40"
           }`}
         >
           {open ? <Minus size={10} /> : <Plus size={10} />}
@@ -370,9 +370,9 @@ const StockAlert: React.FC<{ stock: number }> = ({ stock }) => {
 
   if (stock <= 8) {
     return (
-      <div className="flex items-center gap-2 bg-[#C9922A]/8 border border-[#C9922A]/20 rounded-xl px-4 py-3">
-        <Clock size={14} className="text-[#C9922A] shrink-0" />
-        <p className="text-xs font-black text-[#C9922A] uppercase tracking-wider">
+      <div className="flex items-center gap-2 bg-gold/8 border border-gold/20 rounded-xl px-4 py-3">
+        <Clock size={14} className="text-gold shrink-0" />
+        <p className="text-xs font-black text-gold uppercase tracking-wider">
           {t("product.lowStock", { count: stock })}
         </p>
       </div>
@@ -401,13 +401,13 @@ const StarRating: React.FC<{ rating: number; count: number }> = ({ rating, count
             size={13}
             className={
               n <= Math.round(rating)
-                ? "text-[#C9922A] fill-[#C9922A]"
-                : "text-[#3D1A12]/20"
+                ? "text-gold fill-gold"
+                : "text-espresso/20"
             }
           />
         ))}
       </div>
-      <p className="text-xs text-[#3D1A12]/40 font-light">
+      <p className="text-xs text-espresso/40 font-light">
         {count > 0
           ? `${rating.toFixed(1)} · ${t("reviews.count", { count })}`
           : t("reviews.noReviews")}
@@ -569,13 +569,13 @@ const ProductDetailPage: React.FC = () => {
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-[#F6F4F1] flex flex-col items-center justify-center text-center px-6">
-        <p className="text-[#3D1A12]/30 font-black text-sm uppercase tracking-widest mb-6">
+      <div className="min-h-screen bg-cream flex flex-col items-center justify-center text-center px-6">
+        <p className="text-espresso/30 font-black text-sm uppercase tracking-widest mb-6">
           {t("product.notFound")}
         </p>
         <Link
           to={`/${currentLang}/products`}
-          className="text-[10px] font-black uppercase tracking-widest text-[#C9922A] border-b border-[#C9922A]/40 pb-0.5"
+          className="text-[10px] font-black uppercase tracking-widest text-gold border-b border-gold/40 pb-0.5"
         >
           {t("product.backToCollection")}
         </Link>
@@ -607,7 +607,7 @@ const ProductDetailPage: React.FC = () => {
     .slice(0, 3);
 
   return (
-    <div className="relative min-h-screen bg-[#F6F4F1] overflow-hidden">
+    <div className="relative min-h-screen bg-cream overflow-hidden">
       <ScrollToTop />
 
       {/* ── Image lightbox ── */}
@@ -628,7 +628,7 @@ const ProductDetailPage: React.FC = () => {
         {/* Back */}
         <Link
           to={`/${currentLang}/products`}
-          className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#3D1A12]/40 hover:text-[#3D1A12] transition-colors mb-8 md:mb-14"
+          className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-espresso/40 hover:text-espresso transition-colors mb-8 md:mb-14"
         >
           <ArrowLeft size={13} /> {t("product.backToCollection")}
         </Link>
@@ -651,7 +651,7 @@ const ProductDetailPage: React.FC = () => {
                       onClick={() => setImgIndex(i)}
                       className={`w-full aspect-[4/5] rounded-lg overflow-hidden border-2 transition-all duration-200 ${
                         i === imgIndex
-                          ? "border-[#3D1A12] opacity-100"
+                          ? "border-espresso opacity-100"
                           : "border-transparent opacity-35 hover:opacity-65"
                       }`}
                     >
@@ -666,7 +666,7 @@ const ProductDetailPage: React.FC = () => {
 
               {/* Main image */}
               <div
-                className="relative flex-1 aspect-[4/5] rounded-xl bg-[#EFEBE9] overflow-hidden cursor-zoom-in"
+                className="relative flex-1 aspect-[4/5] rounded-xl bg-linen overflow-hidden cursor-zoom-in"
                 onClick={() => setZoomed(true)}
                 onKeyDown={(e) => e.key === "Enter" && setZoomed(true)}
                 tabIndex={0}
@@ -704,7 +704,7 @@ const ProductDetailPage: React.FC = () => {
                       </picture>
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
-                        <p className="text-[#3D1A12]/20 text-xs font-black uppercase tracking-widest">
+                        <p className="text-espresso/20 text-xs font-black uppercase tracking-widest">
                           {product.collection}
                         </p>
                       </div>
@@ -715,13 +715,13 @@ const ProductDetailPage: React.FC = () => {
                 {/* Badges */}
                 {isUnavailable && (
                   <div className="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur rounded-xl pointer-events-none">
-                    <p className="text-[9px] font-black uppercase tracking-widest text-[#3D1A12]">
+                    <p className="text-[9px] font-black uppercase tracking-widest text-espresso">
                       {isComingSoon ? t("card.comingSoon") : t("card.soldOut")}
                     </p>
                   </div>
                 )}
                 {product.tags.includes("bestseller") && (
-                  <div className="absolute top-4 right-4 px-3 py-1 bg-[#3D1A12] rounded-xl pointer-events-none">
+                  <div className="absolute top-4 right-4 px-3 py-1 bg-espresso rounded-xl pointer-events-none">
                     <p className="text-[9px] font-black uppercase tracking-widest text-white">
                       {t("card.bestseller")}
                     </p>
@@ -737,7 +737,7 @@ const ProductDetailPage: React.FC = () => {
                       className="md:hidden absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/85 rounded-xl flex items-center justify-center disabled:opacity-0 hover:bg-white transition-all duration-200"
                       aria-label="Previous image"
                     >
-                      <ChevronLeft size={15} className="text-[#3D1A12]" />
+                      <ChevronLeft size={15} className="text-espresso" />
                     </button>
                     <button
                       onClick={(e) => { e.stopPropagation(); setImgIndex((i) => Math.min(product.images.length - 1, i + 1)); }}
@@ -745,7 +745,7 @@ const ProductDetailPage: React.FC = () => {
                       className="md:hidden absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white/85 rounded-xl flex items-center justify-center disabled:opacity-0 hover:bg-white transition-all duration-200"
                       aria-label="Next image"
                     >
-                      <ChevronRight size={15} className="text-[#3D1A12]" />
+                      <ChevronRight size={15} className="text-espresso" />
                     </button>
                   </>
                 )}
@@ -782,7 +782,7 @@ const ProductDetailPage: React.FC = () => {
                     onClick={() => setImgIndex(i)}
                     className={`shrink-0 w-[68px] h-[68px] rounded-xl overflow-hidden border-2 transition-all snap-start ${
                       i === imgIndex
-                        ? "border-[#3D1A12] opacity-100"
+                        ? "border-espresso opacity-100"
                         : "border-transparent opacity-40 hover:opacity-70"
                     }`}
                   >
@@ -801,13 +801,13 @@ const ProductDetailPage: React.FC = () => {
 
             {/* Header */}
             <div>
-              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-[#3D1A12]/35 mb-2">
+              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-espresso/35 mb-2">
                 {product.collection} · {product.location}
               </p>
-              <h1 className="text-2xl md:text-4xl font-black text-[#3D1A12] tracking-tight leading-tight">
+              <h1 className="text-2xl md:text-4xl font-black text-espresso tracking-tight leading-tight">
                 {product.name}
               </h1>
-              <p className="text-[#3D1A12]/50 italic text-sm mt-1.5">
+              <p className="text-espresso/50 italic text-sm mt-1.5">
                 {product.tagline}
               </p>
             </div>
@@ -817,13 +817,13 @@ const ProductDetailPage: React.FC = () => {
 
             {/* Price */}
             <div>
-              <p className="text-3xl font-black text-[#3D1A12]">
+              <p className="text-3xl font-black text-espresso">
                 {product.price.toLocaleString()} MAD
               </p>
               {quantity > 1 && (
-                <p className="text-sm text-[#3D1A12]/40 mt-1 font-light">
+                <p className="text-sm text-espresso/40 mt-1 font-light">
                   × {quantity} ={" "}
-                  <span className="font-black text-[#3D1A12]">
+                  <span className="font-black text-espresso">
                     {totalPrice.toLocaleString()} MAD
                   </span>
                 </p>
@@ -838,26 +838,26 @@ const ProductDetailPage: React.FC = () => {
 
             {/* ── ORDER FORM ── */}
             {!isUnavailable && (
-              <div className="bg-white rounded-xl p-5 border border-[#3D1A12]/8 flex flex-col gap-4">
-                <p className="text-[10px] font-black uppercase tracking-widest text-[#3D1A12]/40">
+              <div className="bg-white rounded-xl p-5 border border-espresso/8 flex flex-col gap-4">
+                <p className="text-[10px] font-black uppercase tracking-widest text-espresso/40">
                   {t("product.orderThisPiece")}
                 </p>
 
                 {/* Quantity selector */}
                 <div className="flex flex-col gap-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-[#3D1A12]/45">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-espresso/45">
                     {t("product.quantity")}
                   </label>
                   <div className="flex items-center gap-3">
-                    <div className="flex items-center gap-3 bg-[#F6F4F1] rounded-xl p-1.5">
+                    <div className="flex items-center gap-3 bg-cream rounded-xl p-1.5">
                       <button
                         onClick={() => setQuantity((q) => Math.max(1, q - 1))}
                         className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white transition-colors"
                         aria-label="Decrease quantity"
                       >
-                        <Minus size={13} className="text-[#3D1A12]" />
+                        <Minus size={13} className="text-espresso" />
                       </button>
-                      <span className="text-sm font-black text-[#3D1A12] w-6 text-center">
+                      <span className="text-sm font-black text-espresso w-6 text-center">
                         {quantity}
                       </span>
                       <button
@@ -865,11 +865,11 @@ const ProductDetailPage: React.FC = () => {
                         className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white transition-colors"
                         aria-label="Increase quantity"
                       >
-                        <Plus size={13} className="text-[#3D1A12]" />
+                        <Plus size={13} className="text-espresso" />
                       </button>
                     </div>
                     {stock > 0 && stock <= 8 && (
-                      <p className="text-[10px] text-[#C9922A] font-black uppercase tracking-wider">
+                      <p className="text-[10px] text-gold font-black uppercase tracking-wider">
                         {t("product.countAvailable", { count: stock })}
                       </p>
                     )}
@@ -893,8 +893,8 @@ const ProductDetailPage: React.FC = () => {
                   disabled={added}
                   className={`w-full py-3 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 transition-all duration-300 border ${
                     added
-                      ? "bg-[#C9922A]/10 border-[#C9922A]/30 text-[#C9922A]"
-                      : "bg-transparent border-[#3D1A12]/15 text-[#3D1A12]/50 hover:border-[#3D1A12]/30 hover:text-[#3D1A12]"
+                      ? "bg-gold/10 border-gold/30 text-gold"
+                      : "bg-transparent border-espresso/15 text-espresso/50 hover:border-espresso/30 hover:text-espresso"
                   }`}
                 >
                   {added ? (
@@ -908,7 +908,7 @@ const ProductDetailPage: React.FC = () => {
 
             {/* Unavailable state */}
             {isUnavailable && (
-              <div className="w-full py-4 rounded-xl bg-[#3D1A12]/8 text-[#3D1A12]/30 text-[10px] font-black uppercase tracking-widest text-center">
+              <div className="w-full py-4 rounded-xl bg-espresso/8 text-espresso/30 text-[10px] font-black uppercase tracking-widest text-center">
                 {isComingSoon
                   ? t("product.unavailableComingSoon")
                   : t("product.unavailableSoldOut")}
@@ -916,10 +916,10 @@ const ProductDetailPage: React.FC = () => {
             )}
 
             {/* ── Collapsible detail sections ── */}
-            <div className="border-t border-[#3D1A12]/8 pt-1">
+            <div className="border-t border-espresso/8 pt-1">
 
               <DetailSection label={t("product.aboutThisPiece")} defaultOpen>
-                <p className="text-[#3D1A12]/60 text-sm leading-relaxed font-light">
+                <p className="text-espresso/60 text-sm leading-relaxed font-light">
                   {product.description}
                 </p>
               </DetailSection>
@@ -929,7 +929,7 @@ const ProductDetailPage: React.FC = () => {
                   {product.materials.map((m, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 bg-white border border-[#3D1A12]/10 rounded-xl text-[10px] font-black uppercase tracking-wider text-[#3D1A12]/50"
+                      className="px-3 py-1 bg-white border border-espresso/10 rounded-xl text-[10px] font-black uppercase tracking-wider text-espresso/50"
                     >
                       {m}
                     </span>
@@ -947,12 +947,12 @@ const ProductDetailPage: React.FC = () => {
                   ].map(({ label, value }) => (
                     <div
                       key={label}
-                      className="bg-white rounded-xl px-4 py-3 border border-[#3D1A12]/8"
+                      className="bg-white rounded-xl px-4 py-3 border border-espresso/8"
                     >
-                      <p className="text-[9px] font-black uppercase tracking-widest text-[#3D1A12]/35 mb-0.5">
+                      <p className="text-[9px] font-black uppercase tracking-widest text-espresso/35 mb-0.5">
                         {label}
                       </p>
-                      <p className="text-sm font-black text-[#3D1A12]">{value}</p>
+                      <p className="text-sm font-black text-espresso">{value}</p>
                     </div>
                   ))}
                 </div>
@@ -963,9 +963,9 @@ const ProductDetailPage: React.FC = () => {
                   {product.care.map((c, i) => (
                     <li
                       key={i}
-                      className="flex items-start gap-2 text-sm text-[#3D1A12]/50 font-light"
+                      className="flex items-start gap-2 text-sm text-espresso/50 font-light"
                     >
-                      <span className="text-[#C9922A] shrink-0 font-black mt-0.5">·</span>
+                      <span className="text-gold shrink-0 font-black mt-0.5">·</span>
                       {c}
                     </li>
                   ))}
@@ -975,14 +975,14 @@ const ProductDetailPage: React.FC = () => {
               <DetailSection label={t("product.leadTime")}>
                 <div className="space-y-2">
                   {product.colors.length > 0 && (
-                    <p className="text-sm text-[#3D1A12]/60 font-light">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-[#3D1A12]/40">
+                    <p className="text-sm text-espresso/60 font-light">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-espresso/40">
                         {t("product.availableIn")}:{" "}
                       </span>
                       {product.colors.join(", ")}
                     </p>
                   )}
-                  <p className="text-sm text-[#3D1A12]/60 font-light">
+                  <p className="text-sm text-espresso/60 font-light">
                     {t("product.leadTimeValue", { time: product.leadTime })}
                   </p>
                 </div>
@@ -1004,11 +1004,11 @@ const ProductDetailPage: React.FC = () => {
         {/* ── Related products ── */}
         {related.length > 0 && (
           <div className="mt-20 md:mt-32">
-            <div className="border-t border-[#3D1A12]/10 pt-12 mb-10">
-              <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[#3D1A12]/35 mb-2">
+            <div className="border-t border-espresso/10 pt-12 mb-10">
+              <p className="text-[10px] font-black uppercase tracking-[0.4em] text-espresso/35 mb-2">
                 {t("product.youMayAlsoLike")}
               </p>
-              <h2 className="text-2xl md:text-3xl font-black text-[#3D1A12] tracking-tight">
+              <h2 className="text-2xl md:text-3xl font-black text-espresso tracking-tight">
                 {t("product.fromTheSameWorld")}
               </h2>
             </div>
@@ -1025,7 +1025,7 @@ const ProductDetailPage: React.FC = () => {
                     window.scrollTo({ top: 0, behavior: "smooth" });
                   }}
                 >
-                  <div className="aspect-[3/4] rounded-xl bg-[#EFEBE9] overflow-hidden">
+                  <div className="aspect-[3/4] rounded-xl bg-linen overflow-hidden">
                     {p.images[0] ? (
                       <picture style={{ display: "contents" }}>
                         <source srcSet={toWebp(p.images[0])} type="image/webp" />
@@ -1039,20 +1039,20 @@ const ProductDetailPage: React.FC = () => {
                       </picture>
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
-                        <p className="text-[#3D1A12]/20 text-xs font-black uppercase tracking-widest">
+                        <p className="text-espresso/20 text-xs font-black uppercase tracking-widest">
                           {p.collection}
                         </p>
                       </div>
                     )}
                   </div>
                   <div className="mt-3">
-                    <p className="text-[9px] font-black uppercase tracking-widest text-[#3D1A12]/35">
+                    <p className="text-[9px] font-black uppercase tracking-widest text-espresso/35">
                       {p.collection}
                     </p>
-                    <p className="text-sm font-black text-[#3D1A12] tracking-tight mt-1">
+                    <p className="text-sm font-black text-espresso tracking-tight mt-1">
                       {p.name}
                     </p>
-                    <p className="text-sm font-black text-[#3D1A12] mt-1.5">
+                    <p className="text-sm font-black text-espresso mt-1.5">
                       {p.price.toLocaleString()} MAD
                     </p>
                   </div>

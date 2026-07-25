@@ -1,7 +1,9 @@
 import { Star, MessageCircle, CheckCircle } from "lucide-react";
+import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { getProductReviews, getAvgRating, type Review } from "../../../../data/reviews";
 import { WHATSAPP_NUMBER } from "../../../../config/whatsapp";
+import { Reveal, revealContainer, revealItem } from "../../../../components/Reveal";
 
 function StarRow({ rating, size = 13 }: { rating: number; size?: number }) {
   return (
@@ -12,8 +14,8 @@ function StarRow({ rating, size = 13 }: { rating: number; size?: number }) {
           size={size}
           className={
             n <= Math.round(rating)
-              ? "text-[#C9922A] fill-[#C9922A]"
-              : "text-[#3D1A12]/15"
+              ? "text-gold fill-gold"
+              : "text-espresso/15"
           }
         />
       ))}
@@ -35,19 +37,19 @@ function ReviewCard({ review }: { review: Review }) {
   });
 
   return (
-    <div className="bg-white rounded-2xl p-5 border border-[#3D1A12]/8 flex flex-col gap-3">
+    <div className="bg-white rounded-2xl p-5 border border-espresso/8 flex flex-col gap-3">
       <div className="flex items-center gap-3">
-        <div className="w-9 h-9 rounded-xl bg-[#3D1A12]/8 flex items-center justify-center shrink-0">
-          <span className="text-[10px] font-black text-[#3D1A12]/50">{initials}</span>
+        <div className="w-9 h-9 rounded-xl bg-espresso/8 flex items-center justify-center shrink-0">
+          <span className="text-[10px] font-black text-espresso/50">{initials}</span>
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-xs font-black text-[#3D1A12] tracking-tight">{review.author}</p>
-          <p className="text-[10px] text-[#3D1A12]/35 font-light">{review.city}</p>
+          <p className="text-xs font-black text-espresso tracking-tight">{review.author}</p>
+          <p className="text-[10px] text-espresso/35 font-light">{review.city}</p>
         </div>
         {review.verified && (
           <div className="flex items-center gap-1 shrink-0">
-            <CheckCircle size={11} className="text-[#C9922A]" />
-            <span className="text-[9px] font-black uppercase tracking-wider text-[#C9922A]">
+            <CheckCircle size={11} className="text-gold" />
+            <span className="text-[9px] font-black uppercase tracking-wider text-gold">
               {t("reviews.verified")}
             </span>
           </div>
@@ -56,14 +58,14 @@ function ReviewCard({ review }: { review: Review }) {
 
       <div className="flex items-center justify-between">
         <StarRow rating={review.rating} />
-        <span className="text-[10px] text-[#3D1A12]/25 font-light">{date}</span>
+        <span className="text-[10px] text-espresso/25 font-light">{date}</span>
       </div>
 
       <div>
-        <p className="text-xs font-black text-[#3D1A12] tracking-tight mb-1.5">
+        <p className="text-xs font-black text-espresso tracking-tight mb-1.5">
           {review.title}
         </p>
-        <p className="text-xs text-[#3D1A12]/55 font-light leading-relaxed line-clamp-4">
+        <p className="text-xs text-espresso/55 font-light leading-relaxed line-clamp-4">
           {review.body}
         </p>
       </div>
@@ -89,49 +91,57 @@ export function ReviewsSection({
 
   return (
     <div className="mt-20 md:mt-28">
-      <div className="border-t border-[#3D1A12]/10 pt-12">
+      <div className="border-t border-espresso/10 pt-12">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+        <Reveal className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
           <div>
-            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[#3D1A12]/35 mb-3">
+            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-espresso/35 mb-3">
               {t("reviews.heading")}
             </p>
             {productReviews.length > 0 ? (
               <div className="flex items-center gap-4">
-                <span className="text-4xl font-black text-[#3D1A12] tracking-tight leading-none">
+                <span className="text-4xl font-black text-espresso tracking-tight leading-none">
                   {avgRating.toFixed(1)}
                 </span>
                 <div>
                   <StarRow rating={avgRating} size={16} />
-                  <p className="text-xs text-[#3D1A12]/40 font-light mt-1.5">
+                  <p className="text-xs text-espresso/40 font-light mt-1.5">
                     {t("reviews.count", { count: productReviews.length })}
                   </p>
                 </div>
               </div>
             ) : (
-              <p className="text-sm text-[#3D1A12]/35 font-light">
+              <p className="text-sm text-espresso/35 font-light">
                 {t("reviews.noReviews")}
               </p>
             )}
           </div>
-        </div>
+        </Reveal>
 
         {/* Cards */}
         {productReviews.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12"
+            variants={revealContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+          >
             {productReviews.map((review) => (
-              <ReviewCard key={review.id} review={review} />
+              <motion.div key={review.id} variants={revealItem}>
+                <ReviewCard review={review} />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         )}
 
         {/* WhatsApp share CTA */}
-        <div className="bg-[#EFECE8] rounded-2xl px-6 py-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+        <div className="bg-linen rounded-2xl px-6 py-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
           <div>
-            <p className="text-sm font-black text-[#3D1A12] tracking-tight mb-1">
+            <p className="text-sm font-black text-espresso tracking-tight mb-1">
               {t("reviews.shareHeading")}
             </p>
-            <p className="text-xs text-[#3D1A12]/45 font-light max-w-xs leading-relaxed">
+            <p className="text-xs text-espresso/45 font-light max-w-xs leading-relaxed">
               {t("reviews.shareBody")}
             </p>
           </div>
@@ -139,7 +149,7 @@ export function ReviewsSection({
             href={waHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="shrink-0 inline-flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-[#1ebe5d] transition-colors"
+            className="shrink-0 inline-flex items-center gap-2 bg-whatsapp text-white px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-whatsapp-dark transition-colors"
           >
             <MessageCircle size={14} />
             {t("reviews.shareBtn")}

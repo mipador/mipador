@@ -23,13 +23,13 @@ export default function TrustBadges({ className = "" }: TrustBadgesProps) {
         {BADGES.map(({ Icon, titleKey, descKey }) => (
           <div
             key={titleKey}
-            className="flex flex-col items-center text-center bg-white rounded-xl p-3 gap-1.5 border border-[#3D1A12]/8"
+            className="flex flex-col items-center text-center bg-white rounded-xl p-3 gap-1.5 border border-espresso/8"
           >
-            <Icon size={15} strokeWidth={1.5} className="text-[#3D1A12]/55 shrink-0" />
-            <p className="text-[8px] font-black uppercase tracking-wider text-[#3D1A12] leading-snug">
+            <Icon size={15} strokeWidth={1.5} className="text-espresso/55 shrink-0" />
+            <p className="text-[8px] font-black uppercase tracking-wider text-espresso leading-snug">
               {t(titleKey)}
             </p>
-            <p className="text-[7.5px] text-[#3D1A12]/35 leading-snug hidden sm:block">
+            <p className="text-[7.5px] text-espresso/35 leading-snug hidden sm:block">
               {t(descKey)}
             </p>
           </div>
@@ -38,7 +38,7 @@ export default function TrustBadges({ className = "" }: TrustBadgesProps) {
 
       <Link
         to={`/${currentLang}/refund-policy`}
-        className="text-center text-[8.5px] font-black uppercase tracking-widest text-[#3D1A12]/30 hover:text-[#3D1A12]/55 transition-colors"
+        className="text-center text-[8.5px] font-black uppercase tracking-widest text-espresso/30 hover:text-espresso/55 transition-colors"
       >
         {t("footer.refund")} →
       </Link>

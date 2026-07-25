@@ -4,7 +4,7 @@ import { useProductStore } from "../../../../store/product.store";
 
 const Section: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
   <div>
-    <h4 className="text-[9px] font-black uppercase tracking-[0.3em] text-[#3D1A12]/35 mb-4">
+    <h4 className="text-[9px] font-black uppercase tracking-[0.3em] text-espresso/35 mb-4">
       {title}
     </h4>
     {children}
@@ -20,8 +20,8 @@ const FilterBtn: React.FC<{
     onClick={onClick}
     className={`text-left w-full py-1.5 text-sm transition-all duration-200 font-bold ${
       active
-        ? "text-[#3D1A12] translate-x-1.5"
-        : "text-[#3D1A12]/35 hover:text-[#3D1A12]/70"
+        ? "text-espresso translate-x-1.5"
+        : "text-espresso/35 hover:text-espresso/70"
     }`}
   >
     {children}
@@ -104,9 +104,9 @@ const ProductFilters: React.FC<{ mobile?: boolean }> = ({ mobile = false }) => {
             type="checkbox"
             checked={inStockOnly}
             onChange={(e) => setInStockOnly(e.target.checked)}
-            className="w-4 h-4 accent-[#3D1A12]"
+            className="w-4 h-4 accent-espresso"
           />
-          <span className="text-sm font-bold text-[#3D1A12]/60">
+          <span className="text-sm font-bold text-espresso/60">
             {t("products.filterInStockOnly")}
           </span>
         </label>
@@ -115,7 +115,7 @@ const ProductFilters: React.FC<{ mobile?: boolean }> = ({ mobile = false }) => {
       {/* Reset */}
       <button
         onClick={resetFilters}
-        className="text-left text-[9px] font-black uppercase tracking-widest text-[#3D1A12]/25 hover:text-[#3D1A12]/50 transition-colors"
+        className="text-left text-[9px] font-black uppercase tracking-widest text-espresso/25 hover:text-espresso/50 transition-colors"
       >
         {t("products.filterReset")}
       </button>

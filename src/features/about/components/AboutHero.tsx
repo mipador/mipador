@@ -7,7 +7,7 @@ const AboutHero = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#F6F4F1]">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-cream">
       <div
         className="absolute inset-0 opacity-8"
         style={{
@@ -21,7 +21,7 @@ const AboutHero = () => {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: EASE }}
-          className="text-[#C9922A] text-[10px] font-black uppercase tracking-[0.5em] mb-8"
+          className="text-gold text-[10px] font-black uppercase tracking-[0.5em] mb-8"
         >
           {t("about.eyebrow")}
         </motion.p>
@@ -30,7 +30,7 @@ const AboutHero = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2, ease: EASE }}
-          className="text-[#4D2A22] text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-none mb-8"
+          className="text-espresso-light text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-none mb-8"
         >
           {t("about.headline")}
           <br />
@@ -53,7 +53,7 @@ const AboutHero = () => {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="w-px h-12 bg-gradient-to-b from-[#C9922A]/40 to-transparent"
+          className="w-px h-12 bg-gradient-to-b from-gold/40 to-transparent"
         />
         <p className="text-[9px] font-black uppercase tracking-[0.3em] text-black/20">
           {t("about.scroll")}

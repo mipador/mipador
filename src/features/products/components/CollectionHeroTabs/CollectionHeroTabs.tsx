@@ -107,7 +107,7 @@ const CollectionHeroTabs: React.FC = () => {
               whileTap={{ scale: 0.985 }}
               transition={{ duration: 0.15 }}
               className={`relative overflow-hidden rounded-2xl h-40 sm:h-52 md:h-60 group focus-visible:outline-none ${
-                isActive ? "ring-2 ring-[#C9922A] ring-offset-2 ring-offset-[#F6F4F1]" : ""
+                isActive ? "ring-2 ring-gold ring-offset-2 ring-offset-cream" : ""
               }`}
             >
               {/* Photo */}
@@ -122,13 +122,13 @@ const CollectionHeroTabs: React.FC = () => {
               <div
                 className={`absolute inset-0 transition-colors duration-300 ${
                   isActive
-                    ? "bg-[#3D1A12]/52"
-                    : "bg-[#3D1A12]/40 group-hover:bg-[#3D1A12]/28"
+                    ? "bg-espresso/52"
+                    : "bg-espresso/40 group-hover:bg-espresso/28"
                 }`}
               />
 
               {/* Bottom-up gradient keeps label crisp */}
-              <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-[#150804]/80 to-transparent pointer-events-none" />
+              <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-espresso-950/80 to-transparent pointer-events-none" />
 
               {/* Label */}
               <div className="relative z-10 flex flex-col items-center justify-center h-full gap-2 px-4">
@@ -137,7 +137,7 @@ const CollectionHeroTabs: React.FC = () => {
                     initial={{ opacity: 0, scale: 0.4 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.25 }}
-                    className="text-[#C9922A] text-base leading-none"
+                    className="text-gold text-base leading-none"
                   >
                     ✦
                   </motion.span>
@@ -154,7 +154,7 @@ const CollectionHeroTabs: React.FC = () => {
               {isActive && (
                 <motion.div
                   layoutId="locationActiveBar"
-                  className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#C9922A]"
+                  className="absolute bottom-0 left-0 right-0 h-[3px] bg-gold"
                   transition={{ type: "spring", stiffness: 500, damping: 30 }}
                 />
               )}
@@ -174,7 +174,7 @@ const CollectionHeroTabs: React.FC = () => {
             transition={{ duration: 0.3, ease: EASE }}
           >
             {/* Section label */}
-            <p className="text-[9px] font-black uppercase tracking-[0.35em] text-[#3D1A12]/30 mb-3">
+            <p className="text-[9px] font-black uppercase tracking-[0.35em] text-espresso/30 mb-3">
               {t("products.shopByCategory")}
             </p>
 
@@ -197,7 +197,7 @@ const CollectionHeroTabs: React.FC = () => {
                     whileTap={{ scale: 0.93 }}
                     className={`relative flex-shrink-0 w-[82px] sm:w-[96px] h-[100px] sm:h-[116px] rounded-xl overflow-hidden focus-visible:outline-none transition-opacity duration-200 group ${
                       isActive
-                        ? "ring-2 ring-[#C9922A] ring-offset-1 ring-offset-[#F6F4F1]"
+                        ? "ring-2 ring-gold ring-offset-1 ring-offset-cream"
                         : "opacity-75 hover:opacity-100"
                     }`}
                   >
@@ -210,11 +210,11 @@ const CollectionHeroTabs: React.FC = () => {
                     />
 
                     {/* Bottom-up gradient keeps text crisp */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#150804]/92 via-[#150804]/25 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-espresso-950/92 via-espresso-950/25 to-transparent" />
 
                     {/* Bestseller / featured indicator — top-right gold star */}
                     {isPopular && (
-                      <span className="absolute top-2 right-2 text-[#C9922A] text-[11px] leading-none drop-shadow">
+                      <span className="absolute top-2 right-2 text-gold text-[11px] leading-none drop-shadow">
                         ★
                       </span>
                     )}
@@ -224,7 +224,7 @@ const CollectionHeroTabs: React.FC = () => {
                       <motion.div
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
-                        className="absolute top-2 left-2 w-1.5 h-1.5 rounded-full bg-[#C9922A]"
+                        className="absolute top-2 left-2 w-1.5 h-1.5 rounded-full bg-gold"
                       />
                     )}
 

@@ -1,5 +1,7 @@
 import { Wind, Sun, Moon, Mountain, Droplets, Star, Circle, Triangle } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
+import { Reveal, revealContainer, revealItem } from "../../../components/Reveal";
 
 const icons = [Sun, Mountain, Moon, Wind, Droplets, Star, Circle, Triangle];
 
@@ -18,36 +20,43 @@ const FeatureGrid = () => {
   ];
 
   return (
-    <section className="py-24 px-6 bg-[#F6F4F1]">
+    <section className="py-24 px-6 bg-cream">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[#3D1A12]/40 mb-4">
+        <Reveal className="text-center mb-16">
+          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-espresso/40 mb-4">
             {t("featureGrid.eyebrow")}
           </p>
-          <h2 className="text-4xl font-black text-[#3D1A12] tracking-tight">
+          <h2 className="text-4xl font-black text-espresso tracking-tight">
             {t("featureGrid.heading")}
           </h2>
-        </div>
+        </Reveal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <motion.div
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-4"
+          variants={revealContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+        >
           {touches.map((item, i) => (
-            <div
+            <motion.div
               key={i}
-              className="bg-white border border-[#3D1A12]/8 rounded-xl p-6 hover:bg-[#EFEBE9] hover:border-[#C9922A]/20 transition-all group"
+              variants={revealItem}
+              className="bg-white border border-espresso/8 rounded-xl p-6 hover:bg-linen hover:border-gold/20 transition-all group"
             >
               <item.icon
-                className="text-[#C9922A] mb-5 transition-transform group-hover:scale-110"
+                className="text-gold mb-5 transition-transform group-hover:scale-110"
                 size={24}
               />
-              <h3 className="font-black text-[#3D1A12] text-sm mb-2 tracking-tight">
+              <h3 className="font-black text-espresso text-sm mb-2 tracking-tight">
                 {item.title}
               </h3>
-              <p className="text-xs text-[#3D1A12]/40 leading-relaxed font-light">
+              <p className="text-xs text-espresso/40 leading-relaxed font-light">
                 {item.desc}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -15,7 +15,7 @@ const VisionSection = () => {
   const tags = [t("vision.tag1"), t("vision.tag2"), t("vision.tag3")];
 
   return (
-    <section className="py-28 px-6 bg-[#F6F4F1] overflow-hidden">
+    <section className="py-28 px-6 bg-cream overflow-hidden">
       <div className="max-w-7xl mx-auto">
 
         {/* Central statement */}
@@ -26,14 +26,14 @@ const VisionSection = () => {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.9, ease: EASE }}
         >
-          <p className="text-[10px] font-black uppercase tracking-[0.5em] text-[#C9922A] mb-8">
+          <p className="text-[10px] font-black uppercase tracking-[0.5em] text-gold mb-8">
             {t("vision.eyebrow")}
           </p>
           <div className="space-y-0">
-            <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black text-[#3D1A12] tracking-tight leading-none">
+            <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black text-espresso tracking-tight leading-none">
               {t("vision.taglineA")}
             </h2>
-            <p className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light italic text-[#3D1A12]/20 tracking-tight leading-none">
+            <p className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light italic text-espresso/20 tracking-tight leading-none">
               {t("vision.taglineB")}
             </p>
           </div>
@@ -59,7 +59,7 @@ const VisionSection = () => {
                 loading="lazy"
               />
             </picture>
-            <div className="absolute inset-0 bg-gradient-to-t from-[#2A0F08]/80 via-[#2A0F08]/15 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-espresso-900/80 via-espresso-900/15 to-transparent" />
             <div className="absolute top-6 left-6">
               <div className="bg-black/25 backdrop-blur-md border border-white/10 px-4 py-2 rounded-xl">
                 <span className="text-white/70 text-[9px] font-black uppercase tracking-widest">
@@ -68,7 +68,7 @@ const VisionSection = () => {
               </div>
             </div>
             <div className="absolute bottom-8 left-8 right-8">
-              <p className="text-[#C9922A] text-[9px] font-black uppercase tracking-widest mb-3">
+              <p className="text-gold text-[9px] font-black uppercase tracking-widest mb-3">
                 {t("vision.imageCaption")}
               </p>
               <p className="text-white font-black text-2xl leading-tight">
@@ -92,16 +92,16 @@ const VisionSection = () => {
             {paragraphs.map((p, i) => (
               <motion.div
                 key={i}
-                className="border-l-2 border-[#C9922A]/25 pl-6"
+                className="border-l-2 border-gold/25 pl-6"
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.7, delay: 0.1 * i, ease: EASE }}
               >
-                <p className="text-[#3D1A12] font-black text-base md:text-lg leading-snug mb-3">
+                <p className="text-espresso font-black text-base md:text-lg leading-snug mb-3">
                   {p.lead}
                 </p>
-                <p className="text-[#3D1A12]/55 text-sm leading-relaxed">
+                <p className="text-espresso/55 text-sm leading-relaxed">
                   {p.body}
                 </p>
               </motion.div>
@@ -112,7 +112,7 @@ const VisionSection = () => {
               {tags.map((tag) => (
                 <span
                   key={tag}
-                  className="inline-block border border-[#3D1A12]/12 rounded-full px-4 py-1.5 text-[9px] font-black uppercase tracking-widest text-[#3D1A12]/40 hover:border-[#C9922A]/30 hover:text-[#C9922A] transition-colors"
+                  className="inline-block border border-espresso/12 rounded-full px-4 py-1.5 text-[9px] font-black uppercase tracking-widest text-espresso/40 hover:border-gold/30 hover:text-gold transition-colors"
                 >
                   {tag}
                 </span>

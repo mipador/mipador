@@ -19,20 +19,20 @@ const ContactForm: React.FC = () => {
         <input
           type="text"
           placeholder={t("contact.namePlaceholder")}
-          className="w-full bg-white border border-[#E6E3DF] rounded-xl py-4 px-6 text-sm outline-none focus:border-[#3D1E16] transition-colors text-[#3D1E16]"
+          className="w-full bg-white border border-mist rounded-xl py-4 px-6 text-sm outline-none focus:border-clay transition-colors text-clay"
         />
         <input
           type="email"
           placeholder={t("contact.emailPlaceholder")}
-          className="w-full bg-white border border-[#E6E3DF] rounded-xl py-4 px-6 text-sm outline-none focus:border-[#3D1E16] transition-colors text-[#3D1E16]"
+          className="w-full bg-white border border-mist rounded-xl py-4 px-6 text-sm outline-none focus:border-clay transition-colors text-clay"
         />
       </div>
       <textarea
         placeholder={t("contact.messagePlaceholder")}
         rows={4}
-        className="w-full bg-white border border-[#E6E3DF] rounded-xl py-4 px-6 text-sm outline-none focus:border-[#3D1E16] transition-colors resize-none text-[#3D1E16]"
+        className="w-full bg-white border border-mist rounded-xl py-4 px-6 text-sm outline-none focus:border-clay transition-colors resize-none text-clay"
       />
-      <button className="w-full bg-[#3D1E16] text-white py-4 rounded-xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-3 hover:bg-[#2A150F] active:scale-95 transition-all shadow-sm">
+      <button className="w-full bg-clay text-white py-4 rounded-xl font-bold uppercase tracking-widest text-[10px] flex items-center justify-center gap-3 hover:bg-espresso-deep active:scale-95 transition-all shadow-sm">
         {t("contact.send")}
         <ArrowRight size={14} />
       </button>

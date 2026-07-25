@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { Reveal } from "../../../components/Reveal";
 
 const BrandPromise = () => {
   const { t } = useTranslation();
@@ -14,31 +15,31 @@ const BrandPromise = () => {
   ];
 
   return (
-    <section className="py-24 px-6 bg-[#EFEBE9]">
+    <section className="py-24 px-6 bg-linen">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-20 items-center">
-          <div>
-            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[#C9922A] mb-6">
+          <Reveal>
+            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-gold mb-6">
               {t("brandPromise.eyebrow")}
             </p>
-            <h2 className="text-4xl md:text-5xl font-black text-[#3D1A12] tracking-tight leading-tight mb-10">
+            <h2 className="text-4xl md:text-5xl font-black text-espresso tracking-tight leading-tight mb-10">
               {t("brandPromise.heading")}
               <br />
-              <span className="text-[#3D1A12]/30 italic font-light">{t("brandPromise.headingSoft")}</span>
+              <span className="text-espresso/30 italic font-light">{t("brandPromise.headingSoft")}</span>
             </h2>
             <div className="space-y-5">
               {promises.map((p, i) => (
                 <div key={i} className="flex items-start gap-4">
-                  <div className="w-5 h-5 rounded-xl bg-[#C9922A]/15 flex items-center justify-center shrink-0 mt-0.5">
-                    <Check className="text-[#C9922A]" size={11} />
+                  <div className="w-5 h-5 rounded-xl bg-gold/15 flex items-center justify-center shrink-0 mt-0.5">
+                    <Check className="text-gold" size={11} />
                   </div>
-                  <span className="text-[#3D1A12]/70 text-sm leading-relaxed">{p}</span>
+                  <span className="text-espresso/70 text-sm leading-relaxed">{p}</span>
                 </div>
               ))}
             </div>
-          </div>
+          </Reveal>
 
-          <div className="relative h-[480px] rounded-3xl overflow-hidden">
+          <Reveal delay={0.15} className="relative h-[480px] rounded-3xl overflow-hidden">
             <picture style={{ display: "contents" }}>
               <source srcSet="/images/hero.webp" type="image/webp" />
               <img
@@ -47,7 +48,7 @@ const BrandPromise = () => {
                 className="w-full h-full object-cover"
               />
             </picture>
-            <div className="absolute inset-0 bg-gradient-to-t from-[#2A0F08]/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-espresso-900/50 to-transparent" />
             <div className="absolute bottom-8 left-8 right-8">
               <p className="text-white/50 text-xs font-black uppercase tracking-widest mb-2">
                 {t("brandPromise.imageCaption1")}
@@ -56,7 +57,7 @@ const BrandPromise = () => {
                 {t("brandPromise.imageCaption2")}
               </p>
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

@@ -76,7 +76,7 @@ export default function LanguageSwitcher({ compact = false }: { compact?: boolea
     <div className="relative z-40" ref={wrapperRef}>
       <button
         onClick={() => setOpen(!open)}
-        className={`group flex items-center rounded-xl border border-[#3D1A12]/10 bg-white/70 backdrop-blur-xl hover:bg-white transition-all duration-300 ${
+        className={`group flex items-center rounded-xl border border-espresso/10 bg-white/70 backdrop-blur-xl hover:bg-white transition-all duration-300 ${
           compact ? "p-2" : "gap-2 px-2.5 py-2"
         }`}
         aria-label={current.label}
@@ -89,13 +89,13 @@ export default function LanguageSwitcher({ compact = false }: { compact?: boolea
 
         {!compact && (
           <>
-            <span className="text-[11px] font-semibold tracking-wide text-[#3D1A12]">
+            <span className="text-[11px] font-semibold tracking-wide text-espresso">
               {current.short}
             </span>
             <motion.span
               animate={{ rotate: open ? 180 : 0 }}
               transition={{ duration: 0.2 }}
-              className="text-[10px] text-[#3D1A12]/50"
+              className="text-[10px] text-espresso/50"
             >
               ▼
             </motion.span>
@@ -110,7 +110,7 @@ export default function LanguageSwitcher({ compact = false }: { compact?: boolea
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.96 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className="absolute right-0 top-[120%] w-44 overflow-hidden rounded-xl border border-[#3D1A12]/10 bg-white/95 backdrop-blur-2xl shadow-[0_10px_40px_rgba(0,0,0,0.08)]"
+            className="absolute right-0 top-[120%] w-44 overflow-hidden rounded-xl border border-espresso/10 bg-white/95 backdrop-blur-2xl shadow-[0_10px_40px_rgba(0,0,0,0.08)]"
           >
             {languages.map((l) => (
               <button
@@ -118,8 +118,8 @@ export default function LanguageSwitcher({ compact = false }: { compact?: boolea
                 onClick={() => switchLang(l.code)}
                 className={`w-full flex items-center gap-3 px-4 py-3 transition-all duration-200 ${
                   currentLang === l.code
-                    ? "bg-[#3D1A12] text-white"
-                    : "hover:bg-[#f6f4f1] text-[#3D1A12]"
+                    ? "bg-espresso text-white"
+                    : "hover:bg-cream text-espresso"
                 }`}
               >
                 <img

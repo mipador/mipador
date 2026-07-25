@@ -1,4 +1,6 @@
 import { Quote } from "lucide-react";
+import { motion } from "framer-motion";
+import { Reveal, revealContainer, revealItem } from "../../../components/Reveal";
 
 const voices = [
   {
@@ -19,39 +21,46 @@ const voices = [
 ];
 
 const Testimonials = () => (
-  <section className="py-24 px-6 bg-[#F6F4F1]">
+  <section className="py-24 px-6 bg-cream">
     <div className="max-w-7xl mx-auto">
-      <div className="text-center mb-16">
-        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[#3D1A12]/40 mb-4">
+      <Reveal className="text-center mb-16">
+        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-espresso/40 mb-4">
           Real people · Real spaces
         </p>
-        <h2 className="text-4xl md:text-5xl font-black text-[#3D1A12] tracking-tight">
+        <h2 className="text-4xl md:text-5xl font-black text-espresso tracking-tight">
           How it feels
-          <span className="text-[#3D1A12]/25 italic font-light"> to live with it.</span>
+          <span className="text-espresso/25 italic font-light"> to live with it.</span>
         </h2>
-      </div>
+      </Reveal>
 
-      <div className="grid md:grid-cols-3 gap-6">
+      <motion.div
+        className="grid md:grid-cols-3 gap-6"
+        variants={revealContainer}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-80px" }}
+      >
         {voices.map((v, i) => (
-          <div
+          <motion.div
             key={i}
-            className="bg-white border border-[#3D1A12]/8 rounded-3xl p-8 hover:shadow-lg hover:shadow-[#3D1A12]/5 transition-all"
+            variants={revealItem}
+            className="bg-white border border-espresso/8 rounded-3xl p-8 hover:shadow-lg hover:shadow-espresso/5 transition-all"
           >
-            <Quote className="text-[#C9922A]/40 mb-6" size={28} />
-            <p className="text-[#3D1A12]/70 text-sm leading-relaxed italic mb-8">
+            <Quote className="text-gold/40 mb-6" size={28} />
+            <p className="text-espresso/70 text-sm leading-relaxed italic mb-8">
               "{v.text}"
             </p>
-            <div className="border-t border-[#3D1A12]/8 pt-6">
-              <p className="font-black text-[#3D1A12] text-sm tracking-tight">
+            <div className="border-t border-espresso/8 pt-6">
+              <p className="font-black text-espresso text-sm tracking-tight">
                 {v.name}
               </p>
-              <p className="text-[10px] font-black uppercase tracking-widest text-[#C9922A]/70 mt-1">
+              <p className="text-[10px] font-black uppercase tracking-widest text-gold/70 mt-1">
                 {v.origin}
               </p>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   </section>
 );

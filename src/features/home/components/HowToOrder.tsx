@@ -16,7 +16,7 @@ const HowToOrder: React.FC = () => {
   ];
 
   return (
-    <section className="relative py-6 sm:py-8 lg:py-12 bg-[#F4F4F4]">
+    <section className="relative py-6 sm:py-8 lg:py-12 bg-fog">
 
       <div
         className="absolute inset-0 opacity-[0.1] pointer-events-none z-0"
@@ -35,10 +35,10 @@ const HowToOrder: React.FC = () => {
           transition={{ duration: 0.7, ease: EASE }}
           className="max-w-2xl mx-auto text-center"
         >
-          <h2 className="text-3xl font-bold leading-tight text-[#3D1A12] sm:text-4xl lg:text-5xl">
+          <h2 className="text-3xl font-bold leading-tight text-espresso sm:text-4xl lg:text-5xl">
             {t("howToOrder.heading")}
           </h2>
-          <p className="max-w-lg mx-auto mt-4 text-base leading-relaxed text-[#3D1A12]/70">
+          <p className="max-w-lg mx-auto mt-4 text-base leading-relaxed text-espresso/70">
             {t("howToOrder.body")}
           </p>
         </motion.div>
@@ -69,13 +69,13 @@ const HowToOrder: React.FC = () => {
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ delay: i * 0.15, duration: 0.6, ease: EASE }}
               >
-                <div className="flex items-center justify-center w-16 h-16 mx-auto rounded-full border border-[#3D1A12]/20 bg-white shadow-sm">
-                  <span className="text-lg font-semibold text-[#3D1A12]">{step.number}</span>
+                <div className="flex items-center justify-center w-16 h-16 mx-auto rounded-full border border-espresso/20 bg-white shadow-sm">
+                  <span className="text-lg font-semibold text-espresso">{step.number}</span>
                 </div>
-                <h3 className="mt-6 text-xl font-semibold leading-tight text-[#3D1A12] md:mt-10">
+                <h3 className="mt-6 text-xl font-semibold leading-tight text-espresso md:mt-10">
                   {t(step.titleKey)}
                 </h3>
-                <p className="mt-4 text-base text-[#3D1A12]/70 leading-relaxed">
+                <p className="mt-4 text-base text-espresso/70 leading-relaxed">
                   {t(step.descKey)}
                 </p>
               </motion.div>

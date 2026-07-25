@@ -42,7 +42,7 @@ const LogoStack = () => {
             className="w-full h-full object-cover"
             draggable={false}
           />
-          <div className="absolute inset-0 bg-[#3D1A12]/10" />
+          <div className="absolute inset-0 bg-espresso/10" />
         </SwiperSlide>
 
         {images.map((img, i) => (
@@ -53,7 +53,7 @@ const LogoStack = () => {
               className="w-full h-full object-cover"
               draggable={false}
             />
-            <div className="absolute inset-0 bg-[#3D1A12]/10" />
+            <div className="absolute inset-0 bg-espresso/10" />
           </SwiperSlide>
         ))}
       </Swiper>

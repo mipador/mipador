@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, Quote, Sun, Sunset, Moon, Check, Shuffle, Volume2 } from "lucide-react";
 import { useVibeStore } from "../../store/vibe.store";
+import { BRAND_COLORS } from "../../config/theme";
 import type { PaletteId, RitualStep } from "./paletteData";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -34,13 +35,13 @@ export function SaveVibeButton({
       whileTap={{ scale: 0.94 }}
       className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full border backdrop-blur-sm transition-colors ${
         isSaved
-          ? "bg-white text-[#3D1A12] border-white"
+          ? "bg-white text-espresso border-white"
           : textLight
           ? "border-white/30 text-white hover:bg-white/10"
-          : "border-[#3D1A12]/20 text-[#3D1A12] hover:bg-[#3D1A12]/5"
+          : "border-espresso/20 text-espresso hover:bg-espresso/5"
       }`}
     >
-      <Heart size={12} fill={isSaved ? "#3D1A12" : "none"} />
+      <Heart size={12} fill={isSaved ? BRAND_COLORS.espresso : "none"} />
       {isSaved ? savedLabel : label}
     </motion.button>
   );
@@ -64,14 +65,14 @@ export function VibeQuoteHero({
       className="bg-white rounded-3xl p-6 sm:p-8 mb-5 shadow-sm"
     >
       <Quote size={22} style={{ color: accent }} className="mb-4" />
-      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#3D1A12]/35 mb-3">
+      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-espresso/35 mb-3">
         {label}
       </p>
-      <p className="text-xl sm:text-2xl font-black text-[#3D1A12] leading-snug italic mb-2">
+      <p className="text-xl sm:text-2xl font-black text-espresso leading-snug italic mb-2">
         "{quote.text}"
       </p>
       {quote.source && (
-        <p className="text-xs font-bold text-[#3D1A12]/40">— {quote.source}</p>
+        <p className="text-xs font-bold text-espresso/40">— {quote.source}</p>
       )}
     </motion.div>
   );
@@ -101,7 +102,7 @@ export function RitualTimeline({
       transition={{ duration: 0.5, ease, delay: 0.06 }}
       className="bg-white rounded-3xl p-6 sm:p-8 mb-5 shadow-sm"
     >
-      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#3D1A12]/35 mb-5">
+      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-espresso/35 mb-5">
         {heading}
       </p>
       <div className="space-y-4">
@@ -116,23 +117,23 @@ export function RitualTimeline({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, ease, delay: i * 0.06 }}
               className={`w-full flex items-start gap-3 text-start p-3 rounded-2xl border transition-colors ${
-                done ? "border-[#3D1A12]/15 bg-[#F6F4F1]" : "border-transparent hover:bg-[#F6F4F1]/60"
+                done ? "border-espresso/15 bg-cream" : "border-transparent hover:bg-cream/60"
               } ${isRTL ? "flex-row-reverse text-end" : ""}`}
             >
-              <span className="shrink-0 w-9 h-9 rounded-full bg-[#3D1A12]/5 flex items-center justify-center mt-0.5">
-                <Icon size={16} className="text-[#3D1A12]/60" />
+              <span className="shrink-0 w-9 h-9 rounded-full bg-espresso/5 flex items-center justify-center mt-0.5">
+                <Icon size={16} className="text-espresso/60" />
               </span>
               <span className="flex-1">
-                <span className="block text-[10px] font-black uppercase tracking-widest text-[#3D1A12]/40 mb-1">
+                <span className="block text-[10px] font-black uppercase tracking-widest text-espresso/40 mb-1">
                   {timeLabels[step.time]}
                 </span>
-                <span className={`block text-sm font-bold leading-relaxed ${done ? "text-[#3D1A12]/40 line-through" : "text-[#3D1A12]/80"}`}>
+                <span className={`block text-sm font-bold leading-relaxed ${done ? "text-espresso/40 line-through" : "text-espresso/80"}`}>
                   {step.advice}
                 </span>
               </span>
               <span
                 className={`shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center mt-0.5 transition-colors ${
-                  done ? "bg-[#3D1A12] border-[#3D1A12]" : "border-[#3D1A12]/20"
+                  done ? "bg-espresso border-espresso" : "border-espresso/20"
                 }`}
               >
                 {done && <Check size={13} className="text-white" />}
@@ -171,7 +172,7 @@ export function MantraDeck({
       className="rounded-3xl p-6 sm:p-8 mb-5 shadow-sm"
       style={{ backgroundColor: `${accent}20` }}
     >
-      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#3D1A12]/40 mb-5">
+      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-espresso/40 mb-5">
         {label}
       </p>
       <div className="min-h-[88px] flex items-center mb-5">
@@ -182,7 +183,7 @@ export function MantraDeck({
             animate={{ opacity: 1, y: 0, rotate: 0 }}
             exit={{ opacity: 0, y: -10, rotate: 1 }}
             transition={{ duration: 0.3, ease }}
-            className="text-2xl sm:text-3xl font-black text-[#3D1A12] leading-snug"
+            className="text-2xl sm:text-3xl font-black text-espresso leading-snug"
           >
             {mantras[index]}
           </motion.p>
@@ -190,7 +191,7 @@ export function MantraDeck({
       </div>
       <button
         onClick={next}
-        className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest px-4 py-2.5 rounded-xl bg-[#3D1A12] text-white hover:bg-[#3D1A12]/90 transition-colors"
+        className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest px-4 py-2.5 rounded-xl bg-espresso text-white hover:bg-espresso/90 transition-colors"
       >
         <Shuffle size={13} />
         {nextLabel}
@@ -208,14 +209,14 @@ export function SoundscapeCard({ soundscape, label }: { soundscape: string; labe
       transition={{ duration: 0.5, ease, delay: 0.18 }}
       className="bg-white rounded-3xl p-6 sm:p-8 mb-5 shadow-sm flex items-start gap-4"
     >
-      <span className="shrink-0 w-10 h-10 rounded-full bg-[#3D1A12]/5 flex items-center justify-center">
-        <Volume2 size={17} className="text-[#3D1A12]/60" />
+      <span className="shrink-0 w-10 h-10 rounded-full bg-espresso/5 flex items-center justify-center">
+        <Volume2 size={17} className="text-espresso/60" />
       </span>
       <span>
-        <span className="block text-[10px] font-black uppercase tracking-[0.18em] text-[#3D1A12]/35 mb-2">
+        <span className="block text-[10px] font-black uppercase tracking-[0.18em] text-espresso/35 mb-2">
           {label}
         </span>
-        <span className="block text-sm font-bold text-[#3D1A12]/70 leading-relaxed italic">
+        <span className="block text-sm font-bold text-espresso/70 leading-relaxed italic">
           {soundscape}
         </span>
       </span>

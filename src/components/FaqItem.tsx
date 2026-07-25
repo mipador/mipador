@@ -16,7 +16,7 @@ export const FaqItem: React.FC<FaqItemProps> = ({
 }) => {
   return (
     <div
-      className={`border-b border-[#3D1A12]/10 transition-all duration-300 ${
+      className={`border-b border-espresso/10 transition-all duration-300 ${
         isOpen ? "pb-8" : "pb-0"
       }`}
     >
@@ -27,7 +27,7 @@ export const FaqItem: React.FC<FaqItemProps> = ({
       >
         <span
           className={`text-base font-black tracking-tight transition-colors duration-200 pr-8 ${
-            isOpen ? "text-[#3D1A12]" : "text-[#3D1A12]/60 group-hover:text-[#3D1A12]"
+            isOpen ? "text-espresso" : "text-espresso/60 group-hover:text-espresso"
           }`}
         >
           {question}
@@ -35,8 +35,8 @@ export const FaqItem: React.FC<FaqItemProps> = ({
         <span
           className={`shrink-0 w-7 h-7 rounded-xl flex items-center justify-center transition-all duration-300 ${
             isOpen
-              ? "bg-[#3D1A12] text-white"
-              : "bg-[#3D1A12]/8 text-[#3D1A12]/40 group-hover:bg-[#3D1A12]/15"
+              ? "bg-espresso text-white"
+              : "bg-espresso/8 text-espresso/40 group-hover:bg-espresso/15"
           }`}
         >
           {isOpen ? <Minus size={13} /> : <Plus size={13} />}
@@ -49,7 +49,7 @@ export const FaqItem: React.FC<FaqItemProps> = ({
         }`}
       >
         <div className="overflow-hidden">
-          <p className="text-sm text-[#3D1A12]/50 leading-relaxed font-light pr-12">
+          <p className="text-sm text-espresso/50 leading-relaxed font-light pr-12">
             {answer}
           </p>
         </div>

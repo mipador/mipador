@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { BRAND_COLORS } from "../../../config/theme";
 
 const CasablancaMap: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -29,7 +30,7 @@ const CasablancaMap: React.FC = () => {
     L.control
       .attribution({ position: "bottomleft", prefix: false })
       .addAttribution(
-        '© <a href="https://www.openstreetmap.org/copyright" style="color:#8C7A76">OSM</a> © <a href="https://carto.com" style="color:#8C7A76">CARTO</a>'
+        `© <a href="https://www.openstreetmap.org/copyright" style="color:${BRAND_COLORS.taupe}">OSM</a> © <a href="https://carto.com" style="color:${BRAND_COLORS.taupe}">CARTO</a>`
       )
       .addTo(map);
 
@@ -84,7 +85,7 @@ const CasablancaMap: React.FC = () => {
           position: relative;
           width: 14px;
           height: 14px;
-          background: #3D1E16;
+          background: ${BRAND_COLORS.clay};
           border-radius: 50%;
           border: 2.5px solid #fff;
           box-shadow: 0 2px 10px rgba(61,30,22,0.45);
@@ -96,7 +97,7 @@ const CasablancaMap: React.FC = () => {
           100% { transform: scale(1.8); opacity: 0; }
         }
         .casablanca-label {
-          background: #3D1E16 !important;
+          background: ${BRAND_COLORS.clay} !important;
           color: #fff !important;
           border: none !important;
           border-radius: 8px !important;
@@ -108,21 +109,21 @@ const CasablancaMap: React.FC = () => {
           white-space: nowrap;
         }
         .casablanca-label::before {
-          border-top-color: #3D1E16 !important;
+          border-top-color: ${BRAND_COLORS.clay} !important;
         }
         .leaflet-control-zoom {
           border: none !important;
           box-shadow: 0 2px 8px rgba(0,0,0,0.12) !important;
         }
         .leaflet-control-zoom a {
-          color: #3D1E16 !important;
+          color: ${BRAND_COLORS.clay} !important;
           font-weight: 700 !important;
           border-radius: 6px !important;
           border: none !important;
           background: #fff !important;
         }
         .leaflet-control-zoom a:hover {
-          background: #F6F4F1 !important;
+          background: ${BRAND_COLORS.cream} !important;
         }
         .leaflet-control-attribution {
           background: rgba(246,244,241,0.8) !important;

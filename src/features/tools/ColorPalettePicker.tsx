@@ -301,7 +301,7 @@ const ColorPalettePicker: React.FC = () => {
   }, [activePalette, paletteLang]);
 
   return (
-    <div className="min-h-screen bg-[#F6F4F1]">
+    <div className="min-h-screen bg-cream">
       <ScrollToTop />
 
       {/* ── Hero ────────────────────────────────────────────────────────────── */}
@@ -311,25 +311,25 @@ const ColorPalettePicker: React.FC = () => {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease }}
-            className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-[#3D1A12]/50 mb-4"
+            className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-espresso/50 mb-4"
           >
-            <Sparkles size={11} className="text-[#3D1A12]/40" />
+            <Sparkles size={11} className="text-espresso/40" />
             {t("colorPicker.hero.eyebrow")}
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease, delay: 0.06 }}
-            className="text-4xl md:text-5xl font-black text-[#3D1A12] leading-tight mb-4"
+            className="text-4xl md:text-5xl font-black text-espresso leading-tight mb-4"
           >
             {t("colorPicker.hero.heading")}{" "}
-            <span className="text-[#3D1A12]/30">{t("colorPicker.hero.headingSoft")}</span>
+            <span className="text-espresso/30">{t("colorPicker.hero.headingSoft")}</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease, delay: 0.12 }}
-            className="text-base text-[#3D1A12]/55 max-w-lg mx-auto"
+            className="text-base text-espresso/55 max-w-lg mx-auto"
           >
             {t("colorPicker.hero.body")}
           </motion.p>
@@ -342,7 +342,7 @@ const ColorPalettePicker: React.FC = () => {
           <div
             key={s}
             className={`h-1 rounded-full transition-all duration-500 ${
-              s <= step ? "bg-[#3D1A12] w-10" : "bg-[#3D1A12]/12 w-6"
+              s <= step ? "bg-espresso w-10" : "bg-espresso/12 w-6"
             }`}
           />
         ))}
@@ -362,18 +362,18 @@ const ColorPalettePicker: React.FC = () => {
               transition={{ duration: 0.35, ease }}
               className="max-w-5xl mx-auto"
             >
-              <p className="text-xs font-bold uppercase tracking-widest text-[#3D1A12]/35 text-center mb-2">
+              <p className="text-xs font-bold uppercase tracking-widest text-espresso/35 text-center mb-2">
                 {t("colorPicker.step2.label")}
               </p>
-              <h2 className="text-2xl font-black text-[#3D1A12] text-center mb-8">
+              <h2 className="text-2xl font-black text-espresso text-center mb-8">
                 {t("colorPicker.step2.heading")}
               </h2>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                 {PALETTES.map((palette, idx) => {
                   const theme = CARD_THEMES[palette.id];
-                  const textCol = theme.textLight ? "text-white" : "text-[#3D1A12]";
-                  const subCol  = theme.textLight ? "text-white/60" : "text-[#3D1A12]/50";
+                  const textCol = theme.textLight ? "text-white" : "text-espresso";
+                  const subCol  = theme.textLight ? "text-white/60" : "text-espresso/50";
                   return (
                     <motion.button
                       key={palette.id}
@@ -383,7 +383,7 @@ const ColorPalettePicker: React.FC = () => {
                       transition={{ duration: 0.35, ease, delay: idx * 0.04 }}
                       whileHover={{ scale: 1.03, y: -3 }}
                       whileTap={{ scale: 0.97 }}
-                      className="group flex flex-col overflow-hidden rounded-2xl cursor-pointer text-start shadow-sm hover:shadow-xl transition-shadow duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3D1A12]/30"
+                      className="group flex flex-col overflow-hidden rounded-2xl cursor-pointer text-start shadow-sm hover:shadow-xl transition-shadow duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-espresso/30"
                       style={{ backgroundColor: theme.bg }}
                     >
                       {/* ── Mood image */}
@@ -430,7 +430,7 @@ const ColorPalettePicker: React.FC = () => {
               <div className="text-center mb-6">
                 <button
                   onClick={handleReset}
-                  className={`inline-flex items-center gap-2 text-xs font-bold text-[#3D1A12]/35 hover:text-[#3D1A12] transition-colors ${isRTL ? "flex-row-reverse" : ""}`}
+                  className={`inline-flex items-center gap-2 text-xs font-bold text-espresso/35 hover:text-espresso transition-colors ${isRTL ? "flex-row-reverse" : ""}`}
                 >
                   <RotateCcw size={12} />
                   {t("colorPicker.results.startOver")}
@@ -456,9 +456,9 @@ const ColorPalettePicker: React.FC = () => {
                 <ColorBand swatches={activePalette.swatches} />
 
                 {/* Title */}
-                <div className={`px-6 py-5 flex items-end justify-between gap-4 ${activeTheme.textLight ? "text-white" : "text-[#3D1A12]"}`}>
+                <div className={`px-6 py-5 flex items-end justify-between gap-4 ${activeTheme.textLight ? "text-white" : "text-espresso"}`}>
                   <div>
-                    <p className={`text-xs font-black uppercase tracking-[0.2em] mb-1 ${activeTheme.textLight ? "text-white/50" : "text-[#3D1A12]/35"}`}>
+                    <p className={`text-xs font-black uppercase tracking-[0.2em] mb-1 ${activeTheme.textLight ? "text-white/50" : "text-espresso/35"}`}>
                       {t("colorPicker.results.yourPalette")}
                     </p>
                     <h2 className="text-3xl sm:text-4xl font-black">
@@ -490,10 +490,10 @@ const ColorPalettePicker: React.FC = () => {
                         style={{ backgroundColor: swatch.hex }}
                       />
                       <div className="text-center">
-                        <p className="text-[9px] sm:text-[10px] font-bold text-[#3D1A12]/45 leading-tight">
+                        <p className="text-[9px] sm:text-[10px] font-bold text-espresso/45 leading-tight">
                           {t(`colorPicker.${swatch.roleKey}`)}
                         </p>
-                        <p className="text-[9px] sm:text-[10px] font-black text-[#3D1A12] font-mono mt-0.5">
+                        <p className="text-[9px] sm:text-[10px] font-black text-espresso font-mono mt-0.5">
                           {swatch.hex}
                         </p>
                       </div>
@@ -506,7 +506,7 @@ const ColorPalettePicker: React.FC = () => {
                   className={`flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-xl border transition-all duration-300 ${
                     copied
                       ? "border-green-400 bg-green-50 text-green-700"
-                      : "border-[#3D1A12]/12 text-[#3D1A12]/55 hover:border-[#3D1A12]/25 hover:text-[#3D1A12]"
+                      : "border-espresso/12 text-espresso/55 hover:border-espresso/25 hover:text-espresso"
                   } ${isRTL ? "flex-row-reverse" : ""}`}
                 >
                   {copied ? <Check size={13} /> : <Copy size={13} />}
@@ -528,25 +528,25 @@ const ColorPalettePicker: React.FC = () => {
                     style={{ borderLeft: `4px solid ${accent}` }}
                   >
                     <div className="bg-white px-6 sm:px-8 py-8 sm:py-10">
-                      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#3D1A12]/35 mb-5">
+                      <p className="text-xs font-black uppercase tracking-[0.18em] text-espresso/35 mb-5">
                         {t("colorPicker.results.theVibe")}
                       </p>
-                      <p className="text-xl sm:text-2xl font-black text-[#3D1A12] leading-snug mb-5 italic">
+                      <p className="text-xl sm:text-2xl font-black text-espresso leading-snug mb-5 italic">
                         "{vibe.headline}"
                       </p>
-                      <p className="text-sm text-[#3D1A12]/65 leading-relaxed mb-8">
+                      <p className="text-sm text-espresso/65 leading-relaxed mb-8">
                         {vibe.desc}
                       </p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                          <p className="text-[10px] font-black uppercase tracking-widest text-[#3D1A12]/35 mb-3">
+                          <p className="text-[10px] font-black uppercase tracking-widest text-espresso/35 mb-3">
                             {t("colorPicker.results.youllFeel")}
                           </p>
                           <div className="flex flex-wrap gap-2">
                             {vibe.feel.map((f) => (
                               <span
                                 key={f}
-                                className="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full text-[#3D1A12]"
+                                className="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full text-espresso"
                                 style={{ backgroundColor: `${accent}30` }}
                               >
                                 <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: accent }} />
@@ -556,12 +556,12 @@ const ColorPalettePicker: React.FC = () => {
                           </div>
                         </div>
                         <div>
-                          <p className="text-[10px] font-black uppercase tracking-widest text-[#3D1A12]/35 mb-3">
+                          <p className="text-[10px] font-black uppercase tracking-widest text-espresso/35 mb-3">
                             {t("colorPicker.results.bestFor")}
                           </p>
                           <ul className="space-y-1.5">
                             {vibe.bestFor.map((b) => (
-                              <li key={b} className={`flex items-center gap-2 text-xs font-bold text-[#3D1A12]/70 ${isRTL ? "flex-row-reverse" : ""}`}>
+                              <li key={b} className={`flex items-center gap-2 text-xs font-bold text-espresso/70 ${isRTL ? "flex-row-reverse" : ""}`}>
                                 <span className="w-1 h-1 rounded-full shrink-0" style={{ backgroundColor: accent2 }} />
                                 {b}
                               </li>
@@ -610,7 +610,7 @@ const ColorPalettePicker: React.FC = () => {
               <div className="mb-8">
                 <button
                   onClick={() => setShowProducts((v) => !v)}
-                  className={`w-full flex items-center justify-between gap-2 text-xs font-bold text-[#3D1A12]/45 hover:text-[#3D1A12] transition-colors px-1 py-3 ${isRTL ? "flex-row-reverse" : ""}`}
+                  className={`w-full flex items-center justify-between gap-2 text-xs font-bold text-espresso/45 hover:text-espresso transition-colors px-1 py-3 ${isRTL ? "flex-row-reverse" : ""}`}
                 >
                   {t("colorPicker.lifestyle.matchingPiecesToggle")}
                   <motion.span animate={{ rotate: showProducts ? 180 : 0 }} transition={{ duration: 0.25, ease }}>
@@ -632,7 +632,7 @@ const ColorPalettePicker: React.FC = () => {
                             <Link
                               key={product.id}
                               to={`/${l}/products/${product.slug}`}
-                              className="group block bg-white rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 border border-transparent hover:border-[#3D1A12]/8"
+                              className="group block bg-white rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 border border-transparent hover:border-espresso/8"
                             >
                               <div className="aspect-square overflow-hidden bg-[#F0EDE8]">
                                 <img
@@ -643,18 +643,18 @@ const ColorPalettePicker: React.FC = () => {
                                 />
                               </div>
                               <div className="p-4">
-                                <p className="text-[10px] font-black uppercase tracking-widest text-[#3D1A12]/35 mb-1">
+                                <p className="text-[10px] font-black uppercase tracking-widest text-espresso/35 mb-1">
                                   {product.collection}
                                 </p>
-                                <p className="text-sm font-black text-[#3D1A12] mb-1">{product.name}</p>
-                                <p className="text-xs text-[#3D1A12]/50 mb-3 line-clamp-2 leading-relaxed">
+                                <p className="text-sm font-black text-espresso mb-1">{product.name}</p>
+                                <p className="text-xs text-espresso/50 mb-3 line-clamp-2 leading-relaxed">
                                   {product.tagline}
                                 </p>
                                 <div className="flex items-center justify-between">
-                                  <span className="text-sm font-black text-[#3D1A12]">
+                                  <span className="text-sm font-black text-espresso">
                                     {product.price.toLocaleString()} MAD
                                   </span>
-                                  <span className="text-xs font-bold text-[#3D1A12]/40 group-hover:text-[#3D1A12] transition-colors">
+                                  <span className="text-xs font-bold text-espresso/40 group-hover:text-espresso transition-colors">
                                     {t("colorPicker.results.viewProduct")} →
                                   </span>
                                 </div>
@@ -669,10 +669,10 @@ const ColorPalettePicker: React.FC = () => {
                           style={{ backgroundColor: activeTheme.bg }}
                         >
                           <div>
-                            <p className={`font-black mb-1 ${activeTheme.textLight ? "text-white" : "text-[#3D1A12]"}`}>
+                            <p className={`font-black mb-1 ${activeTheme.textLight ? "text-white" : "text-espresso"}`}>
                               {t("colorPicker.results.talkToUs")}
                             </p>
-                            <p className={`text-xs max-w-xs ${activeTheme.textLight ? "text-white/50" : "text-[#3D1A12]/50"}`}>
+                            <p className={`text-xs max-w-xs ${activeTheme.textLight ? "text-white/50" : "text-espresso/50"}`}>
                               {t("colorPicker.results.talkToUsHint")}
                             </p>
                           </div>
@@ -681,7 +681,7 @@ const ColorPalettePicker: React.FC = () => {
                               href={`https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMsg}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className={`flex items-center justify-center gap-2 bg-[#25D366] text-white text-xs font-black uppercase tracking-widest px-5 py-3 rounded-xl hover:bg-[#20b858] transition-colors ${isRTL ? "flex-row-reverse" : ""}`}
+                              className={`flex items-center justify-center gap-2 bg-whatsapp text-white text-xs font-black uppercase tracking-widest px-5 py-3 rounded-xl hover:bg-[#20b858] transition-colors ${isRTL ? "flex-row-reverse" : ""}`}
                             >
                               <MessageCircle size={14} />
                               WhatsApp
@@ -690,8 +690,8 @@ const ColorPalettePicker: React.FC = () => {
                               to={`/${l}/products`}
                               className={`flex items-center justify-center text-xs font-black uppercase tracking-widest px-5 py-3 rounded-xl transition-colors ${
                                 activeTheme.textLight
-                                  ? "bg-white text-[#3D1A12] hover:bg-white/90"
-                                  : "bg-[#3D1A12] text-white hover:bg-[#3D1A12]/90"
+                                  ? "bg-white text-espresso hover:bg-white/90"
+                                  : "bg-espresso text-white hover:bg-espresso/90"
                               }`}
                             >
                               {t("colorPicker.results.shopCollection")}
@@ -708,7 +708,7 @@ const ColorPalettePicker: React.FC = () => {
               <div className="text-center">
                 <button
                   onClick={handleReset}
-                  className={`inline-flex items-center gap-2 text-xs font-bold text-[#3D1A12]/35 hover:text-[#3D1A12] transition-colors ${isRTL ? "flex-row-reverse" : ""}`}
+                  className={`inline-flex items-center gap-2 text-xs font-bold text-espresso/35 hover:text-espresso transition-colors ${isRTL ? "flex-row-reverse" : ""}`}
                 >
                   <RotateCcw size={12} />
                   {t("colorPicker.results.startOver")}

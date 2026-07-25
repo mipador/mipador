@@ -87,7 +87,7 @@ const ContactPage: React.FC = () => {
   );
   useJsonLd(schema);
   return (
-    <div className="min-h-screen bg-[#F6F4F1] p-6 md:p-12 lg:p-24 selection:bg-[#3D1E16] selection:text-white">
+    <div className="min-h-screen bg-cream p-6 md:p-12 lg:p-24 selection:bg-clay selection:text-white">
       <ScrollToTop />
       <div className="max-w-6xl mx-auto">
         <div id="hero"><ContactHero /></div>
@@ -98,8 +98,8 @@ const ContactPage: React.FC = () => {
             <div id="map"><CasablancaMap /></div>
           </div>
 
-          <div id="contact-form" className="bg-[#EFECE8] p-8 md:p-10 rounded-[2.5rem] border border-[#E6E3DF]">
-            <h3 className="text-xl font-bold text-[#3D1E16] tracking-tight mb-8">
+          <div id="contact-form" className="bg-linen p-8 md:p-10 rounded-[2.5rem] border border-mist">
+            <h3 className="text-xl font-bold text-clay tracking-tight mb-8">
               Direct Message
             </h3>
             <ContactForm />

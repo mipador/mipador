@@ -24,7 +24,7 @@ const FaqsPage        = lazy(() => import("../../pages/FaqsPage"));
 const ColorPalettePicker = lazy(() => import("../tools/ColorPalettePicker"));
 
 // Blank fallback — page fade transition covers the transition seam
-const PageLoader = () => <div className="min-h-screen bg-[#F6F4F1]" />;
+const PageLoader = () => <div className="min-h-screen bg-cream" />;
 
 const supported = ["en", "fr", "ar", "ma"];
 

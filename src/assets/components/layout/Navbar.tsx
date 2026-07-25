@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { ShoppingBag, Heart } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useProductStore } from "../../../store/product.store";
+import { SITE } from "../../../config/site";
 
 const Navbar: React.FC = () => {
   const location = useLocation();
@@ -26,6 +27,9 @@ const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const { scrollYProgress } = useScroll();
+  const scrollProgress = useSpring(scrollYProgress, { stiffness: 300, damping: 40, restDelta: 0.001 });
+
   const isHome = location.pathname === `/${currentLang}` || location.pathname === `/${currentLang}/`;
   const onHero = isHome && !scrolled;
 
@@ -42,6 +46,15 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
+    <>
+      {/* Scroll progress accent — subtle, GPU-cheap (transform only) */}
+      <motion.div
+        aria-hidden="true"
+        className={`fixed top-0 left-0 right-0 z-40 h-0.5 bg-gold origin-left transition-opacity duration-300 ${
+          cartOpen ? "opacity-0" : "opacity-100"
+        }`}
+        style={{ scaleX: scrollProgress }}
+      />
     <div
       className={`fixed top-0 left-0 right-0 z-30 flex justify-center transition-all duration-500 ${
         cartOpen ? "opacity-0 pointer-events-none" : ""
@@ -50,7 +63,7 @@ const Navbar: React.FC = () => {
       <nav
         className={`nav-entrance transition-all duration-500 ease-in-out ${
           scrolled
-            ? "w-full max-w-2xl bg-[#f6f4f1]/92 backdrop-blur-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] rounded-xl border border-white/10"
+            ? "w-full max-w-2xl bg-cream/92 backdrop-blur-2xl shadow-[0_8px_30px_rgba(0,0,0,0.06)] rounded-xl border border-white/10"
             : onHero
             ? "w-full bg-transparent rounded-xl"
             : "w-full max-w-7xl bg-transparent rounded-xl"
@@ -64,12 +77,12 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <Link to={`/${currentLang}`} className="shrink-0">
             <img
-              src="/images/LogoNav.webp"
-              srcSet="/images/LogoNav@1x.webp 200w, /images/LogoNav.webp 400w"
-              sizes="183px"
-              alt="Mipador"
-              width={183}
-              height={28}
+              src={SITE.logo.nav.src}
+              srcSet={SITE.logo.nav.srcSet}
+              sizes={SITE.logo.nav.sizes}
+              alt={SITE.brandName}
+              width={SITE.logo.nav.width}
+              height={SITE.logo.nav.height}
               className="h-7 w-auto object-contain transition-all duration-500"
               style={onHero ? { filter: "brightness(0) invert(1) drop-shadow(0 2px 6px rgba(0,0,0,0.5))" } : undefined}
             />
@@ -87,14 +100,14 @@ const Navbar: React.FC = () => {
                         location.pathname === item.path ? "text-white" : "text-white/90 hover:text-white"
                       }`
                     : location.pathname === item.path
-                    ? "text-[#3D1A12]"
-                    : "text-[#3D1A12]/55 hover:text-[#3D1A12] hover:tracking-[0.02em]"
+                    ? "text-espresso"
+                    : "text-espresso/55 hover:text-espresso hover:tracking-[0.02em]"
                 }`}
               >
                 {item.label}
                 <span
                   className={`absolute -bottom-1 left-0 h-px transition-all duration-300 ${
-                    onHero ? "bg-[#C6A98B]" : "bg-[#3D1A12]"
+                    onHero ? "bg-tan" : "bg-espresso"
                   } ${location.pathname === item.path ? "w-full" : "w-0 group-hover:w-full"}`}
                 />
               </Link>
@@ -110,10 +123,10 @@ const Navbar: React.FC = () => {
               to={`/${currentLang}/wishlist`}
               aria-label={t("wishlist.heading")}
               className={`hidden md:flex relative w-11 h-11 items-center justify-center rounded-xl transition-colors ${
-                onHero ? "hover:bg-white/10" : "hover:bg-[#3D1A12]/5"
+                onHero ? "hover:bg-white/10" : "hover:bg-espresso/5"
               }`}
             >
-              <Heart size={17} className={onHero ? "text-white/90 drop-shadow-[0_2px_5px_rgba(0,0,0,0.6)]" : "text-[#3D1A12]"} />
+              <Heart size={17} className={onHero ? "text-white/90 drop-shadow-[0_2px_5px_rgba(0,0,0,0.6)]" : "text-espresso"} />
               <AnimatePresence mode="popLayout">
                 {wishlistCount > 0 && (
                   <motion.span
@@ -123,7 +136,7 @@ const Navbar: React.FC = () => {
                     exit={{ scale: 0, opacity: 0 }}
                     transition={{ type: "spring", stiffness: 600, damping: 22 }}
                     className={`absolute -top-0.5 -right-0.5 min-w-[17px] h-[17px] px-1 flex items-center justify-center rounded-full text-[9px] font-black leading-none pointer-events-none ${
-                      onHero ? "bg-[#F6F4F1] text-[#2A1814]" : "bg-[#3D1A12] text-white"
+                      onHero ? "bg-cream text-espresso-deep" : "bg-espresso text-white"
                     }`}
                   >
                     {wishlistCount > 99 ? "99+" : wishlistCount}
@@ -141,10 +154,10 @@ const Navbar: React.FC = () => {
                   : t("nav.openCart")
               }
               className={`hidden md:flex relative w-11 h-11 items-center justify-center rounded-xl transition-colors ${
-                onHero ? "hover:bg-white/10" : "hover:bg-[#3D1A12]/5"
+                onHero ? "hover:bg-white/10" : "hover:bg-espresso/5"
               }`}
             >
-              <ShoppingBag size={17} className={onHero ? "text-white/90 drop-shadow-[0_2px_5px_rgba(0,0,0,0.6)]" : "text-[#3D1A12]"} />
+              <ShoppingBag size={17} className={onHero ? "text-white/90 drop-shadow-[0_2px_5px_rgba(0,0,0,0.6)]" : "text-espresso"} />
               <AnimatePresence mode="popLayout">
                 {cartCount > 0 && (
                   <motion.span
@@ -154,7 +167,7 @@ const Navbar: React.FC = () => {
                     exit={{ scale: 0, opacity: 0 }}
                     transition={{ type: "spring", stiffness: 600, damping: 22 }}
                     className={`absolute -top-0.5 -right-0.5 min-w-[17px] h-[17px] px-1 flex items-center justify-center rounded-full text-[9px] font-black leading-none pointer-events-none ${
-                      onHero ? "bg-[#F6F4F1] text-[#2A1814]" : "bg-[#3D1A12] text-white"
+                      onHero ? "bg-cream text-espresso-deep" : "bg-espresso text-white"
                     }`}
                   >
                     {cartCount > 99 ? "99+" : cartCount}
@@ -177,8 +190,8 @@ const Navbar: React.FC = () => {
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={`hidden md:flex items-center justify-center text-xs font-black uppercase tracking-widest px-5 py-2.5 rounded-xl transition-all duration-300 shadow-sm whitespace-nowrap ${
                       onHero
-                        ? "bg-[#F6F4F1] text-[#2A1814] hover:bg-white"
-                        : "bg-[#3D1A12] text-white hover:bg-[#4D2A22]"
+                        ? "bg-cream text-espresso-deep hover:bg-white"
+                        : "bg-espresso text-white hover:bg-espresso-light"
                     }`}
                   >
                     {t("nav.discover")}
@@ -190,7 +203,7 @@ const Navbar: React.FC = () => {
             {/* Mobile hamburger */}
             <button
               className={`md:hidden w-11 h-11 flex flex-col items-center justify-center gap-1.5 rounded-xl transition-colors ${
-                onHero ? "hover:bg-white/10" : "hover:bg-[#3D1A12]/5"
+                onHero ? "hover:bg-white/10" : "hover:bg-espresso/5"
               }`}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={t("nav.toggleMenu")}
@@ -198,15 +211,15 @@ const Navbar: React.FC = () => {
             >
               <motion.span
                 animate={isMobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-                className={`block h-px w-5 ${onHero ? "bg-white" : "bg-[#3D1A12]"}`}
+                className={`block h-px w-5 ${onHero ? "bg-white" : "bg-espresso"}`}
               />
               <motion.span
                 animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-                className={`block h-px w-4 ${onHero ? "bg-white" : "bg-[#3D1A12]"}`}
+                className={`block h-px w-4 ${onHero ? "bg-white" : "bg-espresso"}`}
               />
               <motion.span
                 animate={isMobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-                className={`block h-px w-5 ${onHero ? "bg-white" : "bg-[#3D1A12]"}`}
+                className={`block h-px w-5 ${onHero ? "bg-white" : "bg-espresso"}`}
               />
             </button>
           </div>
@@ -222,7 +235,7 @@ const Navbar: React.FC = () => {
               transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
               style={{ transformOrigin: "top" }}
               className={`md:hidden overflow-hidden backdrop-blur-2xl ${
-                onHero ? "border-t border-white/15 bg-black/35" : "border-t border-[#3D1A12]/10 bg-[#f6f4f1]/95"
+                onHero ? "border-t border-white/15 bg-black/35" : "border-t border-espresso/10 bg-cream/95"
               }`}
             >
               <div className="flex flex-col px-6 py-6 gap-5">
@@ -237,8 +250,8 @@ const Navbar: React.FC = () => {
                           ? "text-white"
                           : "text-white/55"
                         : location.pathname === item.path
-                        ? "text-[#3D1A12]"
-                        : "text-[#3D1A12]/50"
+                        ? "text-espresso"
+                        : "text-espresso/50"
                     }`}
                   >
                     {item.label}
@@ -254,8 +267,8 @@ const Navbar: React.FC = () => {
                         ? "text-white"
                         : "text-white/55"
                       : location.pathname.includes("/wishlist")
-                      ? "text-[#3D1A12]"
-                      : "text-[#3D1A12]/50"
+                      ? "text-espresso"
+                      : "text-espresso/50"
                   }`}
                 >
                   <Heart size={16} />
@@ -263,7 +276,7 @@ const Navbar: React.FC = () => {
                   {wishlistCount > 0 && (
                     <span
                       className={`ml-1 min-w-[18px] h-[18px] px-1 flex items-center justify-center rounded-full text-[9px] font-black ${
-                        onHero ? "bg-[#F6F4F1] text-[#2A1814]" : "bg-[#3D1A12] text-white"
+                        onHero ? "bg-cream text-espresso-deep" : "bg-espresso text-white"
                       }`}
                     >
                       {wishlistCount}
@@ -277,7 +290,7 @@ const Navbar: React.FC = () => {
                     setCartOpen(true);
                   }}
                   className={`flex items-center gap-2 text-base font-bold transition-colors duration-300 ${
-                    onHero ? "text-white/55" : "text-[#3D1A12]/50"
+                    onHero ? "text-white/55" : "text-espresso/50"
                   }`}
                 >
                   <ShoppingBag size={16} />
@@ -285,7 +298,7 @@ const Navbar: React.FC = () => {
                   {cartCount > 0 && (
                     <span
                       className={`ml-1 min-w-[18px] h-[18px] px-1 flex items-center justify-center rounded-full text-[9px] font-black ${
-                        onHero ? "bg-[#F6F4F1] text-[#2A1814]" : "bg-[#3D1A12] text-white"
+                        onHero ? "bg-cream text-espresso-deep" : "bg-espresso text-white"
                       }`}
                     >
                       {cartCount}
@@ -298,8 +311,8 @@ const Navbar: React.FC = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`block text-center w-full text-xs font-black uppercase tracking-widest py-3.5 rounded-xl transition-colors ${
                     onHero
-                      ? "bg-[#F6F4F1] text-[#2A1814] hover:bg-white"
-                      : "bg-[#3D1A12] text-white hover:bg-[#4D2A22]"
+                      ? "bg-cream text-espresso-deep hover:bg-white"
+                      : "bg-espresso text-white hover:bg-espresso-light"
                   }`}
                 >
                   {t("nav.discoverCollection")}
@@ -310,6 +323,7 @@ const Navbar: React.FC = () => {
         </AnimatePresence>
       </nav>
     </div>
+    </>
   );
 };
 

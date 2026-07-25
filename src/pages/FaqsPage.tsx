@@ -80,7 +80,7 @@ const FaqsPage: React.FC = () => {
   const filteredFaqs = faqData.filter((faq: FAQ) => faq.category === activeCategory);
 
   return (
-    <div className="bg-[#F6F4F1] min-h-screen px-6 py-24 md:py-36">
+    <div className="bg-cream min-h-screen px-6 py-24 md:py-36">
       <div className="max-w-4xl mx-auto">
 
         {/* Header */}
@@ -90,34 +90,34 @@ const FaqsPage: React.FC = () => {
           transition={{ duration: 0.7, ease: EASE }}
           className="text-center mb-20"
         >
-          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[#3D1A12]/40 mb-4">
+          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-espresso/40 mb-4">
             {t("faqs.studio")}
           </p>
-          <h1 className="text-5xl md:text-7xl font-black text-[#3D1A12] tracking-tight leading-none mb-6">
+          <h1 className="text-5xl md:text-7xl font-black text-espresso tracking-tight leading-none mb-6">
             {t("faqs.heading")}
           </h1>
-          <p className="text-[#3D1A12]/40 text-base font-light max-w-sm mx-auto leading-relaxed">
+          <p className="text-espresso/40 text-base font-light max-w-sm mx-auto leading-relaxed">
             {t("faqs.body")}
           </p>
         </motion.div>
 
         {/* Category tabs */}
-        <div className="flex flex-wrap justify-center gap-10 mb-16 border-b border-[#3D1A12]/10">
+        <div className="flex flex-wrap justify-center gap-10 mb-16 border-b border-espresso/10">
           {CATEGORIES.map(({ key, labelKey }) => (
             <button
               key={key}
               onClick={() => setActiveCategory(key)}
               className={`pb-4 text-xs font-black uppercase tracking-widest transition-all duration-300 relative ${
                 activeCategory === key
-                  ? "text-[#3D1A12]"
-                  : "text-[#3D1A12]/30 hover:text-[#3D1A12]/60"
+                  ? "text-espresso"
+                  : "text-espresso/30 hover:text-espresso/60"
               }`}
             >
               {t(labelKey)}
               {activeCategory === key && (
                 <motion.span
                   layoutId="faq-tab-indicator"
-                  className="absolute bottom-0 left-0 w-full h-px bg-[#3D1A12]"
+                  className="absolute bottom-0 left-0 w-full h-px bg-espresso"
                 />
               )}
             </button>
@@ -129,7 +129,7 @@ const FaqsPage: React.FC = () => {
           <Accordion key={activeCategory} items={filteredFaqs} />
         ) : (
           <div className="text-center py-20">
-            <p className="text-[#3D1A12]/30 text-sm uppercase tracking-widest font-black">
+            <p className="text-espresso/30 text-sm uppercase tracking-widest font-black">
               {t("faqs.empty")}
             </p>
           </div>
@@ -141,12 +141,12 @@ const FaqsPage: React.FC = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-24 text-center border-t border-[#3D1A12]/10 pt-16"
+          className="mt-24 text-center border-t border-espresso/10 pt-16"
         >
-          <p className="text-[#3D1A12]/40 text-sm mb-2">{t("faqs.stillQuestion")}</p>
+          <p className="text-espresso/40 text-sm mb-2">{t("faqs.stillQuestion")}</p>
           <a
             href="mailto:mipadorofficial@gmail.com"
-            className="text-[#3D1A12] font-black text-sm uppercase tracking-widest border-b border-[#3D1A12]/30 hover:border-[#3D1A12] transition-colors pb-0.5"
+            className="text-espresso font-black text-sm uppercase tracking-widest border-b border-espresso/30 hover:border-espresso transition-colors pb-0.5"
           >
             {t("faqs.writeDirectly")}
           </a>

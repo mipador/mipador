@@ -26,7 +26,7 @@ export default function WishlistPage() {
   const wishlistProducts = getWishlistProducts();
 
   return (
-    <div className="bg-[#F6F4F1] min-h-screen px-6 py-24 md:py-36">
+    <div className="bg-cream min-h-screen px-6 py-24 md:py-36">
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
@@ -36,14 +36,14 @@ export default function WishlistPage() {
           transition={{ duration: 0.7, ease: EASE }}
           className="mb-16"
         >
-          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[#3D1A12]/40 mb-4">
+          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-espresso/40 mb-4">
             {t("products.studio")}
           </p>
-          <h1 className="text-5xl md:text-7xl font-black text-[#3D1A12] tracking-tight leading-none mb-4">
+          <h1 className="text-5xl md:text-7xl font-black text-espresso tracking-tight leading-none mb-4">
             {t("wishlist.heading")}
           </h1>
           {wishlistProducts.length > 0 && (
-            <p className="text-[#3D1A12]/40 text-sm font-light">
+            <p className="text-espresso/40 text-sm font-light">
               {t("wishlist.count", { count: wishlistProducts.length })}
             </p>
           )}
@@ -57,18 +57,18 @@ export default function WishlistPage() {
             transition={{ delay: 0.2, duration: 0.6, ease: EASE }}
             className="flex flex-col items-center justify-center py-24 text-center"
           >
-            <div className="w-16 h-16 rounded-2xl bg-[#3D1A12]/5 flex items-center justify-center mb-6">
-              <Heart size={28} className="text-[#3D1A12]/20" />
+            <div className="w-16 h-16 rounded-2xl bg-espresso/5 flex items-center justify-center mb-6">
+              <Heart size={28} className="text-espresso/20" />
             </div>
-            <p className="text-[#3D1A12] font-black text-sm uppercase tracking-widest mb-2">
+            <p className="text-espresso font-black text-sm uppercase tracking-widest mb-2">
               {t("wishlist.empty")}
             </p>
-            <p className="text-[#3D1A12]/40 text-xs font-light mb-8 max-w-xs leading-relaxed">
+            <p className="text-espresso/40 text-xs font-light mb-8 max-w-xs leading-relaxed">
               {t("wishlist.emptyHint")}
             </p>
             <Link
               to={`/${currentLang}/products`}
-              className="text-[10px] font-black uppercase tracking-widest text-[#3D1A12] border-b border-[#3D1A12]/30 pb-0.5 hover:border-[#3D1A12] transition-colors"
+              className="text-[10px] font-black uppercase tracking-widest text-espresso border-b border-espresso/30 pb-0.5 hover:border-espresso transition-colors"
             >
               {t("wishlist.exploreCollection")}
             </Link>

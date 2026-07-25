@@ -1,21 +1,21 @@
 const PrivacyPolicy = () => {
   return (
-    <div className="min-h-screen bg-[#F6F4F1] font-sans text-[#3D1A12] antialiased selection:bg-[#C9922A]/10">
+    <div className="min-h-screen bg-cream font-sans text-espresso antialiased selection:bg-gold/10">
       <main className="max-w-4xl mx-auto px-6 py-32 md:py-48">
 
         {/* Header */}
         <header className="mb-24">
-          <div className="text-[10px] uppercase tracking-[0.4em] text-[#3D1A12]/40 mb-8">
+          <div className="text-[10px] uppercase tracking-[0.4em] text-espresso/40 mb-8">
             Mipador · Privacy
           </div>
           <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-tight mb-8">
             Your data.
             <br />
-            <span className="text-[#3D1A12]/25 font-light italic">
+            <span className="text-espresso/25 font-light italic">
               Handled with intention.
             </span>
           </h1>
-          <p className="max-w-md text-[#3D1A12]/50 font-light leading-relaxed">
+          <p className="max-w-md text-espresso/50 font-light leading-relaxed">
             We believe in slow, honest relationships — with furniture, with spaces,
             and with the people who trust us. We only collect what is necessary
             to bring a Mipador piece into your home.
@@ -52,18 +52,18 @@ const PrivacyPolicy = () => {
           ].map((s) => (
             <section
               key={s.number}
-              className="grid md:grid-cols-2 gap-12 border-t border-[#3D1A12]/10 pt-12"
+              className="grid md:grid-cols-2 gap-12 border-t border-espresso/10 pt-12"
             >
               <div>
-                <span className="text-[10px] font-black tracking-widest text-[#3D1A12]/30 uppercase">
+                <span className="text-[10px] font-black tracking-widest text-espresso/30 uppercase">
                   {s.number} / {s.label}
                 </span>
               </div>
               <div className="space-y-4">
-                <h3 className="text-2xl font-black text-[#3D1A12] tracking-tight">
+                <h3 className="text-2xl font-black text-espresso tracking-tight">
                   {s.title}
                 </h3>
-                <p className="text-[#3D1A12]/55 leading-relaxed font-light text-sm">
+                <p className="text-espresso/55 leading-relaxed font-light text-sm">
                   {s.body}
                 </p>
               </div>

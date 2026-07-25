@@ -91,7 +91,7 @@ const ProductsPage: React.FC = () => {
   const currentItems = filteredData.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   return (
-    <div className="min-h-screen bg-[#F6F4F1]">
+    <div className="min-h-screen bg-cream">
       <ScrollToTop />
 
       <div className="max-w-7xl mx-auto px-4 md:px-6 pt-28 md:pt-32 pb-24">
@@ -103,18 +103,18 @@ const ProductsPage: React.FC = () => {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mb-10 md:mb-12"
         >
-          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[#3D1A12]/35 mb-2">
+          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-espresso/35 mb-2">
             {t("products.studio")}
           </p>
-          <h1 className="text-4xl md:text-7xl font-black text-[#3D1A12] tracking-tight leading-none">
+          <h1 className="text-4xl md:text-7xl font-black text-espresso tracking-tight leading-none">
             {t("products.heading")}
           </h1>
-          <p className="mt-2 text-[#3D1A12]/40 text-sm font-light">
+          <p className="mt-2 text-espresso/40 text-sm font-light">
             {t("products.pieces", { count: filteredData.length })}
             {hasActiveFilters() && (
               <button
                 onClick={resetFilters}
-                className="ml-3 text-[#C9922A] font-black text-xs uppercase tracking-widest hover:text-[#3D1A12] transition-colors"
+                className="ml-3 text-gold font-black text-xs uppercase tracking-widest hover:text-espresso transition-colors"
               >
                 {t("products.clearFilters")}
               </button>
@@ -132,33 +132,33 @@ const ProductsPage: React.FC = () => {
         <div id="grid">
         {filteredData.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 text-center gap-5">
-            <div className="w-16 h-16 rounded-xl bg-[#3D1A12]/5 flex items-center justify-center">
-              <Search size={22} className="text-[#3D1A12]/20" />
+            <div className="w-16 h-16 rounded-xl bg-espresso/5 flex items-center justify-center">
+              <Search size={22} className="text-espresso/20" />
             </div>
             <div className="space-y-1.5">
-              <p className="text-[#3D1A12]/50 font-black text-sm uppercase tracking-widest">
+              <p className="text-espresso/50 font-black text-sm uppercase tracking-widest">
                 {t("products.noResults")}
               </p>
-              <p className="text-[#3D1A12]/30 text-xs font-light max-w-xs mx-auto leading-relaxed">
+              <p className="text-espresso/30 text-xs font-light max-w-xs mx-auto leading-relaxed">
                 {t("products.noResultsHint")}
               </p>
             </div>
             <div className="flex flex-wrap gap-2 justify-center">
               <button
                 onClick={resetFilters}
-                className="px-4 py-2 bg-[#3D1A12] text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-[#4D2A22] transition-colors"
+                className="px-4 py-2 bg-espresso text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-espresso-light transition-colors"
               >
                 {t("products.noResultsAll")}
               </button>
               <button
                 onClick={() => { resetFilters(); setLocationFilter("indoor"); }}
-                className="px-4 py-2 bg-white border border-[#3D1A12]/15 text-[#3D1A12]/60 text-[10px] font-black uppercase tracking-widest rounded-xl hover:border-[#3D1A12]/30 hover:text-[#3D1A12] transition-colors"
+                className="px-4 py-2 bg-white border border-espresso/15 text-espresso/60 text-[10px] font-black uppercase tracking-widest rounded-xl hover:border-espresso/30 hover:text-espresso transition-colors"
               >
                 {t("products.noResultsIndoor")}
               </button>
               <button
                 onClick={() => { resetFilters(); setLocationFilter("outdoor"); }}
-                className="px-4 py-2 bg-white border border-[#3D1A12]/15 text-[#3D1A12]/60 text-[10px] font-black uppercase tracking-widest rounded-xl hover:border-[#3D1A12]/30 hover:text-[#3D1A12] transition-colors"
+                className="px-4 py-2 bg-white border border-espresso/15 text-espresso/60 text-[10px] font-black uppercase tracking-widest rounded-xl hover:border-espresso/30 hover:text-espresso transition-colors"
               >
                 {t("products.noResultsOutdoor")}
               </button>

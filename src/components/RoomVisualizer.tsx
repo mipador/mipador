@@ -30,12 +30,12 @@ export function RoomVisualizer({ productName, glbUrl, posterUrl }: Props) {
 
   if (!glbUrl) {
     return (
-      <div className="flex flex-col items-center justify-center py-10 px-6 text-center bg-[#F6F4F1] rounded-xl border border-dashed border-[#3D1A12]/15">
-        <Box size={28} className="text-[#3D1A12]/20 mb-3" />
-        <p className="text-xs font-black uppercase tracking-widest text-[#3D1A12]/30 mb-1">
+      <div className="flex flex-col items-center justify-center py-10 px-6 text-center bg-cream rounded-xl border border-dashed border-espresso/15">
+        <Box size={28} className="text-espresso/20 mb-3" />
+        <p className="text-xs font-black uppercase tracking-widest text-espresso/30 mb-1">
           {t("visualizer.comingSoon")}
         </p>
-        <p className="text-[10px] text-[#3D1A12]/25 font-light max-w-xs leading-relaxed">
+        <p className="text-[10px] text-espresso/25 font-light max-w-xs leading-relaxed">
           {t("visualizer.comingSoonHint")}
         </p>
       </div>
@@ -47,7 +47,7 @@ export function RoomVisualizer({ productName, glbUrl, posterUrl }: Props) {
       {!active ? (
         <button
           onClick={() => setActive(true)}
-          className="w-full flex items-center justify-center gap-3 bg-[#3D1A12] text-white py-4 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-[#2e1209] transition-colors"
+          className="w-full flex items-center justify-center gap-3 bg-espresso text-white py-4 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-[#2e1209] transition-colors"
         >
           <Box size={14} />
           {t("visualizer.view3D")}
@@ -76,13 +76,13 @@ export function RoomVisualizer({ productName, glbUrl, posterUrl }: Props) {
               aria-label="Reset view"
               title="Reset view"
             >
-              <RotateCcw size={13} className="text-[#3D1A12]" />
+              <RotateCcw size={13} className="text-espresso" />
             </button>
           </div>
 
           <div className="flex items-start gap-2.5 px-1">
-            <Smartphone size={13} className="text-[#C9922A] shrink-0 mt-0.5" />
-            <p className="text-[10px] text-[#3D1A12]/40 font-light leading-relaxed">
+            <Smartphone size={13} className="text-gold shrink-0 mt-0.5" />
+            <p className="text-[10px] text-espresso/40 font-light leading-relaxed">
               {t("visualizer.arHint")}
             </p>
           </div>

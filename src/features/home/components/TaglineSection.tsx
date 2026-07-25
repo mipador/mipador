@@ -15,7 +15,7 @@ const TaglineSection = () => {
   ];
 
   return (
-    <section className="relative py-16 md:py-32 bg-[#F4F4F4] flex items-center justify-center overflow-hidden">
+    <section className="relative py-16 md:py-32 bg-fog flex items-center justify-center overflow-hidden">
 
       <div
         className="absolute inset-0 opacity-[0.07] pointer-events-none z-0"
@@ -31,10 +31,10 @@ const TaglineSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 1, ease: EASE }}
-          className="text-3xl md:text-5xl font-medium text-[#3D1A12] leading-tight text-center max-w-4xl mx-auto"
+          className="text-3xl md:text-5xl font-medium text-espresso leading-tight text-center max-w-4xl mx-auto"
         >
           {t("tagline.headline")}{" "}
-          <span className="text-[#3D1A12]/60 italic">
+          <span className="text-espresso/60 italic">
             {t("tagline.headlineSoft")}
           </span>{" "}
           {t("tagline.headlineEnd")}
@@ -48,15 +48,15 @@ const TaglineSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ delay: i * 0.12, duration: 0.6, ease: EASE }}
-              className="flex flex-col items-center text-center p-6 md:p-8 rounded-3xl bg-[#FFFFFF]/70 border border-[#3D1A12]/10 transition-all duration-500 hover:scale-[1.02] hover:border-[#3D1A12]/20 hover:shadow-sm"
+              className="flex flex-col items-center text-center p-6 md:p-8 rounded-3xl bg-[#FFFFFF]/70 border border-espresso/10 transition-all duration-500 hover:scale-[1.02] hover:border-espresso/20 hover:shadow-sm"
             >
-              <div className="mb-6 text-[#3D1A12]/60">
+              <div className="mb-6 text-espresso/60">
                 {item.icon}
               </div>
-              <h3 className="text-base font-semibold mb-3 text-[#3D1A12] tracking-wide">
+              <h3 className="text-base font-semibold mb-3 text-espresso tracking-wide">
                 {t(item.titleKey)}
               </h3>
-              <p className="text-[#3D1A12]/55 text-sm leading-relaxed font-light">
+              <p className="text-espresso/55 text-sm leading-relaxed font-light">
                 {t(item.descKey)}
               </p>
             </motion.div>

@@ -29,7 +29,7 @@ const Field: React.FC<FieldProps> = ({
   label, placeholder, type = "text", value, error, onChange,
 }) => (
   <div className="flex flex-col gap-1.5">
-    <label className="text-[10px] font-black uppercase tracking-widest text-[#3D1A12]/45">
+    <label className="text-[10px] font-black uppercase tracking-widest text-espresso/45">
       {label}
     </label>
     <input
@@ -37,10 +37,10 @@ const Field: React.FC<FieldProps> = ({
       placeholder={placeholder}
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className={`w-full bg-[#F6F4F1] rounded-xl px-4 py-3 text-sm text-[#3D1A12] placeholder-[#3D1A12]/25 outline-none border transition-all ${
+      className={`w-full bg-cream rounded-xl px-4 py-3 text-sm text-espresso placeholder-espresso/25 outline-none border transition-all ${
         error
           ? "border-red-300"
-          : "border-[#3D1A12]/10 focus:border-[#3D1A12]/30"
+          : "border-espresso/10 focus:border-espresso/30"
       }`}
     />
     {error && (
@@ -67,34 +67,34 @@ const PaymentOption: React.FC<{
     disabled={disabled}
     className={`relative flex items-center gap-3 w-full rounded-xl border px-4 py-3 text-left transition-all duration-200 ${
       disabled
-        ? "opacity-40 cursor-not-allowed bg-[#F6F4F1] border-[#3D1A12]/8"
+        ? "opacity-40 cursor-not-allowed bg-cream border-espresso/8"
         : selected
-        ? "border-[#3D1A12] bg-[#3D1A12]/5 shadow-[0_0_0_1px_#3D1A12]"
-        : "border-[#3D1A12]/15 bg-[#F6F4F1] hover:border-[#3D1A12]/30"
+        ? "border-espresso bg-espresso/5 shadow-[0_0_0_1px_var(--color-espresso)]"
+        : "border-espresso/15 bg-cream hover:border-espresso/30"
     }`}
   >
     <div className={`shrink-0 w-9 h-9 rounded-lg flex items-center justify-center ${
-      selected ? "bg-[#3D1A12] text-white" : "bg-white text-[#3D1A12]/50"
+      selected ? "bg-espresso text-white" : "bg-white text-espresso/50"
     }`}>
       {icon}
     </div>
     <div className="flex-1 min-w-0">
       <p className={`text-xs font-black uppercase tracking-widest ${
-        selected ? "text-[#3D1A12]" : "text-[#3D1A12]/60"
+        selected ? "text-espresso" : "text-espresso/60"
       }`}>
         {label}
       </p>
-      <p className="text-[10px] text-[#3D1A12]/35 font-light mt-0.5">{desc}</p>
+      <p className="text-[10px] text-espresso/35 font-light mt-0.5">{desc}</p>
     </div>
     {!disabled && (
       <div className={`shrink-0 w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all ${
-        selected ? "border-[#3D1A12] bg-[#3D1A12]" : "border-[#3D1A12]/25"
+        selected ? "border-espresso bg-espresso" : "border-espresso/25"
       }`}>
         {selected && <Check size={8} className="text-white" strokeWidth={3} />}
       </div>
     )}
     {badge && (
-      <span className="absolute top-2 right-2 px-2 py-0.5 bg-[#C9922A]/15 text-[#C9922A] text-[8px] font-black uppercase tracking-widest rounded-lg">
+      <span className="absolute top-2 right-2 px-2 py-0.5 bg-gold/15 text-gold text-[8px] font-black uppercase tracking-widest rounded-lg">
         {badge}
       </span>
     )}
@@ -168,14 +168,14 @@ Please confirm availability. Thank you.`;
   if (sent) {
     return (
       <div className="flex flex-col items-center justify-center py-8 text-center gap-3">
-        <div className="w-12 h-12 rounded-xl bg-[#3D1A12]/8 flex items-center justify-center">
-          <Check size={20} className="text-[#3D1A12]" />
+        <div className="w-12 h-12 rounded-xl bg-espresso/8 flex items-center justify-center">
+          <Check size={20} className="text-espresso" />
         </div>
         <div>
-          <p className="text-sm font-black text-[#3D1A12] tracking-tight">
+          <p className="text-sm font-black text-espresso tracking-tight">
             {t("order.successTitle")}
           </p>
-          <p className="text-xs text-[#3D1A12]/40 mt-1 font-light">
+          <p className="text-xs text-espresso/40 mt-1 font-light">
             {t("order.successBody")}
           </p>
         </div>
@@ -188,7 +188,7 @@ Please confirm availability. Thank you.`;
 
       {/* Payment method selector */}
       <div className="flex flex-col gap-2">
-        <p className="text-[10px] font-black uppercase tracking-widest text-[#3D1A12]/45">
+        <p className="text-[10px] font-black uppercase tracking-widest text-espresso/45">
           {t("order.paymentMethod")}
         </p>
         <PaymentOption
@@ -233,7 +233,7 @@ Please confirm availability. Thank you.`;
       <button
         onClick={handleSubmit}
         disabled={sending}
-        className="w-full bg-[#3D1A12] text-white py-4 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-[#4D2A22] active:scale-95 transition-all disabled:opacity-60"
+        className="w-full bg-espresso text-white py-4 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-espresso-light active:scale-95 transition-all disabled:opacity-60"
       >
         {sending ? (
           <><Loader size={13} className="animate-spin" /> {t("order.sending")}</>
@@ -242,7 +242,7 @@ Please confirm availability. Thank you.`;
         )}
       </button>
 
-      <p className="text-center text-[9px] text-[#3D1A12]/25 uppercase tracking-widest">
+      <p className="text-center text-[9px] text-espresso/25 uppercase tracking-widest">
         {t("order.disclaimer")}
       </p>
     </div>

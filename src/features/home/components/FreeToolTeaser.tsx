@@ -83,7 +83,7 @@ const FreeToolTeaser: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease }}
-          className="relative bg-[#3D1A12] rounded-3xl overflow-hidden px-8 py-12 sm:px-14 sm:py-16"
+          className="relative bg-espresso rounded-3xl overflow-hidden px-8 py-12 sm:px-14 sm:py-16"
         >
           {/* Card-level glow blobs */}
           <motion.div
@@ -156,7 +156,7 @@ const FreeToolTeaser: React.FC = () => {
               </p>
               <Link
                 to={`/${l}/tools/color-palette`}
-                className={`inline-flex items-center gap-2 bg-white text-[#3D1A12] text-xs font-black uppercase tracking-widest px-6 py-3.5 rounded-xl hover:bg-white/90 transition-colors ${isRTL ? "flex-row-reverse" : ""}`}
+                className={`inline-flex items-center gap-2 bg-white text-espresso text-xs font-black uppercase tracking-widest px-6 py-3.5 rounded-xl hover:bg-white/90 transition-colors ${isRTL ? "flex-row-reverse" : ""}`}
               >
                 {t("home.freeToolCta")}
                 <ArrowRight size={13} className={isRTL ? "rotate-180" : ""} />

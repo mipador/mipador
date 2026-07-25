@@ -7,7 +7,7 @@ const AboutStory = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="pt-26 px-6 bg-[#F6F4F1]">
+    <section className="pt-26 px-6 bg-cream">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-center">
 
@@ -29,7 +29,7 @@ const AboutStory = () => {
             >
               <source src="/images/mipadorFlag.mp4" type="video/mp4" />
             </video>
-            <div className="absolute inset-0 bg-gradient-to-t from-[#2A0F08]/50 via-[#2A0F08]/10 to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-40" />
+            <div className="absolute inset-0 bg-gradient-to-t from-espresso-900/50 via-espresso-900/10 to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-40" />
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_center,rgba(201,146,42,0.12),transparent_60%)]" />
             <div className="absolute bottom-8 left-8 transition-all duration-500 group-hover:translate-y-[-4px]">
               <p className="text-white/70 text-[10px] font-black uppercase tracking-widest">
@@ -53,32 +53,32 @@ const AboutStory = () => {
             transition={{ duration: 0.9, ease: EASE }}
             className="order-1 md:order-2"
           >
-            <h2 className="text-4xl md:text-5xl font-black text-[#3D1A12] tracking-tight leading-tight mb-8">
-              <span className="text-[#3D1A12]/30 italic font-light">
+            <h2 className="text-4xl md:text-5xl font-black text-espresso tracking-tight leading-tight mb-8">
+              <span className="text-espresso/30 italic font-light">
                 {t("about.storyHeading")}
               </span>
             </h2>
 
-            <div className="space-y-5 text-[#3D1A12]/60 text-base leading-relaxed">
+            <div className="space-y-5 text-espresso/60 text-base leading-relaxed">
               <p>{t("about.storyP1")}</p>
               <p>{t("about.storyP2")}</p>
-              <p className="text-[#3D1A12] font-semibold">{t("about.storyP3")}</p>
+              <p className="text-espresso font-semibold">{t("about.storyP3")}</p>
             </div>
 
-            <div className="mt-10 border-l-2 border-[#C9922A]/40 pl-6 space-y-4">
-              <p className="text-[#3D1A12]/50 italic text-sm leading-relaxed">
+            <div className="mt-10 border-l-2 border-gold/40 pl-6 space-y-4">
+              <p className="text-espresso/50 italic text-sm leading-relaxed">
                 {t("about.quote")}
                 <br />
-                <span className="text-[#3D1A12]/30 not-italic text-xs mt-1 block">
+                <span className="text-espresso/30 not-italic text-xs mt-1 block">
                   {t("about.quoteAttrib")}
                 </span>
               </p>
-              <p className="text-[#3D1A12]/70 text-sm leading-relaxed">
+              <p className="text-espresso/70 text-sm leading-relaxed">
                 {t("about.quoteResponse")}
               </p>
-              <p className="text-[#3D1A12] font-bold text-sm leading-relaxed">
+              <p className="text-espresso font-bold text-sm leading-relaxed">
                 {t("about.manifesto")}
-                <span className="text-[#C9922A]"> {t("about.manifestoAccent")}</span>.
+                <span className="text-gold"> {t("about.manifestoAccent")}</span>.
               </p>
             </div>
           </motion.div>

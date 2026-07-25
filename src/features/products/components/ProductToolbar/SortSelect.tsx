@@ -14,7 +14,7 @@ const SortSelect: React.FC = () => {
         onChange={(e) =>
           setSortBy(e.target.value as "featured" | "price-asc" | "price-desc" | "name")
         }
-        className="appearance-none bg-white border-none rounded-xl py-3 pl-5 pr-10 text-[10px] font-black uppercase tracking-widest text-[#3D1A12] focus:ring-1 focus:ring-[#3D1A12]/20 outline-none cursor-pointer"
+        className="appearance-none bg-white border-none rounded-xl py-3 pl-5 pr-10 text-[10px] font-black uppercase tracking-widest text-espresso focus:ring-1 focus:ring-espresso/20 outline-none cursor-pointer"
       >
         <option value="featured">{t("products.sortFeatured")}</option>
         <option value="name">{t("products.sortAlpha")}</option>
@@ -22,7 +22,7 @@ const SortSelect: React.FC = () => {
         <option value="price-desc">{t("products.sortPriceHigh")}</option>
       </select>
       <ChevronDown
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-[#3D1A12]/40 pointer-events-none"
+        className="absolute right-3 top-1/2 -translate-y-1/2 text-espresso/40 pointer-events-none"
         size={13}
       />
     </div>
