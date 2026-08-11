@@ -4,7 +4,7 @@ import { AlbatrossMark } from "../components/AlbatrossMark";
 const NotFound: React.FC = () => {
   const { lang } = useParams();
 
-  const base = `/${lang || "en"}`;
+  const base = `/${lang || "fr"}`;
 
   return (
     <div className="relative min-h-screen bg-[#F7F7F7] flex flex-col items-center justify-center px-6 font-sans overflow-hidden">

@@ -29,7 +29,7 @@ const CartDrawer: React.FC = () => {
   const grandTotal = total + (total > 0 ? DELIVERY : 0);
 
   const { lang } = useParams();
-  const currentLang = lang || "en";
+  const currentLang = lang || "fr";
   const isRTL = currentLang === "ar" || currentLang === "ma";
 
   const cartProducts = cart

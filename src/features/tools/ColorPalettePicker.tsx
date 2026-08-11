@@ -212,7 +212,7 @@ function MoodImagePair({
 const ColorPalettePicker: React.FC = () => {
   const { t } = useTranslation();
   const { lang } = useParams<{ lang: string }>();
-  const l = lang || "en";
+  const l = lang || "fr";
   const paletteLang = toLang(l);
   const isRTL = l === "ar" || l === "ma";
 

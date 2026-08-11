@@ -6,7 +6,7 @@ import { SITE } from "../../../config/site";
 const HeroSection = () => {
   const { t } = useTranslation();
   const { lang } = useParams<{ lang?: string }>();
-  const currentLang = lang || "en";
+  const currentLang = lang || "fr";
 
   return (
     <section className="relative bg-[#FBF4ED] px-3 sm:px-5 lg:px-6 pt-3 sm:pt-4 lg:pt-5 pb-3 sm:pb-5">

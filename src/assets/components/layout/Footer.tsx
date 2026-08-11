@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
   const [subscribed, setSubscribed] = useState(false);
   const { t } = useTranslation();
   const { lang } = useParams();
-  const currentLang = lang || "en";
+  const currentLang = lang || "fr";
 
   const linkClass = (path: string) =>
     `transition-colors duration-200 text-sm ${

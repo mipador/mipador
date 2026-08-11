@@ -9,7 +9,7 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         {/* Redirect root → default language */}
-        <Route path="/" element={<Navigate to="/en" replace />} />
+        <Route path="/" element={<Navigate to="/fr" replace />} />
 
         {/* All languages handled here */}
         <Route path="/:lang/*" element={<LanguageLayout />} />

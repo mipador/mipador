@@ -81,7 +81,7 @@ export function useSEO(title: string, description?: string, options?: SeoOptions
   const { lang } = useParams<{ lang: string }>();
   const currentLang: Lang = LANGS.includes(lang as Lang)
     ? (lang as Lang)
-    : "en";
+    : "fr";
 
   const ogImg = options?.ogImage ?? OG_DEFAULT_IMAGE;
   const ogType = options?.ogType ?? "website";
@@ -144,10 +144,10 @@ export function useSEO(title: string, description?: string, options?: SeoOptions
       const href = `${SITE_URL}/${l}${restPath ? `/${restPath}` : ""}`;
       setHreflang(l, href);
     });
-    // x-default → English
+    // x-default → French
     setHreflang(
       "x-default",
-      `${SITE_URL}/en${restPath ? `/${restPath}` : ""}`
+      `${SITE_URL}/fr${restPath ? `/${restPath}` : ""}`
     );
   }, [title, description, currentLang, location.pathname, ogImg, ogType, imageAlt]);
 }

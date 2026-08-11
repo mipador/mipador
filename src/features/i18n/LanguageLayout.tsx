@@ -50,9 +50,9 @@ export default function LanguageLayout() {
     if (localStorage.getItem("lang")) return;
 
     const browserLang = navigator.language.toLowerCase();
-    let detected = "en";
-    if (browserLang.includes("fr")) detected = "fr";
-    else if (browserLang.includes("ar")) detected = "ar";
+    let detected = "fr";
+    if (browserLang.includes("ar")) detected = "ar";
+    else if (browserLang.includes("en")) detected = "en";
 
     localStorage.setItem("lang", detected);
 
@@ -63,7 +63,7 @@ export default function LanguageLayout() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!lang || !supported.includes(lang)) {
-    return <Navigate to="/en" replace />;
+    return <Navigate to="/fr" replace />;
   }
 
   return (

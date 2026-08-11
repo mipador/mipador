@@ -18,7 +18,7 @@ const SelectedWorksSection: React.FC = () => {
 
   const featured = allProducts.filter((p) => p.featured).slice(0, 3);
   const { lang } = useParams();
-  const currentLang = lang || "en";
+  const currentLang = lang || "fr";
 
   return (
     <section className="bg-fog py-20 px-6">

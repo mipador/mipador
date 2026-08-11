@@ -15,7 +15,7 @@ interface TrustBadgesProps {
 export default function TrustBadges({ className = "" }: TrustBadgesProps) {
   const { t } = useTranslation();
   const { lang } = useParams();
-  const currentLang = lang || "en";
+  const currentLang = lang || "fr";
 
   return (
     <div className={`flex flex-col gap-2.5 ${className}`}>

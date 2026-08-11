@@ -4,16 +4,16 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const languages = [
   {
-    code: "en",
-    label: "English",
-    short: "EN",
-    flag: "/flags/en.png",
-  },
-  {
     code: "fr",
     label: "Français",
     short: "FR",
     flag: "/flags/fr.png",
+  },
+  {
+    code: "en",
+    label: "English",
+    short: "EN",
+    flag: "/flags/en.png",
   },
   {
     code: "ar",
@@ -33,7 +33,7 @@ export default function LanguageSwitcher({ compact = false }: { compact?: boolea
   const { lang } = useParams();
   const navigate = useNavigate();
 
-  const currentLang = lang || "en";
+  const currentLang = lang || "fr";
 
   const [open, setOpen] = useState(false);
 

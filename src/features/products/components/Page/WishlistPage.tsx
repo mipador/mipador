@@ -22,7 +22,7 @@ export default function WishlistPage() {
   const { t } = useTranslation();
   useSEO(t("wishlist.heading"));
   const { lang } = useParams();
-  const currentLang = lang || "en";
+  const currentLang = lang || "fr";
   const getWishlistProducts = useProductStore((s) => s.getWishlistProducts);
   const wishlistProducts = getWishlistProducts();
 

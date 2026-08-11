@@ -19,7 +19,7 @@ const CONTACT_LABELS: Record<string, { home: string; contact: string }> = {
 const ContactPage: React.FC = () => {
   const { t } = useTranslation();
   const { lang } = useParams<{ lang: string }>();
-  const l = lang || "en";
+  const l = lang || "fr";
   const labels = CONTACT_LABELS[l] ?? CONTACT_LABELS.en;
 
   useSEO(t("seo.contactTitle"), t("seo.contactDesc"));

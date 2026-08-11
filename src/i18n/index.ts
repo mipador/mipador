@@ -16,7 +16,7 @@ i18n
       ma: { translation: ma },
     },
 
-    fallbackLng: "en",
+    fallbackLng: "fr",
 
     supportedLngs: ["en", "fr", "ar", "ma"],
 

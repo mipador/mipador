@@ -28,7 +28,7 @@ const FaqsPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<Category>("Technical Support");
   const { t } = useTranslation();
   const { lang } = useParams<{ lang: string }>();
-  const l = lang || "en";
+  const l = lang || "fr";
   const bc = FAQ_BREADCRUMB[l] ?? FAQ_BREADCRUMB.en;
 
   useSEO(t("seo.faqsTitle"), t("seo.faqsDesc"));

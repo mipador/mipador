@@ -25,7 +25,7 @@ const ABOUT_LABELS: Record<string, { home: string; about: string }> = {
 function About() {
   const { t } = useTranslation();
   const { lang } = useParams<{ lang: string }>();
-  const currentLang = lang || "en";
+  const currentLang = lang || "fr";
   const l = currentLang;
   const labels = ABOUT_LABELS[l] ?? ABOUT_LABELS.en;
 

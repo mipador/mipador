@@ -11,7 +11,7 @@ import { SITE } from "../../../config/site";
 const Navbar: React.FC = () => {
   const location = useLocation();
   const { lang } = useParams();
-  const currentLang = lang || "en";
+  const currentLang = lang || "fr";
   const { t } = useTranslation();
 
   const cartOpen = useProductStore((s) => s.cartOpen);

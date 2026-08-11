@@ -16,7 +16,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 const FreeToolTeaser: React.FC = () => {
   const { t } = useTranslation();
   const { lang } = useParams<{ lang: string }>();
-  const l = lang || "en";
+  const l = lang || "fr";
   const isRTL = l === "ar" || l === "ma";
 
   return (

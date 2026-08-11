@@ -24,7 +24,7 @@ const ProductCardHomePage: React.FC<{ product: Product }> = ({ product: rawProdu
   };
 
   const { lang } = useParams();
-  const currentLang = lang || "en";
+  const currentLang = lang || "fr";
   const product = localizeProduct(rawProduct, currentLang);
 
   return (
