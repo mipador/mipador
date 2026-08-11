@@ -12,6 +12,7 @@ export interface ProductLocale {
 }
 
 export type ProductCategory =
+  | "Wall Art"
   | "Seating"
   | "Tables"
   | "Lighting"
@@ -44,7 +45,8 @@ export interface Product {
   collection: string;              // e.g. "Wabi Series", "Sahara Edit"
   materials: string[];             // e.g. ["Solid walnut", "Moroccan leather"]
   dimensions: ProductDimensions;
-  colors: string[];                // available colorways
+  colors: string[];                // available colorways / dominant palette (art)
+  colorSwatches?: string[];        // optional hex codes, same order as `colors` — renders swatch dots
   care: string[];                  // care instructions
   leadTime: string;                // e.g. "3–4 weeks" (handcrafted)
   inStock: boolean;
@@ -60,7 +62,364 @@ export interface Product {
   };
 }
 
+// ─── ACTIVE CATALOG — Wall Art launch collection ───────────────────────────
+// Brand focus has shifted to wall art / paintings for launch. The previous
+// furniture catalog is preserved below (commented out), not deleted — see
+// the "PAUSED — furniture catalog" block at the bottom of this file.
 export const products: Product[] = [
+  {
+    id: "6",
+    name: "Zellige Fragments",
+    slug: "zellige-fragments",
+    tagline: "Zellige, shattered and rebuilt.",
+    description:
+      "A study in shattered symmetry — this piece translates the nested geometry of Moroccan zellige into a modern composition of terracotta, gold, and espresso fragments on raw cotton paper. Archivally printed and framed by hand in our Casablanca studio, it holds centuries of pattern in a single, contemporary breath.",
+    price: 4200,
+    status: "available",
+    location: "indoor",
+    category: "Wall Art",
+    collection: "Atelier Edit",
+    materials: ["Giclée print on archival cotton paper", "Solid oak frame, natural finish", "Museum-grade UV glass"],
+    dimensions: { width: 80, depth: 4, height: 100, weight: 5.5 },
+    colors: ["Terracotta", "Gold Ochre", "Espresso", "Dusty Rose", "Cream"],
+    colorSwatches: ["#B5533C", "#C9922A", "#3D1A12", "#C48A78", "#EADFCF"],
+    care: [
+      "Avoid direct sunlight to preserve pigments",
+      "Dust frame with a dry, soft cloth",
+      "Keep away from humidity",
+      "Do not hang above heat sources",
+    ],
+    leadTime: "1–2 weeks",
+    inStock: true,
+    featured: true,
+    images: ["/images/products/zellige-fragments-main.webp"],
+    tags: ["bestseller", "new", "handcrafted"],
+    stock: 6,
+    translations: {
+      fr: {
+        name: "Fragments de Zellige",
+        tagline: "Le zellige, brisé puis reconstruit.",
+        description: "Une étude de symétrie brisée — cette pièce traduit la géométrie imbriquée du zellige marocain en une composition contemporaine de fragments terracotta, or et expresso sur papier coton. Imprimée en édition d'art et encadrée à la main dans notre atelier de Casablanca, elle contient des siècles de motifs dans un souffle résolument moderne.",
+        materials: ["Impression giclée sur papier coton d'archive", "Cadre en chêne massif, finition naturelle", "Verre anti-UV qualité musée"],
+        colors: ["Terracotta", "Ocre doré", "Expresso", "Rose poudré", "Crème"],
+        care: [
+          "Évitez l'exposition directe au soleil pour préserver les pigments",
+          "Dépoussiérez le cadre avec un chiffon doux et sec",
+          "Tenez à l'écart de l'humidité",
+          "Ne pas suspendre au-dessus d'une source de chaleur",
+        ],
+        leadTime: "1–2 semaines",
+      },
+      ar: {
+        name: "شظايا الزليج",
+        tagline: "الزليج، تكسّر ثم أُعيد بناؤه.",
+        description: "دراسة في التناظر المتكسّر — تترجم هذه القطعة الهندسة المتشابكة للزليج المغربي إلى تكوين معاصر من شظايا التراكوتا والذهبي والإسبريسو على ورق قطني. مطبوعة بتقنية الجيكليه ومؤطرة يدوياً في استوديونا بالدار البيضاء، تحمل قروناً من الزخرفة في نفَس عصري واحد.",
+        materials: ["طباعة جيكليه على ورق قطني أرشيفي", "إطار من خشب البلوط الصلب بلمسة طبيعية", "زجاج حامي من الأشعة فوق البنفسجية بجودة المتاحف"],
+        colors: ["التراكوتا", "الذهبي الترابي", "الإسبريسو", "الوردي الترابي", "الكريمي"],
+        care: [
+          "تجنب التعرض المباشر لأشعة الشمس للحفاظ على الألوان",
+          "نظّف الإطار بقماش جاف وناعم",
+          "أبعد عن الرطوبة",
+          "لا تُعلّق فوق مصادر الحرارة",
+        ],
+        leadTime: "1–2 أسابيع",
+      },
+      ma: {
+        name: "شظايا الزليج",
+        tagline: "الزليج، تهرّس ومن بعد تبنى من جديد.",
+        description: "دراسة فالتناظر المكسّر — هاد القطعة كتترجم الهندسة المتشابكة ديال الزليج المغربي لتكوين عصري من شظايا التراكوتا والذهبي والإسبريسو فوق ورق قطني. مطبوعة بجيكليه ومؤطرة باليد فالأتيلي ديالنا بالدار البيضاء، كتحمل قرون من الزخرفة فنفَس عصري واحد.",
+        materials: ["طباعة جيكليه فوق ورق قطني", "إطار من البلوط الصلب بلمسة طبيعية", "زجاج ضد الأشعة بجودة المتاحف"],
+        colors: ["التراكوتا", "الذهبي", "الإسبريسو", "الوردي الترابي", "الكريمي"],
+        care: [
+          "بعّد على الشمس المباشرة باش يبقاو الألوان",
+          "نضح الإطار بشمالة جافة وناعمة",
+          "بعّد على الرطوبة",
+          "ما تعلقوش فوق مصادر السخانة",
+        ],
+        leadTime: "1–2 أسابيع",
+      },
+    },
+  },
+  {
+    id: "7",
+    name: "Dune Horizon",
+    slug: "dune-horizon",
+    tagline: "Where the sand meets the sky.",
+    description:
+      "Painted in wide, unhurried bands, Dune Horizon distills the Sahara's edge into pure color — sand giving way to rust, rust to umber, umber to night. Hung low and wide, it turns a wall into a horizon line.",
+    price: 3800,
+    status: "available",
+    location: "indoor",
+    category: "Wall Art",
+    collection: "Atelier Edit",
+    materials: ["Acrylic on canvas", "Floating frame, blackened oak"],
+    dimensions: { width: 100, depth: 3.5, height: 70, weight: 4.8 },
+    colors: ["Warm Sand", "Terracotta", "Burnt Umber", "Espresso", "Gold"],
+    colorSwatches: ["#EFDCC0", "#C4845A", "#7A4530", "#3D1A12", "#C9922A"],
+    care: [
+      "Keep out of direct, prolonged sunlight",
+      "Dust canvas edges with a dry brush",
+      "Avoid humid rooms (bathrooms, kitchens)",
+    ],
+    leadTime: "2–3 weeks",
+    inStock: true,
+    featured: true,
+    images: ["/images/products/dune-horizon-main.webp"],
+    tags: ["new", "handcrafted"],
+    stock: 5,
+    translations: {
+      fr: {
+        name: "Horizon des Dunes",
+        tagline: "Là où le sable rencontre le ciel.",
+        description: "Peinte en larges bandes tranquilles, Horizon des Dunes distille la lisière du Sahara en couleur pure — le sable cédant à la rouille, la rouille à l'ombre. Suspendue bas et large, elle transforme un mur en ligne d'horizon.",
+        materials: ["Acrylique sur toile", "Cadre flottant en chêne noirci"],
+        colors: ["Sable chaud", "Terracotta", "Ombre brûlée", "Expresso", "Or"],
+        care: [
+          "Évitez une exposition prolongée au soleil direct",
+          "Dépoussiérez les bords de la toile avec une brosse sèche",
+          "Évitez les pièces humides (salle de bain, cuisine)",
+        ],
+        leadTime: "2–3 semaines",
+      },
+      ar: {
+        name: "أفق الكثبان",
+        tagline: "حيث تلتقي الرمال بالسماء.",
+        description: "مرسومة بأشرطة عريضة هادئة، تختزل «أفق الكثبان» حافة الصحراء الكبرى في لون خالص — الرمل يفسح المجال للصدأ، والصدأ للسواد. معلّقة منخفضة وعريضة، تحوّل الجدار إلى خط أفق.",
+        materials: ["أكريليك على قماش الكانفاس", "إطار عائم من خشب البلوط المؤكسد"],
+        colors: ["الرمل الدافئ", "التراكوتا", "السنّي المحروق", "الإسبريسو", "الذهبي"],
+        care: [
+          "تجنب التعرض الطويل لأشعة الشمس المباشرة",
+          "نظّف حواف اللوحة بفرشاة جافة",
+          "تجنب الغرف الرطبة كالحمام والمطبخ",
+        ],
+        leadTime: "2–3 أسابيع",
+      },
+      ma: {
+        name: "أفق الكثبان",
+        tagline: "فين كيلتقاو الرمل والسما.",
+        description: "مرسومة بخطوط عريضة هادئة، «أفق الكثبان» كتختزل حافة الصحرا فلون خالص — الرمل كيفسح للصدأ، والصدأ للظل. معلقة منخفضة وعريضة، كتحول الجدار لخط أفق.",
+        materials: ["أكريليك فوق الكانفاس", "إطار عائم من البلوط المؤكسد"],
+        colors: ["الرمل الدافئ", "التراكوتا", "السنّي", "الإسبريسو", "الذهبي"],
+        care: [
+          "بعّد على الشمس المباشرة لمدة طويلة",
+          "نضح حواف اللوحة بفرشاة جافة",
+          "بعّد على البيوت الرطبة بحال الحمام والكوزينا",
+        ],
+        leadTime: "2–3 أسابيع",
+      },
+    },
+  },
+  {
+    id: "8",
+    name: "Indigo Medina",
+    slug: "indigo-medina",
+    tagline: "The blue hour, held still.",
+    description:
+      "Layered arches in deepening blue recall the blue hour over a medina rooftop, when the calls to prayer fade and the sky holds its last light. Oil on canvas, framed in solid walnut — a quiet anchor for any room.",
+    price: 3600,
+    status: "available",
+    location: "indoor",
+    category: "Wall Art",
+    collection: "Atelier Edit",
+    materials: ["Oil on canvas", "Solid walnut frame"],
+    dimensions: { width: 70, depth: 4, height: 90, weight: 5 },
+    colors: ["Indigo", "Cream", "Gold", "Slate"],
+    colorSwatches: ["#234A66", "#F6F4F1", "#C9922A", "#5A6B78"],
+    care: [
+      "Avoid direct sunlight to preserve oil pigments",
+      "Dust the frame only, never the canvas surface",
+      "Maintain stable room humidity",
+    ],
+    leadTime: "3–4 weeks",
+    inStock: true,
+    featured: true,
+    images: ["/images/products/indigo-medina-main.webp"],
+    tags: ["bestseller", "handcrafted"],
+    stock: 4,
+    translations: {
+      fr: {
+        name: "Médina Indigo",
+        tagline: "L'heure bleue, figée.",
+        description: "Des arches superposées dans un bleu qui s'approfondit rappellent l'heure bleue sur les toits de la médina, quand les appels à la prière s'estompent et que le ciel retient sa dernière lumière. Huile sur toile, encadrée en noyer massif — une ancre tranquille pour toute pièce.",
+        materials: ["Huile sur toile", "Cadre en noyer massif"],
+        colors: ["Indigo", "Crème", "Or", "Ardoise"],
+        care: [
+          "Évitez le soleil direct pour préserver les pigments à l'huile",
+          "Dépoussiérez uniquement le cadre, jamais la toile",
+          "Maintenez une humidité ambiante stable",
+        ],
+        leadTime: "3–4 semaines",
+      },
+      ar: {
+        name: "مدينة النيلي",
+        tagline: "الساعة الزرقاء، ثابتة في مكانها.",
+        description: "أقواس متراكبة بأزرق يزداد عمقاً تستحضر الساعة الزرقاء فوق أسطح المدينة، حين يخفت نداء الأذان وتحتفظ السماء بآخر ضوء لها. زيت على قماش، مؤطرة بخشب الجوز الصلب — ركيزة هادئة لأي غرفة.",
+        materials: ["زيت على قماش الكانفاس", "إطار من خشب الجوز الصلب"],
+        colors: ["النيلي", "الكريمي", "الذهبي", "الرمادي الأردوازي"],
+        care: [
+          "تجنب الشمس المباشرة للحفاظ على ألوان الزيت",
+          "نظّف الإطار فقط، ولا تلمس سطح اللوحة أبداً",
+          "حافظ على رطوبة ثابتة في الغرفة",
+        ],
+        leadTime: "3–4 أسابيع",
+      },
+      ma: {
+        name: "مدينة النيلي",
+        tagline: "الساعة الزرقة، واقفة.",
+        description: "أقواس فوق بعضياتهم بأزرق كيزيد يعمق كيفكّرو بالساعة الزرقة فوق سطوح المدينة، منين كيخفت الأذان والسما كتشد آخر ضوء ديالها. زيت فوق الكانفاس، مؤطرة بخشب الجوز الصلب — ركيزة هادية لأي بيت.",
+        materials: ["زيت فوق الكانفاس", "إطار من الجوز الصلب"],
+        colors: ["النيلي", "الكريمي", "الذهبي", "الرمادي"],
+        care: [
+          "بعّد على الشمس المباشرة باش يبقاو الألوان",
+          "نضح غير الإطار، عمرك ما تمس سطح اللوحة",
+          "حافظ على رطوبة ثابتة فالبيت",
+        ],
+        leadTime: "3–4 أسابيع",
+      },
+    },
+  },
+  {
+    id: "9",
+    name: "Saffron Bloom",
+    slug: "saffron-bloom",
+    tagline: "A garden that never wilts.",
+    description:
+      "Loose, overlapping blooms in saffron and olive — painted the way a garden grows, without a plan. Watercolor on cotton paper, framed under museum glass to keep its warmth exactly as it was laid down.",
+    price: 2600,
+    status: "available",
+    location: "indoor",
+    category: "Wall Art",
+    collection: "Atelier Edit",
+    materials: ["Watercolor on cotton paper", "Museum glass, oak frame"],
+    dimensions: { width: 60, depth: 3, height: 80, weight: 3.2 },
+    colors: ["Saffron", "Olive", "Gold", "Blush", "Espresso"],
+    colorSwatches: ["#E8B090", "#8B9E7A", "#C9922A", "#F0D4C0", "#3D1A12"],
+    care: [
+      "Keep away from direct sunlight and moisture",
+      "Dust glass gently with a dry microfiber cloth",
+      "Handle by the frame only",
+    ],
+    leadTime: "1–2 weeks",
+    inStock: true,
+    featured: false,
+    images: ["/images/products/saffron-bloom-main.webp"],
+    tags: ["new"],
+    stock: 7,
+    translations: {
+      fr: {
+        name: "Floraison Safran",
+        tagline: "Un jardin qui ne fane jamais.",
+        description: "Des fleurs lâches et superposées en safran et olive — peintes comme un jardin pousse, sans plan préétabli. Aquarelle sur papier coton, encadrée sous verre musée pour garder toute sa chaleur intacte.",
+        materials: ["Aquarelle sur papier coton", "Verre musée, cadre en chêne"],
+        colors: ["Safran", "Olive", "Or", "Rose pâle", "Expresso"],
+        care: [
+          "Tenez à l'écart du soleil direct et de l'humidité",
+          "Dépoussiérez le verre délicatement avec un chiffon microfibre sec",
+          "Manipulez uniquement par le cadre",
+        ],
+        leadTime: "1–2 semaines",
+      },
+      ar: {
+        name: "إزهار الزعفران",
+        tagline: "حديقة لا تذبل أبداً.",
+        description: "أزهار متراكبة بحرية بألوان الزعفران والزيتوني — مرسومة كما تنمو الحديقة، دون خطة مسبقة. ألوان مائية على ورق قطني، مؤطرة تحت زجاج بجودة المتاحف للحفاظ على دفئها كما هو.",
+        materials: ["ألوان مائية على ورق قطني", "زجاج بجودة المتاحف، إطار من خشب البلوط"],
+        colors: ["الزعفراني", "الزيتوني", "الذهبي", "الوردي الفاتح", "الإسبريسو"],
+        care: [
+          "أبعد عن الشمس المباشرة والرطوبة",
+          "نظّف الزجاج برفق بقماش مايكروفايبر جاف",
+          "تعامل معها من الإطار فقط",
+        ],
+        leadTime: "1–2 أسابيع",
+      },
+      ma: {
+        name: "إزهار الزعفران",
+        tagline: "حديقة عمرها ما كتذبل.",
+        description: "زهور متراكبة بحرية بألوان الزعفران والزيتوني — مرسومة بحال ما كتنبت الحديقة، بلا تخطيط. ألوان مائية فوق ورق قطني، مؤطرة تحت زجاج بجودة المتاحف باش يبقى الدفء ديالها كيفما هو.",
+        materials: ["ألوان مائية فوق ورق قطني", "زجاج بجودة المتاحف، إطار من البلوط"],
+        colors: ["الزعفراني", "الزيتوني", "الذهبي", "الوردي الفاتح", "الإسبريسو"],
+        care: [
+          "بعّد على الشمس المباشرة والرطوبة",
+          "نضح الزجاج بشمالة مايكروفايبر جافة برفق",
+          "قبضها غير من الإطار",
+        ],
+        leadTime: "1–2 أسابيع",
+      },
+    },
+  },
+  {
+    id: "10",
+    name: "Ochre Study No. 3",
+    slug: "ochre-study-no-3",
+    tagline: "Three gestures, one breath.",
+    description:
+      "Three brushstrokes, three colors, one gesture repeated until it felt right. Part of a small series of studies exploring restraint — small enough for a shelf, considered enough for a wall.",
+    price: 950,
+    status: "available",
+    location: "indoor",
+    category: "Wall Art",
+    collection: "Atelier Edit",
+    materials: ["Giclée print on archival paper", "Slim oak frame"],
+    dimensions: { width: 30, depth: 2.5, height: 40, weight: 1.1 },
+    colors: ["Terracotta", "Gold", "Espresso"],
+    colorSwatches: ["#B5533C", "#C9922A", "#3D1A12"],
+    care: [
+      "Avoid direct sunlight",
+      "Dust frame with a dry cloth",
+    ],
+    leadTime: "1 week",
+    inStock: true,
+    featured: false,
+    images: ["/images/products/ochre-study-no-3-main.webp"],
+    tags: ["new", "handcrafted"],
+    stock: 12,
+    translations: {
+      fr: {
+        name: "Étude Ocre N°3",
+        tagline: "Trois gestes, un seul souffle.",
+        description: "Trois coups de pinceau, trois couleurs, un même geste répété jusqu'à ce qu'il sonne juste. Issue d'une petite série d'études sur la retenue — assez petite pour une étagère, assez réfléchie pour un mur.",
+        materials: ["Impression giclée sur papier d'archive", "Cadre fin en chêne"],
+        colors: ["Terracotta", "Or", "Expresso"],
+        care: [
+          "Évitez l'exposition directe au soleil",
+          "Dépoussiérez le cadre avec un chiffon sec",
+        ],
+        leadTime: "1 semaine",
+      },
+      ar: {
+        name: "دراسة الأوكر رقم 3",
+        tagline: "ثلاث لمسات، نفَس واحد.",
+        description: "ثلاث ضربات فرشاة، ثلاثة ألوان، حركة واحدة تكررت حتى شعرت بأنها صحيحة. جزء من سلسلة صغيرة من الدراسات حول التبسّط — صغيرة بما يكفي لرف، ومدروسة بما يكفي لجدار.",
+        materials: ["طباعة جيكليه على ورق أرشيفي", "إطار رفيع من خشب البلوط"],
+        colors: ["التراكوتا", "الذهبي", "الإسبريسو"],
+        care: [
+          "تجنب التعرض المباشر لأشعة الشمس",
+          "نظّف الإطار بقماش جاف",
+        ],
+        leadTime: "أسبوع واحد",
+      },
+      ma: {
+        name: "دراسة الأوكر رقم 3",
+        tagline: "تلاتة لمسات، نفس واحد.",
+        description: "تلاتة ضربات فرشاة، تلاتة ألوان، حركة واحدة تعاودات حتى حسّيت بلي صافية. جزء من سلسلة صغيرة ديال الدراسات حول التبسيط — صغيرة باش تتحط فوق رف، ومدروسة باش تتعلق فحيط.",
+        materials: ["طباعة جيكليه فوق ورق أرشيفي", "إطار رفيع من البلوط"],
+        colors: ["التراكوتا", "الذهبي", "الإسبريسو"],
+        care: [
+          "بعّد على الشمس المباشرة",
+          "نضح الإطار بشمالة جافة",
+        ],
+        leadTime: "سيمانة وحدة",
+      },
+    },
+  },
+];
+
+// ─── PAUSED — furniture catalog ─────────────────────────────────────────
+// Kept for reference and easy re-launch. Not part of the live `products`
+// array above, so it renders nowhere on the site right now. To bring a
+// piece back: move its object into the `products` array above.
+/*
+const pausedFurnitureCatalog: Product[] = [
   // ─── INDOOR ───────────────────────────────────────────────
   {
     id: "1",
@@ -442,3 +801,4 @@ export const products: Product[] = [
     },
   },
 ];
+*/

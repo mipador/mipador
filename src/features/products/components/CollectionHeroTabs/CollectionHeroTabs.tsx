@@ -10,6 +10,7 @@ const OUTDOOR_HERO = "/images/products/outdoor.webp";
 // Representative image per subcategory — maps to the best matching product shot
 // TODO: Update each entry as dedicated category photography becomes available
 const CAT_IMAGES: Record<string, string> = {
+  "Wall Art":         "/images/products/wallart.webp",
   "Seating":          "/images/products/seating.webp",
   "Tables":           "/images/products/table.webp",
   "Lighting":         "/images/products/lighting.webp",
@@ -24,6 +25,7 @@ const CAT_IMAGES: Record<string, string> = {
 };
 
 const INDOOR_SUBS = [
+  { key: "products.subWallArt",  value: "Wall Art" },
   { key: "products.subSeating",  value: "Seating"  },
   { key: "products.subTables",   value: "Tables"   },
   { key: "products.subLighting", value: "Lighting" },
@@ -75,6 +77,16 @@ const CollectionHeroTabs: React.FC = () => {
     }, {});
   }, [allProducts, locationFilter]);
 
+  // Product count per location — drives the "Coming Soon" ribbon on a tab
+  // that has no live pieces yet (e.g. Outdoor, while launch focuses on Wall Art)
+  const locationCounts = useMemo(
+    () => ({
+      indoor: allProducts.filter((p) => p.location === "indoor").length,
+      outdoor: allProducts.filter((p) => p.location === "outdoor").length,
+    }),
+    [allProducts]
+  );
+
   const handleTabClick = (tab: "indoor" | "outdoor") => {
     setLocationFilter(locationFilter === tab ? "all" : tab);
     setSelectedCategory("All");
@@ -99,6 +111,7 @@ const CollectionHeroTabs: React.FC = () => {
         {(["indoor", "outdoor"] as const).map((tab) => {
           const isActive = locationFilter === tab;
           const heroImg = tab === "indoor" ? INDOOR_HERO : OUTDOOR_HERO;
+          const isComingSoon = locationCounts[tab] === 0;
 
           return (
             <motion.button
@@ -129,6 +142,13 @@ const CollectionHeroTabs: React.FC = () => {
 
               {/* Bottom-up gradient keeps label crisp */}
               <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-espresso-950/80 to-transparent pointer-events-none" />
+
+              {/* Coming Soon ribbon — this space has no live pieces yet */}
+              {isComingSoon && (
+                <span className="absolute top-3 right-3 z-10 px-2.5 py-1 bg-gold text-espresso text-[8.5px] sm:text-[9px] font-black uppercase tracking-widest rounded-xl shadow-sm">
+                  {t("card.comingSoon")}
+                </span>
+              )}
 
               {/* Label */}
               <div className="relative z-10 flex flex-col items-center justify-center h-full gap-2 px-4">
@@ -184,6 +204,7 @@ const CollectionHeroTabs: React.FC = () => {
                 const isActive = selectedCategory === sub.value;
                 const isPopular = popularCategories.has(sub.value);
                 const count = categoryCounts[sub.value] ?? 0;
+                const isComingSoon = count === 0;
                 const img = CAT_IMAGES[sub.value] ?? INDOOR_HERO;
 
                 return (
@@ -206,7 +227,9 @@ const CollectionHeroTabs: React.FC = () => {
                       src={img}
                       alt=""
                       aria-hidden="true"
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className={`absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 ${
+                        isComingSoon ? "grayscale-[0.5]" : ""
+                      }`}
                     />
 
                     {/* Bottom-up gradient keeps text crisp */}
@@ -233,7 +256,11 @@ const CollectionHeroTabs: React.FC = () => {
                       <span className="block text-[8.5px] sm:text-[9.5px] font-black uppercase tracking-[0.1em] text-white leading-tight">
                         {t(sub.key)}
                       </span>
-                      {count > 0 && (
+                      {isComingSoon ? (
+                        <span className="block text-[7px] font-black uppercase tracking-widest text-gold mt-0.5 leading-none">
+                          {t("card.comingSoon")}
+                        </span>
+                      ) : (
                         <span className="block text-[7px] font-bold text-white/45 mt-0.5 leading-none">
                           {t("products.pieces", { count })}
                         </span>

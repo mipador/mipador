@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { getProductReviews, getAvgRating, type Review } from "../../../../data/reviews";
 import { WHATSAPP_NUMBER } from "../../../../config/whatsapp";
-import { Reveal, revealContainer, revealItem } from "../../../../components/Reveal";
+import { Reveal } from "../../../../components/Reveal";
+import { revealContainer, revealItem } from "../../../../components/revealVariants";
 
 function StarRow({ rating, size = 13 }: { rating: number; size?: number }) {
   return (

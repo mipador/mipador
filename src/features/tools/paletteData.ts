@@ -48,14 +48,14 @@ export interface PaletteEntry {
 
 // ── Room → product preference order ──────────────────────────────────────────
 export const ROOM_PRODUCTS: Record<RoomId, string[]> = {
-  "living-room":    ["wabi-lounge-chair", "medina-coffee-table", "kasbah-floor-lamp", "atlas-shelf-system", "sabil-ceramic-vase"],
-  "bedroom":        ["kasbah-floor-lamp", "sabil-ceramic-vase", "atlas-shelf-system", "wabi-lounge-chair", "medina-coffee-table"],
-  "workspace":      ["atlas-shelf-system", "medina-coffee-table", "kasbah-floor-lamp", "sabil-ceramic-vase", "wabi-lounge-chair"],
-  "dining-room":    ["sabil-ceramic-vase", "kasbah-floor-lamp", "medina-coffee-table", "atlas-shelf-system", "wabi-lounge-chair"],
-  "terrace":        ["kasbah-floor-lamp", "sabil-ceramic-vase", "medina-coffee-table", "wabi-lounge-chair", "atlas-shelf-system"],
-  "reading-corner": ["wabi-lounge-chair", "kasbah-floor-lamp", "atlas-shelf-system", "sabil-ceramic-vase", "medina-coffee-table"],
-  "bathroom":       ["sabil-ceramic-vase", "kasbah-floor-lamp", "atlas-shelf-system", "medina-coffee-table", "wabi-lounge-chair"],
-  "kitchen":        ["sabil-ceramic-vase", "medina-coffee-table", "atlas-shelf-system", "kasbah-floor-lamp", "wabi-lounge-chair"],
+  "living-room":    ["zellige-fragments", "dune-horizon", "saffron-bloom", "indigo-medina", "ochre-study-no-3"],
+  "bedroom":        ["saffron-bloom", "ochre-study-no-3", "indigo-medina", "zellige-fragments", "dune-horizon"],
+  "workspace":      ["indigo-medina", "dune-horizon", "saffron-bloom", "ochre-study-no-3", "zellige-fragments"],
+  "dining-room":    ["ochre-study-no-3", "saffron-bloom", "dune-horizon", "indigo-medina", "zellige-fragments"],
+  "terrace":        ["saffron-bloom", "ochre-study-no-3", "dune-horizon", "zellige-fragments", "indigo-medina"],
+  "reading-corner": ["zellige-fragments", "saffron-bloom", "indigo-medina", "ochre-study-no-3", "dune-horizon"],
+  "bathroom":       ["ochre-study-no-3", "saffron-bloom", "indigo-medina", "dune-horizon", "zellige-fragments"],
+  "kitchen":        ["ochre-study-no-3", "dune-horizon", "indigo-medina", "saffron-bloom", "zellige-fragments"],
 };
 
 // ── 12 palettes ───────────────────────────────────────────────────────────────
@@ -76,7 +76,7 @@ export const PALETTES: PaletteEntry[] = [
       { hex: "#F0E0C8", roleKey: "results.textiles" },
       { hex: "#C49A6C", roleKey: "results.metalDecor" },
     ],
-    productSlugs: ["wabi-lounge-chair", "kasbah-floor-lamp", "sabil-ceramic-vase"],
+    productSlugs: ["zellige-fragments", "saffron-bloom", "ochre-study-no-3"],
     vibe: {
       en: {
         headline: "A space that holds you like an embrace at dusk.",
@@ -163,7 +163,7 @@ export const PALETTES: PaletteEntry[] = [
       { hex: "#D4E4D8", roleKey: "results.textiles" },
       { hex: "#9AB4A0", roleKey: "results.metalDecor" },
     ],
-    productSlugs: ["atlas-shelf-system", "medina-coffee-table", "sabil-ceramic-vase"],
+    productSlugs: ["indigo-medina", "dune-horizon", "ochre-study-no-3"],
     vibe: {
       en: {
         headline: "Clean air. A clear mind. A space that lets you breathe.",
@@ -250,7 +250,7 @@ export const PALETTES: PaletteEntry[] = [
       { hex: "#3C3535", roleKey: "results.textiles" },
       { hex: "#C49445", roleKey: "results.metalDecor" },
     ],
-    productSlugs: ["wabi-lounge-chair", "kasbah-floor-lamp", "medina-coffee-table"],
+    productSlugs: ["zellige-fragments", "saffron-bloom", "dune-horizon"],
     vibe: {
       en: {
         headline: "The feeling of looking up at a Saharan sky full of stars.",
@@ -337,7 +337,7 @@ export const PALETTES: PaletteEntry[] = [
       { hex: "#C8C0B2", roleKey: "results.textiles" },
       { hex: "#8C7B68", roleKey: "results.metalDecor" },
     ],
-    productSlugs: ["atlas-shelf-system", "medina-coffee-table", "sabil-ceramic-vase"],
+    productSlugs: ["indigo-medina", "dune-horizon", "ochre-study-no-3"],
     vibe: {
       en: {
         headline: "Silence made visible. A room that asks nothing of you.",
@@ -424,7 +424,7 @@ export const PALETTES: PaletteEntry[] = [
       { hex: "#B8C4CC", roleKey: "results.textiles" },
       { hex: "#F0E8D8", roleKey: "results.metalDecor" },
     ],
-    productSlugs: ["sabil-ceramic-vase", "kasbah-floor-lamp", "medina-coffee-table"],
+    productSlugs: ["ochre-study-no-3", "saffron-bloom", "dune-horizon"],
     vibe: {
       en: {
         headline: "The feeling of afternoon light on Fès zellige tiles.",
@@ -511,7 +511,7 @@ export const PALETTES: PaletteEntry[] = [
       { hex: "#7A5C40", roleKey: "results.textiles" },
       { hex: "#D4B896", roleKey: "results.metalDecor" },
     ],
-    productSlugs: ["wabi-lounge-chair", "sabil-ceramic-vase", "medina-coffee-table"],
+    productSlugs: ["zellige-fragments", "ochre-study-no-3", "dune-horizon"],
     vibe: {
       en: {
         headline: "Ancient walls. Honest materials. A space with memory.",
@@ -598,7 +598,7 @@ export const PALETTES: PaletteEntry[] = [
       { hex: "#C8B890", roleKey: "results.textiles" },
       { hex: "#8B9E7A", roleKey: "results.metalDecor" },
     ],
-    productSlugs: ["atlas-shelf-system", "kasbah-floor-lamp", "wabi-lounge-chair"],
+    productSlugs: ["indigo-medina", "saffron-bloom", "zellige-fragments"],
     vibe: {
       en: {
         headline: "Step into the Atlas Mountains. The air changes.",
@@ -685,7 +685,7 @@ export const PALETTES: PaletteEntry[] = [
       { hex: "#8C6560", roleKey: "results.textiles" },
       { hex: "#E8D0C8", roleKey: "results.metalDecor" },
     ],
-    productSlugs: ["sabil-ceramic-vase", "kasbah-floor-lamp", "wabi-lounge-chair"],
+    productSlugs: ["ochre-study-no-3", "saffron-bloom", "zellige-fragments"],
     vibe: {
       en: {
         headline: "The softness of a rose petal pressed between old book pages.",
@@ -772,7 +772,7 @@ export const PALETTES: PaletteEntry[] = [
       { hex: "#3D2A08", roleKey: "results.textiles" },
       { hex: "#E8C870", roleKey: "results.metalDecor" },
     ],
-    productSlugs: ["kasbah-floor-lamp", "sabil-ceramic-vase", "wabi-lounge-chair"],
+    productSlugs: ["saffron-bloom", "ochre-study-no-3", "zellige-fragments"],
     vibe: {
       en: {
         headline: "Every room becomes golden. Every moment, an occasion.",
@@ -859,7 +859,7 @@ export const PALETTES: PaletteEntry[] = [
       { hex: "#E8E0D0", roleKey: "results.textiles" },
       { hex: "#7AABAB", roleKey: "results.metalDecor" },
     ],
-    productSlugs: ["sabil-ceramic-vase", "medina-coffee-table", "kasbah-floor-lamp"],
+    productSlugs: ["ochre-study-no-3", "dune-horizon", "saffron-bloom"],
     vibe: {
       en: {
         headline: "Centuries of craft and culture, made quiet and contemporary.",
@@ -946,7 +946,7 @@ export const PALETTES: PaletteEntry[] = [
       { hex: "#C8C4BE", roleKey: "results.textiles" },
       { hex: "#B0ACA6", roleKey: "results.metalDecor" },
     ],
-    productSlugs: ["atlas-shelf-system", "medina-coffee-table", "sabil-ceramic-vase"],
+    productSlugs: ["indigo-medina", "dune-horizon", "ochre-study-no-3"],
     vibe: {
       en: {
         headline: "A room so quiet, you can finally hear yourself think.",
@@ -1033,7 +1033,7 @@ export const PALETTES: PaletteEntry[] = [
       { hex: "#8B3828", roleKey: "results.textiles" },
       { hex: "#E8B090", roleKey: "results.metalDecor" },
     ],
-    productSlugs: ["wabi-lounge-chair", "sabil-ceramic-vase", "kasbah-floor-lamp"],
+    productSlugs: ["zellige-fragments", "ochre-study-no-3", "saffron-bloom"],
     vibe: {
       en: {
         headline: "Old Morocco, new confidence. A heritage reimagined.",

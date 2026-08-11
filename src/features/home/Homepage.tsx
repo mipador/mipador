@@ -10,6 +10,7 @@ import FreeToolTeaser from "./components/FreeToolTeaser";
 import ManifestoSection from "./components/ManifestoSection";
 import ScrollToTop from "../../components/ScrollToTop";
 import { useSEO, useJsonLd } from "../../hooks/useSEO";
+import { products } from "../../data/products";
 
 const SITE_URL = "https://mipador.com";
 
@@ -22,7 +23,7 @@ const BREADCRUMB_HOME: Record<string, string> = {
 const HomePage: React.FC = () => {
   const { t } = useTranslation();
   const { lang } = useParams<{ lang: string }>();
-  const l = lang || "en";
+  const l = lang || "fr";
 
   useSEO(t("seo.homeTitle"), t("seo.homeDesc"));
 
@@ -55,41 +56,15 @@ const HomePage: React.FC = () => {
           "@type": "ItemList",
           "name": "Featured Mipador Products",
           "description":
-            "Handcrafted Moroccan furniture and decor — bestsellers from the Mipador collection.",
+            "Handcrafted wall art and paintings — the debut Mipador collection.",
           "url": `${SITE_URL}/${l}/products`,
-          "numberOfItems": 5,
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Wabi Lounge Chair",
-              "url": `${SITE_URL}/${l}/products/wabi-lounge-chair`,
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Medina Coffee Table",
-              "url": `${SITE_URL}/${l}/products/medina-coffee-table`,
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "Atlas Shelf System",
-              "url": `${SITE_URL}/${l}/products/atlas-shelf-system`,
-            },
-            {
-              "@type": "ListItem",
-              "position": 4,
-              "name": "Kasbah Floor Lamp",
-              "url": `${SITE_URL}/${l}/products/kasbah-floor-lamp`,
-            },
-            {
-              "@type": "ListItem",
-              "position": 5,
-              "name": "Sabil Ceramic Vase",
-              "url": `${SITE_URL}/${l}/products/sabil-ceramic-vase`,
-            },
-          ],
+          "numberOfItems": products.length,
+          "itemListElement": products.map((p, i) => ({
+            "@type": "ListItem",
+            "position": i + 1,
+            "name": p.name,
+            "url": `${SITE_URL}/${l}/products/${p.slug}`,
+          })),
         },
       ],
     }),

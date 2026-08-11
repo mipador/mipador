@@ -1,6 +1,7 @@
 import { Quote } from "lucide-react";
 import { motion } from "framer-motion";
-import { Reveal, revealContainer, revealItem } from "../../../components/Reveal";
+import { Reveal } from "../../../components/Reveal";
+import { revealContainer, revealItem } from "../../../components/revealVariants";
 
 const voices = [
   {

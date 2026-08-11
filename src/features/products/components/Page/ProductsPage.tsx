@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useProductStore } from "../../../../store/product.store";
-import { Search } from "lucide-react";
+import { Search, Sparkles } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import ProductToolbar from "../ProductToolbar/ProductToolbar";
 import ProductGrid from "../ProductGrid/ProductGrid";
@@ -29,10 +29,14 @@ const ProductsPage: React.FC = () => {
     hasActiveFilters,
     resetFilters,
     setLocationFilter,
+    setSelectedCategory,
+    selectedCategory,
+    locationFilter,
+    getAllCategories,
   } = useProductStore();
   const { t } = useTranslation();
   const { lang } = useParams<{ lang: string }>();
-  const l = lang || "en";
+  const l = lang || "fr";
   const labels = COLLECTION_LABELS[l] ?? COLLECTION_LABELS.en;
 
   useSEO(t("seo.productsTitle"), t("seo.productsDesc"));
@@ -90,6 +94,15 @@ const ProductsPage: React.FC = () => {
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const currentItems = filteredData.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
+  // A category/space with zero live products (e.g. Seating, Outdoor — paused
+  // while launch focuses on Wall Art) is a different situation from "no
+  // search results": there's nothing to clear, it just isn't launched yet.
+  const liveCategories = getAllCategories();
+  const isComingSoonSelection =
+    filteredData.length === 0 &&
+    ((selectedCategory !== "All" && !liveCategories.includes(selectedCategory)) ||
+      (locationFilter === "outdoor" && selectedCategory === "All"));
+
   return (
     <div className="min-h-screen bg-cream">
       <ScrollToTop />
@@ -130,7 +143,32 @@ const ProductsPage: React.FC = () => {
 
         {/* Product grid or empty state */}
         <div id="grid">
-        {filteredData.length === 0 ? (
+        {isComingSoonSelection ? (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col items-center justify-center py-24 text-center gap-5"
+          >
+            <div className="w-16 h-16 rounded-xl bg-gold/10 flex items-center justify-center">
+              <Sparkles size={22} className="text-gold" />
+            </div>
+            <div className="space-y-1.5">
+              <p className="text-espresso font-black text-sm uppercase tracking-widest">
+                {t("products.comingSoonCategory")}
+              </p>
+              <p className="text-espresso/40 text-xs font-light max-w-xs mx-auto leading-relaxed">
+                {t("products.comingSoonCategoryHint")}
+              </p>
+            </div>
+            <button
+              onClick={() => { resetFilters(); setSelectedCategory("Wall Art"); }}
+              className="px-5 py-2.5 bg-espresso text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-espresso-light transition-colors"
+            >
+              {t("products.comingSoonCategoryCta")}
+            </button>
+          </motion.div>
+        ) : filteredData.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 text-center gap-5">
             <div className="w-16 h-16 rounded-xl bg-espresso/5 flex items-center justify-center">
               <Search size={22} className="text-espresso/20" />

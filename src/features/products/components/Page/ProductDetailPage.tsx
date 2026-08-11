@@ -421,7 +421,7 @@ const ProductDetailPage: React.FC = () => {
   const { slug, lang } = useParams<{ slug: string; lang: string }>();
   const { addToCart } = useProductStore();
   const { t } = useTranslation();
-  const currentLang = lang || "en";
+  const currentLang = lang || "fr";
 
   const [imgIndex, setImgIndex] = useState(0);
   const [added, setAdded] = useState(false);
@@ -810,6 +810,9 @@ const ProductDetailPage: React.FC = () => {
               <p className="text-espresso/50 italic text-sm mt-1.5">
                 {product.tagline}
               </p>
+              <p className="text-espresso/35 text-[11px] font-black uppercase tracking-widest mt-2.5">
+                {product.dimensions.width} × {product.dimensions.height} cm
+              </p>
             </div>
 
             {/* Rating */}
@@ -972,16 +975,39 @@ const ProductDetailPage: React.FC = () => {
                 </ul>
               </DetailSection>
 
+              {product.colors.length > 0 && (
+                <DetailSection
+                  label={
+                    product.category === "Wall Art"
+                      ? t("product.colorPalette")
+                      : t("product.availableIn")
+                  }
+                >
+                  <div className="flex flex-wrap gap-2.5">
+                    {product.colors.map((c, i) => {
+                      const hex = product.colorSwatches?.[i];
+                      return (
+                        <span
+                          key={i}
+                          className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-espresso/10 rounded-xl text-xs font-bold text-espresso/70"
+                        >
+                          {hex && (
+                            <span
+                              className="w-3.5 h-3.5 rounded-full border border-espresso/10 shrink-0"
+                              style={{ backgroundColor: hex }}
+                              aria-hidden="true"
+                            />
+                          )}
+                          {c}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </DetailSection>
+              )}
+
               <DetailSection label={t("product.leadTime")}>
                 <div className="space-y-2">
-                  {product.colors.length > 0 && (
-                    <p className="text-sm text-espresso/60 font-light">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-espresso/40">
-                        {t("product.availableIn")}:{" "}
-                      </span>
-                      {product.colors.join(", ")}
-                    </p>
-                  )}
                   <p className="text-sm text-espresso/60 font-light">
                     {t("product.leadTimeValue", { time: product.leadTime })}
                   </p>
