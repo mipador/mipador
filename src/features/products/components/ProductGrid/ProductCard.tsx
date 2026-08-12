@@ -3,7 +3,7 @@ import type { Product } from "../../../../store/product.store";
 import { useProductStore } from "../../../../store/product.store";
 import { useParams, Link } from "react-router-dom";
 import { Bookmark, Heart } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { toWebp } from "../../../../utils/image";
 import { localizeProduct } from "../../../../utils/localizeProduct";
@@ -33,6 +33,21 @@ const ProductCard: React.FC<{ product: Product }> = ({ product: rawProduct }) =>
   const currentLang = lang || "fr";
   const product = localizeProduct(rawProduct, currentLang);
 
+  const tiltX = useMotionValue(0);
+  const tiltY = useMotionValue(0);
+  const rotateX = useTransform(tiltY, [-0.5, 0.5], [7, -7]);
+  const rotateY = useTransform(tiltX, [-0.5, 0.5], [-7, 7]);
+
+  const handleTiltMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    tiltX.set((e.clientX - rect.left) / rect.width - 0.5);
+    tiltY.set((e.clientY - rect.top) / rect.height - 0.5);
+  };
+  const handleTiltLeave = () => {
+    tiltX.set(0);
+    tiltY.set(0);
+  };
+
   return (
     <motion.div
       whileHover={isUnavailable ? {} : { y: -6 }}
@@ -43,7 +58,11 @@ const ProductCard: React.FC<{ product: Product }> = ({ product: rawProduct }) =>
         className="flex flex-col group"
       >
         {/* Image */}
-        <div className="relative aspect-[3/4] rounded-xl bg-linen overflow-hidden shadow-sm transition-shadow duration-500 group-hover:shadow-[0_16px_48px_rgba(61,26,18,0.12)]">
+        <motion.div
+          onMouseMove={isUnavailable ? undefined : handleTiltMove}
+          onMouseLeave={isUnavailable ? undefined : handleTiltLeave}
+          style={isUnavailable ? undefined : { rotateX, rotateY, transformPerspective: 700 }}
+          className="relative aspect-[3/4] rounded-xl bg-linen overflow-hidden shadow-sm transition-shadow duration-500 group-hover:shadow-[0_16px_48px_rgba(61,26,18,0.12)]">
 
           {/* Badges */}
           <div className="absolute top-3 left-3 z-20 flex flex-col gap-1.5">
@@ -133,7 +152,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product: rawProduct }) =>
               }`}
             />
           </motion.button>
-        </div>
+        </motion.div>
 
         {/* Info */}
         <div className="mt-4 flex flex-col">

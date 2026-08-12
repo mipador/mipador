@@ -12,6 +12,7 @@ import { localizeProduct } from "../../../../utils/localizeProduct";
 import { AlbatrossMark } from "../../../../components/AlbatrossMark";
 
 const DELIVERY = 150;
+const FREE_DELIVERY_THRESHOLD = 1500;
 
 const CartDrawer: React.FC = () => {
   const {
@@ -26,7 +27,9 @@ const CartDrawer: React.FC = () => {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   const total = getCartTotal();
-  const grandTotal = total + (total > 0 ? DELIVERY : 0);
+  const isFreeDelivery = total >= FREE_DELIVERY_THRESHOLD;
+  const deliveryFee = total > 0 && !isFreeDelivery ? DELIVERY : 0;
+  const grandTotal = total + deliveryFee;
 
   const { lang } = useParams();
   const currentLang = lang || "fr";
@@ -62,7 +65,7 @@ const CartDrawer: React.FC = () => {
       items,
       "",
       `${t("cart.subtotal")}: ${total.toLocaleString()} MAD`,
-      `${t("cart.deliveryEstimate")}: ${DELIVERY} MAD`,
+      `${t("cart.deliveryEstimate")}: ${isFreeDelivery ? t("cart.free") : `${deliveryFee} MAD`}`,
       `${t("cart.total")}: ${grandTotal.toLocaleString()} MAD`,
     ].join("\n");
 
@@ -285,10 +288,14 @@ const CartDrawer: React.FC = () => {
                       <div>
                         <p className="text-xs font-black text-espresso/70">{t("cart.deliveryEstimate")}</p>
                         <p className="text-[9px] text-gold font-black uppercase tracking-wider mt-0.5">
-                          {t("cart.freeDeliveryOver", { amount: "1 500" })}
+                          {isFreeDelivery
+                            ? t("cart.freeDeliveryUnlocked")
+                            : t("cart.freeDeliveryOver", { amount: "1 500" })}
                         </p>
                       </div>
-                      <span className="text-sm font-black text-espresso shrink-0">{DELIVERY} MAD</span>
+                      <span className="text-sm font-black text-espresso shrink-0">
+                        {isFreeDelivery ? t("cart.free") : `${DELIVERY} MAD`}
+                      </span>
                     </div>
                     <div className="flex justify-between text-sm font-black text-espresso pt-2 border-t border-espresso/10">
                       <span>{t("cart.total")}</span>

@@ -89,6 +89,8 @@
     "total": "Total",
     "placeOrder": "Place Order · {{total}} MAD",
     "freeDeliveryOver": "Free over {{amount}} MAD",
+    "freeDeliveryUnlocked": "Free delivery unlocked",
+    "free": "Free",
     "hideOrderForm": "Hide Order Form",
     "completeOrder": "Complete your order",
     "clearCart": "Clear Cart",

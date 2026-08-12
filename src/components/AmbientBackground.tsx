@@ -73,6 +73,17 @@ const AmbientBackground = () => {
               "radial-gradient(circle, rgba(201,146,42,0.05) 0%, rgba(201,146,42,0) 70%)",
           }}
         />
+
+        {/* Subtle grain — keeps flat color sections from feeling sterile */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: "url('/noise.svg')",
+            opacity: 0.035,
+            mixBlendMode: "multiply",
+          }}
+        />
       </div>
     </>
   );

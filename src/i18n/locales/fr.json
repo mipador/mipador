@@ -89,6 +89,8 @@
     "total": "Total",
     "placeOrder": "Commander · {{total}} MAD",
     "freeDeliveryOver": "Gratuit dès {{amount}} MAD",
+    "freeDeliveryUnlocked": "Livraison gratuite débloquée",
+    "free": "Gratuit",
     "hideOrderForm": "Masquer le formulaire",
     "completeOrder": "Finaliser votre commande",
     "clearCart": "Vider le panier",

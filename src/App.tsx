@@ -2,10 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { MotionConfig } from "framer-motion";
 import LanguageLayout from "./features/i18n/LanguageLayout";
+import { CustomCursor } from "./components/CustomCursor";
 
 const App: React.FC = () => {
   return (
     <MotionConfig reducedMotion="user">
+    <CustomCursor />
     <Router>
       <Routes>
         {/* Redirect root → default language */}

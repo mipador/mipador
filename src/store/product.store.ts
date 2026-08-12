@@ -99,10 +99,14 @@ export const useProductStore = create<ProductStore>()(
       resetFilters: () => set(defaultFilters),
 
       addToCart: (productId) => {
-        const { cart } = get();
+        const { cart, allProducts } = get();
+        const stock = allProducts.find((p) => p.id === productId)?.stock ?? Infinity;
+        if (stock <= 0) return;
         const existing = cart.find((i) => i.productId === productId);
         if (existing) {
-          set({ cart: cart.map((i) => i.productId === productId ? { ...i, quantity: i.quantity + 1 } : i) });
+          if (existing.quantity < stock) {
+            set({ cart: cart.map((i) => i.productId === productId ? { ...i, quantity: i.quantity + 1 } : i) });
+          }
         } else {
           set({ cart: [...cart, { productId, quantity: 1 }] });
         }
@@ -112,7 +116,10 @@ export const useProductStore = create<ProductStore>()(
         set({ cart: get().cart.filter((i) => i.productId !== productId) }),
       updateQuantity: (productId, qty) => {
         if (qty < 1) { get().removeFromCart(productId); return; }
-        set({ cart: get().cart.map((i) => i.productId === productId ? { ...i, quantity: qty } : i) });
+        const { allProducts } = get();
+        const stock = allProducts.find((p) => p.id === productId)?.stock ?? Infinity;
+        const cappedQty = Math.min(qty, stock);
+        set({ cart: get().cart.map((i) => i.productId === productId ? { ...i, quantity: cappedQty } : i) });
       },
       clearCart: () => set({ cart: [] }),
       setCartOpen: (open) => set({ cartOpen: open }),

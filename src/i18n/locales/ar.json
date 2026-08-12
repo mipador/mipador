@@ -88,6 +88,8 @@
     "total": "الإجمالي",
     "placeOrder": "تأكيد الطلب · {{total}} درهم",
     "freeDeliveryOver": "مجاني عند {{amount}} درهم",
+    "freeDeliveryUnlocked": "التوصيل المجاني مفعّل",
+    "free": "مجاني",
     "hideOrderForm": "إخفاء نموذج الطلب",
     "completeOrder": "أكمل طلبك",
     "clearCart": "تفريغ السلة",
