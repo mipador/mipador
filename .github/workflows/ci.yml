@@ -16,11 +16,14 @@ jobs:
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
 
       - name: 📦 Install Dependencies
-        run: npm install 
+        run: npm install
+
+      - name: 🎭 Install Playwright Chromium (used for prerendering)
+        run: npx playwright install --with-deps chromium
 
       - name: 🔍 Production Build & Type Check
         run: npm run build
