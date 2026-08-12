@@ -17,6 +17,7 @@ import TrustBadges from "../../../../components/TrustBadges";
 import { useSEO, useJsonLd } from "../../../../hooks/useSEO";
 import { ReviewsSection } from "../Reviews/ReviewsSection";
 import { RoomVisualizer } from "../../../../components/RoomVisualizer";
+import { DimensionDiagram } from "../../../../components/DimensionDiagram";
 import { toWebp } from "../../../../utils/image";
 
 // ── Helpers ───────────────────────────────────────────────
@@ -917,110 +918,123 @@ const ProductDetailPage: React.FC = () => {
                   : t("product.unavailableSoldOut")}
               </div>
             )}
+          </div>
+        </div>
 
-            {/* ── Collapsible detail sections ── */}
-            <div className="border-t border-espresso/8 pt-1">
+        {/* ── Collapsible detail sections — full width, breaks out of the
+             image/info grid so the page doesn't leave a tall empty gap in
+             the left column once the sticky image scrolls out of view.
+             Split into two columns on desktop so the freed-up width is
+             actually used instead of leaving a blank void on the right. ── */}
+        <div className="mt-14 md:mt-20 grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-24">
+          <div>
+            <DetailSection label={t("product.aboutThisPiece")} defaultOpen>
+              <p className="text-espresso/60 text-sm leading-relaxed font-light">
+                {product.description}
+              </p>
+            </DetailSection>
 
-              <DetailSection label={t("product.aboutThisPiece")} defaultOpen>
-                <p className="text-espresso/60 text-sm leading-relaxed font-light">
-                  {product.description}
-                </p>
-              </DetailSection>
-
-              <DetailSection label={t("product.materials")}>
-                <div className="flex flex-wrap gap-2">
-                  {product.materials.map((m, i) => (
-                    <span
-                      key={i}
-                      className="px-3 py-1 bg-white border border-espresso/10 rounded-xl text-[10px] font-black uppercase tracking-wider text-espresso/50"
-                    >
-                      {m}
-                    </span>
-                  ))}
-                </div>
-              </DetailSection>
-
-              <DetailSection label={t("product.dimensions")}>
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { label: "W", value: `${product.dimensions.width} cm` },
-                    { label: "D", value: `${product.dimensions.depth} cm` },
-                    { label: "H", value: `${product.dimensions.height} cm` },
-                    { label: "kg", value: `${product.dimensions.weight} kg` },
-                  ].map(({ label, value }) => (
-                    <div
-                      key={label}
-                      className="bg-white rounded-xl px-4 py-3 border border-espresso/8"
-                    >
-                      <p className="text-[9px] font-black uppercase tracking-widest text-espresso/35 mb-0.5">
-                        {label}
-                      </p>
-                      <p className="text-sm font-black text-espresso">{value}</p>
-                    </div>
-                  ))}
-                </div>
-              </DetailSection>
-
-              <DetailSection label={t("product.care")}>
-                <ul className="space-y-2">
-                  {product.care.map((c, i) => (
-                    <li
-                      key={i}
-                      className="flex items-start gap-2 text-sm text-espresso/50 font-light"
-                    >
-                      <span className="text-gold shrink-0 font-black mt-0.5">·</span>
-                      {c}
-                    </li>
-                  ))}
-                </ul>
-              </DetailSection>
-
-              {product.colors.length > 0 && (
-                <DetailSection
-                  label={
-                    product.category === "Wall Art"
-                      ? t("product.colorPalette")
-                      : t("product.availableIn")
-                  }
-                >
-                  <div className="flex flex-wrap gap-2.5">
-                    {product.colors.map((c, i) => {
-                      const hex = product.colorSwatches?.[i];
-                      return (
-                        <span
-                          key={i}
-                          className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-espresso/10 rounded-xl text-xs font-bold text-espresso/70"
-                        >
-                          {hex && (
-                            <span
-                              className="w-3.5 h-3.5 rounded-full border border-espresso/10 shrink-0"
-                              style={{ backgroundColor: hex }}
-                              aria-hidden="true"
-                            />
-                          )}
-                          {c}
-                        </span>
-                      );
-                    })}
+            <DetailSection label={t("product.dimensions")} defaultOpen>
+              <DimensionDiagram
+                width={product.dimensions.width}
+                height={product.dimensions.height}
+                depth={product.dimensions.depth}
+                className="mb-5"
+              />
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { label: "W", value: `${product.dimensions.width} cm` },
+                  { label: "D", value: `${product.dimensions.depth} cm` },
+                  { label: "H", value: `${product.dimensions.height} cm` },
+                  { label: "kg", value: `${product.dimensions.weight} kg` },
+                ].map(({ label, value }) => (
+                  <div
+                    key={label}
+                    className="bg-white rounded-xl px-4 py-3 border border-espresso/8"
+                  >
+                    <p className="text-[9px] font-black uppercase tracking-widest text-espresso/35 mb-0.5">
+                      {label}
+                    </p>
+                    <p className="text-sm font-black text-espresso">{value}</p>
                   </div>
-                </DetailSection>
-              )}
+                ))}
+              </div>
+            </DetailSection>
 
-              <DetailSection label={t("product.leadTime")}>
-                <div className="space-y-2">
-                  <p className="text-sm text-espresso/60 font-light">
-                    {t("product.leadTimeValue", { time: product.leadTime })}
-                  </p>
+            <DetailSection label={t("product.materials")}>
+              <div className="flex flex-wrap gap-2">
+                {product.materials.map((m, i) => (
+                  <span
+                    key={i}
+                    className="px-3 py-1 bg-white border border-espresso/10 rounded-xl text-[10px] font-black uppercase tracking-wider text-espresso/50"
+                  >
+                    {m}
+                  </span>
+                ))}
+              </div>
+            </DetailSection>
+          </div>
+
+          <div className="border-t border-espresso/8 md:border-t-0 mt-1 md:mt-0">
+            <DetailSection label={t("product.care")}>
+              <ul className="space-y-2">
+                {product.care.map((c, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-2 text-sm text-espresso/50 font-light"
+                  >
+                    <span className="text-gold shrink-0 font-black mt-0.5">·</span>
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            </DetailSection>
+
+            {product.colors.length > 0 && (
+              <DetailSection
+                label={
+                  product.category === "Wall Art"
+                    ? t("product.colorPalette")
+                    : t("product.availableIn")
+                }
+              >
+                <div className="flex flex-wrap gap-2.5">
+                  {product.colors.map((c, i) => {
+                    const hex = product.colorSwatches?.[i];
+                    return (
+                      <span
+                        key={i}
+                        className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-espresso/10 rounded-xl text-xs font-bold text-espresso/70"
+                      >
+                        {hex && (
+                          <span
+                            className="w-3.5 h-3.5 rounded-full border border-espresso/10 shrink-0"
+                            style={{ backgroundColor: hex }}
+                            aria-hidden="true"
+                          />
+                        )}
+                        {c}
+                      </span>
+                    );
+                  })}
                 </div>
               </DetailSection>
+            )}
 
-              <DetailSection label={t("visualizer.heading")}>
-                <RoomVisualizer
-                  productName={product.name}
-                  glbUrl={product.model}
-                />
-              </DetailSection>
-            </div>
+            <DetailSection label={t("product.leadTime")}>
+              <div className="space-y-2">
+                <p className="text-sm text-espresso/60 font-light">
+                  {t("product.leadTimeValue", { time: product.leadTime })}
+                </p>
+              </div>
+            </DetailSection>
+
+            <DetailSection label={t("visualizer.heading")}>
+              <RoomVisualizer
+                productName={product.name}
+                glbUrl={product.model}
+              />
+            </DetailSection>
           </div>
         </div>
 

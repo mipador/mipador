@@ -136,7 +136,13 @@
     "pillar3Title": "Liberté",
     "pillar3Desc": "Un espace qui vous rend quelque chose chaque fois que vous y entrez. C'est la seule mesure qui compte.",
     "pillar4Title": "Durabilité",
-    "pillar4Desc": "Conçu pour traverser les tendances, pas seulement les survivre. Des pièces qui s'améliorent avec le temps."
+    "pillar4Desc": "Conçu pour traverser les tendances, pas seulement les survivre. Des pièces qui s'améliorent avec le temps.",
+    "craftTitle": "Fait main",
+    "craftDesc": "Façonné à la main dans notre atelier de Casablanca",
+    "deliveryTitle": "Livraison nationale",
+    "deliveryDesc": "Livré partout au Maroc",
+    "returnsTitle": "Retours faciles",
+    "returnsDesc": "Politique de retour de 7 jours"
   },
   "about": {
     "eyebrow": "Qui sommes-nous",

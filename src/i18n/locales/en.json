@@ -136,7 +136,13 @@
     "pillar3Title": "Freedom",
     "pillar3Desc": "A space that gives something back every time you enter it. That is the only metric that matters.",
     "pillar4Title": "Longevity",
-    "pillar4Desc": "Designed to outlast trends, not just survive them. Pieces that age into something better."
+    "pillar4Desc": "Designed to outlast trends, not just survive them. Pieces that age into something better.",
+    "craftTitle": "Handcrafted",
+    "craftDesc": "Made by hand in our Casablanca studio",
+    "deliveryTitle": "Nationwide Delivery",
+    "deliveryDesc": "Delivered across Morocco",
+    "returnsTitle": "Easy Returns",
+    "returnsDesc": "7-day return policy"
   },
   "about": {
     "eyebrow": "Who we are",

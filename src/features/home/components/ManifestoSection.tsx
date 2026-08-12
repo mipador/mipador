@@ -8,14 +8,14 @@ const ManifestoSection = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="relative min-h-[82vh] bg-cream flex items-center justify-center overflow-hidden px-8 py-24">
+    <section className="relative min-h-[52vh] bg-cream flex items-center justify-center overflow-hidden px-8 py-20">
 
       {/* Albatross watermark — centered, barely perceptible */}
       <div
         className="absolute inset-0 flex items-center justify-center pointer-events-none"
         aria-hidden="true"
       >
-        <div className="w-full max-w-3xl text-espresso opacity-[0.05]">
+        <div className="w-full max-w-3xl text-espresso opacity-[0.07]">
           <AlbatrossMark />
         </div>
       </div>
