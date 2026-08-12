@@ -101,7 +101,7 @@ const Navbar: React.FC = () => {
                       }`
                     : location.pathname === item.path
                     ? "text-espresso"
-                    : "text-espresso/55 hover:text-espresso hover:tracking-[0.02em]"
+                    : "text-espresso/65 hover:text-espresso hover:tracking-[0.02em]"
                 }`}
               >
                 {item.label}
@@ -251,7 +251,7 @@ const Navbar: React.FC = () => {
                           : "text-white/55"
                         : location.pathname === item.path
                         ? "text-espresso"
-                        : "text-espresso/50"
+                        : "text-espresso/65"
                     }`}
                   >
                     {item.label}
@@ -268,7 +268,7 @@ const Navbar: React.FC = () => {
                         : "text-white/55"
                       : location.pathname.includes("/wishlist")
                       ? "text-espresso"
-                      : "text-espresso/50"
+                      : "text-espresso/65"
                   }`}
                 >
                   <Heart size={16} />
@@ -290,7 +290,7 @@ const Navbar: React.FC = () => {
                     setCartOpen(true);
                   }}
                   className={`flex items-center gap-2 text-base font-bold transition-colors duration-300 ${
-                    onHero ? "text-white/55" : "text-espresso/50"
+                    onHero ? "text-white/55" : "text-espresso/65"
                   }`}
                 >
                   <ShoppingBag size={16} />

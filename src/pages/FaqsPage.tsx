@@ -90,13 +90,13 @@ const FaqsPage: React.FC = () => {
           transition={{ duration: 0.7, ease: EASE }}
           className="text-center mb-20"
         >
-          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-espresso/40 mb-4">
+          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-espresso/65 mb-4">
             {t("faqs.studio")}
           </p>
           <h1 className="text-5xl md:text-7xl font-black text-espresso tracking-tight leading-none mb-6">
             {t("faqs.heading")}
           </h1>
-          <p className="text-espresso/40 text-base font-light max-w-sm mx-auto leading-relaxed">
+          <p className="text-espresso/65 text-base font-light max-w-sm mx-auto leading-relaxed">
             {t("faqs.body")}
           </p>
         </motion.div>
@@ -110,7 +110,7 @@ const FaqsPage: React.FC = () => {
               className={`pb-4 text-xs font-black uppercase tracking-widest transition-all duration-300 relative ${
                 activeCategory === key
                   ? "text-espresso"
-                  : "text-espresso/30 hover:text-espresso/60"
+                  : "text-espresso/65 hover:text-espresso/65"
               }`}
             >
               {t(labelKey)}
@@ -129,7 +129,7 @@ const FaqsPage: React.FC = () => {
           <Accordion key={activeCategory} items={filteredFaqs} />
         ) : (
           <div className="text-center py-20">
-            <p className="text-espresso/30 text-sm uppercase tracking-widest font-black">
+            <p className="text-espresso/65 text-sm uppercase tracking-widest font-black">
               {t("faqs.empty")}
             </p>
           </div>
@@ -143,7 +143,7 @@ const FaqsPage: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="mt-24 text-center border-t border-espresso/10 pt-16"
         >
-          <p className="text-espresso/40 text-sm mb-2">{t("faqs.stillQuestion")}</p>
+          <p className="text-espresso/65 text-sm mb-2">{t("faqs.stillQuestion")}</p>
           <a
             href="mailto:mipadorofficial@gmail.com"
             className="text-espresso font-black text-sm uppercase tracking-widest border-b border-espresso/30 hover:border-espresso transition-colors pb-0.5"

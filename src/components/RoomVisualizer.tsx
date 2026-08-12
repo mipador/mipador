@@ -31,11 +31,11 @@ export function RoomVisualizer({ productName, glbUrl, posterUrl }: Props) {
   if (!glbUrl) {
     return (
       <div className="flex flex-col items-center justify-center py-10 px-6 text-center bg-cream rounded-xl border border-dashed border-espresso/15">
-        <Box size={28} className="text-espresso/20 mb-3" />
-        <p className="text-xs font-black uppercase tracking-widest text-espresso/30 mb-1">
+        <Box size={28} className="text-espresso/65 mb-3" />
+        <p className="text-xs font-black uppercase tracking-widest text-espresso/65 mb-1">
           {t("visualizer.comingSoon")}
         </p>
-        <p className="text-[10px] text-espresso/25 font-light max-w-xs leading-relaxed">
+        <p className="text-[10px] text-espresso/65 font-light max-w-xs leading-relaxed">
           {t("visualizer.comingSoonHint")}
         </p>
       </div>
@@ -82,7 +82,7 @@ export function RoomVisualizer({ productName, glbUrl, posterUrl }: Props) {
 
           <div className="flex items-start gap-2.5 px-1">
             <Smartphone size={13} className="text-gold shrink-0 mt-0.5" />
-            <p className="text-[10px] text-espresso/40 font-light leading-relaxed">
+            <p className="text-[10px] text-espresso/65 font-light leading-relaxed">
               {t("visualizer.arHint")}
             </p>
           </div>

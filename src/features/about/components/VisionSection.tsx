@@ -33,7 +33,7 @@ const VisionSection = () => {
             <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black text-espresso tracking-tight leading-none">
               {t("vision.taglineA")}
             </h2>
-            <p className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light italic text-espresso/20 tracking-tight leading-none">
+            <p className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light italic text-espresso/65 tracking-tight leading-none">
               {t("vision.taglineB")}
             </p>
           </div>
@@ -74,7 +74,7 @@ const VisionSection = () => {
               <p className="text-white font-black text-2xl leading-tight">
                 {t("vision.moveWithPurpose")}
                 <br />
-                <span className="text-white/40 italic font-light text-xl">
+                <span className="text-white/50 italic font-light text-xl">
                   {t("vision.liveWithIntention")}
                 </span>
               </p>
@@ -101,7 +101,7 @@ const VisionSection = () => {
                 <p className="text-espresso font-black text-base md:text-lg leading-snug mb-3">
                   {p.lead}
                 </p>
-                <p className="text-espresso/55 text-sm leading-relaxed">
+                <p className="text-espresso/65 text-sm leading-relaxed">
                   {p.body}
                 </p>
               </motion.div>
@@ -112,7 +112,7 @@ const VisionSection = () => {
               {tags.map((tag) => (
                 <span
                   key={tag}
-                  className="inline-block border border-espresso/12 rounded-full px-4 py-1.5 text-[9px] font-black uppercase tracking-widest text-espresso/40 hover:border-gold/30 hover:text-gold transition-colors"
+                  className="inline-block border border-espresso/12 rounded-full px-4 py-1.5 text-[9px] font-black uppercase tracking-widest text-espresso/65 hover:border-gold/30 hover:text-gold transition-colors"
                 >
                   {tag}
                 </span>

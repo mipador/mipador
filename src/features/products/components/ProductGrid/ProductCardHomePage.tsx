@@ -75,7 +75,7 @@ const ProductCardHomePage: React.FC<{ product: Product }> = ({ product: rawProdu
               </span>
             )}
             {isOutOfStock && (
-              <span className="px-2.5 py-1 bg-white/90 text-espresso/60 text-[9px] font-black uppercase tracking-widest rounded-xl">
+              <span className="px-2.5 py-1 bg-white/90 text-espresso/65 text-[9px] font-black uppercase tracking-widest rounded-xl">
                 {t("card.soldOut")}
               </span>
             )}
@@ -83,7 +83,7 @@ const ProductCardHomePage: React.FC<{ product: Product }> = ({ product: rawProdu
 
           {/* Location badge */}
           <div className="absolute top-3 right-3 z-20 px-2.5 py-1 bg-white/80 backdrop-blur-md rounded-xl">
-            <p className="text-[9px] font-black uppercase tracking-widest text-espresso/50">
+            <p className="text-[9px] font-black uppercase tracking-widest text-espresso/65">
               {product.location}
             </p>
           </div>
@@ -112,7 +112,7 @@ const ProductCardHomePage: React.FC<{ product: Product }> = ({ product: rawProdu
               </picture>
             ) : (
               <div className="w-full h-full flex items-center justify-center">
-                <p className="text-espresso/20 text-xs font-black uppercase tracking-widest">
+                <p className="text-espresso/65 text-xs font-black uppercase tracking-widest">
                   {product.collection}
                 </p>
               </div>
@@ -141,7 +141,7 @@ const ProductCardHomePage: React.FC<{ product: Product }> = ({ product: rawProdu
               className={`transition-all duration-200 ${
                 wishlisted
                   ? "text-espresso fill-espresso"
-                  : "text-espresso/40"
+                  : "text-espresso/65"
               }`}
             />
           </motion.button>

@@ -25,7 +25,7 @@ const BrandPromise = () => {
             <h2 className="text-4xl md:text-5xl font-black text-espresso tracking-tight leading-tight mb-10">
               {t("brandPromise.heading")}
               <br />
-              <span className="text-espresso/30 italic font-light">{t("brandPromise.headingSoft")}</span>
+              <span className="text-espresso/65 italic font-light">{t("brandPromise.headingSoft")}</span>
             </h2>
             <div className="space-y-5">
               {promises.map((p, i) => (

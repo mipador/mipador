@@ -112,7 +112,7 @@ export function DimensionDiagram({ width, height, depth, className }: DimensionD
       </svg>
 
       {depth != null && (
-        <p className="text-center text-[10px] text-espresso/40 font-light mt-2 uppercase tracking-widest">
+        <p className="text-center text-[10px] text-espresso/65 font-light mt-2 uppercase tracking-widest">
           + {depth} cm depth
         </p>
       )}

@@ -82,7 +82,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product: rawProduct }) =>
               </span>
             )}
             {isOutOfStock && (
-              <span className="px-2.5 py-1 bg-white/90 text-espresso/60 text-[9px] font-black uppercase tracking-widest rounded-xl">
+              <span className="px-2.5 py-1 bg-white/90 text-espresso/65 text-[9px] font-black uppercase tracking-widest rounded-xl">
                 {t("card.soldOut")}
               </span>
             )}
@@ -90,7 +90,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product: rawProduct }) =>
 
           {/* Location badge */}
           <div className="absolute top-3 right-3 z-20 px-2.5 py-1 bg-white/80 backdrop-blur-md rounded-xl">
-            <p className="text-[9px] font-black uppercase tracking-widest text-espresso/50">
+            <p className="text-[9px] font-black uppercase tracking-widest text-espresso/65">
               {product.location}
             </p>
           </div>
@@ -119,7 +119,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product: rawProduct }) =>
               </picture>
             ) : (
               <div className="w-full h-full flex items-center justify-center">
-                <p className="text-espresso/20 text-xs font-black uppercase tracking-widest">
+                <p className="text-espresso/65 text-xs font-black uppercase tracking-widest">
                   {product.collection}
                 </p>
               </div>
@@ -148,7 +148,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product: rawProduct }) =>
               className={`transition-all duration-200 ${
                 wishlisted
                   ? "text-espresso fill-espresso"
-                  : "text-espresso/40"
+                  : "text-espresso/65"
               }`}
             />
           </motion.button>
@@ -156,13 +156,13 @@ const ProductCard: React.FC<{ product: Product }> = ({ product: rawProduct }) =>
 
         {/* Info */}
         <div className="mt-4 flex flex-col">
-          <p className="text-espresso/35 text-[9px] font-black uppercase tracking-[0.25em]">
+          <p className="text-espresso/65 text-[9px] font-black uppercase tracking-[0.25em]">
             {product.collection}
           </p>
           <h3 className="text-sm font-black text-espresso tracking-tight mt-1">
             {product.name}
           </h3>
-          <p className="text-espresso/40 text-xs italic mt-0.5 leading-relaxed">
+          <p className="text-espresso/65 text-xs italic mt-0.5 leading-relaxed">
             {product.tagline}
           </p>
 
@@ -171,7 +171,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product: rawProduct }) =>
               {product.price.toLocaleString()} MAD
             </p>
             {!isUnavailable && (
-              <p className="text-espresso/30 text-[9px] uppercase tracking-wider">
+              <p className="text-espresso/65 text-[9px] uppercase tracking-wider">
                 {product.leadTime}
               </p>
             )}
@@ -183,7 +183,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product: rawProduct }) =>
             disabled={isUnavailable}
             className={`mt-3 w-full py-2.5 text-[9px] font-black uppercase tracking-widest rounded-xl flex items-center justify-center gap-2 transition-all duration-300 ${
               isUnavailable
-                ? "bg-espresso/8 text-espresso/30 cursor-not-allowed"
+                ? "bg-espresso/8 text-espresso/65 cursor-not-allowed"
                 : "bg-espresso text-white hover:bg-espresso-light active:scale-95"
             }`}
           >

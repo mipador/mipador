@@ -32,7 +32,7 @@ const TaglineSection = () => {
           className="text-3xl md:text-5xl font-medium text-espresso leading-tight text-center max-w-4xl mx-auto"
         >
           {t("tagline.headline")}{" "}
-          <span className="text-espresso/60 italic">
+          <span className="text-espresso/65 italic">
             {t("tagline.headlineSoft")}
           </span>{" "}
           {t("tagline.headlineEnd")}
@@ -48,13 +48,13 @@ const TaglineSection = () => {
               transition={{ delay: i * 0.12, duration: 0.6, ease: EASE }}
               className="flex flex-col items-center text-center p-6 md:p-8 rounded-3xl bg-[#FFFFFF]/70 border border-espresso/10 transition-all duration-500 hover:scale-[1.02] hover:border-espresso/20 hover:shadow-sm"
             >
-              <div className="mb-6 text-espresso/60">
+              <div className="mb-6 text-espresso/65">
                 {item.icon}
               </div>
               <h3 className="text-base font-semibold mb-3 text-espresso tracking-wide">
                 {t(item.titleKey)}
               </h3>
-              <p className="text-espresso/55 text-sm leading-relaxed font-light">
+              <p className="text-espresso/65 text-sm leading-relaxed font-light">
                 {t(item.descKey)}
               </p>
             </motion.div>

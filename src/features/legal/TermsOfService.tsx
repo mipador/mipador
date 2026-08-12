@@ -4,20 +4,20 @@ const TermsOfService = () => {
       <main className="max-w-2xl mx-auto px-8 py-32 md:py-48">
 
         <header className="mb-24">
-          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-espresso/40 mb-8">
+          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-espresso/65 mb-8">
             Mipador · Legal
           </p>
           <h1 className="text-5xl font-black tracking-tight leading-tight mb-8 text-espresso">
             Terms of
             <br />
-            <span className="text-espresso/25 font-light italic">
+            <span className="text-espresso/65 font-light italic">
               Service
             </span>
           </h1>
           <div className="h-px w-16 bg-gold/40 mb-10" />
-          <p className="text-espresso/50 font-light leading-relaxed italic text-sm">
+          <p className="text-espresso/65 font-light leading-relaxed italic text-sm">
             "Your space should feel like freedom, not performance."
-            <span className="not-italic block mt-1 text-espresso/30 text-xs">
+            <span className="not-italic block mt-1 text-espresso/65 text-xs">
               — Mipador
             </span>
           </p>
@@ -47,17 +47,17 @@ const TermsOfService = () => {
             },
           ].map((s, i) => (
             <div key={i} className="space-y-3 border-t border-espresso/8 pt-10">
-              <h2 className="text-[10px] font-black tracking-widest uppercase text-espresso/40">
+              <h2 className="text-[10px] font-black tracking-widest uppercase text-espresso/65">
                 {String(i + 1).padStart(2, "0")} / {s.label}
               </h2>
-              <p className="text-espresso/60 font-light leading-relaxed text-sm">
+              <p className="text-espresso/65 font-light leading-relaxed text-sm">
                 {s.body}
               </p>
             </div>
           ))}
 
           <div className="pt-8">
-            <p className="text-[10px] text-espresso/25 tracking-widest uppercase">
+            <p className="text-[10px] text-espresso/65 tracking-widest uppercase">
               Last updated · 2025 · Mipador Studio
             </p>
           </div>

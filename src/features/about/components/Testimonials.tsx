@@ -25,12 +25,12 @@ const Testimonials = () => (
   <section className="py-24 px-6 bg-cream">
     <div className="max-w-7xl mx-auto">
       <Reveal className="text-center mb-16">
-        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-espresso/40 mb-4">
+        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-espresso/65 mb-4">
           Real people · Real spaces
         </p>
         <h2 className="text-4xl md:text-5xl font-black text-espresso tracking-tight">
           How it feels
-          <span className="text-espresso/25 italic font-light"> to live with it.</span>
+          <span className="text-espresso/65 italic font-light"> to live with it.</span>
         </h2>
       </Reveal>
 

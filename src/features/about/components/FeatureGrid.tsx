@@ -24,7 +24,7 @@ const FeatureGrid = () => {
     <section className="py-24 px-6 bg-cream">
       <div className="max-w-7xl mx-auto">
         <Reveal className="text-center mb-16">
-          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-espresso/40 mb-4">
+          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-espresso/65 mb-4">
             {t("featureGrid.eyebrow")}
           </p>
           <h2 className="text-4xl font-black text-espresso tracking-tight">
@@ -52,7 +52,7 @@ const FeatureGrid = () => {
               <h3 className="font-black text-espresso text-sm mb-2 tracking-tight">
                 {item.title}
               </h3>
-              <p className="text-xs text-espresso/40 leading-relaxed font-light">
+              <p className="text-xs text-espresso/65 leading-relaxed font-light">
                 {item.desc}
               </p>
             </motion.div>

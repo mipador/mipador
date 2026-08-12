@@ -36,7 +36,7 @@ const CoreFeatures = () => {
           </p>
           <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight">
             {t("coreFeatures.heading")}
-            <span className="text-white/25 italic font-light"> {t("coreFeatures.headingSoft")}</span>
+            <span className="text-white/50 italic font-light"> {t("coreFeatures.headingSoft")}</span>
           </h2>
         </Reveal>
 
@@ -59,7 +59,7 @@ const CoreFeatures = () => {
               <h3 className="text-xl font-black text-white mb-4 tracking-tight">
                 {v.title}
               </h3>
-              <p className="text-white/40 leading-relaxed text-sm">
+              <p className="text-white/50 leading-relaxed text-sm">
                 {v.description}
               </p>
             </motion.div>

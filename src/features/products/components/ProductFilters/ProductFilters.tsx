@@ -4,7 +4,7 @@ import { useProductStore } from "../../../../store/product.store";
 
 const Section: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
   <div>
-    <h4 className="text-[9px] font-black uppercase tracking-[0.3em] text-espresso/35 mb-4">
+    <h4 className="text-[9px] font-black uppercase tracking-[0.3em] text-espresso/65 mb-4">
       {title}
     </h4>
     {children}
@@ -21,7 +21,7 @@ const FilterBtn: React.FC<{
     className={`text-left w-full py-1.5 text-sm transition-all duration-200 font-bold ${
       active
         ? "text-espresso translate-x-1.5"
-        : "text-espresso/35 hover:text-espresso/70"
+        : "text-espresso/65 hover:text-espresso/70"
     }`}
   >
     {children}
@@ -106,7 +106,7 @@ const ProductFilters: React.FC<{ mobile?: boolean }> = ({ mobile = false }) => {
             onChange={(e) => setInStockOnly(e.target.checked)}
             className="w-4 h-4 accent-espresso"
           />
-          <span className="text-sm font-bold text-espresso/60">
+          <span className="text-sm font-bold text-espresso/65">
             {t("products.filterInStockOnly")}
           </span>
         </label>
@@ -115,7 +115,7 @@ const ProductFilters: React.FC<{ mobile?: boolean }> = ({ mobile = false }) => {
       {/* Reset */}
       <button
         onClick={resetFilters}
-        className="text-left text-[9px] font-black uppercase tracking-widest text-espresso/25 hover:text-espresso/50 transition-colors"
+        className="text-left text-[9px] font-black uppercase tracking-widest text-espresso/65 hover:text-espresso/65 transition-colors"
       >
         {t("products.filterReset")}
       </button>

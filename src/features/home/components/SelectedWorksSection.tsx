@@ -35,7 +35,7 @@ const SelectedWorksSection: React.FC = () => {
             <h2 className="text-4xl md:text-5xl font-black text-espresso tracking-tighter">
               {t("home.selectedWorks").split(" ").map((word, i, arr) =>
                 i === arr.length - 1 ? (
-                  <span key={i} className="text-espresso/50 italic">{word}</span>
+                  <span key={i} className="text-espresso/65 italic">{word}</span>
                 ) : (
                   <span key={i}>{word} </span>
                 )
@@ -56,7 +56,7 @@ const SelectedWorksSection: React.FC = () => {
 
         {featured.length === 0 ? (
           <div className="text-center py-20 bg-white/50 rounded-3xl border border-dashed border-espresso/10">
-            <p className="text-espresso/60 font-medium">{t("home.noFeatured")}</p>
+            <p className="text-espresso/65 font-medium">{t("home.noFeatured")}</p>
           </div>
         ) : (
           <motion.div

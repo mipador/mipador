@@ -29,7 +29,7 @@ const AboutHero = () => {
         >
           {t("about.headline")}
           <br />
-          <span className="text-espresso/30 italic font-light">
+          <span className="text-espresso/65 italic font-light">
             {t("about.headlineSoft")}
           </span>
         </motion.h1>
@@ -38,7 +38,7 @@ const AboutHero = () => {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.45, ease: EASE }}
-          className="text-espresso/40 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto"
+          className="text-espresso/65 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto"
         >
           {t("about.heroBody")}
         </motion.p>
@@ -50,7 +50,7 @@ const AboutHero = () => {
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           className="w-px h-12 bg-gradient-to-b from-gold/40 to-transparent"
         />
-        <p className="text-[9px] font-black uppercase tracking-[0.3em] text-espresso/20">
+        <p className="text-[9px] font-black uppercase tracking-[0.3em] text-espresso/65">
           {t("about.scroll")}
         </p>
       </div>

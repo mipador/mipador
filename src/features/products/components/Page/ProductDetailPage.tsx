@@ -173,7 +173,7 @@ const ImageLightbox: React.FC<{
     >
       {/* Top bar */}
       <div className="flex items-center justify-between px-5 py-3 shrink-0 border-b border-white/8">
-        <span className="text-white/35 text-[10px] font-black uppercase tracking-[0.22em]">
+        <span className="text-white/50 text-[10px] font-black uppercase tracking-[0.22em]">
           {index + 1} / {images.length}
         </span>
         <div className="flex items-center gap-0.5 bg-white/8 rounded-xl px-2 py-1">
@@ -185,7 +185,7 @@ const ImageLightbox: React.FC<{
           >
             <Minus size={12} />
           </button>
-          <span className="text-white/45 text-[10px] font-black w-10 text-center tabular-nums">
+          <span className="text-white/50 text-[10px] font-black w-10 text-center tabular-nums">
             {Math.round(zoom * 100)}%
           </span>
           <button
@@ -200,7 +200,7 @@ const ImageLightbox: React.FC<{
             <button
               onClick={reset}
               aria-label="Reset zoom"
-              className="ml-1 h-6 px-2 text-[9px] font-black uppercase tracking-wide text-white/40 hover:text-white border border-white/12 hover:border-white/30 rounded-lg transition-colors"
+              className="ml-1 h-6 px-2 text-[9px] font-black uppercase tracking-wide text-white/50 hover:text-white border border-white/12 hover:border-white/30 rounded-lg transition-colors"
             >
               1:1
             </button>
@@ -331,12 +331,12 @@ const DetailSection: React.FC<{
         aria-expanded={open}
         className="flex w-full items-center justify-between py-4 text-left"
       >
-        <span className="text-[10px] font-black uppercase tracking-widest text-espresso/55">
+        <span className="text-[10px] font-black uppercase tracking-widest text-espresso/65">
           {label}
         </span>
         <span
           className={`shrink-0 w-6 h-6 rounded-lg flex items-center justify-center transition-all duration-200 ${
-            open ? "bg-espresso text-white" : "bg-espresso/8 text-espresso/40"
+            open ? "bg-espresso text-white" : "bg-espresso/8 text-espresso/65"
           }`}
         >
           {open ? <Minus size={10} /> : <Plus size={10} />}
@@ -373,7 +373,7 @@ const StockAlert: React.FC<{ stock: number }> = ({ stock }) => {
     return (
       <div className="flex items-center gap-2 bg-gold/8 border border-gold/20 rounded-xl px-4 py-3">
         <Clock size={14} className="text-gold shrink-0" />
-        <p className="text-xs font-black text-gold uppercase tracking-wider">
+        <p className="text-xs font-black text-espresso uppercase tracking-wider">
           {t("product.lowStock", { count: stock })}
         </p>
       </div>
@@ -403,12 +403,12 @@ const StarRating: React.FC<{ rating: number; count: number }> = ({ rating, count
             className={
               n <= Math.round(rating)
                 ? "text-gold fill-gold"
-                : "text-espresso/20"
+                : "text-espresso/65"
             }
           />
         ))}
       </div>
-      <p className="text-xs text-espresso/40 font-light">
+      <p className="text-xs text-espresso/65 font-light">
         {count > 0
           ? `${rating.toFixed(1)} · ${t("reviews.count", { count })}`
           : t("reviews.noReviews")}
@@ -571,7 +571,7 @@ const ProductDetailPage: React.FC = () => {
   if (!product) {
     return (
       <div className="min-h-screen bg-cream flex flex-col items-center justify-center text-center px-6">
-        <p className="text-espresso/30 font-black text-sm uppercase tracking-widest mb-6">
+        <p className="text-espresso/65 font-black text-sm uppercase tracking-widest mb-6">
           {t("product.notFound")}
         </p>
         <Link
@@ -629,7 +629,7 @@ const ProductDetailPage: React.FC = () => {
         {/* Back */}
         <Link
           to={`/${currentLang}/products`}
-          className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-espresso/40 hover:text-espresso transition-colors mb-8 md:mb-14"
+          className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-espresso/65 hover:text-espresso transition-colors mb-8 md:mb-14"
         >
           <ArrowLeft size={13} /> {t("product.backToCollection")}
         </Link>
@@ -705,7 +705,7 @@ const ProductDetailPage: React.FC = () => {
                       </picture>
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
-                        <p className="text-espresso/20 text-xs font-black uppercase tracking-widest">
+                        <p className="text-espresso/65 text-xs font-black uppercase tracking-widest">
                           {product.collection}
                         </p>
                       </div>
@@ -802,16 +802,16 @@ const ProductDetailPage: React.FC = () => {
 
             {/* Header */}
             <div>
-              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-espresso/35 mb-2">
+              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-espresso/65 mb-2">
                 {product.collection} · {product.location}
               </p>
               <h1 className="text-2xl md:text-4xl font-black text-espresso tracking-tight leading-tight">
                 {product.name}
               </h1>
-              <p className="text-espresso/50 italic text-sm mt-1.5">
+              <p className="text-espresso/65 italic text-sm mt-1.5">
                 {product.tagline}
               </p>
-              <p className="text-espresso/35 text-[11px] font-black uppercase tracking-widest mt-2.5">
+              <p className="text-espresso/65 text-[11px] font-black uppercase tracking-widest mt-2.5">
                 {product.dimensions.width} × {product.dimensions.height} cm
               </p>
             </div>
@@ -825,7 +825,7 @@ const ProductDetailPage: React.FC = () => {
                 {product.price.toLocaleString()} MAD
               </p>
               {quantity > 1 && (
-                <p className="text-sm text-espresso/40 mt-1 font-light">
+                <p className="text-sm text-espresso/65 mt-1 font-light">
                   × {quantity} ={" "}
                   <span className="font-black text-espresso">
                     {totalPrice.toLocaleString()} MAD
@@ -843,13 +843,13 @@ const ProductDetailPage: React.FC = () => {
             {/* ── ORDER FORM ── */}
             {!isUnavailable && (
               <div className="bg-white rounded-xl p-5 border border-espresso/8 flex flex-col gap-4">
-                <p className="text-[10px] font-black uppercase tracking-widest text-espresso/40">
+                <p className="text-[10px] font-black uppercase tracking-widest text-espresso/65">
                   {t("product.orderThisPiece")}
                 </p>
 
                 {/* Quantity selector */}
                 <div className="flex flex-col gap-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-espresso/45">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-espresso/65">
                     {t("product.quantity")}
                   </label>
                   <div className="flex items-center gap-3">
@@ -873,7 +873,7 @@ const ProductDetailPage: React.FC = () => {
                       </button>
                     </div>
                     {stock > 0 && stock <= 8 && (
-                      <p className="text-[10px] text-gold font-black uppercase tracking-wider">
+                      <p className="text-[10px] text-espresso font-black uppercase tracking-wider">
                         {t("product.countAvailable", { count: stock })}
                       </p>
                     )}
@@ -898,7 +898,7 @@ const ProductDetailPage: React.FC = () => {
                   className={`w-full py-3 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 transition-all duration-300 border ${
                     added
                       ? "bg-gold/10 border-gold/30 text-gold"
-                      : "bg-transparent border-espresso/15 text-espresso/50 hover:border-espresso/30 hover:text-espresso"
+                      : "bg-transparent border-espresso/15 text-espresso/65 hover:border-espresso/30 hover:text-espresso"
                   }`}
                 >
                   {added ? (
@@ -912,7 +912,7 @@ const ProductDetailPage: React.FC = () => {
 
             {/* Unavailable state */}
             {isUnavailable && (
-              <div className="w-full py-4 rounded-xl bg-espresso/8 text-espresso/30 text-[10px] font-black uppercase tracking-widest text-center">
+              <div className="w-full py-4 rounded-xl bg-espresso/8 text-espresso/65 text-[10px] font-black uppercase tracking-widest text-center">
                 {isComingSoon
                   ? t("product.unavailableComingSoon")
                   : t("product.unavailableSoldOut")}
@@ -929,7 +929,7 @@ const ProductDetailPage: React.FC = () => {
         <div className="mt-14 md:mt-20 grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-24">
           <div>
             <DetailSection label={t("product.aboutThisPiece")} defaultOpen>
-              <p className="text-espresso/60 text-sm leading-relaxed font-light">
+              <p className="text-espresso/65 text-sm leading-relaxed font-light">
                 {product.description}
               </p>
             </DetailSection>
@@ -952,7 +952,7 @@ const ProductDetailPage: React.FC = () => {
                     key={label}
                     className="bg-white rounded-xl px-4 py-3 border border-espresso/8"
                   >
-                    <p className="text-[9px] font-black uppercase tracking-widest text-espresso/35 mb-0.5">
+                    <p className="text-[9px] font-black uppercase tracking-widest text-espresso/65 mb-0.5">
                       {label}
                     </p>
                     <p className="text-sm font-black text-espresso">{value}</p>
@@ -966,7 +966,7 @@ const ProductDetailPage: React.FC = () => {
                 {product.materials.map((m, i) => (
                   <span
                     key={i}
-                    className="px-3 py-1 bg-white border border-espresso/10 rounded-xl text-[10px] font-black uppercase tracking-wider text-espresso/50"
+                    className="px-3 py-1 bg-white border border-espresso/10 rounded-xl text-[10px] font-black uppercase tracking-wider text-espresso/65"
                   >
                     {m}
                   </span>
@@ -981,7 +981,7 @@ const ProductDetailPage: React.FC = () => {
                 {product.care.map((c, i) => (
                   <li
                     key={i}
-                    className="flex items-start gap-2 text-sm text-espresso/50 font-light"
+                    className="flex items-start gap-2 text-sm text-espresso/65 font-light"
                   >
                     <span className="text-gold shrink-0 font-black mt-0.5">·</span>
                     {c}
@@ -1023,7 +1023,7 @@ const ProductDetailPage: React.FC = () => {
 
             <DetailSection label={t("product.leadTime")}>
               <div className="space-y-2">
-                <p className="text-sm text-espresso/60 font-light">
+                <p className="text-sm text-espresso/65 font-light">
                   {t("product.leadTimeValue", { time: product.leadTime })}
                 </p>
               </div>
@@ -1045,7 +1045,7 @@ const ProductDetailPage: React.FC = () => {
         {related.length > 0 && (
           <div className="mt-20 md:mt-32">
             <div className="border-t border-espresso/10 pt-12 mb-10">
-              <p className="text-[10px] font-black uppercase tracking-[0.4em] text-espresso/35 mb-2">
+              <p className="text-[10px] font-black uppercase tracking-[0.4em] text-espresso/65 mb-2">
                 {t("product.youMayAlsoLike")}
               </p>
               <h2 className="text-2xl md:text-3xl font-black text-espresso tracking-tight">
@@ -1079,14 +1079,14 @@ const ProductDetailPage: React.FC = () => {
                       </picture>
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
-                        <p className="text-espresso/20 text-xs font-black uppercase tracking-widest">
+                        <p className="text-espresso/65 text-xs font-black uppercase tracking-widest">
                           {p.collection}
                         </p>
                       </div>
                     )}
                   </div>
                   <div className="mt-3">
-                    <p className="text-[9px] font-black uppercase tracking-widest text-espresso/35">
+                    <p className="text-[9px] font-black uppercase tracking-widest text-espresso/65">
                       {p.collection}
                     </p>
                     <p className="text-sm font-black text-espresso tracking-tight mt-1">

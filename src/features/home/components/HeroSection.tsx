@@ -50,7 +50,7 @@ const HeroSection = () => {
 
             <div className="hero-fade-in flex items-center gap-5" style={{ animationDelay: "0.08s" }}>
               <div className="w-10 h-px bg-white/20" />
-              <p className="text-[9px] uppercase tracking-[0.55em] text-white/35 font-light">{t("hero.badge")}</p>
+              <p className="text-[9px] uppercase tracking-[0.55em] text-white/50 font-light">{t("hero.badge")}</p>
               <div className="w-10 h-px bg-white/20" />
             </div>
           </div>

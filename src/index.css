@@ -19,7 +19,7 @@
   --color-cream:          #F6F4F1; /* primary light bg */
   --color-linen:          #EFEBE9; /* secondary light bg */
   --color-mist:           #E6E3DF; /* borders / dividers */
-  --color-taupe:          #8C7A76; /* muted text on light */
+  --color-taupe:          #746560; /* muted text on light — darkened from #8C7A76 for WCAG AA contrast */
   --color-tan:            #C6A98B; /* decorative accent */
   --color-whatsapp:       #25D366; /* functional, not brand */
   --color-whatsapp-dark:  #1ebe5d;

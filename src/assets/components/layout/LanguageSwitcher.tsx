@@ -95,7 +95,7 @@ export default function LanguageSwitcher({ compact = false }: { compact?: boolea
             <motion.span
               animate={{ rotate: open ? 180 : 0 }}
               transition={{ duration: 0.2 }}
-              className="text-[10px] text-espresso/50"
+              className="text-[10px] text-espresso/65"
             >
               ▼
             </motion.span>

@@ -101,7 +101,7 @@ function About() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to={`/${currentLang}/products`}
-              className="inline-flex items-center justify-center gap-3 bg-gold text-white px-10 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-gold-dark transition-all active:scale-95"
+              className="inline-flex items-center justify-center gap-3 bg-gold text-espresso px-10 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-gold-dark transition-all active:scale-95"
             >
               Explore Collection <ArrowRight size={13} />
             </Link>

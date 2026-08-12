@@ -36,7 +36,7 @@ const ComingSoonSection = () => {
         >
           {t("home.comingSoonHeading")}
           <br />
-          <span className="text-espresso/50 italic">{t("home.comingSoonSub")}</span>
+          <span className="text-espresso/65 italic">{t("home.comingSoonSub")}</span>
         </motion.h2>
 
         <motion.p
@@ -60,7 +60,7 @@ const ComingSoonSection = () => {
             <input
               type="email"
               placeholder={t("home.comingSoonPlaceholder")}
-              className="bg-transparent border-none focus:ring-0 text-espresso placeholder:text-espresso/30 text-[10px] font-bold uppercase tracking-widest px-6 flex-1"
+              className="bg-transparent border-none focus:ring-0 text-espresso placeholder:text-espresso/65 text-[10px] font-bold uppercase tracking-widest px-6 flex-1"
             />
             <button className="px-6 py-3 bg-espresso text-fog text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-espresso-light active:scale-95 transition-all">
               {t("home.comingSoonButton")}

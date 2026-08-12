@@ -13,7 +13,7 @@ export const BRAND_COLORS = {
   cream: "#F6F4F1",
   linen: "#EFEBE9",
   mist: "#E6E3DF",
-  taupe: "#8C7A76",
+  taupe: "#746560",
   tan: "#C6A98B",
   whatsapp: "#25D366",
   whatsappDark: "#1ebe5d",

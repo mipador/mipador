@@ -22,7 +22,7 @@ const SortSelect: React.FC = () => {
         <option value="price-desc">{t("products.sortPriceHigh")}</option>
       </select>
       <ChevronDown
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-espresso/40 pointer-events-none"
+        className="absolute right-3 top-1/2 -translate-y-1/2 text-espresso/65 pointer-events-none"
         size={13}
       />
     </div>

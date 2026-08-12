@@ -38,7 +38,7 @@ const ManifestoSection = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 1, delay: 0.5, ease: EASE }}
-          className="mt-12 text-espresso/35 text-[10px] font-light uppercase tracking-[0.35em]"
+          className="mt-12 text-espresso/65 text-[10px] font-light uppercase tracking-[0.35em]"
         >
           {t("home.manifestoLocations")}
         </motion.p>

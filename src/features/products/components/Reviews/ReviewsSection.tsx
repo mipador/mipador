@@ -41,11 +41,11 @@ function ReviewCard({ review }: { review: Review }) {
     <div className="bg-white rounded-2xl p-5 border border-espresso/8 flex flex-col gap-3">
       <div className="flex items-center gap-3">
         <div className="w-9 h-9 rounded-xl bg-espresso/8 flex items-center justify-center shrink-0">
-          <span className="text-[10px] font-black text-espresso/50">{initials}</span>
+          <span className="text-[10px] font-black text-espresso/65">{initials}</span>
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-xs font-black text-espresso tracking-tight">{review.author}</p>
-          <p className="text-[10px] text-espresso/35 font-light">{review.city}</p>
+          <p className="text-[10px] text-espresso/65 font-light">{review.city}</p>
         </div>
         {review.verified && (
           <div className="flex items-center gap-1 shrink-0">
@@ -59,14 +59,14 @@ function ReviewCard({ review }: { review: Review }) {
 
       <div className="flex items-center justify-between">
         <StarRow rating={review.rating} />
-        <span className="text-[10px] text-espresso/25 font-light">{date}</span>
+        <span className="text-[10px] text-espresso/65 font-light">{date}</span>
       </div>
 
       <div>
         <p className="text-xs font-black text-espresso tracking-tight mb-1.5">
           {review.title}
         </p>
-        <p className="text-xs text-espresso/55 font-light leading-relaxed line-clamp-4">
+        <p className="text-xs text-espresso/65 font-light leading-relaxed line-clamp-4">
           {review.body}
         </p>
       </div>
@@ -96,7 +96,7 @@ export function ReviewsSection({
         {/* Header */}
         <Reveal className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
           <div>
-            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-espresso/35 mb-3">
+            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-espresso/65 mb-3">
               {t("reviews.heading")}
             </p>
             {productReviews.length > 0 ? (
@@ -106,13 +106,13 @@ export function ReviewsSection({
                 </span>
                 <div>
                   <StarRow rating={avgRating} size={16} />
-                  <p className="text-xs text-espresso/40 font-light mt-1.5">
+                  <p className="text-xs text-espresso/65 font-light mt-1.5">
                     {t("reviews.count", { count: productReviews.length })}
                   </p>
                 </div>
               </div>
             ) : (
-              <p className="text-sm text-espresso/35 font-light">
+              <p className="text-sm text-espresso/65 font-light">
                 {t("reviews.noReviews")}
               </p>
             )}
@@ -142,7 +142,7 @@ export function ReviewsSection({
             <p className="text-sm font-black text-espresso tracking-tight mb-1">
               {t("reviews.shareHeading")}
             </p>
-            <p className="text-xs text-espresso/45 font-light max-w-xs leading-relaxed">
+            <p className="text-xs text-espresso/65 font-light max-w-xs leading-relaxed">
               {t("reviews.shareBody")}
             </p>
           </div>
@@ -150,7 +150,7 @@ export function ReviewsSection({
             href={waHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="shrink-0 inline-flex items-center gap-2 bg-whatsapp text-white px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-whatsapp-dark transition-colors"
+            className="shrink-0 inline-flex items-center gap-2 bg-whatsapp text-espresso px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-whatsapp-dark transition-colors"
           >
             <MessageCircle size={14} />
             {t("reviews.shareBtn")}

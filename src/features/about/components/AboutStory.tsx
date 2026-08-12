@@ -54,22 +54,22 @@ const AboutStory = () => {
             className="order-1 md:order-2"
           >
             <h2 className="text-4xl md:text-5xl font-black text-espresso tracking-tight leading-tight mb-8">
-              <span className="text-espresso/30 italic font-light">
+              <span className="text-espresso/65 italic font-light">
                 {t("about.storyHeading")}
               </span>
             </h2>
 
-            <div className="space-y-5 text-espresso/60 text-base leading-relaxed">
+            <div className="space-y-5 text-espresso/65 text-base leading-relaxed">
               <p>{t("about.storyP1")}</p>
               <p>{t("about.storyP2")}</p>
               <p className="text-espresso font-semibold">{t("about.storyP3")}</p>
             </div>
 
             <div className="mt-10 border-l-2 border-gold/40 pl-6 space-y-4">
-              <p className="text-espresso/50 italic text-sm leading-relaxed">
+              <p className="text-espresso/65 italic text-sm leading-relaxed">
                 {t("about.quote")}
                 <br />
-                <span className="text-espresso/30 not-italic text-xs mt-1 block">
+                <span className="text-espresso/65 not-italic text-xs mt-1 block">
                   {t("about.quoteAttrib")}
                 </span>
               </p>

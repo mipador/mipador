@@ -194,7 +194,7 @@ const CollectionHeroTabs: React.FC = () => {
             transition={{ duration: 0.3, ease: EASE }}
           >
             {/* Section label */}
-            <p className="text-[9px] font-black uppercase tracking-[0.35em] text-espresso/30 mb-3">
+            <p className="text-[9px] font-black uppercase tracking-[0.35em] text-espresso/65 mb-3">
               {t("products.shopByCategory")}
             </p>
 
@@ -261,7 +261,7 @@ const CollectionHeroTabs: React.FC = () => {
                           {t("card.comingSoon")}
                         </span>
                       ) : (
-                        <span className="block text-[7px] font-bold text-white/45 mt-0.5 leading-none">
+                        <span className="block text-[7px] font-bold text-white/50 mt-0.5 leading-none">
                           {t("products.pieces", { count })}
                         </span>
                       )}

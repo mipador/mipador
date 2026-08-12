@@ -25,13 +25,13 @@ const ModelGrid = () => {
     <section className="py-24 px-6 bg-cream">
       <div className="max-w-7xl mx-auto text-center">
         <Reveal>
-          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-espresso/40 mb-4">
+          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-espresso/65 mb-4">
             {t("modelGrid.eyebrow")}
           </p>
           <h2 className="text-4xl md:text-5xl font-black text-espresso tracking-tight mb-4">
             {t("modelGrid.heading")}
           </h2>
-          <p className="text-espresso/40 text-base mb-16 max-w-xl mx-auto leading-relaxed">
+          <p className="text-espresso/65 text-base mb-16 max-w-xl mx-auto leading-relaxed">
             {t("modelGrid.body")}
           </p>
         </Reveal>

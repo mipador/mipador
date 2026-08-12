@@ -27,7 +27,7 @@ export const FaqItem: React.FC<FaqItemProps> = ({
       >
         <span
           className={`text-base font-black tracking-tight transition-colors duration-200 pr-8 ${
-            isOpen ? "text-espresso" : "text-espresso/60 group-hover:text-espresso"
+            isOpen ? "text-espresso" : "text-espresso/65 group-hover:text-espresso"
           }`}
         >
           {question}
@@ -36,7 +36,7 @@ export const FaqItem: React.FC<FaqItemProps> = ({
           className={`shrink-0 w-7 h-7 rounded-xl flex items-center justify-center transition-all duration-300 ${
             isOpen
               ? "bg-espresso text-white"
-              : "bg-espresso/8 text-espresso/40 group-hover:bg-espresso/15"
+              : "bg-espresso/8 text-espresso/65 group-hover:bg-espresso/15"
           }`}
         >
           {isOpen ? <Minus size={13} /> : <Plus size={13} />}
@@ -49,7 +49,7 @@ export const FaqItem: React.FC<FaqItemProps> = ({
         }`}
       >
         <div className="overflow-hidden">
-          <p className="text-sm text-espresso/50 leading-relaxed font-light pr-12">
+          <p className="text-sm text-espresso/65 leading-relaxed font-light pr-12">
             {answer}
           </p>
         </div>

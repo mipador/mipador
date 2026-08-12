@@ -5,17 +5,17 @@ const PrivacyPolicy = () => {
 
         {/* Header */}
         <header className="mb-24">
-          <div className="text-[10px] uppercase tracking-[0.4em] text-espresso/40 mb-8">
+          <div className="text-[10px] uppercase tracking-[0.4em] text-espresso/65 mb-8">
             Mipador · Privacy
           </div>
           <h1 className="text-5xl md:text-7xl font-black tracking-tight leading-tight mb-8">
             Your data.
             <br />
-            <span className="text-espresso/25 font-light italic">
+            <span className="text-espresso/65 font-light italic">
               Handled with intention.
             </span>
           </h1>
-          <p className="max-w-md text-espresso/50 font-light leading-relaxed">
+          <p className="max-w-md text-espresso/65 font-light leading-relaxed">
             We believe in slow, honest relationships — with furniture, with spaces,
             and with the people who trust us. We only collect what is necessary
             to bring a Mipador piece into your home.
@@ -55,7 +55,7 @@ const PrivacyPolicy = () => {
               className="grid md:grid-cols-2 gap-12 border-t border-espresso/10 pt-12"
             >
               <div>
-                <span className="text-[10px] font-black tracking-widest text-espresso/30 uppercase">
+                <span className="text-[10px] font-black tracking-widest text-espresso/65 uppercase">
                   {s.number} / {s.label}
                 </span>
               </div>
@@ -63,7 +63,7 @@ const PrivacyPolicy = () => {
                 <h3 className="text-2xl font-black text-espresso tracking-tight">
                   {s.title}
                 </h3>
-                <p className="text-espresso/55 leading-relaxed font-light text-sm">
+                <p className="text-espresso/65 leading-relaxed font-light text-sm">
                   {s.body}
                 </p>
               </div>

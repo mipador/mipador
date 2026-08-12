@@ -65,14 +65,14 @@ export function VibeQuoteHero({
       className="bg-white rounded-3xl p-6 sm:p-8 mb-5 shadow-sm"
     >
       <Quote size={22} style={{ color: accent }} className="mb-4" />
-      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-espresso/35 mb-3">
+      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-espresso/65 mb-3">
         {label}
       </p>
       <p className="text-xl sm:text-2xl font-black text-espresso leading-snug italic mb-2">
         "{quote.text}"
       </p>
       {quote.source && (
-        <p className="text-xs font-bold text-espresso/40">— {quote.source}</p>
+        <p className="text-xs font-bold text-espresso/65">— {quote.source}</p>
       )}
     </motion.div>
   );
@@ -102,7 +102,7 @@ export function RitualTimeline({
       transition={{ duration: 0.5, ease, delay: 0.06 }}
       className="bg-white rounded-3xl p-6 sm:p-8 mb-5 shadow-sm"
     >
-      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-espresso/35 mb-5">
+      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-espresso/65 mb-5">
         {heading}
       </p>
       <div className="space-y-4">
@@ -121,13 +121,13 @@ export function RitualTimeline({
               } ${isRTL ? "flex-row-reverse text-end" : ""}`}
             >
               <span className="shrink-0 w-9 h-9 rounded-full bg-espresso/5 flex items-center justify-center mt-0.5">
-                <Icon size={16} className="text-espresso/60" />
+                <Icon size={16} className="text-espresso/65" />
               </span>
               <span className="flex-1">
-                <span className="block text-[10px] font-black uppercase tracking-widest text-espresso/40 mb-1">
+                <span className="block text-[10px] font-black uppercase tracking-widest text-espresso/65 mb-1">
                   {timeLabels[step.time]}
                 </span>
-                <span className={`block text-sm font-bold leading-relaxed ${done ? "text-espresso/40 line-through" : "text-espresso/80"}`}>
+                <span className={`block text-sm font-bold leading-relaxed ${done ? "text-espresso/65 line-through" : "text-espresso/80"}`}>
                   {step.advice}
                 </span>
               </span>
@@ -172,7 +172,7 @@ export function MantraDeck({
       className="rounded-3xl p-6 sm:p-8 mb-5 shadow-sm"
       style={{ backgroundColor: `${accent}20` }}
     >
-      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-espresso/40 mb-5">
+      <p className="text-[10px] font-black uppercase tracking-[0.18em] text-espresso/65 mb-5">
         {label}
       </p>
       <div className="min-h-[88px] flex items-center mb-5">
@@ -210,10 +210,10 @@ export function SoundscapeCard({ soundscape, label }: { soundscape: string; labe
       className="bg-white rounded-3xl p-6 sm:p-8 mb-5 shadow-sm flex items-start gap-4"
     >
       <span className="shrink-0 w-10 h-10 rounded-full bg-espresso/5 flex items-center justify-center">
-        <Volume2 size={17} className="text-espresso/60" />
+        <Volume2 size={17} className="text-espresso/65" />
       </span>
       <span>
-        <span className="block text-[10px] font-black uppercase tracking-[0.18em] text-espresso/35 mb-2">
+        <span className="block text-[10px] font-black uppercase tracking-[0.18em] text-espresso/65 mb-2">
           {label}
         </span>
         <span className="block text-sm font-bold text-espresso/70 leading-relaxed italic">

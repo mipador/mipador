@@ -144,7 +144,7 @@ const FreeToolTeaser: React.FC = () => {
           {/* Content */}
           <div className={`relative z-10 flex flex-col sm:flex-row items-center gap-10 ${isRTL ? "sm:flex-row-reverse" : ""}`}>
             <div className="flex-1 text-center sm:text-start">
-              <p className="text-xs font-black uppercase tracking-[0.2em] text-white/40 mb-3">
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-white/50 mb-3">
                 {t("colorPicker.hero.eyebrow")}
               </p>
               <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight mb-4">
@@ -181,7 +181,7 @@ const FreeToolTeaser: React.FC = () => {
                       style={{ backgroundColor: card.dot }}
                     />
                   ) : (
-                    <p className="text-[9px] font-bold uppercase tracking-widest text-white/25">
+                    <p className="text-[9px] font-bold uppercase tracking-widest text-white/50">
                       12 vibes
                     </p>
                   )}

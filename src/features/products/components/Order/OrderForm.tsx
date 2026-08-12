@@ -29,7 +29,7 @@ const Field: React.FC<FieldProps> = ({
   label, placeholder, type = "text", value, error, onChange,
 }) => (
   <div className="flex flex-col gap-1.5">
-    <label className="text-[10px] font-black uppercase tracking-widest text-espresso/45">
+    <label className="text-[10px] font-black uppercase tracking-widest text-espresso/65">
       {label}
     </label>
     <input
@@ -74,17 +74,17 @@ const PaymentOption: React.FC<{
     }`}
   >
     <div className={`shrink-0 w-9 h-9 rounded-lg flex items-center justify-center ${
-      selected ? "bg-espresso text-white" : "bg-white text-espresso/50"
+      selected ? "bg-espresso text-white" : "bg-white text-espresso/65"
     }`}>
       {icon}
     </div>
     <div className="flex-1 min-w-0">
       <p className={`text-xs font-black uppercase tracking-widest ${
-        selected ? "text-espresso" : "text-espresso/60"
+        selected ? "text-espresso" : "text-espresso/65"
       }`}>
         {label}
       </p>
-      <p className="text-[10px] text-espresso/35 font-light mt-0.5">{desc}</p>
+      <p className="text-[10px] text-espresso/65 font-light mt-0.5">{desc}</p>
     </div>
     {!disabled && (
       <div className={`shrink-0 w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all ${
@@ -175,7 +175,7 @@ Please confirm availability. Thank you.`;
           <p className="text-sm font-black text-espresso tracking-tight">
             {t("order.successTitle")}
           </p>
-          <p className="text-xs text-espresso/40 mt-1 font-light">
+          <p className="text-xs text-espresso/65 mt-1 font-light">
             {t("order.successBody")}
           </p>
         </div>
@@ -188,7 +188,7 @@ Please confirm availability. Thank you.`;
 
       {/* Payment method selector */}
       <div className="flex flex-col gap-2">
-        <p className="text-[10px] font-black uppercase tracking-widest text-espresso/45">
+        <p className="text-[10px] font-black uppercase tracking-widest text-espresso/65">
           {t("order.paymentMethod")}
         </p>
         <PaymentOption
@@ -242,7 +242,7 @@ Please confirm availability. Thank you.`;
         )}
       </button>
 
-      <p className="text-center text-[9px] text-espresso/25 uppercase tracking-widest">
+      <p className="text-center text-[9px] text-espresso/65 uppercase tracking-widest">
         {t("order.disclaimer")}
       </p>
     </div>
